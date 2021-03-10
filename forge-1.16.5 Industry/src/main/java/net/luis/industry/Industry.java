@@ -11,7 +11,6 @@ import net.luis.industry.init.blocks.util.ModContainerTypes;
 import net.luis.industry.init.blocks.util.ModTileEntityTypes;
 import net.luis.industry.init.items.ModItems;
 import net.luis.industry.init.recipe.ModRecipeSerializer;
-import net.luis.industry.init.util.tags.ModBlockTags;
 import net.luis.industry.init.villager.ModPointOfInterestTypes;
 import net.luis.industry.init.villager.ModVillagerProfessions;
 import net.minecraft.item.ItemGroup;
@@ -28,7 +27,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class Industry {
 	
 	public static final Logger LOGGER = LogManager.getLogger();
-	private static final String MOD_NAME = "Industry";
 	public static final String MOD_ID = "industry";
 	public static final String MINECRAFT_ID = "minecraft";
 	
@@ -58,8 +56,6 @@ public class Industry {
 		
 		MinecraftForge.EVENT_BUS.register(this);
 		
-		LOGGER.debug("gjsdjshdgjshdjshdsj" + ModBlockTags.FLUID_SYSTEM.getPath());
-		
 	}
 
 	private void doCommonSetup(FMLCommonSetupEvent event) {
@@ -70,7 +66,7 @@ public class Industry {
 		
 	}
 	
-	public static final ItemGroup INDUSTRY = new ItemGroup(MOD_NAME) {
+	public static final ItemGroup INDUSTRY = new ItemGroup(MOD_ID) {
 		
 		@Override
 		public ItemStack createIcon() {

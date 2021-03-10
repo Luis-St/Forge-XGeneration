@@ -1,4 +1,4 @@
-package net.luis.industry.api.blocks;
+package net.luis.industry.common.blocks.fluid;
 
 import net.luis.industry.init.util.tags.ModBlockTags;
 import net.minecraft.block.Block;
@@ -17,7 +17,7 @@ public class PipeBlock extends SixWayBlock {
 
 	public PipeBlock(Properties properties) {
 		
-		super(0.3125F, properties);
+		super(0.25F, properties);
 		
 	}
 	
@@ -37,21 +37,27 @@ public class PipeBlock extends SixWayBlock {
 		Block south = blockReader.getBlockState(pos.south()).getBlock();
 		Block west = blockReader.getBlockState(pos.west()).getBlock();
 		
-		return this.getDefaultState().with(DOWN, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(down)))
-				.with(UP, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(up)))
-				.with(NORTH, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(north)))
-				.with(EAST, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(east)))
-				.with(SOUTH, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(south)))
-				.with(WEST, Boolean.valueOf(BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(west)));
+		return this.getDefaultState().with(DOWN, Boolean.valueOf(PipeBlock.isAllowedConnection(down)))
+				.with(UP, Boolean.valueOf(PipeBlock.isAllowedConnection(up)))
+				.with(NORTH, Boolean.valueOf(PipeBlock.isAllowedConnection(north)))
+				.with(EAST, Boolean.valueOf(PipeBlock.isAllowedConnection(east)))
+				.with(SOUTH, Boolean.valueOf(PipeBlock.isAllowedConnection(south)))
+				.with(WEST, Boolean.valueOf(PipeBlock.isAllowedConnection(west)));
 		
 	}
 	
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		
-		boolean flag = BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(facingState.getBlock());
+		boolean flag = PipeBlock.isAllowedConnection(facingState.getBlock());
 		
 		return stateIn.with(FACING_TO_PROPERTY_MAP.get(facing), Boolean.valueOf(flag));
+		
+	}
+	
+	public static boolean isAllowedConnection(Block block) {
+		
+		return BlockTags.getCollection().get(ModBlockTags.FLUID_SYSTEM).contains(block);
 		
 	}
 	

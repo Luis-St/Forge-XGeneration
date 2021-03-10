@@ -1,3 +1,5 @@
 {
-
+  "itemGroup.industry": "Industry",
+  
+  "block.industry.fluid_pipe": "Fluid Pipe"
 }

@@ -1,7 +1,7 @@
 package net.luis.industry.init.blocks;
 
 import net.luis.industry.Industry;
-import net.luis.industry.api.blocks.PipeBlock;
+import net.luis.industry.common.blocks.fluid.PipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
