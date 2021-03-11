@@ -1,0 +1,47 @@
+modLoader="javafml" #mandatory
+	
+loaderVersion="[35,)" #mandatory 
+
+license="All rights reserved"
+
+[[mods]] #mandatory
+	
+modId="industry" #mandatory
+
+version="${file.jarVersion}" #mandatory
+
+displayName="Industry" #mandatory
+
+logoFile="" #optional
+
+credits="Thanks for downloading my Mod" #optional
+	
+authors="Luis" #optional
+
+description='''
+This mod adds some industrial machine and materials
+'''
+	
+[[dependencies.industry]] #optional
+	
+    modId="forge" #mandatory
+    
+    mandatory=true #mandatory
+    
+    versionRange="[35,)" #mandatory
+    
+    ordering="NONE"
+    
+    side="BOTH"
+    
+[[dependencies.cave]]
+		
+    modId="minecraft"
+    
+    mandatory=true
+
+    versionRange="[1.16.4,1.17)"
+    
+    ordering="NONE"
+    
+    side="BOTH"
