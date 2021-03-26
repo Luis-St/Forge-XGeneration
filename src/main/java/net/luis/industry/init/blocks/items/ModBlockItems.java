@@ -15,5 +15,8 @@ public class ModBlockItems {
 	
 	public static final RegistryObject<Item> FLUID_PIPE_ITEM = ITEMS.register("fluid_pipe", 
 			() -> new BlockItem(ModBlocks.FLUID_PIPE.get(), new Item.Properties().group(Industry.INDUSTRY)));
+	
+	public static final RegistryObject<Item> MILESTONE_ITEM = ITEMS.register("milestone", 
+			() -> new BlockItem(ModBlocks.MILESTONE.get(), new Item.Properties().group(Industry.INDUSTRY)));
 
 }
