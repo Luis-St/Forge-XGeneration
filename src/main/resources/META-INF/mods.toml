@@ -34,7 +34,7 @@ This mod adds some industrial machine and materials
     
     side="BOTH"
     
-[[dependencies.cave]]
+[[dependencies.industry]]
 		
     modId="minecraft"
     
