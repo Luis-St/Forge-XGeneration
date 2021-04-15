@@ -1,14 +1,13 @@
 {
-	
+	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "industry:block/fluid_pipe",
 		"particle": "industry:block/fluid_pipe"
 	},
 	"elements": [
 		{
-			"from": [3, 3, 3],
-			"to": [13, 13, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 0]},
+			"from": [2, 2, 2],
+			"to": [14, 14, 14],
 			"faces": {
 				"north": {"uv": [0, 0, 6, 6], "texture": "#0"},
 				"east": {"uv": [0, 0, 6, 6], "texture": "#0"},
