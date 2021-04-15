@@ -1,6 +1,6 @@
-package net.luis.industry.common.tileentities;
+package net.luis.industry.common.tileentity;
 
-import net.luis.industry.init.blocks.util.ModTileEntityTypes;
+import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.minecraft.tileentity.TileEntity;
 
 public class MilestoneTileEntity extends TileEntity {

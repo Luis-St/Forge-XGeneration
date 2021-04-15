@@ -1,7 +1,7 @@
-package net.luis.industry.init.blocks.items;
+package net.luis.industry.init.block.item;
 
 import net.luis.industry.Industry;
-import net.luis.industry.init.blocks.ModBlocks;
+import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;

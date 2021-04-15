@@ -1,8 +1,8 @@
-package net.luis.industry.common.blocks.mechanical;
+package net.luis.industry.common.block.mechanical;
 
 import java.util.stream.Stream;
 
-import net.luis.industry.common.tileentities.MilestoneTileEntity;
+import net.luis.industry.common.tileentity.MilestoneTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

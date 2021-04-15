@@ -5,10 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import net.luis.industry.init.ModEnchantments;
 import net.luis.industry.init.ModEntityTypes;
-import net.luis.industry.init.blocks.ModBlocks;
-import net.luis.industry.init.blocks.items.ModBlockItems;
-import net.luis.industry.init.blocks.util.ModContainerTypes;
-import net.luis.industry.init.blocks.util.ModTileEntityTypes;
+import net.luis.industry.init.block.ModBlocks;
+import net.luis.industry.init.block.item.ModBlockItems;
+import net.luis.industry.init.block.util.ModContainerTypes;
+import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.luis.industry.init.items.ModItems;
 import net.luis.industry.init.recipe.ModRecipeSerializer;
 import net.luis.industry.init.villager.ModPointOfInterestTypes;
