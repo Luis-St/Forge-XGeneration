@@ -16,11 +16,11 @@ public class ModBlocks {
 	
 	
 	public static RegistryObject<PipeBlock> FLUID_PIPE = BLOCKS.register("fluid_pipe", 
-			() -> new PipeBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).harvestLevel(2)
-					.hardnessAndResistance(4.0F, 10.0F).setRequiresTool()));
+			() -> new PipeBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).harvestLevel(2)
+					.strength(4.0F, 10.0F).requiresCorrectToolForDrops()));
 	
-	public static RegistryObject<MilestoneBlock> MILESTONE = BLOCKS.register("milestone", 
-			() -> new MilestoneBlock(Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestLevel(2)
-					.hardnessAndResistance(3.5F, 6.0F).setRequiresTool()));
+	public static RegistryObject<MilestoneBlock> MILESTONE = BLOCKS.register("milestone",
+			() -> new MilestoneBlock(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestLevel(2)
+					.strength(3.5F, 6.0F).requiresCorrectToolForDrops()));
 	
 }

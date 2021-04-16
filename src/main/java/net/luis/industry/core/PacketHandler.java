@@ -8,6 +8,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class PacketHandler {
 
 	private static final String version = "1";
+	@SuppressWarnings("unused")
 	private static int id = 0;
 	public static SimpleChannel simpleChannel;
 

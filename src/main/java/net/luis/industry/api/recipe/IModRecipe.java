@@ -1,16 +1,24 @@
 package net.luis.industry.api.recipe;
 
-import net.luis.industry.api.recipe.util.RecipeInput;
-import net.luis.industry.api.recipe.util.RecipeOutput;
+import java.util.List;
+
+import net.luis.industry.api.recipe.item.ResultItemStack;
+import net.minecraft.item.ItemStack;
 
 public interface IModRecipe {
 	
-	RecipeInput getRecipeInput();
+	List<ItemStack> getRecipeItems();
 	
-	RecipeOutput getRecipeOutput();
+	List<ResultItemStack> getResultItems();
 	
-	default int getRecipeTime() {
+	default int getProgressTime() {
 		return 0;
 	}
+	
+	boolean isRecipeItem(ItemStack itemStack);
+	
+	boolean isResultItem(ItemStack itemStack);
+	
+	boolean isItemRequired(ItemStack itemStack);
 
 }

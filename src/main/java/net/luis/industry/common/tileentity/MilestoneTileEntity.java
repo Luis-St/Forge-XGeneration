@@ -6,9 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 public class MilestoneTileEntity extends TileEntity {
 
 	public MilestoneTileEntity() {
-		
 		super(ModTileEntityTypes.MILESTONE.get());
-		
 	}
 
 }

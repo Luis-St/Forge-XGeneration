@@ -1,6 +1,6 @@
 package net.luis.industry.common.enums;
 
-public enum ModRecipeTypes {
+public enum ModRecipeType {
 	
 	MILESTONE();
 

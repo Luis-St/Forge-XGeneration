@@ -14,6 +14,6 @@ public class ModTileEntityTypes {
 	
 	
 	public static final RegistryObject<TileEntityType<MilestoneTileEntity>> MILESTONE = TILE_ENTITIES.register("milestone", 
-			() -> TileEntityType.Builder.create(MilestoneTileEntity::new, ModBlocks.MILESTONE.get()).build(null));
+			() -> TileEntityType.Builder.of(MilestoneTileEntity::new, ModBlocks.MILESTONE.get()).build(null));
 
 }

@@ -69,7 +69,7 @@ public class Industry {
 	public static final ItemGroup INDUSTRY = new ItemGroup(MOD_ID) {
 		
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			
 			return new ItemStack(Items.STICKY_PISTON);
 			
