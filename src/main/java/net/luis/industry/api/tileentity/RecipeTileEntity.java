@@ -1,20 +1,22 @@
 package net.luis.industry.api.tileentity;
 
+import static net.luis.industry.Industry.LOGGER;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.luis.industry.Industry;
 import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.recipe.IModRecipeHelper;
-import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -85,16 +87,13 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 
 	public boolean canInteract(PlayerEntity player, ItemStack itemStack) {
 		
-		Industry.LOGGER.debug("canInteract");
-		
 		if (player != null) {
 			
-			if (this.getRecipeHelper().hasRecipe(itemStack) || itemStack.isEmpty()) {
-				
-				Industry.LOGGER.debug("canInteract: true");
+//			if (this.getRecipeHelper().hasRecipe(itemStack) || itemStack.isEmpty()) {
+//				
 				return true;
-				
-			}
+//				
+//			}
 			
 		}
 		
@@ -102,41 +101,38 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 	}
 	
-	public void onInteract(PlayerEntity player, Hand hand) {
-		
-		Industry.LOGGER.debug("onInteract");
+	public void onInteract(PlayerEntity player, Hand hand, boolean isSneaking) {
 		
 		if (player != null) {
 			
 			ItemStack itemStack = player.getItemInHand(hand);
 			
+			LOGGER.debug(itemStack);
+			
 			if (itemStack.isEmpty()) {
 				
-				if (!this.isInventoryEmpty()) {
-					
-					this.dropInventory(player, this.inputInventory);
-					
-				}
+				LOGGER.debug("isEmpty");
+				this.dropInventory(null, this.inputInventory);
 				
 			} else {
 				
-				Industry.LOGGER.debug("!itemStack.isEmpty");
 				ItemStack leftStack = ItemStack.EMPTY;
+				int slot = this.getNextSlot(this.inputInventory, itemStack);
 				
-				if (!player.isShiftKeyDown()) {
+				if (isSneaking) {
 					
-					Industry.LOGGER.debug("!isShiftKeyDown");
 					ItemStack copy = new ItemStack(itemStack.getItem(), 1);
-					leftStack = this.inputInventory.insertItem(this.getNextEmptySlot(this.inputInventory), copy, false);
+					leftStack = this.inputInventory.insertItem(slot, copy, true);
 					itemStack.shrink(1);
 					
 				} else {
 					
-					Industry.LOGGER.debug("isShiftKeyDown");
-					leftStack = this.inputInventory.insertItem(this.getNextEmptySlot(this.inputInventory), itemStack, false);
+					leftStack = this.inputInventory.insertItem(slot, itemStack, true);
 					itemStack.shrink(itemStack.getCount());
 					
 				}
+				
+				LOGGER.debug(this.inputInventory.getStackInSlot(slot));
 				
 				if (!leftStack.isEmpty()) {
 					
@@ -149,17 +145,18 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		}
 		
 		this.updateCurrentRecipe();
-		Industry.LOGGER.debug("getInventory: " + this.getInputInventory());
-		Industry.LOGGER.debug("getCurrentRecipe: " + this.getCurrentRecipe());
+		this.setChanged();
 		
 	}
 	
-	protected int getNextEmptySlot(ItemStackHandler inventory) {
+	protected int getNextSlot(ItemStackHandler inventory, ItemStack itemStack) {
 		
 		int slot = 0;
 		for (; slot < inventory.getSlots(); slot++) {
 			
-			if (inventory.getStackInSlot(slot).isEmpty()) {
+			ItemStack stack = inventory.getStackInSlot(slot);
+			
+			if (stack.isEmpty() || (stack.getCount() < stack.getMaxStackSize() && stack.getItem() == itemStack.getItem())) {
 				
 				break;
 				
@@ -174,39 +171,42 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	protected final void dropInventory(@Nullable PlayerEntity player, ItemStackHandler inventory) {
 		
 		ArrayList<ItemStack> inventoryList = this.inventoryToList(inventory);
-		this.inputInventory = new ItemStackHandler(5);
+//		this.inputInventory = new ItemStackHandler(5);
 		
 		if (player != null) {
 			
+			LOGGER.debug("!=");
+			LOGGER.debug("" + inventoryList);
+			
 			for (ItemStack itemStack : inventoryList) {
 				
+				LOGGER.debug(itemStack.toString());
 				ItemHandlerHelper.giveItemToPlayer(player, itemStack);
 				
 			}
 			
 		} else {
 			
+			LOGGER.debug("else");
+			
 			this.dropItems(inventoryList);
 			
 		}
+		
+		this.setChanged();
 		
 	}
 	
 	protected final void updateCurrentRecipe() {
 		
 		List<T> currentRecipes = new ArrayList<T>();
+		List<T> allRecipes = this.getRecipeHelper().getRecipes();
 		
-		if (!this.isInventoryEmpty()) {
+		for (T recipe : allRecipes) {
 			
-			List<T> allRecipes = this.getRecipeHelper().getRecipes();
-			
-			for (T recipe : allRecipes) {
+			if (this.hasItemsForRecipe(recipe)) {
 				
-				if (this.hasItemsForRecipe(recipe)) {
-					
-					currentRecipes.add(recipe);
-					
-				}
+				currentRecipes.add(recipe);
 				
 			}
 			
@@ -214,6 +214,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 		this.setCurrentRecipe(currentRecipes.isEmpty() ? null : currentRecipes.get(0));
 		this.updateProgressTime();
+		this.setChanged();
 		
 	}
 	
@@ -224,6 +225,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		if (currentRecipe != null) {
 			
 			this.setProgressTime(currentRecipe.getRecipeProgressTime());
+			this.setChanged();
 			
 		}
 		
@@ -248,25 +250,6 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	
 	public boolean hasItemsForRecipe(T recipe) {
 		return recipe.allItemsAvailable(this.inventoryToList(this.inputInventory));
-	}
-	
-	private boolean isInventoryEmpty() {
-		
-		boolean isEmpty = true;
-		
-		for (ItemStack itemStack : this.inventoryToList(this.inputInventory)) {
-			
-			if (!itemStack.isEmpty()) {
-				
-				isEmpty = false;
-				break;
-				
-			}
-			
-		}
-		
-		return isEmpty;
-		
 	}
 	
 	public boolean allItemsAvailable(T recipe) {
@@ -294,30 +277,11 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 	}
 	
-	protected List<ItemStack> getResultItems(T recipe) {
-		
-		List<ResultItemStack> resultItems = recipe.getResultItems();
-		List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
-		
-		for (ResultItemStack resultItem : resultItems) {
-			
-			if (resultItem.getChance()) {
-				
-				itemsToDrop.add(resultItem.getItemStack());
-				
-			}
-			
-		}
-		
-		return itemsToDrop;
-		
-	}
-	
 	private double[] getPosToDrop() {
 		
 		double[] xyz = new double[3];
 		xyz[0] = this.getBlockPos().getX() + 0.5;
-		xyz[1] = this.getBlockPos().getY() + 0.5;
+		xyz[1] = this.getBlockPos().getY() + 0.85;
 		xyz[2] = this.getBlockPos().getZ() + 0.5;
 		return xyz;
 		
@@ -360,10 +324,44 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 				
 			}
 			
+			this.setChanged();
+			
 		}
 		
 	}
 	
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		
+		CompoundNBT nbt = new CompoundNBT();
+		nbt.put("inputInventory", this.inputInventory.serializeNBT());
+		nbt.put("outputInventory", this.outputInventory.serializeNBT());
+		return new SUpdateTileEntityPacket(worldPosition, -1, nbt);
+		
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+		
+		super.onDataPacket(networkManager, packet);
+		CompoundNBT nbt = packet.getTag();
+		this.inputInventory.deserializeNBT(nbt.getCompound("inputInventory"));
+		this.outputInventory.deserializeNBT(nbt.getCompound("outputInventory"));
+		
+		if (this.getLevel() != null) {
+			
+			World world = this.getLevel();
+			
+			if (world.isAreaLoaded(this.getBlockPos(), 1)) {
+				
+
+				
+			}
+			
+		}
+		
+	}
+		
 	@Override
 	public CompoundNBT save(CompoundNBT nbt) {
 		

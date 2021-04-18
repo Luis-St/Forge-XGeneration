@@ -1,5 +1,6 @@
 package net.luis.industry.common.recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.luis.industry.api.item.ItemStackHolder;
@@ -26,8 +27,27 @@ public class MilestoneRecipe implements IModRecipe {
 	}
 
 	@Override
-	public List<ResultItemStack> getResultItems() {
+	public List<ResultItemStack> getAllResultItems() {
 		return this.reslutItems;
+	}
+	
+	@Override
+	public List<ItemStack> getResultItemsWithChance() {
+		
+		List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+		
+		for (ResultItemStack resultItem : this.getAllResultItems()) {
+			
+			if (resultItem.getChance()) {
+				
+				itemsToDrop.add(resultItem.getItemStack());
+				
+			}
+			
+		}
+		
+		return itemsToDrop;
+		
 	}
 	
 	@Override

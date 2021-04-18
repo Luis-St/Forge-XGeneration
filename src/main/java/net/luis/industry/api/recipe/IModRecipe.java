@@ -9,7 +9,9 @@ public interface IModRecipe {
 	
 	List<ItemStack> getRecipeItems();
 	
-	List<ResultItemStack> getResultItems();
+	List<ResultItemStack> getAllResultItems();
+	
+	List<ItemStack> getResultItemsWithChance();
 	
 	default int getRecipeProgressTime() {
 		return 0;
