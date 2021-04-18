@@ -11,14 +11,38 @@ public interface IModRecipe {
 	
 	List<ResultItemStack> getResultItems();
 	
-	default int getProgressTime() {
+	default int getRecipeProgressTime() {
 		return 0;
 	}
 	
-	boolean isRecipeItem(ItemStack itemStack);
+	default boolean containsRecipeItem(ItemStack itemStack) {
+		
+		boolean contains = false;
+		
+		for (ItemStack recipeStack : this.getRecipeItems()) {
+			contains = IModRecipe.equals(recipeStack, itemStack);
+		}
+		
+		return contains;
+		
+	}
 	
-	boolean isResultItem(ItemStack itemStack);
+	boolean allItemsAvailable(List<ItemStack> itemStacks);
 	
-	boolean isItemRequired(ItemStack itemStack);
+	static boolean equals(ItemStack recipeStack, ItemStack toCheck) {
+		
+		if (recipeStack.getItem() == toCheck.getItem()) {
+			
+			if (recipeStack.getCount() == toCheck.getCount()) {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
 
 }

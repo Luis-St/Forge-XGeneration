@@ -2,6 +2,7 @@ package net.luis.industry.common.block.mechanical;
 
 import java.util.stream.Stream;
 
+import net.luis.industry.Industry;
 import net.luis.industry.common.tileentity.MilestoneTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -52,7 +53,26 @@ public class MilestoneBlock extends Block {
 	@Override
 	@SuppressWarnings("deprecation")
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+		
+		TileEntity tileEntity = world.getBlockEntity(pos);
+		
+		if (tileEntity instanceof MilestoneTileEntity) {
+			
+			Industry.LOGGER.debug("MilestoneTileEntity");
+			MilestoneTileEntity milestoneTileEntity = (MilestoneTileEntity) tileEntity;
+			
+			if (milestoneTileEntity.canInteract(player, player.getItemInHand(hand))) {
+				
+				Industry.LOGGER.debug("MilestoneTileEntity#canInteract");
+				milestoneTileEntity.onInteract(player, hand);
+				return ActionResultType.SUCCESS;
+				
+			}
+			
+		}
+		
 		return super.use(state, world, pos, player, hand, rayTraceResult);
+		
 	}
 	
 }

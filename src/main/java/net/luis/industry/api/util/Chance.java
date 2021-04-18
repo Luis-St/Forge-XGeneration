@@ -11,6 +11,10 @@ public class Chance {
 		this.chance = chance;
 	}
 	
+	public boolean isAlways() {
+		return this.isAlwaysTrue() || this.isAlwaysFalse();
+	}
+	
 	public boolean isAlwaysTrue() {
 		return chance == 100;
 	}
