@@ -103,7 +103,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	
 	public void onInteract(PlayerEntity player, Hand hand, boolean isSneaking) {
 		
-		if (player != null) {
+		if (player != null && this.level != null && !this.level.isClientSide) {
 			
 			ItemStack itemStack = player.getItemInHand(hand);
 			
@@ -132,7 +132,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 					
 				}
 				
-				LOGGER.debug(this.inputInventory.getStackInSlot(slot));
+				this.printInv(inputInventory);
 				
 				if (!leftStack.isEmpty()) {
 					
@@ -146,6 +146,16 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 		this.updateCurrentRecipe();
 		this.setChanged();
+		
+	}
+	
+	public void printInv(ItemStackHandler inventory) {
+		
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			
+			LOGGER.debug("Slot: " + i + ", ItemStack: " + inventory.getStackInSlot(i));
+			
+		}
 		
 	}
 	
@@ -173,23 +183,27 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		ArrayList<ItemStack> inventoryList = this.inventoryToList(inventory);
 //		this.inputInventory = new ItemStackHandler(5);
 		
-		if (player != null) {
+		if (this.level != null && !this.level.isClientSide) {
 			
-			LOGGER.debug("!=");
-			LOGGER.debug("" + inventoryList);
-			
-			for (ItemStack itemStack : inventoryList) {
+			if (player != null) {
 				
-				LOGGER.debug(itemStack.toString());
-				ItemHandlerHelper.giveItemToPlayer(player, itemStack);
+				LOGGER.debug("!=");
+				LOGGER.debug("" + inventoryList);
+				
+				for (ItemStack itemStack : inventoryList) {
+					
+					LOGGER.debug(itemStack.toString());
+					ItemHandlerHelper.giveItemToPlayer(player, itemStack);
+					
+				}
+				
+			} else {
+				
+				LOGGER.debug("else");
+				
+				this.dropItems(inventoryList);
 				
 			}
-			
-		} else {
-			
-			LOGGER.debug("else");
-			
-			this.dropItems(inventoryList);
 			
 		}
 		
@@ -202,11 +216,15 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		List<T> currentRecipes = new ArrayList<T>();
 		List<T> allRecipes = this.getRecipeHelper().getRecipes();
 		
-		for (T recipe : allRecipes) {
+		if (this.level != null && !this.level.isClientSide) {
 			
-			if (this.hasItemsForRecipe(recipe)) {
+			for (T recipe : allRecipes) {
 				
-				currentRecipes.add(recipe);
+				if (this.hasItemsForRecipe(recipe)) {
+					
+					currentRecipes.add(recipe);
+					
+				}
 				
 			}
 			
@@ -222,7 +240,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 		T currentRecipe = this.getCurrentRecipe();
 		
-		if (currentRecipe != null) {
+		if (currentRecipe != null && this.level != null && !this.level.isClientSide) {
 			
 			this.setProgressTime(currentRecipe.getRecipeProgressTime());
 			this.setChanged();
@@ -309,7 +327,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	
 	protected void dropItems(List<ItemStack> itemsToDrop) {
 		
-		if (this.hasCurrentRecipe()) {
+		if (this.hasCurrentRecipe() && this.level != null && !this.level.isClientSide) {
 			
 			List<ItemEntity> itemEntities = this.toItemEntity(itemsToDrop);
 			World world = this.getLevel();
@@ -344,9 +362,6 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
 		
 		super.onDataPacket(networkManager, packet);
-		CompoundNBT nbt = packet.getTag();
-		this.inputInventory.deserializeNBT(nbt.getCompound("inputInventory"));
-		this.outputInventory.deserializeNBT(nbt.getCompound("outputInventory"));
 		
 		if (this.getLevel() != null) {
 			
@@ -354,7 +369,9 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 			
 			if (world.isAreaLoaded(this.getBlockPos(), 1)) {
 				
-
+				CompoundNBT nbt = packet.getTag();
+				this.inputInventory.deserializeNBT(nbt.getCompound("inputInventory"));
+				this.outputInventory.deserializeNBT(nbt.getCompound("outputInventory"));
 				
 			}
 			
