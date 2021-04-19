@@ -84,7 +84,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		}
 		
 	}
-
+	
 	public boolean canInteract(PlayerEntity player, ItemStack itemStack) {
 		
 		if (player != null) {
@@ -122,12 +122,12 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 				if (isSneaking) {
 					
 					ItemStack copy = new ItemStack(itemStack.getItem(), 1);
-					leftStack = this.inputInventory.insertItem(slot, copy, true);
+					leftStack = this.inputInventory.insertItem(slot, copy, false);
 					itemStack.shrink(1);
 					
 				} else {
 					
-					leftStack = this.inputInventory.insertItem(slot, itemStack, true);
+					leftStack = this.inputInventory.insertItem(slot, itemStack, false);
 					itemStack.shrink(itemStack.getCount());
 					
 				}
