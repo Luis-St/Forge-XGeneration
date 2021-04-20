@@ -585,6 +585,46 @@
       "apply": {
         "model": "industry:block/fluid_pipe/pipe_dispatcher"
       }
+    },
+	{
+      "when": {
+        "down": "true",
+        "up": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "industry:block/fluid_pipe/pipe_dispatcher"
+      }
+    },
+	{
+      "when": {
+        "down": "true",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "industry:block/fluid_pipe/pipe_dispatcher"
+      }
+    },
+	{
+      "when": {
+        "down": "true",
+        "up": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "industry:block/fluid_pipe/pipe_dispatcher"
+      }
+    },
+	{
+      "when": {
+        "down": "true",
+        "up": "true",
+        "east": "true"
+      },
+      "apply": {
+        "model": "industry:block/fluid_pipe/pipe_dispatcher"
+      }
     }
   ]
 }

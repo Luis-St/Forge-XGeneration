@@ -14,6 +14,14 @@ public class VarArgs<T> {
 		this.list.addAll(Arrays.asList(args));
 	}
 	
+	public T getType() {
+		return this.list.get(0);
+	}
+	
+	public int size() {
+		return this.list.size();
+	}
+	
 	public List<T> asList() {
 		return this.list;
 	}

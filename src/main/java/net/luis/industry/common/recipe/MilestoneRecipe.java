@@ -16,10 +16,12 @@ public class MilestoneRecipe implements IModRecipe {
 	private final int recipeProgressTime;
 	
 	public MilestoneRecipe(VarArgs<ItemStack> recipeItems, VarArgs<ResultItemStack> reslutItems, int recipeProgressTime) {
+		this.requireSize(recipeItems, this.getRecipeItemMaxCount());
+		this.requireSize(reslutItems, this.getResultItemMaxCount());
 		this.recipeItems = recipeItems.asList();
 		this.reslutItems = reslutItems.asList();
 		this.recipeProgressTime = recipeProgressTime;
-	}
+	}	
 
 	@Override
 	public List<ItemStack> getRecipeItems() {
@@ -51,6 +53,16 @@ public class MilestoneRecipe implements IModRecipe {
 	}
 	
 	@Override
+	public int getRecipeItemMaxCount() {
+		return 10;
+	}
+
+	@Override
+	public int getResultItemMaxCount() {
+		return 4;
+	}
+	
+	@Override
 	public int getRecipeProgressTime() {
 		return this.recipeProgressTime;
 	}
@@ -75,6 +87,12 @@ public class MilestoneRecipe implements IModRecipe {
 		
 		return containedItems >= this.getRecipeItems().size();
 		
+	}
+	
+	private final <T> void requireSize(VarArgs<T> toCheck, int size) {
+		if (toCheck.size() > size) {
+			throw new IllegalArgumentException("The VarArgs<?> is longer than " + size);
+		}
 	}
 
 }

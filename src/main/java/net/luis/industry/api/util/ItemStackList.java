@@ -1,6 +1,5 @@
 package net.luis.industry.api.util;
 
-import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -9,14 +8,23 @@ import java.util.Objects;
 import com.google.common.collect.Lists;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
-public class ItemStackList extends AbstractList<ItemStack> {
+public class ItemStackList extends NonNullList<ItemStack> {
 	
 	private final List<ItemStack> itemStacks;
 	private final ItemStack defaultItemStack;
 
+	@SuppressWarnings("unchecked")
 	public static ItemStackList create() {
 		return new ItemStackList();
+	}
+	
+	public static ItemStackList withSize(int size, ItemStack defaultItemStack) {
+		Objects.requireNonNull(defaultItemStack);
+		ItemStack[] itemStackArray = new ItemStack[size];
+		Arrays.fill(itemStackArray, defaultItemStack);
+		return new ItemStackList(Arrays.asList((ItemStack[]) itemStackArray), defaultItemStack);
 	}
 
 	@SafeVarargs
@@ -50,6 +58,10 @@ public class ItemStackList extends AbstractList<ItemStack> {
 		List<ItemStack> itemStacks = this.getAll();
 		this.clear();
 		return itemStacks;
+	}
+	
+	public ItemStack setDefault(int index) {
+		return this.set(index, this.getDefault());
 	}
 	
 	@Override

@@ -61,7 +61,7 @@ public class MilestoneBlock extends Block {
 			
 			if (milestoneTileEntity.canInteract(player, player.getItemInHand(hand))) {
 				
-				milestoneTileEntity.onInteract(player, hand, player.isSteppingCarefully());
+				milestoneTileEntity.onInteract(player, hand);
 				return ActionResultType.SUCCESS;
 				
 			}

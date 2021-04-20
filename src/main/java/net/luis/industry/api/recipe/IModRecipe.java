@@ -13,6 +13,10 @@ public interface IModRecipe {
 	
 	List<ItemStack> getResultItemsWithChance();
 	
+	int getRecipeItemMaxCount();
+	
+	int getResultItemMaxCount();
+	
 	default int getRecipeProgressTime() {
 		return 0;
 	}
