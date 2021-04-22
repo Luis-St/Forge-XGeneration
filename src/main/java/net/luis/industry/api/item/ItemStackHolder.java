@@ -46,10 +46,8 @@ public class ItemStackHolder {
 		List<ItemStackHolder> stackHolders = new ArrayList<ItemStackHolder>();
 		
 		for (ItemStack itemStack : itemStacks) {
-			
 			ItemStackHolder itemStackHolder = new ItemStackHolder(itemStack);
 			stackHolders.add(itemStackHolder);
-			
 		}
 		
 		return stackHolders;

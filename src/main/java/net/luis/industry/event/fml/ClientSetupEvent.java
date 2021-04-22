@@ -13,8 +13,6 @@ public class ClientSetupEvent {
 	@SubscribeEvent
 	public static void doClientSetup(FMLClientSetupEvent event) {
 		
-			
-		
 	}
 
 }

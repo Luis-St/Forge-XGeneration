@@ -24,11 +24,15 @@ public class ItemStackList extends NonNullList<ItemStack> {
 		Objects.requireNonNull(defaultItemStack);
 		ItemStack[] itemStackArray = new ItemStack[size];
 		Arrays.fill(itemStackArray, defaultItemStack);
-		return new ItemStackList(Arrays.asList((ItemStack[]) itemStackArray), defaultItemStack);
+		return new ItemStackList(Arrays.asList(itemStackArray), defaultItemStack);
+	}
+	
+	public static ItemStackList of(ItemStack defaultItemStack, List<ItemStack> itemStacks) {
+		return new ItemStackList(itemStacks, defaultItemStack);
 	}
 
 	@SafeVarargs
-	public static  ItemStackList of(ItemStack defaultItemStack, ItemStack... itemStacks) {
+	public static ItemStackList of(ItemStack defaultItemStack, ItemStack... itemStacks) {
 		return new ItemStackList(Arrays.asList(itemStacks), defaultItemStack);
 	}
 	
@@ -84,19 +88,27 @@ public class ItemStackList extends NonNullList<ItemStack> {
 	
 	@Override
 	public boolean remove(Object object) {
+		
 		Iterator<ItemStack> iterator = this.iterator();
+		
 		if (object instanceof ItemStack) {
-			ItemStack itemStack = (ItemStack) object;
+			
 			while (iterator.hasNext()) {
+				
+				ItemStack itemStack = (ItemStack) object;
 				ItemStack nextItemStack = iterator.next();
+				
 				if (this.equalItemStack(itemStack, nextItemStack)) {
 					iterator.remove();
 					return true;
 				}
 				
 			}
+			
 		}
+		
 		return false;
+		
 	}
 	
 	@Override
@@ -118,35 +130,78 @@ public class ItemStackList extends NonNullList<ItemStack> {
 		return this.containsItemStack(itemStack);
 	}
 	
+	public boolean containsAll(List<ItemStack> itemStacks) {
+		
+		if (!itemStacks.isEmpty()) {
+			
+			int contains = 0;
+			
+			for (ItemStack itemStack : itemStacks) {
+				
+				if (this.containsItemStack(itemStack)) {
+					
+					contains++;
+					
+				}
+				
+			}
+			
+			return contains >= itemStacks.size();
+			
+		}
+		
+		return false;
+		
+	}
+	
 	public boolean containsItemStack(ItemStack itemStack) {
+		
 		boolean contains = false;
+		
 		for (ItemStack stack : this.itemStacks) {
+			
 			if (this.equalItemStack(stack, itemStack)) {
+				
 				contains = true;
 				break;
+				
 			}
+			
 		}
+		
 		return contains;
+		
 	}
 	
 	@Override
 	public void clear() {
+		
 		if (this.defaultItemStack == null) {
+			
 			throw new NullPointerException();
+			
 		} else {
+			
 			for (int i = 0; i < this.size(); i++) {
+				
 				this.itemStacks.set(i, this.getDefault());
+				
 			}
+			
 		}
+		
 	}
 	
-	private boolean equalItemStack(ItemStack firstStack, ItemStack secondStack) {
-		if (firstStack.getItem() == secondStack.getItem()) {
-			if (firstStack.getCount() == secondStack.getCount()) {
-				return true;
-			}
+	private boolean equalItemStack(ItemStack itemStack, ItemStack toCheck) {
+		
+		if (itemStack.getItem() == toCheck.getItem()) {
+			
+			return toCheck.getCount() >= itemStack.getCount();
+			
 		}
+		
 		return false;
+		
 	}
 	
 }

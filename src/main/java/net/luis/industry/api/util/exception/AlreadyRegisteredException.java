@@ -12,4 +12,8 @@ public class AlreadyRegisteredException extends RuntimeException {
 		super(message);
 	}
 	
+	public AlreadyRegisteredException(int id) {
+		super("The ID " + id + ", already exists");
+	}
+	
 }

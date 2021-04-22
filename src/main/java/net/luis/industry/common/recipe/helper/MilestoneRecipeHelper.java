@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.api.recipe.item.ResultItemStack;
-import net.luis.industry.api.util.VarArgs;
+import net.luis.industry.api.util.ItemStackList;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.luis.industry.common.recipe.MilestoneRecipe;
@@ -22,24 +22,21 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 	
 	@Override
 	public void createRecipeList() {
-		this.registerRecipe(
-				new MilestoneRecipe(
-						new VarArgs<ItemStack>(new ItemStack(Items.GRASS_BLOCK)), 
-						new VarArgs<ResultItemStack>(new ResultItemStack(new ItemStack(Items.DIRT), 100)), 
-						0));
+		this.milestoneRecipes.clear();
+		this.registerRecipe(new MilestoneRecipe(new ItemStack(Items.STONE), new ResultItemStack(new ItemStack(Items.COBBLESTONE), 100), 10, 0));
 	}
 	
 	@Override
 	public void registerRecipe(MilestoneRecipe recipe) {
 		
 		if (this.isRecipeRegistered(recipe)) {
-			
-			throw new AlreadyRegisteredException();
-			
+			throw new AlreadyRegisteredException("This recipe has already been registered");
 		} else {
-			
-			this.milestoneRecipes.add(recipe);
-			
+			if (this.existsId(recipe)) {
+				throw new AlreadyRegisteredException(recipe.getId());
+			} else {
+				this.milestoneRecipes.add(recipe);
+			}
 		}
 		
 	}
@@ -47,6 +44,22 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 	@Override
 	public boolean isRecipeRegistered(MilestoneRecipe recipe) {
 		return this.milestoneRecipes.contains(recipe);
+	}
+	
+	public boolean existsId(MilestoneRecipe recipe) {
+		
+		for (MilestoneRecipe milestoneRecipe : this.getRecipes()) {
+			
+			if (milestoneRecipe.equalsId(recipe)) {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
 	}
 
 	@Override
@@ -58,15 +71,12 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 	public List<MilestoneRecipe> getRecipes() {
 		return this.milestoneRecipes;
 	}
-
+	
 	@Override
 	public boolean hasRecipe(ItemStack stack) {
-		
 		List<MilestoneRecipe> recipes = this.getRecipes();
-		recipes.removeIf(milestoneRecipe -> !milestoneRecipe.containsRecipeItem(stack));
-		
+		recipes.removeIf(milestoneRecipe -> !milestoneRecipe.containsItemStack(stack, true));
 		return recipes.size() > 0;
-		
 	}
 
 	@Override
@@ -138,6 +148,27 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 		}
 		
 		return equalItems == size;
+		
+	}
+
+	@Override
+	public MilestoneRecipe getNextRecipe(ItemStackList inventory) {
+		
+		List<MilestoneRecipe> milestoneRecipes = this.getRecipes();
+		MilestoneRecipe recipe = null;
+		
+		for (MilestoneRecipe milestoneRecipe : milestoneRecipes) {
+			
+			if (milestoneRecipe.canDrop(inventory)) {
+				
+				recipe = milestoneRecipe;
+				break;
+				
+			}
+			
+		}
+		
+		return recipe;
 		
 	}
 

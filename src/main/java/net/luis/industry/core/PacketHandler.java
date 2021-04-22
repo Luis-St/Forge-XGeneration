@@ -13,10 +13,8 @@ public class PacketHandler {
 	public static SimpleChannel simpleChannel;
 
 	public static void init() {
-
 		simpleChannel = NetworkRegistry.newSimpleChannel(new ResourceLocation(Industry.MOD_ID, "simple_chnanel"),
 				() -> version, version::equals, version::equals);
-
 	}
 
 }

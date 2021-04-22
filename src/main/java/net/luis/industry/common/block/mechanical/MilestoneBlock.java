@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -47,6 +48,24 @@ public class MilestoneBlock extends Block {
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void onRemove(BlockState oldState, World world, BlockPos pos, BlockState newState, boolean flag) {
+		
+		TileEntity tileEntity = world.getBlockEntity(pos);
+		
+		if (tileEntity instanceof MilestoneTileEntity) {
+			
+			MilestoneTileEntity milestoneTileEntity = (MilestoneTileEntity) tileEntity;
+			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getInput());
+			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getOutput());
+			
+		}
+		
+		super.onRemove(oldState, world, pos, newState, flag);
+		
 	}
 	
 	@Override

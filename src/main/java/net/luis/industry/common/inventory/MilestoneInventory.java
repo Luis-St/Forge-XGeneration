@@ -1,5 +1,8 @@
 package net.luis.industry.common.inventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.luis.industry.api.inventory.IRecipeInventory;
 import net.luis.industry.api.util.ItemStackList;
 import net.minecraft.item.Item;
@@ -129,10 +132,65 @@ public class MilestoneInventory implements IRecipeInventory {
 		return ItemStack.EMPTY;
 		
 	}
-
+	
+	@Override
+	public ItemStack insertAll(int slot, List<ItemStack> itemStacks, ItemStackList inventory) {
+		
+		ItemStack leftStack = ItemStack.EMPTY;
+		
+		for (ItemStack itemStack : inventory) {
+			
+			leftStack = this.insert(slot, itemStack, inventory);
+			
+			if (!leftStack.isEmpty()) {
+				
+				break;
+				
+			}
+			
+		}
+		
+		return leftStack;
+	}
+	
 	@Override
 	public ItemStack extract(int slot, ItemStack itemStack, ItemStackList inventory) {
-		return this.tryExtract(slot, slot, inventory);
+		
+		if (slot > 0) {
+			
+			return this.tryExtract(slot, itemStack, inventory);
+			
+		}
+		
+		return this.tryExtractItemStack(itemStack, inventory);
+
+	}
+	
+	@Override
+	public  List<ItemStack> extractAll(List<ItemStack> itemStacks, ItemStackList inventory) {
+		
+		List<ItemStack> extractItemStacks = new ArrayList<ItemStack>();
+		
+		for (int i = 0; i < itemStacks.size(); i++) {
+			
+			for (int j = 0; j < inventory.size(); j++) {
+				
+				ItemStack itemStack = itemStacks.get(i);
+				ItemStack inventoryStack = inventory.get(j);
+				
+				if (this.equalsItemStack(itemStack, inventoryStack, false)) {
+					
+					extractItemStacks.add(inventoryStack);
+					inventory.setDefault(j);
+					
+				}
+				
+			}
+			
+		}
+		
+		return extractItemStacks;
+		
 	}
 	
 	protected ItemStack tryInsert(ItemStack itemStack, ItemStackList inventory) {
@@ -181,8 +239,8 @@ public class MilestoneInventory implements IRecipeInventory {
 		return itemStack;
 		
 	}
-
-	protected ItemStack tryExtract(int slot, int count, ItemStackList inventory) {
+	
+	protected ItemStack tryExtract(int slot, ItemStack itemStack, ItemStackList inventory) {
 		
 		for (int i = 0; i < inventory.size(); i++) {
 			
@@ -192,16 +250,17 @@ public class MilestoneInventory implements IRecipeInventory {
 				
 				if (i == slot) {
 					
-					if (count >= inventoryStack.getCount()) {
+					if (itemStack.getCount() >= inventoryStack.getCount()) {
 						
 						inventory.setDefault(slot);
+						return inventoryStack;
 						
 					} else {
 						
 						Item item = inventoryStack.getItem();
-						int leftCount = inventoryStack.getCount() - count;
+						int leftCount = inventoryStack.getCount() - itemStack.getCount();
 						inventory.set(i, new ItemStack(item, leftCount));
-						return new ItemStack(item, count);
+						return new ItemStack(item, itemStack.getCount());
 						
 					}
 					
@@ -211,20 +270,31 @@ public class MilestoneInventory implements IRecipeInventory {
 			
 		}
 		
-		return this.tryExtract(inventory);
+		return ItemStack.EMPTY;
 		
 	}
 	
-	protected ItemStack tryExtract(ItemStackList inventory) {
+	protected ItemStack tryExtractItemStack(ItemStack itemStack, ItemStackList inventory) {
 		
 		for (int i = 0; i < inventory.size(); i++) {
 			
 			ItemStack inventoryStack = inventory.get(i);
 			
-			if (!inventoryStack.isEmpty()) {
+			if (!itemStack.isEmpty() && this.equalsItemStack(itemStack, inventoryStack, true)) {
 				
-				inventory.setDefault(i);
-				return inventoryStack;
+				if (itemStack.getCount() >= inventoryStack.getCount()) {
+					
+					inventory.setDefault(i);
+					return inventoryStack;
+					
+				} else {
+					
+					Item item = inventoryStack.getItem();
+					int leftCount = inventoryStack.getCount() - itemStack.getCount();
+					inventory.set(i, new ItemStack(item, leftCount));
+					return new ItemStack(item, itemStack.getCount());
+					
+				}
 				
 			}
 			
@@ -232,6 +302,17 @@ public class MilestoneInventory implements IRecipeInventory {
 		
 		return ItemStack.EMPTY;
 		
+	}
+	
+	private boolean equalsItemStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags) {
+		
+		if (itemStack.getItem() == toCheck.getItem()) {
+			
+			return toCheck.getCount() >= itemStack.getCount() || ignoreTags;
+			
+		}
+		
+		return false;
 	}
 	
 	@Override

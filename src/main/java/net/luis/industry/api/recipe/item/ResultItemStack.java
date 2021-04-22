@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 
 public class ResultItemStack {
 	
-	private final ItemStack itemStack;
-	private final Chance chance;
+	private ItemStack itemStack;
+	private Chance chance;
 	
 	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, 0);
 	
@@ -18,24 +18,31 @@ public class ResultItemStack {
 		this.itemStack = itemStack;
 		this.chance = chance;
 	}
+	
+	protected Chance getChance() {
+		return this.chance;
+	}
 
 	public ItemStack getItemStack() {
 		return itemStack;
 	}
 
-	public boolean getChance() {
+	public boolean isResult() {
 		return this.chance.getChance();
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(ResultItemStack resultStack, boolean ignoreTags, boolean ignoreChance) {
 		
-		if (!(obj instanceof ItemStack)) {
-			return false;
+		if (resultStack.getItemStack().getItem() == this.getItemStack().getItem()) {
+			
+			if (resultStack.getItemStack().getCount() == this.getItemStack().getCount() || ignoreTags) {
+				
+				return resultStack.getChance().equals(this.getChance()) || ignoreChance;
+				
+			}
+			
 		}
-		
-		ItemStack itemStack = (ItemStack) obj;	
-		return itemStack.getItem() == this.getItemStack().getItem();
+		return false;
 		
 	}
 
