@@ -13,7 +13,7 @@ public class NotRegisteredException extends RuntimeException {
 	}
 	
 	public NotRegisteredException(int id) {
-		super("The ID " + id + ", does not exists");
+		super("An recipe with id " + id + ", does not exists");
 	}
 	
 }

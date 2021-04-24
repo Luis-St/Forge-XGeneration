@@ -27,4 +27,6 @@ public interface IModRecipeHelper<T extends IModRecipe> {
 	
 	T getNextRecipe(ItemStackList inventory);
 	
+	T getRecipeFromId(int id);
+	
 }

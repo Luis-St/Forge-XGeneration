@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.luis.industry.api.recipe.IModRecipe;
+import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
 import net.luis.industry.api.util.VarArgs;
+import net.luis.industry.common.recipe.helper.MilestoneRecipeHelper;
 import net.minecraft.item.ItemStack;
 
 public class MilestoneRecipe implements IModRecipe {
@@ -15,6 +17,7 @@ public class MilestoneRecipe implements IModRecipe {
 	private final List<ResultItemStack> resultItems;
 	private final int progressTime;
 	private final int id;
+	private final IModRecipeHelper<MilestoneRecipe> recipeHelper;
 
 	public MilestoneRecipe(ItemStack firstInput, ResultItemStack firstResult, int progressTime, int id) {
 		this(new VarArgs<ItemStack>(firstInput), new VarArgs<ResultItemStack>(firstResult), progressTime, id);
@@ -47,11 +50,17 @@ public class MilestoneRecipe implements IModRecipe {
 		this.resultItems = reslutItems.asList();
 		this.progressTime = progressTime;
 		this.id = id;
+		this.recipeHelper = new MilestoneRecipeHelper();
 	}
 	
 	@Override
 	public int getId() {
 		return this.id;
+	}
+	
+	@Override
+	public IModRecipeHelper<MilestoneRecipe> getRecipeHelper() {
+		return this.recipeHelper;
 	}
 	
 	@Override
@@ -94,7 +103,7 @@ public class MilestoneRecipe implements IModRecipe {
 	}
 
 	@Override
-	public int getRecipeProgressTime() {
+	public int getProgressTime() {
 		return this.progressTime;
 	}
 	

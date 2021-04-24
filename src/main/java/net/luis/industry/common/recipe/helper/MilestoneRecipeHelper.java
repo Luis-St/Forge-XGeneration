@@ -11,6 +11,7 @@ import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
+import net.luis.industry.api.util.exception.NotRegisteredException;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.luis.industry.common.recipe.MilestoneRecipe;
 import net.minecraft.item.ItemStack;
@@ -49,13 +50,9 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 	public boolean existsId(MilestoneRecipe recipe) {
 		
 		for (MilestoneRecipe milestoneRecipe : this.getRecipes()) {
-			
 			if (milestoneRecipe.equalsId(recipe)) {
-				
 				return true;
-				
 			}
-			
 		}
 		
 		return false;
@@ -83,9 +80,7 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 	public List<ItemStack> getItemsForRecipe(MilestoneRecipe recipe) {
 		
 		if (this.isRecipeRegistered(recipe)) {
-			
 			return recipe.getRecipeItems();
-			
 		}
 		
 		return null;
@@ -100,29 +95,18 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 		List<MilestoneRecipe> milestoneRecipes = new ArrayList<MilestoneRecipe>();
 		
 		for (MilestoneRecipe recipe : registeredRecipes) {
-			
 			if (recipe.getRecipeItems().size() == itemStacks.length) {
-				
 				if (this.recipesEqual(recipe.getRecipeItems(), new ArrayList<ItemStack>(Arrays.asList(itemStacks)))) {
-					
 					milestoneRecipes.add(recipe);
-					
 				}
-				
 			}
-			
 		}
 		
 		if (!milestoneRecipes.isEmpty()) {
-			
 			if (milestoneRecipes.size() > 1) {
-				
 				return milestoneRecipes.get(new Random().nextInt(milestoneRecipes.size()));
-				
 			}
-			
 			return milestoneRecipes.get(0);
-			
 		}
 		
 		return null;
@@ -140,11 +124,8 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 			ItemStack itemStack = itemStacks.get(i);
 			
 			if (milestoneItemStack.getItem() == itemStack.getItem()) {
-				
 				equalItems++;
-				
 			}
-			
 		}
 		
 		return equalItems == size;
@@ -158,18 +139,32 @@ public class MilestoneRecipeHelper implements IModRecipeHelper<MilestoneRecipe> 
 		MilestoneRecipe recipe = null;
 		
 		for (MilestoneRecipe milestoneRecipe : milestoneRecipes) {
-			
 			if (milestoneRecipe.canDrop(inventory)) {
-				
 				recipe = milestoneRecipe;
 				break;
-				
 			}
-			
 		}
 		
 		return recipe;
 		
+	}
+
+	@Override
+	public MilestoneRecipe getRecipeFromId(int id) {
+		
+		MilestoneRecipe recipe = null;
+		
+		for (MilestoneRecipe milestoneRecipe : this.milestoneRecipes) {
+			if (milestoneRecipe.getId() == id) {
+				recipe = milestoneRecipe;
+			}
+		}
+		
+		if (recipe == null) {
+			throw new NotRegisteredException(id);
+		}
+		
+		return null;
 	}
 
 }

@@ -3,7 +3,11 @@ package net.luis.industry.common.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import net.luis.industry.api.inventory.IRecipeInventory;
+import net.luis.industry.api.inventory.InventorySlot;
+import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.util.ItemStackList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,11 +50,11 @@ public class MilestoneInventory implements IRecipeInventory {
 		return this.output.size();
 	}
 	
-	public void setInputSize(int size) {
+	protected void setInputSize(int size) {
 		this.input = ItemStackList.withSize(size, ItemStack.EMPTY);
 	}
 	
-	public void setOutputSize(int size) {
+	protected void setOutputSize(int size) {
 		this.output = ItemStackList.withSize(size, ItemStack.EMPTY);
 	}
 	
@@ -77,6 +81,48 @@ public class MilestoneInventory implements IRecipeInventory {
 	@Override
 	public boolean isSlotEmpty(ItemStackList inventory, int slot) {
 		return inventory.get(slot).isEmpty();
+	}
+	
+	@Override
+	public List<InventorySlot> hasItemsForRecipe(ItemStackList inventory, IModRecipe recipe) {
+		
+		List<InventorySlot> inventorySlots = new ArrayList<InventorySlot>();
+		
+		for (ItemStack itemStack : recipe.getRecipeItems()) {
+			
+			inventorySlots.add(this.getSlotWithStack(inventory, itemStack));
+			
+		}
+		
+		if (inventorySlots.size() >= recipe.getRecipeItems().size()) {
+			return inventorySlots;
+		}
+		
+		return Lists.newArrayList();
+		
+	}
+	
+	@Override
+	public InventorySlot getSlotWithStack(ItemStackList inventory, ItemStack itemStack) {
+		
+		ItemStack slotStack = ItemStack.EMPTY;
+		int slot = 0;
+		
+		for (int i = 0; i < inventory.size(); i++) {
+			
+			ItemStack inventoryStack = inventory.get(i);
+			
+			if (this.equalsStack(itemStack, inventoryStack, false)) {
+				
+				slotStack = inventoryStack;
+				slot = i;
+				break;
+				
+			}
+			
+		}
+		
+		return new InventorySlot(slotStack, slot);
 	}
 	
 	@Override
@@ -143,18 +189,17 @@ public class MilestoneInventory implements IRecipeInventory {
 			leftStack = this.insert(slot, itemStack, inventory);
 			
 			if (!leftStack.isEmpty()) {
-				
 				break;
-				
 			}
 			
 		}
 		
 		return leftStack;
+		
 	}
 	
 	@Override
-	public ItemStack extract(int slot, ItemStack itemStack, ItemStackList inventory) {
+	public ItemStack extract(int slot, ItemStack itemStack, ItemStackList inventory, boolean extractNext) {
 		
 		if (slot > 0) {
 			
@@ -162,7 +207,7 @@ public class MilestoneInventory implements IRecipeInventory {
 			
 		}
 		
-		return this.tryExtractItemStack(itemStack, inventory);
+		return this.tryExtractItemStack(itemStack, inventory, extractNext);
 
 	}
 	
@@ -178,7 +223,7 @@ public class MilestoneInventory implements IRecipeInventory {
 				ItemStack itemStack = itemStacks.get(i);
 				ItemStack inventoryStack = inventory.get(j);
 				
-				if (this.equalsItemStack(itemStack, inventoryStack, false)) {
+				if (this.equalsStack(itemStack, inventoryStack, false)) {
 					
 					extractItemStacks.add(inventoryStack);
 					inventory.setDefault(j);
@@ -190,6 +235,17 @@ public class MilestoneInventory implements IRecipeInventory {
 		}
 		
 		return extractItemStacks;
+		
+	}
+	
+	@Override
+	public void extractRecipe(IModRecipe recipe, ItemStackList inventory) {
+		
+		for (ItemStack itemStack : recipe.getRecipeItems()) {
+			
+			this.extract(-1, itemStack, inventory, false);
+			
+		}
 		
 	}
 	
@@ -211,9 +267,7 @@ public class MilestoneInventory implements IRecipeInventory {
 				int count = inventoryStack.getCount() + itemStack.getCount();
 				
 				if (inventoryStack.getCount() == inventoryStack.getMaxStackSize()) {
-					
 					continue;
-					
 				} else {
 					
 					if (inventoryStack.getMaxStackSize() >= count) {
@@ -274,13 +328,13 @@ public class MilestoneInventory implements IRecipeInventory {
 		
 	}
 	
-	protected ItemStack tryExtractItemStack(ItemStack itemStack, ItemStackList inventory) {
+	protected ItemStack tryExtractItemStack(ItemStack itemStack, ItemStackList inventory, boolean extractNext) {
 		
 		for (int i = 0; i < inventory.size(); i++) {
 			
 			ItemStack inventoryStack = inventory.get(i);
 			
-			if (!itemStack.isEmpty() && this.equalsItemStack(itemStack, inventoryStack, true)) {
+			if (!itemStack.isEmpty() && this.equalsStack(itemStack, inventoryStack, true)) {
 				
 				if (itemStack.getCount() >= inventoryStack.getCount()) {
 					
@@ -296,6 +350,11 @@ public class MilestoneInventory implements IRecipeInventory {
 					
 				}
 				
+			} else if (itemStack.isEmpty() && extractNext) {
+				
+				inventory.setDefault(i);
+				return inventoryStack;
+				
 			}
 			
 		}
@@ -304,7 +363,7 @@ public class MilestoneInventory implements IRecipeInventory {
 		
 	}
 	
-	private boolean equalsItemStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags) {
+	private boolean equalsStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags) {
 		
 		if (itemStack.getItem() == toCheck.getItem()) {
 			

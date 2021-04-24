@@ -13,7 +13,7 @@ public interface IModInventory {
 	
 	int getNextEmptySlot();
 	
-	int getNextSlotWith(ItemStack itemStack);
+	InventorySlot getNextSlotWith(ItemStack itemStack);
 	
 	ItemStack insertItemStack(ItemStack itemStack);
 	

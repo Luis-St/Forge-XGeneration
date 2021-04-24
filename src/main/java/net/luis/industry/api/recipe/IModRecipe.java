@@ -10,6 +10,8 @@ public interface IModRecipe {
 	
 	int getId();
 	
+	IModRecipeHelper<?> getRecipeHelper();
+	
 	List<ItemStack> getRecipeItems();
 	
 	List<ResultItemStack> getAllResultItems();
@@ -20,7 +22,7 @@ public interface IModRecipe {
 	
 	int getResultItemMaxCount();
 	
-	int getRecipeProgressTime();
+	int getProgressTime();
 	
 	boolean canDrop(ItemStackList inventory);
 	
