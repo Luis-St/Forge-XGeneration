@@ -1,6 +1,5 @@
 package net.luis.industry.api.tileentity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -9,13 +8,11 @@ import net.luis.industry.api.inventory.IRecipeInventory;
 import net.luis.industry.api.inventory.InventorySlot;
 import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.recipe.IModRecipeHelper;
-import net.luis.industry.api.recipe.RecipeProgress;
-import net.luis.industry.api.util.ItemStackList;
+import net.luis.industry.api.recipe.progress.RecipeProgress;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IClearable;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -27,21 +24,20 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-import static net.luis.industry.Industry.LOGGER;
 
-public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implements IClearable, ITickableTileEntity {
+public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends TileEntity implements IClearable, ITickableTileEntity {
 	
 	private ModRecipeType recipeType;
 	private IModRecipeHelper<T> recipeHelper;
 	protected IRecipeInventory inventory;
-	protected List<RecipeProgress> recipeProgresses;
+	protected RecipeProgress recipeProgress;
 	
-	public RecipeTileEntity(TileEntityType<?> tileEntityType, ModRecipeType recipeType, IModRecipeHelper<T> recipeHelper, IRecipeInventory inventory) {
+	public AbstractRecipeTileEntity(TileEntityType<?> tileEntityType, ModRecipeType recipeType, IModRecipeHelper<T> recipeHelper, IRecipeInventory inventory) {
 		super(tileEntityType);
 		this.recipeType = recipeType;
 		this.recipeHelper = recipeHelper;
 		this.inventory = inventory;
-		this.recipeProgresses = new ArrayList<RecipeProgress>();
+		this.recipeProgress = null;
 	}
 	
 	protected ModRecipeType getRecipeType() {
@@ -104,17 +100,16 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 	}
 	
-	// TODO : modify (creat RecipeProgress & remove items form inv (add method in inventory extract recipe items (from recipe & InventorySlot)))
 	public void updateInventory(T recipe) {
 		
-		if (recipe != null) {
+		if (recipe != null && this.recipeProgress == null) {
 			
 			List<InventorySlot> inventorySlots = this.inventory.hasItemsForRecipe(this.inventory.getInput(), recipe);
 			
 			if (!inventorySlots.isEmpty()) {
 				
 				this.inventory.extractRecipe(recipe, this.inventory.getInput());
-				this.recipeProgresses.add(new RecipeProgress(recipe, this.getRecipeType(), recipe.getProgressTime()));
+				this.recipeProgress = new RecipeProgress(recipe, this.getRecipeType(), recipe.getProgressTime());
 				
 			}
 			
@@ -124,23 +119,21 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 		
 	}
 	
-	// TODO : modify (update next prozzess)
 	@Override
 	public void tick() {
-		
+		if (this.recipeProgress != null && this.getLevel() != null) {
+			this.recipeUpdate(this.getLevel(), this.getBlockPos());
+		}
 	}
 	
-	// TODO : modify (remove)
-	public void recipeUpdate(World world, BlockPos pos, BlockState state) {
-		
-	}
-	
-	// TODO : modify (set pos)
-	public void drop(ItemStackList inventory) {
-		World world = this.getLevel();
-		BlockPos pos = this.getBlockPos();
-		InventoryHelper.dropContents(world, pos, inventory);
-		this.markUpdated();
+	public void recipeUpdate(World world, BlockPos pos) {
+		if (this.recipeProgress != null) {
+			this.recipeProgress.executeRecipe(world, pos);
+			if (this.recipeProgress.getProgressTime() < 0) {
+				this.recipeProgress = null;
+				this.markUpdated();
+			}
+		}
 	}
 	
 	protected void markUpdated() {
@@ -154,6 +147,7 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	public void clearContent() {
 		this.inventory.clearInput();
 		this.inventory.clearOutput();
+		this.markUpdated();
 	}
 	
 	@Override
@@ -163,16 +157,21 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	
 	@Override
 	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
-		this.load(this.getBlockState(), packet.getTag());
+		if (this.getLevel() != null) {
+			if (this.getLevel().isAreaLoaded(this.getBlockPos(), 1)) {
+				this.load(this.getBlockState(), packet.getTag());
+			}
+		}
 	}
 		
 	@Override
 	public CompoundNBT save(CompoundNBT nbt) {
 		super.save(nbt);
 		nbt.putInt("recipeType", this.recipeType.getId());
-		nbt.put("recipeProgresses", RecipeProgress.serializeList(this.recipeProgresses));
 		this.inventory.serializeNBT(nbt);
-		LOGGER.debug("save nbt: " + nbt);
+		if (this.recipeProgress != null) {
+			nbt.put("recipeProgress", this.recipeProgress.serializeNBT());
+		}
 		return nbt;
 	}
 	
@@ -180,11 +179,14 @@ public class RecipeTileEntity<T extends IModRecipe> extends TileEntity implement
 	@SuppressWarnings("unchecked")
 	public void load(BlockState state, CompoundNBT nbt) {
 		super.load(state, nbt);
-		LOGGER.debug("load nbt: " + nbt);
 		this.inventory.deserializeNBT(nbt);
 		this.recipeType = ModRecipeType.byId(nbt.getInt("recipeType"));
 		this.recipeHelper = (IModRecipeHelper<T>) this.getRecipeType().getRecipeHelper();
-		this.recipeProgresses = RecipeProgress.ofList(nbt.getCompound("recipeProgresses"));
+		if (nbt.contains("recipeProgress")) {
+			this.recipeProgress = RecipeProgress.of(nbt.getCompound("recipeProgress"));
+		} else {
+			this.recipeProgress = null;
+		}
 	}
 
 }

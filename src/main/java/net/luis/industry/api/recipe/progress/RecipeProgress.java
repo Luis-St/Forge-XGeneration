@@ -1,21 +1,16 @@
-package net.luis.industry.api.recipe;
+package net.luis.industry.api.recipe.progress;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Lists;
-
+import net.luis.industry.api.recipe.IModRecipe;
+import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.api.util.exception.NotExecuteException;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+// TODO : modify serializeNBT
 public class RecipeProgress implements IRecipeProgress {
 	
 	private IModRecipe recipe;
@@ -28,7 +23,6 @@ public class RecipeProgress implements IRecipeProgress {
 		this.progressTime = progressTime;
 	}
 	
-	@Nullable
 	public static RecipeProgress of(CompoundNBT nbt) {
 		if (nbt.contains("progressTime") && nbt.contains("recipeType") && nbt.contains("recipeId")) {
 			int progressTime = nbt.getInt("progressTime");
@@ -43,6 +37,10 @@ public class RecipeProgress implements IRecipeProgress {
 	
 	public IModRecipe getRecipe() {
 		return recipe;
+	}
+	
+	public ModRecipeType getRecipeType() {
+		return recipeType;
 	}
 	
 	public int getProgressTime() {
@@ -62,20 +60,29 @@ public class RecipeProgress implements IRecipeProgress {
 	@Override
 	public void executeRecipe(World world, BlockPos pos) {
 		
-		if (this.progressTime > 0) {
-			this.reduceProgressTime();
-		}
-		
-		if (this.progressTime == 0) {
-			this.dropResultItems(world, pos);
+		if (world.getGameTime() % 20 == 0 && !world.isClientSide) {
+			
+			if (this.progressTime > 0) {
+				this.reduceProgressTime();
+			}
+			
+			if (this.progressTime == 0) {
+				this.dropResultItems(world, pos);
+				this.progressTime = -1;
+			}
+			
 		}
 		
 	}
 	
 	protected void dropResultItems(World world, BlockPos pos) {
 		
-		for (ItemStack itemStack : this.getRecipe().getResultItems()) {
-			world.addFreshEntity(new ItemEntity(world, this.getPos(pos)[0], this.getPos(pos)[1], this.getPos(pos)[2], itemStack));
+		if (this.getRecipe() != null) {
+			for (ItemStack itemStack : this.getRecipe().getResultItems()) {
+				ItemEntity itemEntity = new ItemEntity(world, this.getPos(pos)[0], this.getPos(pos)[1], this.getPos(pos)[2], itemStack);
+				itemEntity.setDeltaMovement(0, 0, 0);
+				world.addFreshEntity(itemEntity);
+			}
 		}
 		
 	}
@@ -83,47 +90,19 @@ public class RecipeProgress implements IRecipeProgress {
 	private double[] getPos(BlockPos pos) {
 		double[] xyz = new double[3];
 		xyz[0] = pos.getX() + 0.5;
-		xyz[1] = pos.getY() + 0.9;
+		xyz[1] = pos.getY() + 1.1;
 		xyz[2] = pos.getZ() + 0.5;
 		return xyz;
 	}
 
 	public CompoundNBT serializeNBT() {
 		CompoundNBT nbt = new CompoundNBT();
-		nbt.putInt("recipeId", this.recipe.getId());
-		nbt.putInt("recipeType", this.recipeType.getId());
-		nbt.putInt("progressTime", this.progressTime);
-		return nbt;
-	}
-	
-	public static CompoundNBT serializeList(List<RecipeProgress> recipeProgresses) {
-		CompoundNBT nbt = new CompoundNBT();
-		if (recipeProgresses != null) {
-			nbt.putInt("size", recipeProgresses.size());
-			ListNBT listNBT = new ListNBT();
-			for (int i = 0; i < recipeProgresses.size(); i++) {
-				RecipeProgress recipeProgress = recipeProgresses.get(i);
-				if (recipeProgress != null) {
-					listNBT.add(i, recipeProgress.serializeNBT());
-				}
-			}
-			nbt.put("list", listNBT);
+		if (this.recipe != null && this.recipeType != null && this.progressTime >= 0) {
+			nbt.putInt("recipeId", this.recipe.getId());
+			nbt.putInt("recipeType", this.recipeType.getId());
+			nbt.putInt("progressTime", this.progressTime);
 		}
 		return nbt;
-	}
-	
-	public static List<RecipeProgress> ofList(CompoundNBT nbt) {
-		if (nbt.contains("size") && nbt.contains("list")) {
-			int size = nbt.getInt("size");
-			ListNBT listNBT = nbt.getList("list", 9);
-			List<RecipeProgress> recipeProgresses = new ArrayList<RecipeProgress>();
-			for (int i = 0; i < size; i++) {
-				RecipeProgress recipeProgress = RecipeProgress.of(listNBT.getCompound(i));
-				recipeProgresses.add(i, recipeProgress);
-			}
-			return recipeProgresses;
-		}
-		return Lists.newArrayList();
 	}
 
 }

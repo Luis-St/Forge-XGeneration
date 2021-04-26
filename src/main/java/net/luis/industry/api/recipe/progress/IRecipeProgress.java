@@ -1,4 +1,4 @@
-package net.luis.industry.api.recipe;
+package net.luis.industry.api.recipe.progress;
 
 import net.luis.industry.api.util.IProgress;
 import net.minecraft.util.math.BlockPos;
