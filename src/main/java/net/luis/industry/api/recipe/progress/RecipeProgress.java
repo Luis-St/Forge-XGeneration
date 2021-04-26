@@ -10,7 +10,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-// TODO : modify serializeNBT
 public class RecipeProgress implements IRecipeProgress {
 	
 	private IModRecipe recipe;
