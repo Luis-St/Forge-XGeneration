@@ -1,5 +1,7 @@
 package net.luis.industry.common.enums;
 
+import javax.annotation.Nullable;
+
 import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.common.recipe.helper.MilestoneRecipeHelper;
@@ -30,18 +32,15 @@ public enum ModRecipeType {
 		return recipeHelper;
 	}
 	
+	@Nullable
 	public static ModRecipeType byId(int id) {
-		
 		ModRecipeType[] recipeTypes = values();
-		
 		for (ModRecipeType modRecipeType : recipeTypes) {
 			if (modRecipeType.getId() == id) {
 				return modRecipeType;
 			}
 		}
-		
 		return null;
-
 	}
 
 }

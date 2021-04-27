@@ -37,12 +37,12 @@ public class MilestoneRecipe extends AbstractRecipe<MilestoneRecipe> {
 	}
 
 	@Override
-	public int getRecipeItemMaxCount() {
+	public int getMaxInput() {
 		return 10;
 	}
 
 	@Override
-	public int getResultItemMaxCount() {
+	public int getMaxResult() {
 		return 4;
 	}
 	

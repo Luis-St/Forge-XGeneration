@@ -1,7 +1,6 @@
 package net.luis.industry.api.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -11,7 +10,6 @@ import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.api.util.exception.NotRegisteredException;
-import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -67,11 +65,6 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 	}
 
 	@Override
-	public ModRecipeType getRecipeType() {
-		return ModRecipeType.MILESTONE;
-	}
-
-	@Override
 	public List<T> getRecipes() {
 		return this.recipes;
 	}
@@ -86,28 +79,7 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 	@Override
 	public List<ItemStack> getItemsForRecipe(T recipe) {
 		if (this.isRecipeRegistered(recipe)) {
-			return recipe.getRecipeItems();
-		}
-		return null;
-	}
-	
-	@Override
-	@Nullable
-	public T getRecipeForItems(ItemStack... itemStacks) {
-		List<T> registeredRecipes = this.getRecipes();
-		List<T> recipes = new ArrayList<T>();
-		for (T recipe : registeredRecipes) {
-			if (recipe.getRecipeItems().size() == itemStacks.length) {
-				if (this.recipesEqual(recipe.getRecipeItems(), new ArrayList<ItemStack>(Arrays.asList(itemStacks)))) {
-					recipes.add(recipe);
-				}
-			}
-		}
-		if (!recipes.isEmpty()) {
-			if (recipes.size() > 1) {
-				return recipes.get(new Random().nextInt(recipes.size()));
-			}
-			return recipes.get(0);
+			return recipe.getInput();
 		}
 		return null;
 	}
@@ -131,12 +103,30 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 		List<T> recipes = this.getRecipes();
 		T returnRecipe = null;
 		for (T recipe : recipes) {
-			if (recipe.canDrop(inventory)) {
+			if (recipe.containsAll(inventory)) {
 				returnRecipe = recipe;
 				break;
 			}
 		}
 		return returnRecipe;
+	}
+	
+	@Nullable
+	@Override
+	public T getRandomRecipe(ItemStackList inventory) {
+		List<T> recipes = this.getRecipes();
+		List<T> availableRecipes = new ArrayList<T>();
+		for (T recipe : recipes) {
+			if (recipe.containsAll(inventory)) {
+				availableRecipes.add(recipe);
+			}
+		}
+		if (availableRecipes.isEmpty()) {
+			return null;
+		} else if (availableRecipes.size() > 1) {
+			return availableRecipes.get(new Random().nextInt(availableRecipes.size()));
+		}
+		return availableRecipes.get(0);
 	}
 	
 	@Override

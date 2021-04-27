@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.luis.industry.api.inventory.IRecipeInventory;
 import net.luis.industry.api.inventory.InventorySlot;
+import net.luis.industry.api.inventory.recipe.IRecipeInventory;
 import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.recipe.IModRecipeHelper;
 import net.luis.industry.api.recipe.progress.RecipeProgress;
@@ -40,7 +40,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 		this.recipeProgress = null;
 	}
 	
-	protected ModRecipeType getRecipeType() {
+	public ModRecipeType getRecipeType() {
 		return this.recipeType;
 	}
 	
@@ -53,70 +53,56 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	}
 	
 	protected boolean hasItemsForRecipe(T recipe) {
-		return recipe.canDrop(this.inventory.getInput());
+		return recipe.containsAll(this.inventory.getInput());
 	}
 	
-	@Nullable 
-	public T getRecipe() {
+	public boolean isProgressing() {
+		return this.recipeProgress != null ? this.recipeProgress.getProgressTime() > 0 : false;
+	}
+	
+	@Nullable
+	@Deprecated
+	protected T getRecipe() {
 		return this.getRecipeHelper().getNextRecipe(this.inventory.getInput());
 	}
 	
+	@Nullable 
+	protected T getRandomRecipe() {
+		return this.getRecipeHelper().getRandomRecipe(this.inventory.getInput());
+	}
+	
 	public boolean canInteract(PlayerEntity player, ItemStack itemStack) {
-		
 		this.recipeHelper.createRecipeList();
-		
 		if (player != null) {
-			
 			if (this.getInventory().hasEmptySlots(this.inventory.getInput()) || itemStack.isEmpty()) {
-				
 				return this.getRecipeHelper().hasRecipe(itemStack) || itemStack.isEmpty();
-				
 			}
-			
 		}
-		
 		return false;
-		
 	}
 	
 	public void onInteract(PlayerEntity player, Hand hand) {
-		
 		ItemStack itemStack = player.getItemInHand(hand);
-		
 		if (itemStack.isEmpty()) {
-			
 			ItemStack extractStack = this.inventory.extract(-1, itemStack, this.inventory.getInput(), true);
 			ItemHandlerHelper.giveItemToPlayer(player, extractStack);
-			
 		} else {
-			
 			this.inventory.insert(-1, itemStack, this.inventory.getInput());
 			player.setItemInHand(hand, ItemStack.EMPTY);
-			
 		}
-		
 		this.markUpdated();
-		this.updateInventory(this.getRecipe());
-		
+		this.updateInventory(this.getRandomRecipe());
 	}
 	
-	public void updateInventory(T recipe) {
-		
+	protected void updateInventory(T recipe) {
 		if (recipe != null && this.recipeProgress == null) {
-			
 			List<InventorySlot> inventorySlots = this.inventory.hasItemsForRecipe(this.inventory.getInput(), recipe);
-			
 			if (!inventorySlots.isEmpty()) {
-				
 				this.inventory.extractRecipe(recipe, this.inventory.getInput());
 				this.recipeProgress = new RecipeProgress(recipe, this.getRecipeType(), recipe.getProgressTime());
-				
 			}
-			
 			this.markUpdated();
-			
 		}
-		
 	}
 	
 	@Override
@@ -126,12 +112,13 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 		}
 	}
 	
-	public void recipeUpdate(World world, BlockPos pos) {
+	protected void recipeUpdate(World world, BlockPos pos) {
 		if (this.recipeProgress != null) {
 			this.recipeProgress.executeRecipe(world, pos);
 			if (this.recipeProgress.getProgressTime() < 0) {
 				this.recipeProgress = null;
 				this.markUpdated();
+				this.updateInventory(this.getRandomRecipe());
 			}
 		}
 	}
@@ -145,8 +132,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	
 	@Override
 	public void clearContent() {
-		this.inventory.clearInput();
-		this.inventory.clearOutput();
+		this.inventory.clearAll();
 		this.markUpdated();
 	}
 	

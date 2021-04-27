@@ -88,27 +88,18 @@ public class ItemStackList extends NonNullList<ItemStack> {
 	
 	@Override
 	public boolean remove(Object object) {
-		
 		Iterator<ItemStack> iterator = this.iterator();
-		
 		if (object instanceof ItemStack) {
-			
 			while (iterator.hasNext()) {
-				
 				ItemStack itemStack = (ItemStack) object;
 				ItemStack nextItemStack = iterator.next();
-				
 				if (this.equalItemStack(itemStack, nextItemStack)) {
 					iterator.remove();
 					return true;
 				}
-				
 			}
-			
 		}
-		
 		return false;
-		
 	}
 	
 	@Override
@@ -131,77 +122,45 @@ public class ItemStackList extends NonNullList<ItemStack> {
 	}
 	
 	public boolean containsAll(List<ItemStack> itemStacks) {
-		
 		if (!itemStacks.isEmpty()) {
-			
 			int contains = 0;
-			
 			for (ItemStack itemStack : itemStacks) {
-				
 				if (this.containsItemStack(itemStack)) {
-					
 					contains++;
-					
 				}
-				
 			}
-			
 			return contains >= itemStacks.size();
-			
 		}
-		
 		return false;
-		
 	}
 	
 	public boolean containsItemStack(ItemStack itemStack) {
-		
 		boolean contains = false;
-		
 		for (ItemStack stack : this.itemStacks) {
-			
 			if (this.equalItemStack(stack, itemStack)) {
-				
 				contains = true;
 				break;
-				
 			}
-			
 		}
-		
 		return contains;
-		
 	}
 	
 	@Override
 	public void clear() {
-		
 		if (this.defaultItemStack == null) {
-			
 			throw new NullPointerException();
-			
 		} else {
-			
 			for (int i = 0; i < this.size(); i++) {
-				
 				this.itemStacks.set(i, this.getDefault());
-				
 			}
-			
 		}
-		
 	}
 	
 	private boolean equalItemStack(ItemStack itemStack, ItemStack toCheck) {
-		
 		if (itemStack.getItem() == toCheck.getItem()) {
-			
 			return toCheck.getCount() >= itemStack.getCount();
-			
 		}
-		
 		return false;
-		
 	}
 	
 }

@@ -58,32 +58,25 @@ public class RecipeProgress implements IRecipeProgress {
 
 	@Override
 	public void executeRecipe(World world, BlockPos pos) {
-		
 		if (world.getGameTime() % 20 == 0 && !world.isClientSide) {
-			
 			if (this.progressTime > 0) {
 				this.reduceProgressTime();
 			}
-			
 			if (this.progressTime == 0) {
 				this.dropResultItems(world, pos);
 				this.progressTime = -1;
 			}
-			
 		}
-		
 	}
 	
 	protected void dropResultItems(World world, BlockPos pos) {
-		
 		if (this.getRecipe() != null) {
-			for (ItemStack itemStack : this.getRecipe().getResultItems()) {
+			for (ItemStack itemStack : this.getRecipe().getResult()) {
 				ItemEntity itemEntity = new ItemEntity(world, this.getPos(pos)[0], this.getPos(pos)[1], this.getPos(pos)[2], itemStack);
 				itemEntity.setDeltaMovement(0, 0, 0);
 				world.addFreshEntity(itemEntity);
 			}
 		}
-		
 	}
 	
 	private double[] getPos(BlockPos pos) {

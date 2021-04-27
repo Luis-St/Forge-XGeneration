@@ -8,7 +8,7 @@ public class ResultItemStack {
 	private ItemStack itemStack;
 	private Chance chance;
 	
-	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, 0);
+	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, -1);
 	
 	public ResultItemStack(ItemStack itemStack, int chance) {
 		this(itemStack, new Chance(chance));
@@ -32,18 +32,12 @@ public class ResultItemStack {
 	}
 	
 	public boolean equals(ResultItemStack resultStack, boolean ignoreTags, boolean ignoreChance) {
-		
 		if (resultStack.getItemStack().getItem() == this.getItemStack().getItem()) {
-			
 			if (resultStack.getItemStack().getCount() == this.getItemStack().getCount() || ignoreTags) {
-				
 				return resultStack.getChance().equals(this.getChance()) || ignoreChance;
-				
 			}
-			
 		}
 		return false;
-		
 	}
 
 }

@@ -25,15 +25,12 @@ public class Chance {
 	}
 	
 	public boolean getChance() {
-		
 		if (this.isAlwaysTrue()) {
 			return true;
 		} else if (this.isAlwaysFalse()) {
 			return false;
 		}
-		
 		return chance >= (int) Math.random() * 100;
-		
 	}
 	
 	public boolean equals(Chance chance) {

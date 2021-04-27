@@ -53,42 +53,27 @@ public class MilestoneBlock extends Block {
 	@Override
 	@SuppressWarnings("deprecation")
 	public void onRemove(BlockState oldState, World world, BlockPos pos, BlockState newState, boolean flag) {
-		
 		TileEntity tileEntity = world.getBlockEntity(pos);
-		
 		if (tileEntity instanceof MilestoneTileEntity) {
-			
 			MilestoneTileEntity milestoneTileEntity = (MilestoneTileEntity) tileEntity;
 			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getInput());
 			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getOutput());
-			
 		}
-		
 		super.onRemove(oldState, world, pos, newState, flag);
-		
 	}
 	
 	@Override
 	@SuppressWarnings("deprecation")
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
-		
 		TileEntity tileEntity = world.getBlockEntity(pos);
-		
 		if (tileEntity instanceof MilestoneTileEntity) {
-			
 			MilestoneTileEntity milestoneTileEntity = (MilestoneTileEntity) tileEntity;
-			
 			if (milestoneTileEntity.canInteract(player, player.getItemInHand(hand))) {
-				
 				milestoneTileEntity.onInteract(player, hand);
 				return ActionResultType.SUCCESS;
-				
 			}
-			
 		}
-		
 		return super.use(state, world, pos, player, hand, rayTraceResult);
-		
 	}
 	
 }

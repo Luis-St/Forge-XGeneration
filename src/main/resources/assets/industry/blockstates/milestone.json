@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/milestone"
+      "model": "industry:block/mile"
     }
   }
 }

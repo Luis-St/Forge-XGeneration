@@ -12,19 +12,19 @@ public interface IModRecipe {
 	
 	IModRecipeHelper<?> getRecipeHelper();
 	
-	List<ItemStack> getRecipeItems();
+	List<ItemStack> getInput();
 	
-	List<ResultItemStack> getAllResultItems();
+	List<ResultItemStack> getResultItems();
 	
-	List<ItemStack> getResultItems();
+	List<ItemStack> getResult();
 	
-	int getRecipeItemMaxCount();
+	int getMaxInput();
 	
-	int getResultItemMaxCount();
+	int getMaxResult();
 	
 	int getProgressTime();
 	
-	boolean canDrop(ItemStackList inventory);
+	boolean containsAll(ItemStackList inventory);
 	
 	boolean containsItemStack(ItemStack toCheck, boolean ignoreTags);
 	

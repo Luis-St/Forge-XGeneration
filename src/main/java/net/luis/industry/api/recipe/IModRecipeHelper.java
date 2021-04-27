@@ -23,9 +23,9 @@ public interface IModRecipeHelper<T extends IModRecipe> {
 	
 	List<ItemStack> getItemsForRecipe(T recipe);
 	
-	T getRecipeForItems(ItemStack... itemStacks);
-	
 	T getNextRecipe(ItemStackList inventory);
+	
+	T getRandomRecipe(ItemStackList inventory);
 	
 	T getRecipeFromId(int id);
 	
