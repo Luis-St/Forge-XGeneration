@@ -3,6 +3,7 @@ package net.luis.industry.api.recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -113,10 +114,10 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 	}
 	
 	@Override
-	public T getRecipeFromId(int id) {
+	public T getRecipeFromId(UUID id) {
 		T returnRecipe = null;
 		for (T milestoneRecipe : this.recipes) {
-			if (milestoneRecipe.getId() == id) {
+			if (milestoneRecipe.getId().equals(id)) {
 				returnRecipe = milestoneRecipe;
 			}
 		}

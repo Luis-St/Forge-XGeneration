@@ -10,33 +10,42 @@ import net.luis.industry.init.block.util.ModTileEntityTypes;
 
 public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecipe> implements IMechanicalTileEntity {
 	
-	private float currentSpeed = 0F;
-	private float previousSpeed = 0F;
+	private float previousRotation = 0F;
+	private float currentRotation = 0F;
 	
 	public MilestoneTileEntity() {
 		super(ModTileEntityTypes.MILESTONE.get(), ModRecipeType.MILESTONE, new MilestoneRecipeHelper(), new RecipeInventory(10, 4));
 	}
 	
-	@Override
-	public float getCurrent() {
-		return this.currentSpeed;
+	public float getCurrentRotation() {
+		return this.currentRotation;
 	}
-
+	
+	public float getPreviousRotation() {
+		return this.previousRotation;
+	}
+	
 	@Override
-	public float getPrevious() {
-		return this.previousSpeed;
+	public float getSpeed() {
+		return (this.isProgressing() ? 10F : 0F) / 100;
 	}
 
 	@Override
 	public float calc() {
-		return this.isProgressing() ? 10F : 0F;
+		float newRotation = 0F;
+		if (this.currentRotation + this.getSpeed() > 360) {
+			newRotation = (this.currentRotation + this.getSpeed()) - 360;
+		} else {
+			newRotation = this.currentRotation + this.getSpeed();
+		}
+		return newRotation;
 	}
 	
 	@Override
 	public void tick() {
 		super.tick();
-		this.previousSpeed = this.currentSpeed;
-		this.currentSpeed = this.calc();
+		this.previousRotation = this.currentRotation;
+		this.currentRotation = this.calc();
 	}
 	
 	@Override

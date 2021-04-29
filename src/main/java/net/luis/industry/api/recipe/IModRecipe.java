@@ -1,6 +1,7 @@
 package net.luis.industry.api.recipe;
 
 import java.util.List;
+import java.util.UUID;
 
 import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
@@ -8,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public interface IModRecipe {
 	
-	int getId();
+	UUID getId();
 	
 	IModRecipeHelper<?> getRecipeHelper();
 	

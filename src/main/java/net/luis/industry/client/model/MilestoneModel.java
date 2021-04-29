@@ -62,10 +62,8 @@ public class MilestoneModel extends Model {
 		this.west.texOffs(0, 0).addBox(-1.5F, -4.5F, -9.0F, 3.0F, 6.0F, 18.0F, 0.0F, false);
 	}
 	
-	public void rotationRender(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float rotationSpeed) {
-		float f = rotationSpeed / 1000;
-		float g = (float) (f * Math.PI); 
-		this.milestone.yRot += g;
+	public void rotationRender(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float rotation) {
+		this.milestone.yRot = rotation;
 		this.milestone.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 

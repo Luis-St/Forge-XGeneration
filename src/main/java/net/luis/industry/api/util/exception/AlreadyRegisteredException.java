@@ -1,5 +1,7 @@
 package net.luis.industry.api.util.exception;
 
+import java.util.UUID;
+
 public class AlreadyRegisteredException extends RuntimeException {
 	
 	private static final long serialVersionUID = 6936289692706578936L;
@@ -12,8 +14,8 @@ public class AlreadyRegisteredException extends RuntimeException {
 		super(message);
 	}
 	
-	public AlreadyRegisteredException(int id) {
-		super("The ID " + id + ", already exists");
+	public AlreadyRegisteredException(UUID id) {
+		super("The ID " + id.toString() + ", already exists");
 	}
 	
 }

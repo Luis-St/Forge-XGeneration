@@ -7,6 +7,7 @@ import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -28,7 +29,7 @@ public class RecipeProgress implements IRecipeProgress {
 			ModRecipeType recipeType = ModRecipeType.byId(nbt.getInt("recipeType"));
 			IModRecipeHelper<?> recipeHelper = (IModRecipeHelper<?>) recipeType.getRecipeHelper();
 			recipeHelper.createRecipeList();
-			IModRecipe recipe = recipeHelper.getRecipeFromId(nbt.getInt("recipeId"));
+			IModRecipe recipe = recipeHelper.getRecipeFromId(NBTUtil.loadUUID(nbt.get("recipeId")));
 			return new RecipeProgress(recipe, recipeType, progressTime);
 		}
 		return null;
@@ -90,7 +91,7 @@ public class RecipeProgress implements IRecipeProgress {
 	public CompoundNBT serializeNBT() {
 		CompoundNBT nbt = new CompoundNBT();
 		if (this.recipe != null && this.recipeType != null && this.progressTime >= 0) {
-			nbt.putInt("recipeId", this.recipe.getId());
+			nbt.put("recipeId", NBTUtil.createUUID(this.recipe.getId()));
 			nbt.putInt("recipeType", this.recipeType.getId());
 			nbt.putInt("progressTime", this.progressTime);
 		}

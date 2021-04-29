@@ -1,5 +1,7 @@
 package net.luis.industry.api.util.exception;
 
+import java.util.UUID;
+
 public class NotRegisteredException extends RuntimeException {
 	
 	private static final long serialVersionUID = -7233914446240576811L;
@@ -12,8 +14,8 @@ public class NotRegisteredException extends RuntimeException {
 		super(message);
 	}
 	
-	public NotRegisteredException(int id) {
-		super("An recipe with id " + id + ", does not exists");
+	public NotRegisteredException(UUID id) {
+		super("An recipe with id " + id.toString() + ", does not exists");
 	}
 	
 }

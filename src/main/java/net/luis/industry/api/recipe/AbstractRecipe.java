@@ -2,6 +2,7 @@ package net.luis.industry.api.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
@@ -13,9 +14,9 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	protected final List<ItemStack> recipeItems;
 	protected final List<ResultItemStack> resultItems;
 	protected final int progressTime;
-	protected final int id;
+	protected final UUID id;
 	
-	public AbstractRecipe(VarArgs<ItemStack> recipeItems, VarArgs<ResultItemStack> reslutItems, int progressTime, int id) {
+	public AbstractRecipe(VarArgs<ItemStack> recipeItems, VarArgs<ResultItemStack> reslutItems, int progressTime, UUID id) {
 		this.requireSize(recipeItems, this.getMaxInput());
 		this.requireSize(reslutItems, this.getMaxResult());
 		this.recipeItems = recipeItems.asList();
@@ -25,7 +26,7 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	}
 	
 	@Override
-	public int getId() {
+	public UUID getId() {
 		return this.id;
 	}
 	
@@ -86,7 +87,7 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	
 	@Override
 	public boolean equalsResultItemStack(ResultItemStack resultStack, ResultItemStack toCheck, boolean ignoreTags) {
-		return resultStack.equals(resultStack, ignoreTags, true);
+		return resultStack.equals(toCheck, ignoreTags, true);
 	}
 	
 	@Override
