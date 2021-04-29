@@ -4,6 +4,8 @@ public class Chance {
 	
 	private final int chance;
 	
+	public static final Chance DUMMY = new Chance(-1);
+	
 	public Chance(int chance) {
 		this.chance = chance;
 	}
@@ -17,11 +19,15 @@ public class Chance {
 	}
 	
 	public boolean isAlwaysTrue() {
-		return chance == 100;
+		return chance >= 100;
 	}
 	
 	public boolean isAlwaysFalse() {
 		return chance == 0;
+	}
+	
+	protected final boolean isDummy() {
+		return this.chance == -1;
 	}
 	
 	public boolean getChance() {
@@ -29,8 +35,10 @@ public class Chance {
 			return true;
 		} else if (this.isAlwaysFalse()) {
 			return false;
+		} else if (this.isDummy()) {
+			return false;
 		}
-		return chance >= (int) Math.random() * 100;
+		return chance >= (int) (Math.random() * 100);
 	}
 	
 	public boolean equals(Chance chance) {

@@ -6,35 +6,18 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.ItemStackList;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.api.util.exception.NotRegisteredException;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IModRecipeHelper<T> {
 	
 	protected final List<T> recipes = new ArrayList<T>();
 	
-	protected ResultItemStack creatResult(Item item, int chance) {
-		return new ResultItemStack(this.creatStack(item), chance);
-	} 
-	
-	protected ResultItemStack creatResult(ItemStack itemStack, int chance) {
-		return new ResultItemStack(itemStack, chance);
-	}
-	
-	protected ResultItemStack creatResult(Item item, int count, int chance) {
-		return new ResultItemStack(this.creatStack(item, count), chance);
-	}
-	
-	protected ItemStack creatStack(Item item) {
-		return new ItemStack(item);
-	}
-	
-	protected ItemStack creatStack(Item item, int count) {
-		return new ItemStack(item, count);
+	@Override
+	public void createRecipeList() {
+		this.recipes.clear();
 	}
 	
 	@Override

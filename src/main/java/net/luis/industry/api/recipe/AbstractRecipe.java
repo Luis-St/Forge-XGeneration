@@ -14,26 +14,19 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	protected final List<ResultItemStack> resultItems;
 	protected final int progressTime;
 	protected final int id;
-	protected final IModRecipeHelper<T> recipeHelper;
 	
-	protected AbstractRecipe(VarArgs<ItemStack> recipeItems, VarArgs<ResultItemStack> reslutItems, int progressTime, IModRecipeHelper<T> recipeHelper, int id) {
+	public AbstractRecipe(VarArgs<ItemStack> recipeItems, VarArgs<ResultItemStack> reslutItems, int progressTime, int id) {
 		this.requireSize(recipeItems, this.getMaxInput());
 		this.requireSize(reslutItems, this.getMaxResult());
 		this.recipeItems = recipeItems.asList();
 		this.resultItems = reslutItems.asList();
 		this.progressTime = progressTime;
 		this.id = id;
-		this.recipeHelper = recipeHelper;
 	}
 	
 	@Override
 	public int getId() {
 		return this.id;
-	}
-	
-	@Override
-	public IModRecipeHelper<T> getRecipeHelper() {
-		return this.recipeHelper;
 	}
 	
 	@Override
@@ -98,12 +91,7 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	
 	@Override
 	public boolean equalsId(IModRecipe toCheck) {
-		return this.equalsId(toCheck.getId());
-	}
-
-	@Override
-	public boolean equalsId(int id) {
-		return this.getId() == id;
+		return this.getId() == toCheck.getId();
 	}
 	
 	@Override

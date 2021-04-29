@@ -30,8 +30,6 @@ public interface IModRecipe {
 	
 	boolean equalsId(IModRecipe toCheck);
 	
-	boolean equalsId(int id);
-	
 	boolean equalsItemStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags);
 	
 	boolean equalsResultItemStack(ResultItemStack resultStack, ResultItemStack toCheck, boolean ignoreTags);

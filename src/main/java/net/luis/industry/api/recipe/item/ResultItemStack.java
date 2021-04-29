@@ -1,20 +1,35 @@
 package net.luis.industry.api.recipe.item;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import net.luis.industry.api.util.Chance;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ResultItemStack {
 	
-	private ItemStack itemStack;
-	private Chance chance;
+	protected final ItemStack itemStack;
+	protected final Chance chance;
 	
-	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, -1);
+	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, Chance.DUMMY);
+	
+	public ResultItemStack(Item item, int chance) {
+		this(new ItemStack(item, 1), chance);
+	}
+	
+	public ResultItemStack(Item item, int count, int chance) {
+		this(new ItemStack(item, count), chance);
+	}
+	
+	public ResultItemStack(Item item, int min, int max, int chance) {
+		this(new ItemStack(item, ThreadLocalRandom.current().nextInt(min, max + 1)), chance);
+	}
 	
 	public ResultItemStack(ItemStack itemStack, int chance) {
 		this(itemStack, new Chance(chance));
 	}
 	
-	public ResultItemStack(ItemStack itemStack, Chance chance) {
+	protected ResultItemStack(ItemStack itemStack, Chance chance) {
 		this.itemStack = itemStack;
 		this.chance = chance;
 	}

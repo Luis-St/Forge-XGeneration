@@ -14,7 +14,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 
+// TODO : fix render bug
 public class MilestoneTileEntityRenderer extends TileEntityRenderer<MilestoneTileEntity> {
 	
 	public static final RenderMaterial TEXTURE_LOCATION = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation(MOD_ID, "entity/mile"));
@@ -29,7 +31,8 @@ public class MilestoneTileEntityRenderer extends TileEntityRenderer<MilestoneTil
 		matrix.pushPose();
 		matrix.translate(1, 1, 1);
 		IVertexBuilder vertexBuilder = TEXTURE_LOCATION.buffer(renderBuffer, RenderType::entitySolid);
-		this.milestone.rotationRender(matrix, vertexBuilder, light, overlay, milestoneTileEntity.isProgressing() ? 10 : 0);
+		float f = MathHelper.lerp(partialTicks, milestoneTileEntity.getPrevious(), milestoneTileEntity.getPrevious());
+		this.milestone.rotationRender(matrix, vertexBuilder, light, overlay, f);
 		matrix.popPose();
 	}
 	
