@@ -1,6 +1,22 @@
 {
-  "itemGroup.industry": "Industry",
-  
+  "item.industry.black_glass_shard": "Black Glass Shard",
+  "item.industry.blue_glass_shard": "Blue Glass Shard",
+  "item.industry.brown_glass_shard": "Brown Glass Shard",
+  "item.industry.cyan_glass_shard": "Cyan Glass Shard",
+  "item.industry.glass_shard": "Glass Shard",
+  "item.industry.gray_glass_shard": "Gray Glass Shard",
+  "item.industry.green_glass_shard": "Green Glass Shard",
+  "item.industry.light_blue_glass_shard": "Light Blue Glass Shard",
+  "item.industry.light_gray_glass_shard": "Light Gray Glass Shard",
+  "item.industry.lime_glass_shard": "Lime Glass Shard",
+  "item.industry.magenta_glass_shard": "Magenta Glass Shard",
+  "item.industry.orange_glass_shard": "Orange Glass Shard",
+  "item.industry.pink_glass_shard": "Pink Glass Shard",
+  "item.industry.red_glass_shard": "Red Glass Shard",
+  "item.industry.white_glass_shard": "White Glass Shard",
+  "item.industry.yellow_glass_shard": "Yellow Glass Shard",
+  "item.industry.purple_glass_shard": "Purple Glass Shard",
+  "block.industry.milestone": "Milestone",
   "block.industry.fluid_pipe": "Fluid Pipe",
-  "block.industry.milestone": "Milestone"
+  "itemGroup.industry": "Industry"
 }
