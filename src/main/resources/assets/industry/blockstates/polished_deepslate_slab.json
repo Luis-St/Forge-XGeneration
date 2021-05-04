@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "industry:block/polished_deepslate_slab"
+    },
+    "type=double": {
+      "model": "industry:block/polished_deepslate_slab_full"
+    },
+    "type=top": {
+      "model": "industry:block/polished_deepslate_slab_top"
+    }
+  }
+}

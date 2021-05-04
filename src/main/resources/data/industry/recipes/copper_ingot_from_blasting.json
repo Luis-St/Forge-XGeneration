@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "industry:crushed_copper_ore"
+  },
+  "result": "industry:copper_ingot",
+  "experience": 0.35,
+  "cookingtime": 100
+}

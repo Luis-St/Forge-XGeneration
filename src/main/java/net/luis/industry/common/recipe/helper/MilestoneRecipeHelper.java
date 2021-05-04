@@ -73,8 +73,8 @@ public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe>
 		input.add(new ItemStack(Items.GRANITE, 1));
 		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
 		result.add(new ResultItemStack(Items.COBBLESTONE, 100));
-		result.add(new ResultItemStack(Items.DIORITE, 60));
-		result.add(new ResultItemStack(Items.QUARTZ, 30));
+		result.add(new ResultItemStack(Items.DIORITE, 50));
+		result.add(new ResultItemStack(Items.QUARTZ, 25));
 		result.add(new ResultItemStack(Items.REDSTONE, 1, 2, 10));
 		return new MilestoneRecipe(input, result, progressTime, id);
 	}
