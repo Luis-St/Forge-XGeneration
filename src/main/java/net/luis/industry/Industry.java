@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.luis.industry.common.world.dimension.DeepslateBiomeProvider;
+import net.luis.industry.common.world.dimension.DeepslateChunkGenerator;
 import net.luis.industry.init.ModEnchantments;
 import net.luis.industry.init.ModEntityTypes;
 import net.luis.industry.init.block.ModBlocks;
@@ -23,6 +25,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -70,44 +73,77 @@ public class Industry {
 	}
 
 	private void doCommonSetup(FMLCommonSetupEvent event) {
-		
+		event.enqueueWork(() -> {
+			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "chunkgen"), DeepslateChunkGenerator.CODEC);
+			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
+		});
 	}
 
 	private void doClientSetup(FMLClientSetupEvent event) {
 		
 	}
 	
-	public static final ItemGroup INDUSTRY_BLOCKS = new ItemGroup("industry_blocks") {
-		
+	public static final ItemGroup BUILDING_BLOCKS = new ItemGroup("industry_building_blocks") {
 		@Override
 		public ItemStack makeIcon() {
-			
-			return new ItemStack(Items.STICKY_PISTON);
-			
-		}
-		
-	};
-	
-	public static final ItemGroup INDUSTRY_DEEPSLATE = new ItemGroup("industry_deepslate") {
-		
-		@Override
-		public ItemStack makeIcon() {
-			
 			return new ItemStack(ModBlockItems.DEEPSLATE.get());
-			
 		}
-		
 	};
 	
-	public static final ItemGroup INDUSTRY_ITEMS = new ItemGroup("industry_items") {
-		
+	public static final ItemGroup DECORATIONS = new ItemGroup("industry_decorations") {
 		@Override
 		public ItemStack makeIcon() {
-			
-			return new ItemStack(Items.LEVER);
-			
+			return new ItemStack(Items.PEONY);
 		}
-		
+	};
+	
+	public static final ItemGroup REDSTONE = new ItemGroup("industry_redstone") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.REDSTONE);
+		}
+	};
+	
+	public static final ItemGroup TRANSPORTATION = new ItemGroup("industry_transportation") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.POWERED_RAIL);
+		}
+	};
+	
+	public static final ItemGroup MISC = new ItemGroup("industry_miscellaneous") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.LAVA_BUCKET);
+		}
+	};
+	
+	public static final ItemGroup FOOD = new ItemGroup("industry_food") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.APPLE);
+		}
+	};
+	
+	public static final ItemGroup TOOLS = new ItemGroup("industry_tools") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.IRON_AXE);
+		}
+	};
+	
+	public static final ItemGroup COMBAT = new ItemGroup("industry_combat") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.GOLDEN_SWORD);
+		}
+	};
+	
+	public static final ItemGroup BREWING = new ItemGroup("industry_brewing") {
+		@Override
+		public ItemStack makeIcon() {
+			return Items.POTION.getDefaultInstance();
+		}
 	};
 	
 	@SuppressWarnings({ "deprecation", "unused" })
