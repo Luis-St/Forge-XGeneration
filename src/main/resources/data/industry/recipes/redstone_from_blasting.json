@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "industry:deepslate_redstone_ore"
+  },
+  "result": "minecraft:redstone",
+  "experience": 0.35,
+  "cookingtime": 100
+}
