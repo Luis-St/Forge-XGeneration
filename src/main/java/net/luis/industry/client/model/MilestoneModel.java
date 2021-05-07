@@ -73,7 +73,6 @@ public class MilestoneModel extends Model {
 		throw new NotExecuteException("A normally unused method was executed!");
 	}
 	
-
 	protected void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.xRot= x;
 		modelRenderer.yRot = y;

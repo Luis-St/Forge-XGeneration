@@ -20,6 +20,7 @@ import net.luis.industry.init.items.ModItems;
 import net.luis.industry.init.recipe.ModRecipeSerializer;
 import net.luis.industry.init.villager.ModPointOfInterestTypes;
 import net.luis.industry.init.villager.ModVillagerProfessions;
+import net.luis.industry.init.world.ModBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -27,6 +28,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -68,6 +73,8 @@ public class Industry {
 		
 		ModEntityTypes.ENTITIES.register(eventBus);
 		
+		ModBiomes.BIOMES.register(eventBus);
+		
 		MinecraftForge.EVENT_BUS.register(this);
 		
 	}
@@ -77,10 +84,15 @@ public class Industry {
 			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "chunkgen"), DeepslateChunkGenerator.CODEC);
 			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
 		});
+		this.createBiome(BiomeType.WARM, Type.MODIFIED, Type.SPOOKY);
 	}
 
 	private void doClientSetup(FMLClientSetupEvent event) {
 		
+	}
+	
+	private void createBiome(BiomeManager.BiomeType biomeType, BiomeDictionary.Type... types) {
+		BiomeDictionary.addTypes(ModBiomes.DEEPSLATE_CAVE, types);
 	}
 	
 	public static final ItemGroup BUILDING_BLOCKS = new ItemGroup("industry_building_blocks") {

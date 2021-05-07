@@ -26,7 +26,9 @@ import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
-
+	
+	// TODO : modify the dimension.json (better settings)
+	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(Codec.INT.fieldOf("base").forGetter(Settings::getBaseHeight),
 					Codec.FLOAT.fieldOf("verticalvariance").forGetter(Settings::getVerticalVariance),
@@ -36,7 +38,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	public static final Codec<DeepslateChunkGenerator> CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
 					.forGetter(DeepslateChunkGenerator::getBiomeRegistry),
-					SETTINGS_CODEC.fieldOf("settings").forGetter(DeepslateChunkGenerator::getTutorialSettings))
+					SETTINGS_CODEC.fieldOf("settings").forGetter(DeepslateChunkGenerator::getDeepslateDimensionSettings))
 			.apply(instance, DeepslateChunkGenerator::new));
 
 	private final Settings settings;
@@ -48,7 +50,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		+ settings.getHorizontalVariance() + ", " + settings.getVerticalVariance());
 	}
 
-	public Settings getTutorialSettings() {
+	public Settings getDeepslateDimensionSettings() {
 		return settings;
 	}
 
@@ -64,14 +66,13 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		SharedSeedRandom seedRng = new SharedSeedRandom();
 		seedRng.setBaseChunkSeed(chunkX, chunkY);
 		this.buildDeepslate(chunk);
-		this.buildStoneTop(chunk, seedRng);
 		this.buildBedrock(chunk, seedRng);
 	}
 	
 	protected void buildDeepslate(IChunk chunk) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				for (int y = 0; y < 255; y++) {
+				for (int y = 0; y < 256; y++) {
 					this.setDeepSlate(chunk, x, y, z);
 				}
 			}
@@ -81,31 +82,12 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	private void setDeepSlate(IChunk chunk, int x, int y, int z) {
 		chunk.setBlockState(new BlockPos(x, y, z), ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
 	}
-	
-	protected void buildStoneTop(IChunk chunk, Random rng) {
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				for (int y = 0; y < 255; y++) {
-					int stoneLayer = 255;
-					if (y >= 215) {
-						this.setStone(chunk, x, y, z);
-					} else if (y >= stoneLayer - rng.nextInt(55)) {
-						this.setStone(chunk, x, y, z);
-					}
-				}
-			}
-		}
-	}
-	
-	private void setStone(IChunk chunk, int x, int y, int z) {
-		chunk.setBlockState(new BlockPos(x, y, z), Blocks.STONE.defaultBlockState(), false);
-	}
 
 	protected void buildBedrock(IChunk chunk, Random rng) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				for (int y = 0; y < 255; y++) {
-					if (y > 252) {
+				for (int y = 0; y < 256; y++) {
+					if (y > 253) {
 						this.setBedrock(chunk, x, y, z);
 					} else if (y <= rng.nextInt(5)) {
 						this.setBedrock(chunk, x, y, z);
@@ -136,11 +118,16 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public int getBaseHeight(int x, int z, Heightmap.Type heightmapType) {
-		return 0;
+		return 256;
+	}
+	
+	@Override
+	public int getSeaLevel() {
+		return 256;
 	}
 
 	@Override
-	public IBlockReader getBaseColumn(int p_230348_1_, int p_230348_2_) {
+	public IBlockReader getBaseColumn(int x, int z) {
 		return new Blockreader(new BlockState[0]);
 	}
 

@@ -129,4 +129,7 @@ public class ModBlocks {
 	public static final RegistryObject<ModOreBlock> DEEPSLATE_EMERALD_ORE = BLOCKS.register("deepslate_emerald_ore", 
 			() -> new ModOreBlock(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
 	
+	public static final RegistryObject<Block> TUFF = BLOCKS.register("tuff", 
+			() -> new Block(Block.Properties.copy(Blocks.STONE)));
+	
 }

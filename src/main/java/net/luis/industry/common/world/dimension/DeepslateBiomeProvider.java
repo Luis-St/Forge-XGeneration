@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import com.mojang.serialization.Codec;
 
+import net.luis.industry.init.world.ModBiomes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.feature.structure.Structure;
 
@@ -21,20 +21,20 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 
     private final Biome biome;
     private final Registry<Biome> biomeRegistry;
-    private static final List<RegistryKey<Biome>> SPAWN = Collections.singletonList(Biomes.THE_VOID);
+    private static final List<RegistryKey<Biome>> SPAWN = Collections.singletonList(ModBiomes.DEEPSLATE_CAVE);
 
     public DeepslateBiomeProvider(Registry<Biome> biomeRegistry) {
         super(getStartBiomes(biomeRegistry));
         this.biomeRegistry = biomeRegistry;
-        biome = biomeRegistry.get(Biomes.THE_VOID.location());
+        biome = biomeRegistry.get(ModBiomes.DEEPSLATE_CAVE.location());
     }
 
     private static List<Biome> getStartBiomes(Registry<Biome> registry) {
-        return SPAWN.stream().map(s -> registry.get(s.location())).collect(Collectors.toList());
+        return DeepslateBiomeProvider.SPAWN.stream().map(s -> registry.get(s.location())).collect(Collectors.toList());
     }
 
     public Registry<Biome> getBiomeRegistry() {
-        return biomeRegistry;
+        return this.biomeRegistry;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 
     @Override
     protected Codec<? extends BiomeProvider> codec() {
-        return CODEC;
+        return DeepslateBiomeProvider.CODEC;
     }
 
     @Override
@@ -54,6 +54,6 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 
     @Override
     public Biome getNoiseBiome(int x, int y, int z) {
-        return biome;
+        return this.biome;
     }
 }
