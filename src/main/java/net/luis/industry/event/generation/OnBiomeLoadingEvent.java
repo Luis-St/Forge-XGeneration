@@ -3,7 +3,7 @@ package net.luis.industry.event.generation;
 import static net.luis.industry.Industry.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 
-import net.luis.industry.common.world.ModDefaultFeatures;
+import net.luis.industry.common.world.feature.ModDefaultFeatures;
 import net.luis.industry.init.world.ModBiomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome.Category;

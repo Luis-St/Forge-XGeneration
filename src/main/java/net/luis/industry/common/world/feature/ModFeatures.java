@@ -1,4 +1,4 @@
-package net.luis.industry.common.world;
+package net.luis.industry.common.world.feature;
 
 import net.luis.industry.Industry;
 import net.luis.industry.init.block.ModBlocks;

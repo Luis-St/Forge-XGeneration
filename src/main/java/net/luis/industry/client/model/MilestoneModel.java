@@ -3,7 +3,6 @@ package net.luis.industry.client.model;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import net.luis.industry.api.util.exception.NotExecuteException;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -70,7 +69,7 @@ public class MilestoneModel extends Model {
 	@Override
 	@Deprecated
 	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		throw new NotExecuteException("A normally unused method was executed!");
+		throw new UnsupportedOperationException();
 	}
 	
 	protected void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

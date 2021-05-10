@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "industry:deepslate"
+    "industry:deepslate",
+    "industry:tuff"
   ]
 }

@@ -2,7 +2,6 @@ package net.luis.industry.api.recipe.progress;
 
 import net.luis.industry.api.recipe.IModRecipe;
 import net.luis.industry.api.recipe.IModRecipeHelper;
-import net.luis.industry.api.util.exception.NotExecuteException;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -54,7 +53,7 @@ public class RecipeProgress implements IRecipeProgress {
 	@Override
 	@Deprecated
 	public void execute() {
-		throw new NotExecuteException("A normally unused method was executed!");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

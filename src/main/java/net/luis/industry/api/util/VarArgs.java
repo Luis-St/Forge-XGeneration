@@ -29,11 +29,15 @@ public class VarArgs<T> {
 	
 	@SuppressWarnings("unchecked")
 	public void addAll(T... args) {
-		this.list.addAll(Arrays.asList(args));
+		this.addAll(Arrays.asList(args));
 	}
 	
 	public T getType() {
 		return this.list.get(0);
+	}
+	
+	public boolean contains(T t) {
+		return this.list.contains(t);
 	}
 	
 	public int size() {

@@ -1,11 +1,11 @@
 package net.luis.industry.common.world.biome;
 
+import net.luis.industry.common.world.feature.ModDefaultFeatures;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.BiomeGenerationSettings;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.MoodSoundAmbience;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
@@ -72,13 +72,13 @@ public class DeepslateCaveBiome implements IBiome {
 
 	@Override
 	public MobSpawnInfo getMobSpawnSettings(MobSpawnInfo.Builder modBuilder) {
-		DefaultBiomeFeatures.commonSpawns(modBuilder);
+		ModDefaultFeatures.addCommonSpawns(modBuilder);
 		return modBuilder.build();
 	}
 
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.surfaceBuilder(ConfiguredSurfaceBuilders.STONE);
+		generationBuilder.surfaceBuilder(ConfiguredSurfaceBuilders.STONE); // () -> Deepslate
 		return generationBuilder.build();
 	}
 	
