@@ -21,6 +21,7 @@ import net.luis.industry.init.recipe.ModRecipeSerializer;
 import net.luis.industry.init.villager.ModPointOfInterestTypes;
 import net.luis.industry.init.villager.ModVillagerProfessions;
 import net.luis.industry.init.world.ModBiomes;
+import net.luis.industry.init.world.ModFeature;
 import net.luis.industry.init.world.ModWorldCarvers;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -75,8 +76,8 @@ public class Industry {
 		ModEntityTypes.ENTITIES.register(eventBus);
 		
 		ModBiomes.BIOMES.register(eventBus);
-		
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
+		ModFeature.FEATURES.register(eventBus);
 		
 		MinecraftForge.EVENT_BUS.register(this);
 		

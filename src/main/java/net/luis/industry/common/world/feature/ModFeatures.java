@@ -2,6 +2,7 @@ package net.luis.industry.common.world.feature;
 
 import net.luis.industry.Industry;
 import net.luis.industry.init.block.ModBlocks;
+import net.luis.industry.init.world.ModFeature;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -81,12 +82,15 @@ public class ModFeatures {
 			.range(256).squared().count(10));
 	
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAVE_LAKE = ModFeatures.register("deepslate_lava_lake", 
-			Feature.LAKE.configured(new BlockStateFeatureConfig(States.LAVA))
+			ModFeature.LAKE.get().configured(new BlockStateFeatureConfig(States.LAVA))
 			.decorated(Placement.WATER_LAKE.configured(new ChanceConfig(40))));
 	
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_WATER_LAKE = ModFeatures.register("deepslate_water_lake", 
 			Feature.LAKE.configured(new BlockStateFeatureConfig(States.WATER))
 			.decorated(Placement.WATER_LAKE.configured(new ChanceConfig(40))));
+	
+	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = ModFeatures.register("deepslate_monster_room", 
+			ModFeature.MONSTER_ROOM.get().configured(IFeatureConfig.NONE).range(256).squared().count(8));
 	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Industry.MOD_ID, name), configuredFeature);

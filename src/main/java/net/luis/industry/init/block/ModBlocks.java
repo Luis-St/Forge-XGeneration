@@ -1,7 +1,6 @@
 package net.luis.industry.init.block;
 
-import static net.luis.industry.Industry.MOD_ID;
-
+import net.luis.industry.Industry;
 import net.luis.industry.api.block.ModOreBlock;
 import net.luis.industry.common.block.fluid.PipeBlock;
 import net.luis.industry.common.block.mechanical.MilestoneBlock;
@@ -20,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlocks {
 	
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Industry.MOD_ID);
 	
 	
 	public static final RegistryObject<PipeBlock> FLUID_PIPE = BLOCKS.register("fluid_pipe", 
