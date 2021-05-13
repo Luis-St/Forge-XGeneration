@@ -2,11 +2,9 @@ package net.luis.industry.common.world.carver.canyon;
 
 import java.util.BitSet;
 import java.util.Random;
-import java.util.Set;
 import java.util.function.Function;
 
 import net.luis.industry.common.world.carver.ModWorldCarver;
-import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
@@ -18,11 +16,6 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 	
 	public ModCanyonWorldCarver(int lavaHeigth) {
 		super(lavaHeigth);
-		this.replaceableBlocks = Set.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
-				ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
-				ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
-				ModBlocks.DEEPSLATE_REDSTONE_ORE.get(), ModBlocks.DEEPSLATE_DIAMOND_ORE.get(),
-				ModBlocks.DEEPSLATE_EMERALD_ORE.get());
 	}
 	
 	public int getCanyonY(Random rng) {

@@ -11,6 +11,8 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureSpread;
+import net.minecraft.world.gen.feature.FeatureSpreadConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
@@ -91,6 +93,11 @@ public class ModFeatures {
 	
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = ModFeatures.register("deepslate_monster_room", 
 			ModFeature.MONSTER_ROOM.get().configured(IFeatureConfig.NONE).range(256).squared().count(8));
+	
+	public static final ConfiguredFeature<?, ?> DEEPSLATE_MINESHAFT = ModFeatures.register("deepslate_mineshaft", 
+			ModFeature.MINESHAFT.get().configured(IFeatureConfig.NONE).decorated(Placement.COUNT
+			.configured(new FeatureSpreadConfig(FeatureSpread.fixed(1))))
+			.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(20, 0, 230))));
 	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Industry.MOD_ID, name), configuredFeature);

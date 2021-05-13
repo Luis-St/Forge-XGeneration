@@ -51,15 +51,13 @@ public class PipeBlock extends SixWayBlock {
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		VoxelShape pipeShape = super.getShape(state, worldIn, pos, context);
+	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+		VoxelShape pipeShape = super.getShape(state, world, pos, context);
 		VoxelShape dispatcherShape = VoxelShapes.join(Block.box(2, 2, 2, 14, 14, 14), pipeShape, IBooleanFunction.OR);
 		List<BooleanProperty> properties = PROPERTY_BY_DIRECTION.values().stream().collect(Collectors.toList());
 		properties.removeIf(property -> !state.getValue(property));
 		return properties.size() >= 3 ? dispatcherShape : pipeShape;
 	}
-	
-	
 	
 	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -70,7 +68,6 @@ public class PipeBlock extends SixWayBlock {
 	public static boolean isAllowedConnection(Block block) {
 		return BlockTags.getAllTags().getTag(ModBlockTags.FLUID_SYSTEM).contains(block);
 	}
-	
 	
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {

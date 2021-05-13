@@ -3,6 +3,7 @@ package net.luis.industry.init.world;
 import net.luis.industry.Industry;
 import net.luis.industry.common.world.feature.ModDungeonsFeature;
 import net.luis.industry.common.world.feature.ModLakesFeature;
+import net.luis.industry.common.world.feature.ModMineshaftFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,6 +16,7 @@ public class ModFeature {
 	
 	public static final RegistryObject<ModDungeonsFeature> MONSTER_ROOM = FEATURES.register("monster_room", ModDungeonsFeature::new);
 	public static final RegistryObject<ModLakesFeature> LAKE = FEATURES.register("lake", ModLakesFeature::new);
+	public static final RegistryObject<ModMineshaftFeature> MINESHAFT = FEATURES.register("mineshaft", ModMineshaftFeature::new);
 
 }
 

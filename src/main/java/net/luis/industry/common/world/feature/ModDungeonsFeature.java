@@ -3,7 +3,6 @@ package net.luis.industry.common.world.feature;
 import java.util.Random;
 import java.util.Set;
 
-import net.luis.industry.Industry;
 import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -78,7 +77,6 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 				}
 				this.setChestPos(seedReader, pos, rng, width);
 				this.setSpawner(seedReader, pos, rng);
-				Industry.LOGGER.debug("ModDungeonsFeature: " + pos);
 			}
 		}
 		return true;
