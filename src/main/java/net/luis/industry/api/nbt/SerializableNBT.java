@@ -5,7 +5,5 @@ import net.minecraft.nbt.CompoundNBT;
 public interface SerializableNBT {
 	
 	CompoundNBT serialize();
-	
-	void deserialize(CompoundNBT nbt);
 
 }

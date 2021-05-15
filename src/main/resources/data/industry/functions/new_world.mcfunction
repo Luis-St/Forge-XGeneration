@@ -1,4 +1,4 @@
-time set 0
+time set 1000
 weather clear
 gamerule commandBlockOutput false
 gamerule doDaylightCycle false

@@ -8,6 +8,15 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.luis.industry.api.capability.CapabilityFactory;
+import net.luis.industry.api.capability.CapabilityStorage;
+import net.luis.industry.api.capability.interfaces.IItemStackCapability;
+import net.luis.industry.api.capability.interfaces.entity.IEntityCapability;
+import net.luis.industry.api.capability.interfaces.entity.ILivingEntityCapability;
+import net.luis.industry.api.capability.interfaces.entity.IPlayerCapability;
+import net.luis.industry.api.capability.interfaces.world.IChunkCapability;
+import net.luis.industry.api.capability.interfaces.world.ITileEntityCapability;
+import net.luis.industry.api.capability.interfaces.world.IWorldCapability;
 import net.luis.industry.common.world.dimension.DeepslateBiomeProvider;
 import net.luis.industry.common.world.dimension.DeepslateChunkGenerator;
 import net.luis.industry.init.ModEnchantments;
@@ -35,6 +44,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -84,11 +94,22 @@ public class Industry {
 	}
 
 	private void doCommonSetup(FMLCommonSetupEvent event) {
+		this.registerCapability(IChunkCapability.class);
+		this.registerCapability(IEntityCapability.class);
+		this.registerCapability(IItemStackCapability.class);
+		this.registerCapability(ILivingEntityCapability.class);
+		this.registerCapability(IPlayerCapability.class);
+		this.registerCapability(ITileEntityCapability.class);
+		this.registerCapability(IWorldCapability.class);
 		event.enqueueWork(() -> {
 			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "chunkgen"), DeepslateChunkGenerator.CODEC);
 			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
 		});
 		this.createBiome(BiomeType.WARM, Type.MODIFIED, Type.SPOOKY);
+	}
+	
+	private <T> void registerCapability(Class<T> clazz) {
+		CapabilityManager.INSTANCE.register(clazz, new CapabilityStorage<T>(), new CapabilityFactory<T>());
 	}
 
 	private void doClientSetup(FMLClientSetupEvent event) {
