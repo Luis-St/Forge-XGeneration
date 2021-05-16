@@ -9,7 +9,6 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -21,11 +20,11 @@ import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	
-	protected final int lavaHeigth;
+	protected final IWorldCarverGenerationConfig carverConfig;
 	
-	public ModWorldCarver(int lavaHeigth) {
+	public ModWorldCarver(IWorldCarverGenerationConfig carverConfig) {
 		super(ProbabilityConfig.CODEC, 256);
-		this.lavaHeigth = lavaHeigth;
+		this.carverConfig = carverConfig;
 		this.replaceableBlocks = Set.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
 				ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
 				ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
@@ -34,9 +33,8 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	}
 	
 	@Override
-	protected boolean carveSphere(IChunk chunk, Function<BlockPos, Biome> toBiome, long seed,
-			int seaLevel, int chunkX, int chunkZ, double posX, double posY,
-			double posZ, double width, double height, BitSet bitSet) {
+	protected boolean carveSphere(IChunk chunk, Function<BlockPos, Biome> toBiome, long seed, int seaLevel, int chunkX, int chunkZ, 
+			double posX, double posY, double posZ, double width, double height, BitSet bitSet) {
 		Random random = new Random(seed + (long) chunkX + (long) chunkZ);
 		double chunkCenterX = (double) (chunkX * 16 + 8);
 		double chunkCenterZ = (double) (chunkZ * 16 + 8);
@@ -86,9 +84,8 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	}
 	
 	@Override
-	protected boolean carveBlock(IChunk chunk, Function<BlockPos, Biome> toBiome, BitSet bitSet, Random rng, Mutable pos0, Mutable pos1, 
-			Mutable pos2, int seaLevel, int chunkX, int chunkZ, int carverX, int carverZ, int carverPosX, int carverPosY, 
-			int carverPosZ, MutableBoolean mutableboolean) {
+	protected boolean carveBlock(IChunk chunk, Function<BlockPos, Biome> toBiome, BitSet bitSet, Random rng, Mutable pos0, Mutable pos1, Mutable pos2, 
+			int seaLevel, int chunkX, int chunkZ, int carverX, int carverZ, int carverPosX, int carverPosY,  int carverPosZ, MutableBoolean mutableboolean) {
 		int i = carverPosX | carverPosZ << 4 | carverPosY << 8;
 		if (i < 0) {
 			i *= -1;
@@ -98,24 +95,21 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 		} else {
 			bitSet.set(i);
 			pos0.set(carverX, carverPosY, carverZ);
-			BlockState blockStateDown = chunk.getBlockState(pos0);
+			BlockState blockState = chunk.getBlockState(pos0);
 			BlockState blockStateUp = chunk.getBlockState(pos1.setWithOffset(pos0, Direction.UP));
-			if (blockStateDown.is(Blocks.GRASS_BLOCK) || blockStateDown.is(Blocks.MYCELIUM)) {
-				mutableboolean.setTrue();
-			}
-			if (!this.canReplaceBlock(blockStateDown, blockStateUp)) {
+			if (!this.canReplaceBlock(blockState, blockStateUp)) {
 				return false;
 			} else {
-				if (carverPosY < this.lavaHeigth + 1) {
-					chunk.setBlockState(pos0, LAVA.createLegacyBlock(), false);
-				} else {
-					chunk.setBlockState(pos0, CAVE_AIR, false);
-					if (mutableboolean.isTrue()) {
-						pos2.setWithOffset(pos0, Direction.DOWN);
-						if (chunk.getBlockState(pos2).is(Blocks.DIRT)) {
-							chunk.setBlockState(pos2, toBiome.apply(pos0).getGenerationSettings().getSurfaceBuilderConfig().getTopMaterial(), false);
-						}
+				BlockState fillerType = this.carverConfig.getFillerType().getFiller();
+				if (this.carverConfig.getFillerType() != FillerType.AIR) {
+					if (carverPosY <= this.carverConfig.getFillerHight()) {
+						chunk.setBlockState(pos0, fillerType, false);
+					} else {
+						chunk.setBlockState(pos0, CAVE_AIR, false);
 					}
+				} else {
+					chunk.setBlockState(pos0, fillerType, false);
+					this.carverConfig.generateConfigDecoration(chunk, pos0.immutable(), rng);
 				}
 				return true;
 			}

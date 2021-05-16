@@ -1,9 +1,9 @@
 package net.luis.industry.api.capability.handler.entity;
 
-import net.luis.industry.api.capability.interfaces.IItemStackCapability;
+import net.luis.industry.api.capability.interfaces.entity.IPlayerCapability;
 import net.minecraft.nbt.CompoundNBT;
 
-public class PlayerCapabilityHandler implements IItemStackCapability {
+public class PlayerCapabilityHandler implements IPlayerCapability {
 	
 	@Override
 	public CompoundNBT serializeNBT() {

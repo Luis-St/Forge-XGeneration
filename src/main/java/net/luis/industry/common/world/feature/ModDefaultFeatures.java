@@ -34,7 +34,7 @@ public class ModDefaultFeatures {
 	}
 	
 	public static void addDeepslateStructures(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addFeature(GenerationStage.Decoration.STRONGHOLDS, ModFeatures.DEEPSLATE_MINESHAFT);
+//		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, ModFeatures.DEEPSLATE_MINESHAFT);
 //		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 //		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, ModFeatures.DEEPSLATE_MONSTER_ROOM); 
 //		generationBuilder.addFeature(GenerationStage.Decoration.LAKES, ModFeatures.DEEPSLATE_WATER_LAKE);

@@ -1,9 +1,9 @@
 package net.luis.industry.api.capability.handler.entity;
 
-import net.luis.industry.api.capability.interfaces.IItemStackCapability;
+import net.luis.industry.api.capability.interfaces.entity.ILivingEntityCapability;
 import net.minecraft.nbt.CompoundNBT;
 
-public class LivingEntityCapabilityHandler implements IItemStackCapability {
+public class LivingEntityCapabilityHandler implements ILivingEntityCapability {
 	
 	@Override
 	public CompoundNBT serializeNBT() {

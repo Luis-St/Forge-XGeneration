@@ -108,7 +108,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public ChunkGenerator withSeed(long seed) {
-		return new DeepslateChunkGenerator(getBiomeRegistry(), settings);
+		return new DeepslateChunkGenerator(getBiomeRegistry(), this.settings);
 	}
 
 	@Override
