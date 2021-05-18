@@ -1,6 +1,6 @@
 package net.luis.industry.common.world.biome;
 
-import net.luis.industry.common.world.feature.ModDefaultFeatures;
+import net.luis.industry.common.world.feature.DefaultModFeatures;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
@@ -72,7 +72,7 @@ public class DeepslateCaveBiome implements IBiome {
 
 	@Override
 	public MobSpawnInfo getMobSpawnSettings(MobSpawnInfo.Builder modBuilder) {
-		ModDefaultFeatures.addCommonSpawns(modBuilder);
+		DefaultModFeatures.addCommonSpawns(modBuilder);
 		return modBuilder.build();
 	}
 

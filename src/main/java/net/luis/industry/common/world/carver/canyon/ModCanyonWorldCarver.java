@@ -12,10 +12,11 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public class ModCanyonWorldCarver extends ModWorldCarver {
+	
 	protected final float[] rs = new float[1024];
 	
-	public ModCanyonWorldCarver(int lavaHeigth) {
-		super(lavaHeigth);
+	public ModCanyonWorldCarver() {
+		super();
 	}
 	
 	public int getCanyonY(Random rng) {
@@ -106,14 +107,14 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 			double canyonHeight = this.getCanyonHeight(rng, canyonWidth, heightMultiplier);
 			motionModifiers[2] = MathHelper.cos(axisMultiplier1);
 			motionModifiers[3] = MathHelper.sin(axisMultiplier1);
+			
+			
+			
 			posX = this.getNextXPos(rng, posX, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posY = this.getNextYPos(rng, posY, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posZ = this.getNextZPos(rng, posZ, axisMultiplier0, axisMultiplier1, motionModifiers);
-//			posX += Math.cos(axisMultiplier0) * motionModifiers[2];
-//			
-//			posY += motionModifiers[3];
-//			
-//			posZ += Math.sin(axisMultiplier0) * motionModifiers[2];
+			
+			
 			axisMultiplier0 += motionModifiers[0] * 0.05F;
 			motionModifiers[1] *= 0.8F;
 			motionModifiers[0] *= 0.5F;

@@ -9,6 +9,8 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -20,16 +22,21 @@ import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	
-	protected final IWorldCarverGenerationConfig carverConfig;
-	
-	public ModWorldCarver(IWorldCarverGenerationConfig carverConfig) {
+	public ModWorldCarver() {
 		super(ProbabilityConfig.CODEC, 256);
-		this.carverConfig = carverConfig;
 		this.replaceableBlocks = Set.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
 				ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
 				ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
 				ModBlocks.DEEPSLATE_REDSTONE_ORE.get(), ModBlocks.DEEPSLATE_DIAMOND_ORE.get(),
 				ModBlocks.DEEPSLATE_EMERALD_ORE.get());
+	}
+	
+	protected int getFluidFillHeight(Random rng, int chunkX, int chunkZ) {
+		return 14;
+	}
+	
+	protected FluidState getFluidFillState(Random rng, int chunkX, int y, int chunkZ) {
+		return Fluids.LAVA.defaultFluidState();
 	}
 	
 	@Override
@@ -87,9 +94,6 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	protected boolean carveBlock(IChunk chunk, Function<BlockPos, Biome> toBiome, BitSet bitSet, Random rng, Mutable pos0, Mutable pos1, Mutable pos2, 
 			int seaLevel, int chunkX, int chunkZ, int carverX, int carverZ, int carverPosX, int carverPosY,  int carverPosZ, MutableBoolean mutableboolean) {
 		int i = carverPosX | carverPosZ << 4 | carverPosY << 8;
-		if (i < 0) {
-			i *= -1;
-		}
 		if (bitSet.get(i)) {
 			return false;
 		} else {
@@ -100,16 +104,10 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 			if (!this.canReplaceBlock(blockState, blockStateUp)) {
 				return false;
 			} else {
-				BlockState fillerType = this.carverConfig.getFillerType().getFiller();
-				if (this.carverConfig.getFillerType() != FillerType.AIR) {
-					if (carverPosY <= this.carverConfig.getFillerHight()) {
-						chunk.setBlockState(pos0, fillerType, false);
-					} else {
-						chunk.setBlockState(pos0, CAVE_AIR, false);
-					}
+				if (carverPosY <= this.getFluidFillHeight(rng, chunkX, chunkZ)) {
+					chunk.setBlockState(pos0, this.getFluidFillState(rng, chunkX, carverPosY, chunkZ).createLegacyBlock(), false);
 				} else {
-					chunk.setBlockState(pos0, fillerType, false);
-					this.carverConfig.generateConfigDecoration(chunk, pos0.immutable(), rng);
+					chunk.setBlockState(pos0, CAVE_AIR, false);
 				}
 				return true;
 			}

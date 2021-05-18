@@ -1,12 +1,13 @@
 package net.luis.industry.common.world.feature;
 
+import net.luis.industry.common.world.carver.ModCarvers;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage;
 
-public class ModDefaultFeatures {
+public class DefaultModFeatures {
 	
 	// TODO : mining test
 	
@@ -34,17 +35,14 @@ public class ModDefaultFeatures {
 	}
 	
 	public static void addDeepslateStructures(BiomeGenerationSettings.Builder generationBuilder) {
-//		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, ModFeatures.DEEPSLATE_MINESHAFT);
 //		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 //		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, ModFeatures.DEEPSLATE_MONSTER_ROOM); 
 //		generationBuilder.addFeature(GenerationStage.Decoration.LAKES, ModFeatures.DEEPSLATE_WATER_LAKE);
 	}
 
-	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {;
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.DEEP_LAVA_CAVE);
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.DEEP_CAVE);
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.DEFAULT_CAVE);
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CAVE);
+	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {
+		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CAVE);
+//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CANYON);
 	}
 	
 	public static void addCommonSpawns(MobSpawnInfo.Builder mobSpawnBuilder) {
@@ -54,6 +52,10 @@ public class ModDefaultFeatures {
 		mobSpawnBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.CREEPER, 100, 4, 4));
 		mobSpawnBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.ENDERMAN, 10, 1, 4));
 		mobSpawnBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.WITCH, 5, 1, 1));
+	}
+	
+	public static void addFlatBedrock(BiomeGenerationSettings.Builder generationBuilder) {
+		generationBuilder.addFeature(GenerationStage.Decoration.RAW_GENERATION, ModFeatures.FLAT_BEDROCK);
 	}
 
 }
