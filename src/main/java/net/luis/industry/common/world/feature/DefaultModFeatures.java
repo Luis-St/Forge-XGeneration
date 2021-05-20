@@ -1,6 +1,5 @@
 package net.luis.industry.common.world.feature;
 
-import net.luis.industry.common.world.carver.ModCarvers;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.BiomeGenerationSettings;
@@ -41,8 +40,10 @@ public class DefaultModFeatures {
 	}
 
 	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CAVE);
+//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CAVE);
 //		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.CANYON);
+		
+//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ModCarvers.LARGE_CANYON);
 	}
 	
 	public static void addCommonSpawns(MobSpawnInfo.Builder mobSpawnBuilder) {

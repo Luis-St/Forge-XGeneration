@@ -27,7 +27,7 @@ public class MilestoneRecipe extends AbstractRecipe<MilestoneRecipe> {
 
 	@Override
 	public int getMaxResult() {
-		return 8;
+		return 10;
 	}
 
 }

@@ -1,5 +1,7 @@
 package net.luis.industry.api.util;
 
+import java.util.Random;
+
 public class Chance {
 	
 	private final int chance;
@@ -38,7 +40,7 @@ public class Chance {
 		} else if (this.isDummy()) {
 			return false;
 		}
-		return chance >= (int) (Math.random() * 100);
+		return chance >= new Random().nextInt(100);
 	}
 	
 	public boolean equals(Chance chance) {

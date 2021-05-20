@@ -2,7 +2,6 @@ package net.luis.industry.api.recipe.item;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.luis.industry.Industry;
 import net.luis.industry.api.util.Chance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,10 +55,7 @@ public class ResultItemStack {
 	}
 
 	public ItemStack getItemStack() {
-		Industry.LOGGER.debug("min: " + this.getMin());
-		Industry.LOGGER.debug("max " + this.getMax());
 		int count = this.max > this.min ? ThreadLocalRandom.current().nextInt(this.min, this.max + 1) : min;
-		Industry.LOGGER.debug("count: " + count);
 		return new ItemStack(this.item, count);
 	}
 

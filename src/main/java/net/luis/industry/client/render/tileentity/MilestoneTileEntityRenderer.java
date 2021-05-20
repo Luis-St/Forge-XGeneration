@@ -1,10 +1,9 @@
 package net.luis.industry.client.render.tileentity;
 
-import static net.luis.industry.Industry.MOD_ID;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import net.luis.industry.Industry;
 import net.luis.industry.client.model.MilestoneModel;
 import net.luis.industry.common.tileentity.MilestoneTileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -18,7 +17,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class MilestoneTileEntityRenderer extends TileEntityRenderer<MilestoneTileEntity> {
 	
-	public static final RenderMaterial TEXTURE_LOCATION = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation(MOD_ID, "entity/mile"));
+	public static final RenderMaterial TEXTURE_LOCATION = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation(Industry.MOD_ID, "entity/mile"));
 	protected final MilestoneModel milestone = new MilestoneModel();
 	
 	public MilestoneTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {

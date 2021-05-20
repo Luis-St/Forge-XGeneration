@@ -19,14 +19,16 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 		super();
 	}
 	
+	public int getCanyonYMin() {
+		return 25;
+	}
+	
+	public int getCanyonYMax() {
+		return 200;
+	}
+	
 	public int getCanyonY(Random rng) {
-		int i = rng.nextInt(128) + 10;
-		int j = rng.nextInt(128) + 10;
-		int k = i + j;
-		if (k > 220) {
-			k -= (50 + rng.nextInt(16));
-		}
-		return k;
+		return MathHelper.nextInt(rng, this.getCanyonYMin(), this.getCanyonYMax());
 	}
 	
 	@Override
@@ -69,7 +71,7 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 	
 	@Override
 	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return rng.nextFloat() <= config.probability;
+		return rng.nextFloat() <= config.probability && rng.nextInt(2) == 0;
 	}
 	
 	@Override
@@ -83,8 +85,8 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 		float secondAxisMultiplier = (rng.nextFloat() - 0.5F) * 2.0F / 8.0F;
 		float widthMultiplier = (rng.nextFloat() * 2.0F + rng.nextFloat()) * 2.0F;
 		int canyonLength = this.getCanyonLength(rng, range);
-		this.genCanyon(chunk, toBiome, rng.nextLong(), seaLevel, chunkX, chunkZ, posX, posY, posZ, widthMultiplier,
-				firstAxisMultiplier, secondAxisMultiplier, canyonLength, 3.0D, bitSet);
+		this.genCanyon(chunk, toBiome, rng.nextLong(), seaLevel, chunkX, chunkZ, posX, posY, posZ, widthMultiplier, firstAxisMultiplier, secondAxisMultiplier, 
+				canyonLength, 3.0D, bitSet);
 		return true;
 	}
 	

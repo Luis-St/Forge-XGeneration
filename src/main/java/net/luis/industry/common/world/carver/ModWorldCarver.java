@@ -31,7 +31,7 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 				ModBlocks.DEEPSLATE_EMERALD_ORE.get());
 	}
 	
-	protected int getFluidFillHeight(Random rng, int chunkX, int chunkZ) {
+	protected int getFluidFillHeight(Random rng, int chunkX, int y, int chunkZ) {
 		return 14;
 	}
 	
@@ -104,7 +104,7 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 			if (!this.canReplaceBlock(blockState, blockStateUp)) {
 				return false;
 			} else {
-				if (carverPosY <= this.getFluidFillHeight(rng, chunkX, chunkZ)) {
+				if (carverPosY <= this.getFluidFillHeight(rng, chunkX, carverPosY, chunkZ)) {
 					chunk.setBlockState(pos0, this.getFluidFillState(rng, chunkX, carverPosY, chunkZ).createLegacyBlock(), false);
 				} else {
 					chunk.setBlockState(pos0, CAVE_AIR, false);

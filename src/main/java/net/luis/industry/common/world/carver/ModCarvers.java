@@ -29,8 +29,11 @@ public class ModCarvers {
 	public static final ConfiguredCarver<ProbabilityConfig> CANYON = ModCarvers.register("canyon",
 			ModWorldCarvers.CANYON.get().configured(new ProbabilityConfig(0.02F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> CAVE= ModCarvers.register("cave",
+	public static final ConfiguredCarver<ProbabilityConfig> CAVE = ModCarvers.register("cave",
 			ModWorldCarvers.CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
+	
+	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = ModCarvers.register("large_canyon",
+			ModWorldCarvers.LARGE_CANYON.get().configured(new ProbabilityConfig(0.01F)));
 	
 	private static <WC extends ICarverConfig> ConfiguredCarver<WC> register(String name, ConfiguredCarver<WC> configuredCarver) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_CARVER, new ResourceLocation(Industry.MOD_ID, name), configuredCarver);

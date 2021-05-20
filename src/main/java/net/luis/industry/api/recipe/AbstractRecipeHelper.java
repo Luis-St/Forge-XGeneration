@@ -1,5 +1,6 @@
 package net.luis.industry.api.recipe;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +8,9 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import net.luis.industry.Industry;
 import net.luis.industry.api.util.ItemStackList;
+import net.luis.industry.api.util.annotation.Recipe;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.api.util.exception.NotRegisteredException;
 import net.minecraft.item.ItemStack;
@@ -19,6 +22,7 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 	@Override
 	public void createRecipeList() {
 		this.recipes.clear();
+		this.recipeRegistration();
 	}
 	
 	@Override
@@ -31,6 +35,25 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 			} else {
 				this.recipes.add(recipe);
 			}
+		}
+	}
+	
+	@SuppressWarnings({"unchecked"})
+	private void recipeRegistration() {
+		try {
+			for (Method method : this.getClass().getDeclaredMethods()) {
+				if (method.isAnnotationPresent(Recipe.class)) {
+					Recipe recipe = method.getAnnotation(Recipe.class);
+					method.setAccessible(true);
+					Object object = method.invoke(this, recipe.time(), UUID.fromString(recipe.id()));
+					if (object instanceof IModRecipe) {
+						IModRecipe modRecipe = (IModRecipe) object;
+						this.registerRecipe((T) modRecipe);
+					}
+				}
+			}
+		} catch (Exception e) {
+			Industry.LOGGER.warn("There was an error registering a recipe", e);
 		}
 	}
 	
