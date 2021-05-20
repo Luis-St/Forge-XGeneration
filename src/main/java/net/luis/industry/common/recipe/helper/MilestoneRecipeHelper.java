@@ -1,8 +1,10 @@
 package net.luis.industry.common.recipe.helper;
 
+import java.util.Random;
 import java.util.UUID;
 
 import net.luis.industry.api.recipe.AbstractRecipeHelper;
+import net.luis.industry.api.recipe.ModRecipeHelper;
 import net.luis.industry.api.recipe.item.ResultItemStack;
 import net.luis.industry.api.util.VarArgs;
 import net.luis.industry.api.util.annotation.Recipe;
@@ -10,16 +12,20 @@ import net.luis.industry.common.enums.ModRecipeType;
 import net.luis.industry.common.recipe.MilestoneRecipe;
 import net.luis.industry.init.block.item.ModBlockItems;
 import net.luis.industry.init.items.ModItems;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
+// TODO: new recipe regstration -> world/tileentity capability
 public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe> {
 	
 	/* Stone: 20
 	 * Ore: 25
 	 * Sand/Gravel: 10
-	 * Wood: 15
+	 * Wood, glass: 15
 	 * Obsidian: 40
+	 * Flower: 5
 	 */
 	
 //	@NotTested
@@ -33,8 +39,242 @@ public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe>
 //	}
 	
 	@Override
+	public void createRecipeList() {
+		super.createRecipeList();
+		int colorCount = DyeColor.values().length;
+		for (int i = 0; i < colorCount; i++) {
+			DyeColor color = DyeColor.byId(i);
+			Random rng = new Random(i);
+			this.createColoredGlassBlockRecipe(color, 15, new UUID(rng.nextLong(), rng.nextLong() * -1));
+		} 
+		for (int i = colorCount; i < colorCount + colorCount; i++) {
+			DyeColor color = DyeColor.byId(i - colorCount);
+			Random rng = new Random(i);
+			this.createColoredGlassPaneRecipe(color, 15, new UUID(rng.nextLong(), rng.nextLong() * -1));
+		}
+		this.createDeadCoralRecipe(Items.DEAD_TUBE_CORAL_BLOCK, UUID.fromString("5f7c85d4-1876-43f9-afc2-5b8147787be9"));
+		this.createDeadCoralRecipe(Items.DEAD_BRAIN_CORAL_BLOCK, UUID.fromString("ba322431-30c8-4bb5-9080-2903fba40a15"));
+		this.createDeadCoralRecipe(Items.DEAD_BUBBLE_CORAL_BLOCK, UUID.fromString("dda9d9dd-ce6f-4eee-b9f1-1c71b798f897"));
+		this.createDeadCoralRecipe(Items.DEAD_FIRE_CORAL_BLOCK, UUID.fromString("9836054b-a87b-4353-85fb-379f6b485789"));
+		this.createDeadCoralRecipe(Items.DEAD_HORN_CORAL_BLOCK, UUID.fromString("bcd28cf0-3e49-4504-9b3e-cc383353f266"));
+		this.createCoralRecipe(Items.TUBE_CORAL_BLOCK, Items.BLUE_DYE, UUID.fromString("74a6f802-a796-4776-be8c-da58acb7eb8f"));
+		this.createCoralRecipe(Items.BRAIN_CORAL_BLOCK, Items.MAGENTA_DYE, UUID.fromString("5c2b1804-fda8-4330-b331-fc504240389a"));
+		this.createCoralRecipe(Items.BUBBLE_CORAL_BLOCK, Items.PURPLE_DYE, UUID.fromString("0b3348eb-7e6b-431e-b1ca-8687bf5e19da"));
+		this.createCoralRecipe(Items.FIRE_CORAL_BLOCK, Items.RED_DYE, UUID.fromString("00f0cc47-06d7-4bce-86b5-f547c3c5521a"));
+		this.createCoralRecipe(Items.HORN_CORAL_BLOCK, Items.YELLOW_DYE, UUID.fromString("c5b9d43c-69e7-426e-85a7-40b8811c7f0d"));
+		
+		this.createDeadCoralRecipe(Items.DEAD_TUBE_CORAL, UUID.fromString("04b82a6c-4b46-46e6-81d5-297e9ffff71c"));
+		this.createDeadCoralRecipe(Items.DEAD_BRAIN_CORAL, UUID.fromString("ce71d5b2-0572-455f-adf2-13f64103e92c"));
+		this.createDeadCoralRecipe(Items.DEAD_BUBBLE_CORAL, UUID.fromString("249f878c-6ab8-497f-8126-a4460d4c1e24"));
+		this.createDeadCoralRecipe(Items.DEAD_FIRE_CORAL, UUID.fromString("8409e052-fb7e-402b-8da4-fb3e2aa1f5ad"));
+		this.createDeadCoralRecipe(Items.DEAD_HORN_CORAL, UUID.fromString("a6142ada-6835-4ceb-8fab-b5a1fe89ad89"));
+		this.createCoralRecipe(Items.TUBE_CORAL, Items.BLUE_DYE, UUID.fromString("2ab53817-74c9-4603-9b18-eb72d1f9d26a"));
+		this.createCoralRecipe(Items.BRAIN_CORAL, Items.MAGENTA_DYE, UUID.fromString("47364d94-7d4d-466b-b276-0ea39cc9e2f0"));
+		this.createCoralRecipe(Items.BUBBLE_CORAL, Items.PURPLE_DYE, UUID.fromString("8c007f6b-4e4e-49a2-a8e8-62f80cceae84"));
+		this.createCoralRecipe(Items.FIRE_CORAL, Items.RED_DYE, UUID.fromString("a8a5093d-4f41-469c-b909-f5f009c35597"));
+		this.createCoralRecipe(Items.HORN_CORAL, Items.YELLOW_DYE, UUID.fromString("79f41717-901a-4757-a6d3-7cde600cc7e3"));
+		
+		this.createDeadCoralRecipe(Items.DEAD_TUBE_CORAL_FAN, UUID.fromString("8508c609-210d-49aa-8c04-7a4a009be060"));
+		this.createDeadCoralRecipe(Items.DEAD_BRAIN_CORAL_FAN, UUID.fromString("c9e6681c-0f5f-4689-9b12-accb29d79c23"));
+		this.createDeadCoralRecipe(Items.DEAD_BUBBLE_CORAL_FAN, UUID.fromString("e21c8fb4-fc35-4343-8876-ddee3de4e5e4"));
+		this.createDeadCoralRecipe(Items.DEAD_FIRE_CORAL_FAN, UUID.fromString("f18f1d0b-66ee-47da-9802-41f74981d83b"));
+		this.createDeadCoralRecipe(Items.DEAD_HORN_CORAL_FAN, UUID.fromString("efdd949f-0978-4f54-a200-4ae5637c8237"));
+		this.createCoralRecipe(Items.TUBE_CORAL_FAN, Items.BLUE_DYE, UUID.fromString("671043ba-70bf-4f05-979c-ca2d1b55a68f"));
+		this.createCoralRecipe(Items.BRAIN_CORAL_FAN, Items.MAGENTA_DYE, UUID.fromString("34ec99b6-6a00-4c34-b5a1-7b598f40e976"));
+		this.createCoralRecipe(Items.BUBBLE_CORAL_FAN, Items.PURPLE_DYE, UUID.fromString("3e70b628-59f7-4604-b9e9-7230bbde8a5d"));
+		this.createCoralRecipe(Items.FIRE_CORAL_FAN, Items.RED_DYE, UUID.fromString("2765a387-1ba3-4008-8c92-56abd603e224"));
+		this.createCoralRecipe(Items.HORN_CORAL_FAN, Items.YELLOW_DYE, UUID.fromString("3377f9ab-afc9-40a1-8638-7116f0e88f15"));
+		
+		this.createFlowerRecipe(Items.DANDELION, Items.YELLOW_DYE, UUID.fromString("02420d4e-adca-4955-8e2b-126c93f87c16"));
+		this.createFlowerRecipe(Items.POPPY, Items.RED_DYE, UUID.fromString("1d635115-5087-4df0-a9f1-cbbe0ce66420"));
+		this.createFlowerRecipe(Items.BLUE_ORCHID, Items.LIGHT_BLUE_DYE, UUID.fromString("d292fa44-2c5b-4009-b9bb-f51a32266f88"));
+		this.createFlowerRecipe(Items.ALLIUM, Items.MAGENTA_DYE, UUID.fromString("649fadf3-bd3d-4c2f-b463-641c51bb7cfb"));
+		this.createFlowerRecipe(Items.AZURE_BLUET, Items.LIGHT_GRAY_DYE, UUID.fromString("b1214083-d4a3-4d82-ac58-31e0354a3973"));
+		this.createFlowerRecipe(Items.RED_TULIP, Items.RED_DYE, UUID.fromString("b04f216b-82c8-4987-afaf-7a09296671d9"));
+		this.createFlowerRecipe(Items.ORANGE_TULIP, Items.ORANGE_DYE, UUID.fromString("d32aa9c5-d748-4059-9611-58339ce0d26a"));
+		this.createFlowerRecipe(Items.WHITE_TULIP, Items.LIGHT_GRAY_DYE, UUID.fromString("2174f3b2-eaf3-4519-8e8e-c85a39e8faf1"));
+		this.createFlowerRecipe(Items.PINK_TULIP, Items.PINK_DYE, UUID.fromString("96b82302-8906-403f-a59c-7a8643e76274"));
+		this.createFlowerRecipe(Items.OXEYE_DAISY, Items.LIGHT_GRAY_DYE, UUID.fromString("5b216add-5043-4574-a6a5-e2bb311ed736"));
+		this.createFlowerRecipe(Items.CORNFLOWER, Items.BLUE_DYE, UUID.fromString("ed578cef-bedf-40d9-9f5a-78f97dec5b46"));
+		this.createFlowerRecipe(Items.LILY_OF_THE_VALLEY, Items.WHITE_DYE, UUID.fromString("d640ecf8-3d03-4228-bb53-b09b222b69cd"));
+		this.createFlowerRecipe(Items.WITHER_ROSE, Items.BLACK_DYE, UUID.fromString("b334da52-e2d2-4e28-80e4-7a125d514ab6"));
+		this.createFlowerRecipe(Items.SUNFLOWER, Items.YELLOW_DYE, UUID.fromString("06e9e945-fe7c-4ebf-9946-53444f1415d2"));
+		this.createFlowerRecipe(Items.LILAC, Items.MAGENTA_DYE, UUID.fromString("6e0226b1-a4aa-49fb-aa80-7301ee9c7f00"));
+		this.createFlowerRecipe(Items.ROSE_BUSH, Items.RED_DYE, UUID.fromString("89a03eb3-74b8-4c65-8584-73dd74caf922"));
+		this.createFlowerRecipe(Items.PEONY, Items.PINK_DYE, UUID.fromString("7f92377b-c763-41c2-9e1e-e32597a275b4"));
+	}
+	
+	@Override
 	public ModRecipeType getRecipeType() {
 		return ModRecipeType.MILESTONE;
+	}
+	
+	@Recipe(time = 5, id = "aba52d0d-dbea-40cd-bd38-595bdfb00323")
+	protected MilestoneRecipe createLilyPadRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.LILY_PAD));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.GREEN_DYE, 75));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 5, id = "1c136db7-6c18-4f2a-8a58-d3213046a2ec")
+	protected MilestoneRecipe createVinesRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.VINE));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.GREEN_DYE, 75));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	protected void createColoredGlassPaneRecipe(DyeColor color, int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(ModRecipeHelper.glassPaneFromColor(color)));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(ModRecipeHelper.glassShardFromColor(color), 1, 2, 100));
+		this.registerRecipe(new MilestoneRecipe(input, result, progressTime, id));
+	}
+	
+	@Recipe(time = 15, id = "05ae6ec1-dd41-4308-8fbb-8c986de65029")
+	protected MilestoneRecipe createGlassPaneRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.GLASS_PANE));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(ModItems.GLASS_SHARD.get(), 1, 2, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 20, id = "7547fa40-c07d-4745-bfea-deb2d22776d9")
+	protected MilestoneRecipe createChainRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.CHAIN));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.IRON_NUGGET, 1, 4, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 20, id = "9e078041-17c6-4116-8575-82118e6a8659")
+	protected MilestoneRecipe createIronBarsRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.IRON_BARS));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.IRON_INGOT, 1, 2, 100));
+		result.add(new ResultItemStack(Items.IRON_INGOT, 50));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 20, id = "d5803492-099c-4a73-b177-3893038593fb")
+	protected MilestoneRecipe createCactusRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.CACTUS));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.GREEN_DYE, 2, 100));
+		result.add(new ResultItemStack(Items.GREEN_DYE, 25));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 5, id = "38a050f0-9401-4f19-82a5-9369511239af")
+	protected MilestoneRecipe createBambooRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.BAMBOO));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.STICK, 80));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 5, id = "a7cc7b8f-07fb-4567-8f80-f12fd69d1a34")
+	protected MilestoneRecipe createSugarCaneRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.SUGAR_CANE));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.SUGAR, 100));
+		result.add(new ResultItemStack(Items.SUGAR, 50));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	// TODO: cancle place event of 2 block flowers
+	protected void createFlowerRecipe(Item flower, Item dye, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(flower));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(dye, 2, 100));
+		result.add(new ResultItemStack(dye, 25));
+		this.registerRecipe(new MilestoneRecipe(input, result, 5, id));
+	}
+	
+	@Recipe(time = 40, id = "526d4b3c-9276-4a3b-813d-7af31c634489")
+	protected MilestoneRecipe createCryingObsidianRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.CRYING_OBSIDIAN));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.OBSIDIAN, 100));
+		result.add(new ResultItemStack(ModItems.OBSIDIAN_POWDER.get(), 50));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 40, id = "fdf44ee6-e1b5-4080-a354-0b9c46fe7d8b")
+	protected MilestoneRecipe createAncientDebrisRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.ANCIENT_DEBRIS));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.NETHERITE_SCRAP, 100));
+		result.add(new ResultItemStack(Items.NETHERITE_SCRAP, 5));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	protected void createCoralRecipe(Item coral, Item dye, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(coral));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(dye, 100));
+		result.add(new ResultItemStack(Items.BONE_MEAL, 100));
+		result.add(new ResultItemStack(Items.BONE_MEAL, 50));
+		this.registerRecipe(new MilestoneRecipe(input, result, 20, id));
+	}
+	
+	protected void createDeadCoralRecipe(Item coral, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(coral));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.BONE_MEAL, 100));
+		result.add(new ResultItemStack(Items.BONE_MEAL, 50));
+		this.registerRecipe(new MilestoneRecipe(input, result, 20, id));
+	}
+	
+	@Recipe(time = 20, id = "8f937ea7-9046-49a0-9f70-9e72a7f5cda7")
+	protected MilestoneRecipe createBoneBlockRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.BONE_BLOCK));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.BONE, 3, 9, 100));
+		result.add(new ResultItemStack(Items.BONE_MEAL, 1, 3, 75));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@Recipe(time = 20, id = "f3f8c1be-0051-4d4e-807a-1e6ab17a6d27")
+	protected MilestoneRecipe createRedSandstoneRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.RED_SANDSTONE));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.RED_SAND, 1, 4, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	protected void createColoredGlassBlockRecipe(DyeColor color, int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(ModRecipeHelper.glassBlockFromColor(color)));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(ModRecipeHelper.glassShardFromColor(color), 1, 4, 100));
+		this.registerRecipe(new MilestoneRecipe(input, result, progressTime, id));
+	}
+	
+	@Recipe(time = 15, id = "8987e9fa-0dcf-4405-8232-e265a64d1df0")
+	protected MilestoneRecipe createGlassBlockRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.GLASS));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(ModItems.GLASS_SHARD.get(), 1, 4, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
 	}
 	
 	@Recipe(time = 20, id = "553af932-cf26-400c-b410-22b90d9bc24a")

@@ -1,5 +1,6 @@
 package net.luis.industry.api.recipe;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,13 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch (IllegalAccessException e) {
 			Industry.LOGGER.warn("There was an error registering a recipe", e);
-		}
+		} catch (IllegalArgumentException e) {
+			Industry.LOGGER.warn("A registration method does not have the required parameters", e);
+		} catch (InvocationTargetException e) {
+			Industry.LOGGER.warn("There was an error registering a recipe", e);
+		}	
 	}
 	
 	@Override

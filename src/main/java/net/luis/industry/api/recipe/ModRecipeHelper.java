@@ -1,11 +1,11 @@
-package net.luis.industry.api.world;
+package net.luis.industry.api.recipe;
 
 import net.luis.industry.init.items.ModItems;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-public class GlassHelper {
+public class ModRecipeHelper {
 	
 	public static Item glassBlockFromColor(DyeColor color) {
 		switch (color) {
@@ -25,7 +25,29 @@ public class GlassHelper {
 		case RED: return Items.RED_STAINED_GLASS;
 		case WHITE: return Items.WHITE_STAINED_GLASS;
 		case YELLOW: return Items.YELLOW_STAINED_GLASS;
-		default: return Items.GLASS;
+		default: throw new IllegalArgumentException();
+		}
+	}
+	
+	public static Item glassPaneFromColor(DyeColor color) {
+		switch (color) {
+		case BLACK: return Items.BLACK_STAINED_GLASS_PANE;
+		case BLUE: return Items.BLUE_STAINED_GLASS_PANE;
+		case BROWN: return Items.BROWN_STAINED_GLASS_PANE;
+		case CYAN: return Items.CYAN_STAINED_GLASS_PANE;
+		case GRAY: return Items.GRAY_STAINED_GLASS_PANE;
+		case GREEN: return Items.GREEN_STAINED_GLASS_PANE;
+		case LIGHT_BLUE: return Items.LIGHT_BLUE_STAINED_GLASS_PANE;
+		case LIGHT_GRAY: return Items.LIGHT_GRAY_STAINED_GLASS_PANE;
+		case LIME: return Items.LIME_STAINED_GLASS_PANE;
+		case MAGENTA: return Items.MAGENTA_STAINED_GLASS_PANE;
+		case ORANGE: return Items.ORANGE_STAINED_GLASS_PANE;
+		case PINK: return Items.PINK_STAINED_GLASS_PANE;
+		case PURPLE: return Items.PURPLE_STAINED_GLASS_PANE;
+		case RED: return Items.RED_STAINED_GLASS_PANE;
+		case WHITE: return Items.WHITE_STAINED_GLASS_PANE;
+		case YELLOW: return Items.YELLOW_STAINED_GLASS_PANE;
+		default: throw new IllegalArgumentException();
 		}
 	}
 	
@@ -47,7 +69,7 @@ public class GlassHelper {
 		case RED: return ModItems.RED_GLASS_SHARD.get();
 		case WHITE: return ModItems.WHITE_GLASS_SHARD.get();
 		case YELLOW: return ModItems.YELLOW_GLASS_SHARD.get();
-		default: return ModItems.GLASS_SHARD.get();
+		default: throw new IllegalArgumentException();
 		}
 	}
 

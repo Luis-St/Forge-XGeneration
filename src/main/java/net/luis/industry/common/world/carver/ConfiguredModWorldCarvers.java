@@ -9,7 +9,7 @@ import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.carver.ICarverConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
-public class ModCarvers {
+public class ConfiguredModWorldCarvers {
 	
 //	public static final ConfiguredCarver<ProbabilityConfig> DEEP_LAVA_CAVE = ModCarvers.register("deep_lava_cave",
 //			ModWorldCarvers.DEEP_LAVA_CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
@@ -26,13 +26,13 @@ public class ModCarvers {
 //	public static final ConfiguredCarver<ProbabilityConfig> SMALL_CAVE = ModCarvers.register("small_cave",
 //			ModWorldCarvers.SMALL_CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> CANYON = ModCarvers.register("canyon",
+	public static final ConfiguredCarver<ProbabilityConfig> CANYON = ConfiguredModWorldCarvers.register("canyon",
 			ModWorldCarvers.CANYON.get().configured(new ProbabilityConfig(0.02F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> CAVE = ModCarvers.register("cave",
+	public static final ConfiguredCarver<ProbabilityConfig> CAVE = ConfiguredModWorldCarvers.register("cave",
 			ModWorldCarvers.CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = ModCarvers.register("large_canyon",
+	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = ConfiguredModWorldCarvers.register("large_canyon",
 			ModWorldCarvers.LARGE_CANYON.get().configured(new ProbabilityConfig(0.01F)));
 	
 	private static <WC extends ICarverConfig> ConfiguredCarver<WC> register(String name, ConfiguredCarver<WC> configuredCarver) {

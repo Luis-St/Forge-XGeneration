@@ -11,26 +11,26 @@ public class DefaultModFeatures {
 	// TODO : mining test
 	
 	public static void addDeepslateOres(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_COAL_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_COPPER_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_IRON_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_GOLD_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_LAPIS_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_REDSTONE_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_EXTRA_REDSTONE_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_DIAMOND_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.DEEPSLATE_EMERALD_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_COAL_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_COPPER_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_IRON_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_GOLD_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_LAPIS_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_REDSTONE_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_EXTRA_REDSTONE_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_DIAMOND_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.DEEPSLATE_EMERALD_ORE);
 	}
 	
 	public static void addOreOverwrites(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.COPPER_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE);
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.COAL_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.COPPER_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.IRON_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.GOLD_ORE);
 	}
 	
 	public static void addDeepslateUndergroundVariety(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.TUFF_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.TUFF_ORE);
 	}
 	
 	public static void addDeepslateStructures(BiomeGenerationSettings.Builder generationBuilder) {
@@ -56,7 +56,7 @@ public class DefaultModFeatures {
 	}
 	
 	public static void addFlatBedrock(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addFeature(GenerationStage.Decoration.RAW_GENERATION, ModFeatures.FLAT_BEDROCK);
+		generationBuilder.addFeature(GenerationStage.Decoration.RAW_GENERATION, ConfiguredModFeatures.FLAT_BEDROCK);
 	}
 
 }

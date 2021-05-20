@@ -3,9 +3,13 @@
   "generator": {
     "type": "industry:chunkgen",
     "settings": {
-      "base": 65,
-      "verticalvariance": 16,
-      "horizontalvariance": 10
+      "base_height": 128,
+      "min_height": 64,
+      "max_height": 192,
+      "sea_level": 256,
+      "ocean_level": 96,
+      "bedrock_top_layer": 256,
+      "bedrock_top_layer_size": 2
     }
   }
 }

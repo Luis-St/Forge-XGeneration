@@ -2,7 +2,7 @@ package net.luis.industry.common.world.feature;
 
 import net.luis.industry.Industry;
 import net.luis.industry.init.block.ModBlocks;
-import net.luis.industry.init.world.ModFeature;
+import net.luis.industry.init.world.ModFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -21,72 +21,72 @@ import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 
-public class ModFeatures {
+public class ConfiguredModFeatures {
 
 	private static final RuleTest DEEPSLATE = new BlockMatchRuleTest(ModBlocks.DEEPSLATE.get());
 	private static final RuleTest STONE = new BlockMatchRuleTest(Blocks.STONE);
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_COAL_ORE = register("deepslate_coal_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_COAL_ORE, 12))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_COAL_ORE, 12))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(255, 64))).squared().count(18));
 
 	public static final ConfiguredFeature<?, ?> COAL_ORE = register("coal_ore_overwrite",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(STONE, States.COAL_ORE, 17))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.COAL_ORE, 17))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 128))).squared().count(20));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_COPPER_ORE = register("deepslate_copper_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_COPPER_ORE, 8))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_COPPER_ORE, 8))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(255, 32))).squared().count(16));
 
 	public static final ConfiguredFeature<?, ?> COPPER_ORE = register("copper_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(STONE, States.COPPER_ORE, 10))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.COPPER_ORE, 10))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 96))).squared().count(20));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_IRON_ORE = register("deepslate_iron_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_IRON_ORE, 10))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_IRON_ORE, 10))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(128, 176))).squared().count(26));
 
 	public static final ConfiguredFeature<?, ?> IRON_ORE = register("iron_ore_overwrite",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(STONE, States.IRON_ORE, 9))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.IRON_ORE, 9))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 64))).squared().count(20));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_GOLD_ORE = register("deepslate_gold_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_GOLD_ORE, 7))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_GOLD_ORE, 7))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(176, 128))).squared().count(8));
 
 	public static final ConfiguredFeature<?, ?> GOLD_ORE = register("gold_ore_overwrite",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(STONE, States.GOLD_ORE, 7))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.GOLD_ORE, 7))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 48))).squared().count(2));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAPIS_ORE = register("deepslate_lapis_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_LAPIS_ORE, 7))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_LAPIS_ORE, 7))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(128, 64))).squared().count(6));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_REDSTONE_ORE = register("deepslate_redstone_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_REDSTONE_ORE, 8))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_REDSTONE_ORE, 8))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 96))).squared().count(12));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_EXTRA_REDSTONE_ORE = register("deepslate_extra_redstone_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_REDSTONE_ORE, 10))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_REDSTONE_ORE, 10))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 32))).squared().count(2));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_DIAMOND_ORE = register("deepslate_diamond_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_DIAMOND_ORE, 8))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_DIAMOND_ORE, 8))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 32))).squared().count(8));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_EMERALD_ORE = register("deepslate_emerald_ore",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_EMERALD_ORE, 4))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_EMERALD_ORE, 4))
 			.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(0, 0, 192))).squared());
 	
 	public static final ConfiguredFeature<?, ?> EMERALD_ORE = register("emerald_ore_overwrite",
-			ModFeature.ORE.get().configured(new OreFeatureConfig(STONE, States.EMERALD_ORE, 8))
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.EMERALD_ORE, 8))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 96))).squared().count(20));
 
 	public static final ConfiguredFeature<?, ?> TUFF_ORE = register("tuff_ore", 
-			ModFeature.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.TUFF_ORE, 33)).range(256).squared().count(10));
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.TUFF_ORE, 33)).range(256).squared().count(10));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAVE_LAKE = register("deepslate_lava_lake",
-			ModFeature.LAKE.get().configured(new BlockStateFeatureConfig(States.LAVA))
+			ModFeatures.LAKE.get().configured(new BlockStateFeatureConfig(States.LAVA))
 			.decorated(Placement.WATER_LAKE.configured(new ChanceConfig(40))));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_WATER_LAKE = register("deepslate_water_lake",
@@ -94,10 +94,10 @@ public class ModFeatures {
 			.decorated(Placement.WATER_LAKE.configured(new ChanceConfig(40))));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = register("deepslate_monster_room",
-			ModFeature.MONSTER_ROOM.get().configured(IFeatureConfig.NONE).range(256).squared().count(8));
+			ModFeatures.MONSTER_ROOM.get().configured(IFeatureConfig.NONE).range(256).squared().count(8));
 	
 	public static final ConfiguredFeature<?, ?> FLAT_BEDROCK = register("flat_bedrock", 
-			ModFeature.FLAT_BEDROCK.get().configured(IFeatureConfig.NONE).count(FeatureSpread.fixed(1))
+			ModFeatures.FLAT_BEDROCK.get().configured(IFeatureConfig.NONE).count(FeatureSpread.fixed(1))
 			.squared().range(5));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
