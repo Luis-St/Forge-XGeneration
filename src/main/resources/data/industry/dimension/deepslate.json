@@ -7,7 +7,8 @@
       "min_height": 64,
       "max_height": 192,
       "sea_level": 256,
-      "ocean_level": 96,
+      "water_ocean_level": 128,
+      "lava_ocean_level": 96,
       "bedrock_top_layer": 256,
       "bedrock_top_layer_size": 2
     }

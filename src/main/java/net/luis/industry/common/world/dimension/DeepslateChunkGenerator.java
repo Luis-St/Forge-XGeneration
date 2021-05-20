@@ -34,7 +34,8 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 					Codec.INT.fieldOf("min_height").forGetter(Settings::getMinHeight),
 					Codec.INT.fieldOf("max_height").forGetter(Settings::getMaxHeight),
 					Codec.INT.fieldOf("sea_level").forGetter(Settings::getSeaLevel),
-					Codec.INT.fieldOf("ocean_level").forGetter(Settings::getOceanLevel),
+					Codec.INT.fieldOf("water_ocean_level").forGetter(Settings::getWaterOceanLevel),
+					Codec.INT.fieldOf("lava_ocean_level").forGetter(Settings::getLavaOceanLevel),
 					Codec.INT.fieldOf("bedrock_top_layer").forGetter(Settings::getBedrockTopLayer),
 					Codec.INT.fieldOf("bedrock_top_layer_size").forGetter(Settings::getBedrockTopLayerSize))
 			.apply(instance, Settings::new));
@@ -137,16 +138,18 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		private final int minHeight;
 		private final int maxHeight;
 		private final int seaLevel;
-		private final int oceanLevel;
+		private final int waterOceanLevel;
+		private final int lavaOceanLevel;
 		private final int bedrockTopLayer;
 		private final int bedrockTopLayerSize;
 		
-		public Settings(int baseHeight, int minHeight, int maxHeight, int seaLevel, int oceanLevel, int bedrockTopLayer, int bedrockTopLayerSize) {
+		public Settings(int baseHeight, int minHeight, int maxHeight, int seaLevel, int waterOceanLevel, int lavaOceanLevel, int bedrockTopLayer, int bedrockTopLayerSize) {
 			this.baseHeight = baseHeight;
 			this.minHeight = minHeight;
 			this.maxHeight = maxHeight;
 			this.seaLevel = seaLevel;
-			this.oceanLevel = oceanLevel;
+			this.waterOceanLevel = waterOceanLevel;
+			this.lavaOceanLevel = lavaOceanLevel;
 			this.bedrockTopLayer = bedrockTopLayer;
 			this.bedrockTopLayerSize = bedrockTopLayerSize;
 		}
@@ -167,8 +170,12 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			return this.seaLevel;
 		}
 
-		public int getOceanLevel() {
-			return this.oceanLevel;
+		public int getWaterOceanLevel() {
+			return this.waterOceanLevel;
+		}
+		
+		public int getLavaOceanLevel() {
+			return this.lavaOceanLevel;
 		}
 
 		public int getBedrockTopLayer() {
@@ -179,29 +186,6 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			return this.bedrockTopLayerSize;
 		}
 		
-		
-		
-		
-//		private final int baseHeight;
-//		private final float verticalVariance;
-//		private final float horizontalVariance;
-//
-//		public Settings(int baseHeight, float verticalVariance, float horizontalVariance) {
-//			this.baseHeight = baseHeight;
-//			this.verticalVariance = verticalVariance;
-//			this.horizontalVariance = horizontalVariance;
-//		}
-//
-//		public float getVerticalVariance() {
-//			return verticalVariance;
-//		}
-//
-//		public int getBaseHeight() {
-//			return baseHeight;
-//		}
-//
-//		public float getHorizontalVariance() {
-//			return horizontalVariance;
-//		}
 	}
+	
 }

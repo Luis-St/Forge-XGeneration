@@ -12,8 +12,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class ConfiguredModSurfaceBuilders {
 	
-	public static final BlockState DEEPSLATE = ModBlocks.DEEPSLATE.get().defaultBlockState();
-	public static final SurfaceBuilderConfig DEEPSLATE_CONFIG = new SurfaceBuilderConfig(DEEPSLATE, DEEPSLATE, DEEPSLATE);
+	protected static final BlockState DEEPSLATE = ModBlocks.DEEPSLATE.get().defaultBlockState();
+	protected static final SurfaceBuilderConfig DEEPSLATE_CONFIG = new SurfaceBuilderConfig(DEEPSLATE, DEEPSLATE, DEEPSLATE);
 	
 	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> DEFAULT_DEEPSLATE = register("default_deepslate", 
 			ModSurfaceBuilders.DEFAULT_DEEPSLATE.get().configured(DEEPSLATE_CONFIG));
