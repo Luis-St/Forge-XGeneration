@@ -41,6 +41,10 @@ public class ConfiguredModFeatures {
 	public static final ConfiguredFeature<?, ?> COPPER_ORE = register("copper_ore",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.COPPER_ORE, 10))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 96))).squared().count(20));
+	
+	public static final ConfiguredFeature<?, ?> COPPER_ORE_BLOBS = register("copper_ore_blobs",
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.COPPER_ORE, 6))
+			.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(0, 0, 96))).squared().count(10));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_IRON_ORE = register("deepslate_iron_ore",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_IRON_ORE, 10))
@@ -49,6 +53,10 @@ public class ConfiguredModFeatures {
 	public static final ConfiguredFeature<?, ?> IRON_ORE = register("iron_ore_overwrite",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.IRON_ORE, 9))
 			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 64))).squared().count(20));
+	
+	public static final ConfiguredFeature<?, ?> IRON_ORE_BLOBS = register("iron_ore_blobs",
+			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.IRON_ORE, 5))
+			.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(0, 0, 64))).squared().count(5));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_GOLD_ORE = register("deepslate_gold_ore",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_GOLD_ORE, 7))
@@ -56,7 +64,7 @@ public class ConfiguredModFeatures {
 
 	public static final ConfiguredFeature<?, ?> GOLD_ORE = register("gold_ore_overwrite",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(STONE, States.GOLD_ORE, 7))
-			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 48))).squared().count(2));
+			.decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(0, 48))).squared().count(4));
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAPIS_ORE = register("deepslate_lapis_ore",
 			ModFeatures.ORE.get().configured(new OreFeatureConfig(DEEPSLATE, States.DEEPSLATE_LAPIS_ORE, 7))

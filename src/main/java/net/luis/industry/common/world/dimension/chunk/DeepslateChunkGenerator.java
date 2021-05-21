@@ -32,6 +32,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	
 	// TODO: more biome
 	// TODO: biome sufacebuilder
+	// TODO: use noise gen
 	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(Codec.INT.fieldOf("base_height").forGetter(Settings::getBaseHeight),

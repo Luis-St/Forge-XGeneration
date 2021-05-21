@@ -31,7 +31,6 @@ public class OnBiomeLoadingEvent {
 		
 		if (biomeName.equals(ModBiomeKeys.DEEPSLATE.location())) {
 			
-			// TODO: change
 			DefaultModFeatures.addDeepslateCarvers(genBuilder);
 			DefaultModFeatures.addDeepslateStructures(genBuilder);
 			DefaultModFeatures.addDeepslateUndergroundVariety(genBuilder);

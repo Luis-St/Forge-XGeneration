@@ -1,6 +1,5 @@
 package net.luis.industry.common.world.biome;
 
-import net.luis.industry.common.world.surfacebuilder.ConfiguredModSurfaceBuilders;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -47,10 +46,6 @@ public interface IBiome {
 	
 	MobSpawnInfo getMobSpawnSettings();
 	
-	default BiomeGenerationSettings getBiomeGenerationSettings() {
-		BiomeGenerationSettings.Builder generationBuilder = new BiomeGenerationSettings.Builder();
-		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.DEEPSLATE);
-		return generationBuilder.build();
-	}
+	BiomeGenerationSettings getBiomeGenerationSettings();
 
 }

@@ -1,8 +1,10 @@
 package net.luis.industry.common.world.biome;
 
 import net.luis.industry.common.world.feature.DefaultModFeatures;
+import net.luis.industry.common.world.surfacebuilder.ConfiguredModSurfaceBuilders;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeAmbience;
+import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.MoodSoundAmbience;
 
@@ -39,6 +41,13 @@ public class DeepslateBiome implements IBiome {
 		MobSpawnInfo.Builder modBuilder = new MobSpawnInfo.Builder();
 		DefaultModFeatures.addCommonSpawns(modBuilder);
 		return modBuilder.build();
+	}
+
+	@Override
+	public BiomeGenerationSettings getBiomeGenerationSettings() {
+		BiomeGenerationSettings.Builder generationBuilder = new BiomeGenerationSettings.Builder();
+		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.DEEPSLATE);
+		return generationBuilder.build();
 	}
 	
 }

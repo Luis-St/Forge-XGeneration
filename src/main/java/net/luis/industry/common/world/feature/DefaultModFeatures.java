@@ -25,7 +25,9 @@ public class DefaultModFeatures {
 	public static void addOreOverwrites(BiomeGenerationSettings.Builder generationBuilder) {
 		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.COAL_ORE);
 		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.COPPER_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.COPPER_ORE_BLOBS);
 		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.IRON_ORE);
+		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.IRON_ORE_BLOBS);
 		generationBuilder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredModFeatures.GOLD_ORE);
 	}
 	

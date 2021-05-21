@@ -18,6 +18,12 @@ public class ConfiguredModSurfaceBuilders {
 	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> DEEPSLATE = register("deepslate", 
 			ModSurfaceBuilders.DEEPSLATE.get().configured(DEEPSLATE_CONFIG));
 	
+//	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> WATER_OCEAN = register("water_ocean", 
+//			ModSurfaceBuilders.WATER_OCEAN.get().configured(DEEPSLATE_CONFIG));
+//	
+//	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> LAVA_OCEAN = register("lava_ocean", 
+//			ModSurfaceBuilders.LAVA_OCEAN.get().configured(DEEPSLATE_CONFIG));
+	
 	private static <SC extends ISurfaceBuilderConfig> ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> surfaceBuilder) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, new ResourceLocation(Industry.MOD_ID, name), surfaceBuilder);
 	}
