@@ -12,11 +12,11 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class ConfiguredModSurfaceBuilders {
 	
-	protected static final BlockState DEEPSLATE = ModBlocks.DEEPSLATE.get().defaultBlockState();
-	protected static final SurfaceBuilderConfig DEEPSLATE_CONFIG = new SurfaceBuilderConfig(DEEPSLATE, DEEPSLATE, DEEPSLATE);
+	protected static final BlockState DEFAULT_STATE = ModBlocks.DEEPSLATE.get().defaultBlockState();
+	protected static final SurfaceBuilderConfig DEEPSLATE_CONFIG = new SurfaceBuilderConfig(DEFAULT_STATE, DEFAULT_STATE, DEFAULT_STATE);
 	
-	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> DEFAULT_DEEPSLATE = register("default_deepslate", 
-			ModSurfaceBuilders.DEFAULT_DEEPSLATE.get().configured(DEEPSLATE_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> DEEPSLATE = register("deepslate", 
+			ModSurfaceBuilders.DEEPSLATE.get().configured(DEEPSLATE_CONFIG));
 	
 	private static <SC extends ISurfaceBuilderConfig> ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> surfaceBuilder) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, new ResourceLocation(Industry.MOD_ID, name), surfaceBuilder);

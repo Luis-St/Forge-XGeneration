@@ -3,7 +3,7 @@ package net.luis.industry.api.recipe;
 import java.util.List;
 import java.util.UUID;
 
-import net.luis.industry.api.util.ItemStackList;
+import net.luis.industry.api.inventory.ItemStackList;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.common.enums.ModRecipeType;
 import net.minecraft.item.ItemStack;

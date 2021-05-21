@@ -17,8 +17,8 @@ import net.luis.industry.api.capability.interfaces.entity.IPlayerCapability;
 import net.luis.industry.api.capability.interfaces.world.IChunkCapability;
 import net.luis.industry.api.capability.interfaces.world.ITileEntityCapability;
 import net.luis.industry.api.capability.interfaces.world.IWorldCapability;
-import net.luis.industry.common.world.dimension.DeepslateBiomeProvider;
-import net.luis.industry.common.world.dimension.DeepslateChunkGenerator;
+import net.luis.industry.common.world.dimension.biome.DeepslateBiomeProvider;
+import net.luis.industry.common.world.dimension.chunk.DeepslateChunkGenerator;
 import net.luis.industry.init.ModEnchantments;
 import net.luis.industry.init.ModEntityTypes;
 import net.luis.industry.init.block.ModBlocks;
@@ -29,6 +29,7 @@ import net.luis.industry.init.items.ModItems;
 import net.luis.industry.init.recipe.ModRecipeSerializer;
 import net.luis.industry.init.villager.ModPointOfInterestTypes;
 import net.luis.industry.init.villager.ModVillagerProfessions;
+import net.luis.industry.init.world.ModBiomeKeys;
 import net.luis.industry.init.world.ModBiomes;
 import net.luis.industry.init.world.ModFeatures;
 import net.luis.industry.init.world.ModSurfaceBuilders;
@@ -42,8 +43,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -55,6 +54,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Industry.MOD_ID)
 public class Industry {
+	
+	// TODO proxy -> client and server registry -> move events in event package & itemgrops
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "industry";
@@ -104,10 +105,10 @@ public class Industry {
 		this.registerCapability(ITileEntityCapability.class);
 		this.registerCapability(IWorldCapability.class);
 		event.enqueueWork(() -> {
-			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "chunkgen"), DeepslateChunkGenerator.CODEC);
+			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
 			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
 		});
-		this.createBiome(BiomeType.WARM, Type.MODIFIED, Type.SPOOKY);
+		this.createBiomes();
 	}
 	
 	private <T> void registerCapability(Class<T> clazz) {
@@ -118,8 +119,8 @@ public class Industry {
 		
 	}
 	
-	private void createBiome(BiomeManager.BiomeType biomeType, BiomeDictionary.Type... types) {
-		BiomeDictionary.addTypes(ModBiomes.DEEPSLATE_CAVE, types);
+	private void createBiomes() {
+		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE, Type.MODIFIED);
 	}
 	
 	public static final ItemGroup BUILDING_BLOCKS = new ItemGroup("industry_building_blocks") {

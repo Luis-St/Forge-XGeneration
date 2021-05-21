@@ -1,10 +1,12 @@
-package net.luis.industry.common.world.dimension;
+package net.luis.industry.common.world.dimension.chunk;
 
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.luis.industry.common.world.dimension.biome.DeepslateBiomeProvider;
 import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,6 +22,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.INoiseGenerator;
+import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
@@ -60,46 +64,40 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	public Registry<Biome> getBiomeRegistry() {
 		return ((DeepslateBiomeProvider) this.biomeSource).getBiomeRegistry();
 	}
-
+	
 	@Override
 	public void buildSurfaceAndBedrock(WorldGenRegion region, IChunk chunk) {
 		ChunkPos chunkpos = chunk.getPos();
 		SharedSeedRandom seedRng = new SharedSeedRandom();
 		seedRng.setBaseChunkSeed(chunkpos.x, chunkpos.z);
-		this.buildDeepslate(chunk);
-		this.buildBedrock(chunk, seedRng);
+		INoiseGenerator noiseGenerator = new OctavesNoiseGenerator(seedRng, IntStream.range(-3, 0));
+		for (int x = 0; x < 16; x++) {
+			for (int y = 0; y < 256; y++) {
+				for (int z = 0; z < 16; z++) {
+					BlockPos pos = new BlockPos(x, y, z);
+					chunk.setBlockState(pos, ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
+					this.buildBedrock(seedRng, chunk, pos);
+					this.buildSurface(seedRng, chunk, noiseGenerator, region.getBiome(pos), pos, z);
+				}
+			}
+		}
+	}
+
+	protected void buildBedrock(Random rng, IChunk chunk, BlockPos pos) {
+		if (pos.getY() > this.getDimensionSettings().getBedrockTopLayer() - this.getDimensionSettings().getBedrockTopLayerSize() - 1) {
+			chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+		} else if (pos.getY() <= rng.nextInt(5)) {
+			chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+		}
 	}
 	
-	protected void buildDeepslate(IChunk chunk) {
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				for (int y = 0; y < 256; y++) {
-					this.setDeepSlate(chunk, x, y, z);
-				}
-			}
-		}
-	}
-
-	private void setDeepSlate(IChunk chunk, int x, int y, int z) {
-		chunk.setBlockState(new BlockPos(x, y, z), ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
-	}
-
-	protected void buildBedrock(IChunk chunk, Random rng) {
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				for (int y = 0; y < 256; y++) {
-					if (y > this.getDimensionSettings().getBedrockTopLayer() - this.getDimensionSettings().getBedrockTopLayerSize() - 1) {
-						this.setBedrock(chunk, x, y, z);
-					} else if (y <= rng.nextInt(5)) {
-						this.setBedrock(chunk, x, y, z);
-					}
-				}
-			}
-		}
-	}
-
-	private void setBedrock(IChunk chunk, int x, int y, int z) {
-		chunk.setBlockState(new BlockPos(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
+	protected void buildSurface(Random rng, IChunk chunk, INoiseGenerator noiseGenerator, Biome biome, BlockPos pos, long seed) {
+		int worldX = chunk.getPos().getMinBlockX() + pos.getX();
+		int worldZ = chunk.getPos().getMinBlockZ() + pos.getZ();
+		int y = chunk.getHeight(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
+		double noise = noiseGenerator.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, pos.getX() * 0.0625) * 15;
+		biome.buildSurfaceAt(rng, chunk, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), 
+				this.getSeaLevel(), seed);
 	}
 
 	@Override
@@ -119,7 +117,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public int getBaseHeight(int x, int z, Heightmap.Type heightmapType) {
-		return 256;
+		return 128;
 	}
 	
 	@Override

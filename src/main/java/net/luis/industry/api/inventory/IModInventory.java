@@ -1,6 +1,5 @@
 package net.luis.industry.api.inventory;
 
-import net.luis.industry.api.util.ItemStackList;
 import net.minecraft.item.ItemStack;
 
 public interface IModInventory {

@@ -10,7 +10,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import net.luis.industry.Industry;
-import net.luis.industry.api.util.ItemStackList;
+import net.luis.industry.api.inventory.ItemStackList;
 import net.luis.industry.api.util.annotation.Recipe;
 import net.luis.industry.api.util.exception.AlreadyRegisteredException;
 import net.luis.industry.api.util.exception.NotRegisteredException;

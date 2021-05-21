@@ -3,8 +3,8 @@ package net.luis.industry.api.inventory.recipe;
 import java.util.List;
 
 import net.luis.industry.api.inventory.InventorySlot;
+import net.luis.industry.api.inventory.ItemStackList;
 import net.luis.industry.api.recipe.IModRecipe;
-import net.luis.industry.api.util.ItemStackList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 

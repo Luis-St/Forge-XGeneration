@@ -6,9 +6,9 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import net.luis.industry.api.inventory.InventorySlot;
+import net.luis.industry.api.inventory.ItemStackList;
 import net.luis.industry.api.inventory.recipe.IRecipeInventory;
 import net.luis.industry.api.recipe.IModRecipe;
-import net.luis.industry.api.util.ItemStackList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

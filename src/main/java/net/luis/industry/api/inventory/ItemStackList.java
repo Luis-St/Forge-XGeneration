@@ -1,4 +1,4 @@
-package net.luis.industry.api.util;
+package net.luis.industry.api.inventory;
 
 import java.util.Arrays;
 import java.util.Iterator;

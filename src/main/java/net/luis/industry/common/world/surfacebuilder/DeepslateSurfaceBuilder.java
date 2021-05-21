@@ -8,21 +8,16 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class DefaultDeepslateSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
+public class DeepslateSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
 
-	public DefaultDeepslateSurfaceBuilder() {
+	public DeepslateSurfaceBuilder() {
 		super(SurfaceBuilderConfig.CODEC);
 	}
 
 	@Override
-	public void apply(Random rng, IChunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, 
+	public void apply(Random rng, IChunk chunk, Biome biome, int worldX, int worldZ, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, 
 			int seaLevel, long seed, SurfaceBuilderConfig config) {
-		
-		System.out.println("x: " + x);
-		System.out.println("z: " + z);
-		System.out.println("height: " + height);
-		System.out.println("noise: " + noise);
-		
-	}
 
+	}
+	
 }

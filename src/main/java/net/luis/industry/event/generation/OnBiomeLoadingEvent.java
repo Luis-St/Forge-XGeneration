@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import net.luis.industry.common.world.feature.DefaultModFeatures;
 import net.luis.industry.common.world.feature.ModOreFeature;
-import net.luis.industry.init.world.ModBiomes;
+import net.luis.industry.init.world.ModBiomeKeys;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome.Category;
@@ -27,14 +27,15 @@ public class OnBiomeLoadingEvent {
 		
 		ResourceLocation biomeName = event.getName();
 		Category category = event.getCategory();
-		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
+		BiomeGenerationSettingsBuilder genBuilder = event.getGeneration();
 		
-		if (biomeName.equals(ModBiomes.DEEPSLATE_CAVE.location())) {
+		if (biomeName.equals(ModBiomeKeys.DEEPSLATE.location())) {
 			
-			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
-			DefaultModFeatures.addDeepslateStructures(generationBuilder);
-			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
-			DefaultModFeatures.addDeepslateOres(generationBuilder);
+			// TODO: change
+			DefaultModFeatures.addDeepslateCarvers(genBuilder);
+			DefaultModFeatures.addDeepslateStructures(genBuilder);
+			DefaultModFeatures.addDeepslateUndergroundVariety(genBuilder);
+			DefaultModFeatures.addDeepslateOres(genBuilder);
 			
 		} else if (category == Category.THEEND) {
 			
@@ -42,8 +43,8 @@ public class OnBiomeLoadingEvent {
 			
 		} else { 
 			
-			DefaultModFeatures.addOreOverwrites(generationBuilder);
-			DefaultModFeatures.addFlatBedrock(generationBuilder);
+			DefaultModFeatures.addOreOverwrites(genBuilder);
+			DefaultModFeatures.addFlatBedrock(genBuilder);
 			
 		}
 		
