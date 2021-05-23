@@ -11,23 +11,24 @@ import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 
 public class DeepslateBiomeLayer {
-	
-	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> createDeepslateBiomeLayer(LongFunction<C> function) {
-		IAreaFactory<T> areaFactory = DeepslateLayer.INSTANCE.run(function.apply(0L));
+
+	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> createBaseLayer(LongFunction<C> function) {
+		IAreaFactory<T> areaFactory = BaseLayer.INSTANCE.run(function.apply(0L));
 		return areaFactory;
 	}
-	
+
 	public static ModLayer createLayer(long seed) {
-		IAreaFactory<LazyArea> factory = createDeepslateBiomeLayer((seedModifier) -> {
-			return new LazyAreaLayerContext(1, seedModifier, seed);
+		IAreaFactory<LazyArea> factory = createBaseLayer((seedModifier) -> {
+			return new LazyAreaLayerContext(25, seedModifier, seed);
 		});
 		return new ModLayer(factory);
 	}
-	
-	public enum DeepslateLayer implements IAreaTransformer0 {
+
+	protected enum BaseLayer implements IAreaTransformer0 {
 		INSTANCE;
 		
-		public int applyPixel(INoiseRandom random, int x, int z) {
+		@Override
+		public int applyPixel(INoiseRandom rng, int x, int z) {
 			return -1;
 		}
 	}

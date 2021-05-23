@@ -8,7 +8,7 @@ import com.mojang.serialization.Codec;
 
 import net.luis.industry.common.world.dimension.biome.layer.DeepslateBiomeLayer;
 import net.luis.industry.common.world.dimension.biome.layer.ModLayer;
-import net.luis.industry.init.world.ModBiomeKeys;
+import net.luis.industry.init.world.biome.ModBiomeKeys;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -18,23 +18,33 @@ import net.minecraft.world.gen.feature.structure.Structure;
 
 public class DeepslateBiomeProvider extends BiomeProvider {
 
-	// TODO Deepslate cave biome -> deepslate
+	// TODO: custom tp engine for deepslate dimension
 
 	public static final Codec<DeepslateBiomeProvider> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
 			.xmap(DeepslateBiomeProvider::new, DeepslateBiomeProvider::getBiomeRegistry).codec();
-
-	private final ModLayer noiseBiomeLayer;
+	
+	private final long seed;
 	private final Registry<Biome> biomeRegistry;
+	private final ModLayer noiseBiomeLayer;
 	private static final List<RegistryKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
-
+	
 	public DeepslateBiomeProvider(Registry<Biome> biomeRegistry) {
+		this(biomeRegistry, new Random().nextLong());
+	}
+	
+	public DeepslateBiomeProvider(Registry<Biome> biomeRegistry, long seed) {
 		super(getStartBiomes(biomeRegistry));
+		this.seed = seed;
 		this.biomeRegistry = biomeRegistry;
-		this.noiseBiomeLayer = DeepslateBiomeLayer.createLayer(new Random().nextLong());
+		this.noiseBiomeLayer = DeepslateBiomeLayer.createLayer(seed);
 	}
 
 	private static List<Biome> getStartBiomes(Registry<Biome> registry) {
 		return DeepslateBiomeProvider.BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList());
+	}
+	
+	public long getSeed() {
+		return seed;
 	}
 	
 	public Registry<Biome> getBiomeRegistry() {
@@ -53,13 +63,13 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 
 	@Override
 	public BiomeProvider withSeed(long seed) {
-		return this;
+		return new DeepslateBiomeProvider(this.biomeRegistry, seed);
 	}
 
 	@Override
 	public Biome getNoiseBiome(int x, int y, int z) {
 		// TODO: custom layer
-		return this.noiseBiomeLayer.get(this.biomeRegistry, x, z) /*ModBiomes.DEEPSLATE.get()*/;
+		return this.noiseBiomeLayer.get(this.biomeRegistry, x, z);
 	}
-	
+
 }

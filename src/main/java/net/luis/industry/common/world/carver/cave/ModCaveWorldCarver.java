@@ -16,11 +16,6 @@ public class ModCaveWorldCarver extends ModWorldCarver {
 	public ModCaveWorldCarver() {
 		super();
 	}
-
-	@Override
-	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return rng.nextFloat() <= config.probability;
-	}
 	
 	@Override
 	public int getRange() {
@@ -106,7 +101,7 @@ public class ModCaveWorldCarver extends ModWorldCarver {
 			double posX, double posY, double posZ, double width, double heigth, BitSet bitSet) {
 		double roomWidth = this.calcRoomWidth(new Random(seed), width);
 		double roomHeight = this.calcRoomHeight(new Random(seed), roomWidth, heigth);
-		this.carveSphere(chunk, toBiome, seed, seaLevel, chunkX, chunkZ, posX + 1.0D, posY, posZ, roomWidth, roomHeight, bitSet);
+		this.carveSphere(chunk, toBiome, seed, seaLevel, chunkX, chunkZ, posX + 1, posY, posZ, roomWidth, roomHeight, bitSet);
 	}
 	
 	public double getNextXPos(Random rng, double oldPosX, float axisMultiplier0, float axisMultiplier1, float[] motionModifiers) {
@@ -121,8 +116,6 @@ public class ModCaveWorldCarver extends ModWorldCarver {
 		return oldPosZ + (Math.sin(axisMultiplier0) * motionModifiers[2]);
 	}
 	
-	
-	// TODO: test
 	protected void genTunnel(IChunk chunk, Function<BlockPos, Biome> toBiome, long seed, int seaLevel, int chunkX, int chunkZ, double posX, double posY,
 			double posZ, float thickness, float axisMultiplier0, float axisMultiplier1, int startLength, int caveLength, double yScale, BitSet bitSet) {
 		Random rng = new Random(seed);
@@ -134,17 +127,10 @@ public class ModCaveWorldCarver extends ModWorldCarver {
 		for (int j = startLength; j < caveLength; ++j) {
 			double width = 1.5D + Math.sin(Math.PI * j / caveLength) * thickness;
 			double height = width * yScale;
-			
 			motionModifiers[2] = MathHelper.cos(axisMultiplier1);
-			
 			posX = this.getNextXPos(rng, posX, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posY = this.getNextYPos(rng, posY, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posZ = this.getNextZPos(rng, posZ, axisMultiplier0, axisMultiplier1, motionModifiers);
-			
-//			posX += Math.cos(axisMultiplier0) * motionModifiers[2];
-//			posY += Math.sin(axisMultiplier1);
-//			posZ += Math.sin(axisMultiplier0) * motionModifiers[2];
-			
 			axisMultiplier1 *= (flag ? 0.92F : 0.7F);
 			axisMultiplier1 += motionModifiers[1] * 0.1F;
 			axisMultiplier0 += motionModifiers[0] * 0.1F;

@@ -4,6 +4,7 @@ import net.luis.industry.Industry;
 import net.luis.industry.common.world.carver.canyon.LargeCanyon;
 import net.luis.industry.common.world.carver.canyon.ModCanyonWorldCarver;
 import net.luis.industry.common.world.carver.cave.ModCaveWorldCarver;
+import net.luis.industry.common.world.carver.ocean.OceanWorldCarver;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraftforge.fml.RegistryObject;
@@ -16,6 +17,7 @@ public class ModWorldCarvers {
 	
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CANYON = WORLD_CARVERS.register("canyon", ModCanyonWorldCarver::new);
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CAVE = WORLD_CARVERS.register("cave", ModCaveWorldCarver::new);
+	public static final RegistryObject<WorldCarver<ProbabilityConfig>> OCEAN = WORLD_CARVERS.register("ocean", OceanWorldCarver::new);
 	
 	// TODO: add mor custom cave and canyons
 	

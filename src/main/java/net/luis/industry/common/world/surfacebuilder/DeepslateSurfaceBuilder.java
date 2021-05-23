@@ -33,7 +33,6 @@ public class DeepslateSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
 	@Override
 	public void apply(Random rng, IChunk chunk, Biome biome, int worldX, int worldZ, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, 
 			int seaLevel, long seed, SurfaceBuilderConfig config) {
-
 	}
 	
 }

@@ -40,6 +40,11 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	}
 	
 	@Override
+	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
+		return rng.nextFloat() <= config.probability;
+	}
+	
+	@Override
 	protected boolean carveSphere(IChunk chunk, Function<BlockPos, Biome> toBiome, long seed, int seaLevel, int chunkX, int chunkZ, 
 			double posX, double posY, double posZ, double width, double height, BitSet bitSet) {
 		Random random = new Random(seed + (long) chunkX + (long) chunkZ);
@@ -74,9 +79,8 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 							for (int k2 = posYMin; k2 > posYMax; --k2) {
 								double d4 = ((double) k2 - 0.5D - posY) / height;
 								if (!this.skip(d2, d4, d3, k2)) {
-									flag |= this.carveBlock(chunk, toBiome, bitSet, random,
-											pos0, pos1, pos2, seaLevel,
-											chunkX, chunkZ, l1, j2, k1, k2, i2, mutableboolean);
+									flag |= this.carveBlock(chunk, toBiome, bitSet, random, pos0, pos1, pos2, seaLevel, chunkX, chunkZ, l1, j2, k1, k2, i2, 
+											mutableboolean);
 								}
 							}
 						}

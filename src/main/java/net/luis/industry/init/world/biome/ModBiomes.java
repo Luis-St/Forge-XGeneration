@@ -1,4 +1,4 @@
-package net.luis.industry.init.world;
+package net.luis.industry.init.world.biome;
 
 import net.luis.industry.Industry;
 import net.luis.industry.common.world.biome.DeepslateBiome;

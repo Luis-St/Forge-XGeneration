@@ -1,7 +1,7 @@
 package net.luis.industry.common.world.dimension.biome.layer;
 
 import net.luis.industry.Industry;
-import net.luis.industry.init.world.ModBiomeKeys;
+import net.luis.industry.init.world.biome.ModBiomeKeys;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.Util;
@@ -31,7 +31,7 @@ public class ModLayer extends Layer {
 			Biome biome = biomeRegistry.get(registrykey);
 			if (biome == null) {
 				if (SharedConstants.IS_RUNNING_IN_IDE) {
-					throw (IllegalStateException) Util.pauseInIde(new IllegalStateException("Unknown biome id: " + i));
+					throw Util.pauseInIde(new IllegalStateException("Unknown biome id: " + i));
 				} else {
 					Industry.LOGGER.warn("Unknown biome id: ", i);
 					return biomeRegistry.get(BiomeRegistry.byId(0));
@@ -47,10 +47,7 @@ public class ModLayer extends Layer {
 		if (keyValue >= 0) {
 			registrykey = BiomeRegistry.byId(keyValue);
 		} else {
-			switch (keyValue) {
-			case -1: registrykey = ModBiomeKeys.DEEPSLATE; break;
-			default: break;
-			}
+			registrykey = ModBiomeKeys.byId(keyValue);
 		}
 		return registrykey;
 	}

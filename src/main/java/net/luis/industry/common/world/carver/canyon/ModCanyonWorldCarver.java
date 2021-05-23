@@ -71,7 +71,7 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 	
 	@Override
 	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return rng.nextFloat() <= config.probability && rng.nextInt(2) == 0;
+		return super.isStartChunk(rng, chunkX, chunkZ, config) && rng.nextInt(2) == 0;
 	}
 	
 	@Override

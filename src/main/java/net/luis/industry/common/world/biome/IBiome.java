@@ -3,38 +3,37 @@ package net.luis.industry.common.world.biome;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.biome.MobSpawnInfo;
 
 public interface IBiome {
 	
-	Biome createBiome();
-	
-	default Biome.RainType getRainType() {
-		return RainType.NONE;
+	default Biome createBiome() {
+		Biome.Builder biomeBuilder = new Biome.Builder();
+		biomeBuilder.precipitation(this.getRainType());
+		biomeBuilder.biomeCategory(this.getCategory());
+		biomeBuilder.depth(this.getDepth());
+		biomeBuilder.scale(this.getScale());
+		biomeBuilder.temperature(this.getTemperature());
+		biomeBuilder.downfall(this.getDownfall());
+		biomeBuilder.specialEffects(this.getBiomeAmbience());
+		biomeBuilder.mobSpawnSettings(this.getMobSpawnSettings());
+		biomeBuilder.generationSettings(this.getBiomeGenerationSettings());
+		return biomeBuilder.build();
 	}
 	
-	default Category getCategory() {
-		return Category.NONE;
-	}
+	Biome.RainType getRainType();
 	
-	default float getDepth() {
-		return 0.0F;
-	}
+	Category getCategory();
 	
-	default float getScale() {
-		return 0.0F;
-	}
+	float getDepth();
 	
-	default float getTemperature() {
-		return 1.0F;
-	}
+	float getScale();
 	
-	default float getDownfall() {
-		return 0.0F;
-	}
+	float getTemperature();
+	
+	float getDownfall();
 	
 	BiomeAmbience getBiomeAmbience();
 	

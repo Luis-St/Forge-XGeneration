@@ -35,6 +35,9 @@ public class ConfiguredModWorldCarvers {
 	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = ConfiguredModWorldCarvers.register("large_canyon",
 			ModWorldCarvers.LARGE_CANYON.get().configured(new ProbabilityConfig(0.01F)));
 	
+	public static final ConfiguredCarver<ProbabilityConfig> OCEAN = ConfiguredModWorldCarvers.register("ocean",
+			ModWorldCarvers.OCEAN.get().configured(new ProbabilityConfig(0.01F)));
+	
 	private static <WC extends ICarverConfig> ConfiguredCarver<WC> register(String name, ConfiguredCarver<WC> configuredCarver) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_CARVER, new ResourceLocation(Industry.MOD_ID, name), configuredCarver);
 	}
