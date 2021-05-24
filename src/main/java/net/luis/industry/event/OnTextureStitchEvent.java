@@ -1,4 +1,4 @@
-package net.luis.industry.client.texture;
+package net.luis.industry.event;
 
 import net.luis.industry.Industry;
 import net.minecraft.util.ResourceLocation;

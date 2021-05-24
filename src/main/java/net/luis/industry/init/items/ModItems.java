@@ -37,5 +37,6 @@ public class ModItems {
 	public static final RegistryObject<Item> MITHRIL = ITEMS.register("mithril", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	public static final RegistryObject<Item> ANCIENT_TOME = ITEMS.register("ancient_tome", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	public static final RegistryObject<Item> HEATED_OBSIDIAN_POWDER = ITEMS.register("heated_obsidian_powder", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	
 }

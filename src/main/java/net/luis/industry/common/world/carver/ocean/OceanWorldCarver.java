@@ -27,7 +27,7 @@ public class OceanWorldCarver extends ModWorldCarver {
 	
 	@Override
 	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return super.isStartChunk(rng, chunkX, chunkZ, config) && rng.nextInt(4) == 0;
+		return super.isStartChunk(rng, chunkX, chunkZ, config) /*&& rng.nextInt(4) == 0*/;
 	}
 
 	@Override
