@@ -1,13 +1,16 @@
 package net.luis.industry.common.block.mechanical;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import net.luis.industry.common.tileentity.MilestoneTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -56,8 +59,13 @@ public class MilestoneBlock extends Block {
 		TileEntity tileEntity = world.getBlockEntity(pos);
 		if (tileEntity instanceof MilestoneTileEntity) {
 			MilestoneTileEntity milestoneTileEntity = (MilestoneTileEntity) tileEntity;
-			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getInput());
-			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().getOutput());
+			InventoryHelper.dropContents((World) world, pos, milestoneTileEntity.getInventory().get());
+			if (milestoneTileEntity.isProgressing()) {
+				List<ItemStack> items = milestoneTileEntity.getRecipeProgress().getRecipe().getInput();
+				for (ItemStack itemStack : items) {
+					world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+				}
+			}
 		}
 		super.onRemove(oldState, world, pos, newState, flag);
 	}

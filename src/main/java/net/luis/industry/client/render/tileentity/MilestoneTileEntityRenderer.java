@@ -29,7 +29,7 @@ public class MilestoneTileEntityRenderer extends TileEntityRenderer<MilestoneTil
 		matrix.pushPose();
 		matrix.translate(1, 1, 1);
 		IVertexBuilder vertexBuilder = TEXTURE_LOCATION.buffer(renderBuffer, RenderType::entitySolid);
-		float yRotation = MathHelper.lerp(partialTicks, milestoneTileEntity.getPreviousRotation(), milestoneTileEntity.getCurrentRotation());
+		float yRotation = MathHelper.lerp(partialTicks, milestoneTileEntity.getPrevious(), milestoneTileEntity.getCurrent());
 		this.milestone.rotationRender(matrix, vertexBuilder, light, overlay, yRotation);
 		matrix.popPose();
 	}

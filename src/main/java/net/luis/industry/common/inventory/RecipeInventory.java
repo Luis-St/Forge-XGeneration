@@ -17,42 +17,30 @@ import net.minecraftforge.common.util.Constants;
 
 public class RecipeInventory implements IRecipeInventory {
 	
-	private ItemStackList input;
-	private ItemStackList output;
+	private ItemStackList inventory;
 	
-	public RecipeInventory(int sizeInput, int sizeOutput) {
-		this.input = ItemStackList.withSize(sizeInput, ItemStack.EMPTY);
-		this.output = ItemStackList.withSize(sizeOutput, ItemStack.EMPTY);
+	public RecipeInventory(int size) {
+		this(ItemStackList.withSize(size, ItemStack.EMPTY));
 	}
 	
-	public RecipeInventory(ItemStackList input, ItemStackList output) {
-		this.input = input;
-		this.output = output;
+	public RecipeInventory(ItemStackList inventory) {
+		this.inventory = inventory;
 	}
 
 	@Override
-	public ItemStackList getInput() {
-		return this.input;
-	}
-
-	@Override
-	public ItemStackList getOutput() {
-		return this.output;
+	public ItemStackList get() {
+		return this.inventory;
 	}
 	
-	protected void setInputSize(int size) {
-		this.input = ItemStackList.withSize(size, ItemStack.EMPTY);
-	}
-	
-	protected void setOutputSize(int size) {
-		this.output = ItemStackList.withSize(size, ItemStack.EMPTY);
+	protected void setSize(int size) {
+		this.inventory = ItemStackList.withSize(size, ItemStack.EMPTY);
 	}
 	
 	@Override
-	public boolean hasEmptySlots(ItemStackList inventory) {
+	public boolean hasEmptySlots() {
 		boolean hasEmptySlots = false;
-		for (int i = 0; i < inventory.size(); i++) {
-			if (this.isSlotEmpty(inventory, i)) {
+		for (int i = 0; i < this.inventory.size(); i++) {
+			if (this.isSlotEmpty(i)) {
 				hasEmptySlots = true;
 				break;
 			}
@@ -61,15 +49,15 @@ public class RecipeInventory implements IRecipeInventory {
 	}
 
 	@Override
-	public boolean isSlotEmpty(ItemStackList inventory, int slot) {
-		return inventory.get(slot).isEmpty();
+	public boolean isSlotEmpty(int slot) {
+		return this.inventory.get(slot).isEmpty();
 	}
 	
 	@Override
-	public List<InventorySlot> hasItemsForRecipe(ItemStackList inventory, IModRecipe recipe) {
+	public List<InventorySlot> hasItemsForRecipe(IModRecipe recipe) {
 		List<InventorySlot> inventorySlots = new ArrayList<InventorySlot>();
 		for (ItemStack itemStack : recipe.getInput()) {
-			inventorySlots.add(this.getSlotWithStack(inventory, itemStack));
+			inventorySlots.add(this.getSlotWithStack(itemStack, false, true));
 		}
 		if (inventorySlots.size() >= recipe.getInput().size()) {
 			return inventorySlots;
@@ -78,12 +66,12 @@ public class RecipeInventory implements IRecipeInventory {
 	}
 	
 	@Override
-	public InventorySlot getSlotWithStack(ItemStackList inventory, ItemStack itemStack) {
+	public InventorySlot getSlotWithStack(ItemStack itemStack, boolean ignoreCount, boolean ignoreTag) {
 		ItemStack slotStack = ItemStack.EMPTY;
 		int slot = 0;
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack inventoryStack = inventory.get(i);
-			if (this.equalsStack(itemStack, inventoryStack, false)) {
+		for (int i = 0; i < this.inventory.size(); i++) {
+			ItemStack inventoryStack = this.inventory.get(i);
+			if (this.equalsStack(itemStack, inventoryStack, ignoreCount, ignoreTag)) {
 				slotStack = inventoryStack;
 				slot = i;
 				break;
@@ -93,14 +81,14 @@ public class RecipeInventory implements IRecipeInventory {
 	}
 	
 	@Override
-	public ItemStack insert(int slot, ItemStack itemStack, ItemStackList inventory) {
+	public ItemStack insert(int slot, ItemStack itemStack) {
 		if (itemStack.isEmpty()) {
 			return ItemStack.EMPTY;
 		}
 		if (slot >= 0) {
-			ItemStack inventoryStack = this.input.get(slot);
+			ItemStack inventoryStack = this.inventory.get(slot);
 			if (inventoryStack.isEmpty()) {
-				inventory.set(slot, itemStack);
+				this.inventory.set(slot, itemStack);
 				return ItemStack.EMPTY;
 			} else if (inventoryStack.getItem() == itemStack.getItem()) {
 				int count = inventoryStack.getCount() + itemStack.getCount();
@@ -108,12 +96,12 @@ public class RecipeInventory implements IRecipeInventory {
 					return itemStack;
 				} else {
 					if (inventoryStack.getMaxStackSize() >= count) {
-						inventory.set(slot, new ItemStack(inventoryStack.getItem(), count));
+						this.inventory.set(slot, new ItemStack(inventoryStack.getItem(), count));
 						return ItemStack.EMPTY;
 					} else {
 						int leftCount = count - inventoryStack.getMaxStackSize();
 						Item leftItem = inventoryStack.getItem();
-						inventory.set(slot, new ItemStack(inventoryStack.getItem(), inventoryStack.getMaxStackSize()));
+						this.inventory.set(slot, new ItemStack(inventoryStack.getItem(), inventoryStack.getMaxStackSize()));
 						return new ItemStack(leftItem, leftCount);
 					}
 				}
@@ -125,19 +113,19 @@ public class RecipeInventory implements IRecipeInventory {
 	}
 	
 	@Override
-	public ItemStack extract(int slot, ItemStack itemStack, ItemStackList inventory, boolean next) {
+	public ItemStack extract(int slot, ItemStack itemStack, boolean next) {
 		if (slot > 0) {
-			return this.tryExtract(slot, itemStack, inventory);
+			return this.tryExtract(slot, itemStack, this.inventory);
 		} else if (itemStack.isEmpty() && slot < 0 && next) {
-			return this.tryExtractNext(inventory);
+			return this.tryExtractNext(this.inventory);
 		}
-		return this.tryExtractItemStack(itemStack, inventory);
+		return this.tryExtractItemStack(itemStack, this.inventory);
 	}
 	
 	@Override
-	public void extractRecipe(IModRecipe recipe, ItemStackList inventory) {
+	public void extractRecipe(IModRecipe recipe) {
 		for (ItemStack itemStack : recipe.getInput()) {
-			this.extract(-1, itemStack, inventory, false);
+			this.extract(-1, itemStack, false);
 		}
 	}
 	
@@ -198,7 +186,7 @@ public class RecipeInventory implements IRecipeInventory {
 	protected ItemStack tryExtractItemStack(ItemStack itemStack, ItemStackList inventory) {
 		for (int i = 0; i < inventory.size(); i++) {
 			ItemStack inventoryStack = inventory.get(i);
-			if (!itemStack.isEmpty() && this.equalsStack(itemStack, inventoryStack, true)) {
+			if (!itemStack.isEmpty() && this.equalsStack(itemStack, inventoryStack, false, true)) {
 				if (itemStack.getCount() >= inventoryStack.getCount()) {
 					inventory.setDefault(i);
 					return inventoryStack;
@@ -226,76 +214,51 @@ public class RecipeInventory implements IRecipeInventory {
 		return ItemStack.EMPTY;
 	}
 	
-	private boolean equalsStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags) {
+	private boolean equalsStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreCount, boolean ignoreTag) {
 		if (itemStack.getItem() == toCheck.getItem()) {
-			return toCheck.getCount() >= itemStack.getCount() || ignoreTags;
+			if (toCheck.getCount() >= itemStack.getCount() || ignoreCount)
+			return toCheck.areShareTagsEqual(itemStack)|| ignoreTag;
 		}
 		return false;
 	}
 	
 	@Override
-	public void clear(ItemStackList inventory) {
-		inventory.clear();
-	}
-	
-	@Override
-	public void clearAll() {
-		this.clear(this.input);
-		this.clear(this.output);
+	public void clear() {
+		this.inventory.clear();
 	}
 
 	@Override
-	public ItemStackList getAndClear(ItemStackList inventory) {
-		ItemStackList tempList = inventory;
-		this.clear(inventory);
-		return tempList;
+	public ItemStackList getAndClear() {
+		ItemStackList tempInventory = this.inventory;
+		this.clear();
+		return tempInventory;
 	}
 
 	@Override
 	public CompoundNBT serializeNBT(CompoundNBT nbt) {
 		ListNBT inputList = new ListNBT();
-		ListNBT outputList = new ListNBT();
-		for (int i = 0; i < this.input.size(); i++) {
-			if (!this.input.get(i).isEmpty()) {
+		for (int i = 0; i < this.inventory.size(); i++) {
+			if (!this.inventory.get(i).isEmpty()) {
 				CompoundNBT itemTag = new CompoundNBT();
 				itemTag.putInt("slot", i);
-				input.get(i).save(itemTag);
+				this.inventory.get(i).save(itemTag);
 				inputList.add(itemTag);
 			}
 		}
-		for (int i = 0; i < this.output.size(); i++) {
-			if (!this.output.get(i).isEmpty()) {
-				CompoundNBT itemTag = new CompoundNBT();
-				itemTag.putInt("slot", i);
-				output.get(i).save(itemTag);
-				outputList.add(itemTag);
-			}
-		}
-		nbt.put("input", inputList);
-		nbt.putInt("inputSize", input.size());
-		nbt.put("output", outputList);
-		nbt.putInt("outputSize", output.size());
+		nbt.put("inventory", inputList);
+		nbt.putInt("inventorySize", this.inventory.size());
 		return nbt;
 	}
 
 	@Override
 	public void deserializeNBT(CompoundNBT nbt) {
-		this.setInputSize(nbt.getInt("inputSize"));
-		this.setOutputSize(nbt.getInt("outputSize"));
-		ListNBT inputList = nbt.getList("input", Constants.NBT.TAG_COMPOUND);
-		ListNBT outputList = nbt.getList("input", Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < inputList.size(); i++) {
-			CompoundNBT itemTags = inputList.getCompound(i);
+		this.setSize(nbt.getInt("inventorySize"));
+		ListNBT inventoryList = nbt.getList("input", Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < inventoryList.size(); i++) {
+			CompoundNBT itemTags = inventoryList.getCompound(i);
 			int slot = itemTags.getInt("slot");
-			if (slot >= 0 && slot < this.input.size()) {
-				this.input.set(slot, ItemStack.of(itemTags));
-			}
-		}
-		for (int i = 0; i < outputList.size(); i++) {
-			CompoundNBT itemTags = outputList.getCompound(i);
-			int slot = itemTags.getInt("slot");
-			if (slot >= 0 && slot < this.output.size()) {
-				this.output.set(slot, ItemStack.of(itemTags));
+			if (slot >= 0 && slot < this.inventory.size()) {
+				this.inventory.set(slot, ItemStack.of(itemTags));
 			}
 		}
 	}

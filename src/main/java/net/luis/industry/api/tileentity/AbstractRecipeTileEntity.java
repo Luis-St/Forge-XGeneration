@@ -30,6 +30,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	private ModRecipeType recipeType;
 	private IModRecipeHelper<T> recipeHelper;
 	protected IRecipeInventory inventory;
+	@Nullable 
 	protected RecipeProgress recipeProgress;
 	
 	public AbstractRecipeTileEntity(TileEntityType<?> tileEntityType, ModRecipeType recipeType, IModRecipeHelper<T> recipeHelper, IRecipeInventory inventory) {
@@ -53,7 +54,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	}
 	
 	protected boolean hasItemsForRecipe(T recipe) {
-		return recipe.containsAll(this.inventory.getInput());
+		return recipe.containsAll(this.inventory.get());
 	}
 	
 	public boolean isProgressing() {
@@ -61,20 +62,24 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	}
 	
 	@Nullable
-	@Deprecated
+	public RecipeProgress getRecipeProgress() {
+		return this.recipeProgress;
+	}
+	
+	@Nullable
 	protected T getRecipe() {
-		return this.getRecipeHelper().getNextRecipe(this.inventory.getInput());
+		return this.getRecipeHelper().getNextRecipe(this.inventory.get());
 	}
 	
 	@Nullable 
 	protected T getRandomRecipe() {
-		return this.getRecipeHelper().getRandomRecipe(this.inventory.getInput());
+		return this.getRecipeHelper().getRandomRecipe(this.inventory.get());
 	}
 	
 	public boolean canInteract(PlayerEntity player, ItemStack itemStack) {
 		this.recipeHelper.createRecipeList();
 		if (player != null) {
-			if (this.getInventory().hasEmptySlots(this.inventory.getInput()) || itemStack.isEmpty()) {
+			if (this.getInventory().hasEmptySlots() || itemStack.isEmpty()) {
 				return this.getRecipeHelper().hasRecipe(itemStack) || itemStack.isEmpty();
 			}
 		}
@@ -84,10 +89,10 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	public void onInteract(PlayerEntity player, Hand hand) {
 		ItemStack itemStack = player.getItemInHand(hand);
 		if (itemStack.isEmpty()) {
-			ItemStack extractStack = this.inventory.extract(-1, itemStack, this.inventory.getInput(), true);
+			ItemStack extractStack = this.inventory.extract(-1, itemStack, true);
 			ItemHandlerHelper.giveItemToPlayer(player, extractStack);
 		} else {
-			this.inventory.insert(-1, itemStack, this.inventory.getInput());
+			this.inventory.insert(-1, itemStack);
 			player.setItemInHand(hand, ItemStack.EMPTY);
 		}
 		this.markUpdated();
@@ -96,9 +101,9 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	
 	protected void updateInventory(T recipe) {
 		if (recipe != null && this.recipeProgress == null) {
-			List<InventorySlot> inventorySlots = this.inventory.hasItemsForRecipe(this.inventory.getInput(), recipe);
+			List<InventorySlot> inventorySlots = this.inventory.hasItemsForRecipe(recipe);
 			if (!inventorySlots.isEmpty()) {
-				this.inventory.extractRecipe(recipe, this.inventory.getInput());
+				this.inventory.extractRecipe(recipe);
 				this.recipeProgress = new RecipeProgress(recipe, this.getRecipeType(), recipe.getProgressTime());
 			}
 			this.markUpdated();
@@ -132,7 +137,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	
 	@Override
 	public void clearContent() {
-		this.inventory.clearAll();
+		this.inventory.clear();
 		this.markUpdated();
 	}
 	
@@ -173,6 +178,11 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 		} else {
 			this.recipeProgress = null;
 		}
+	}
+	
+	@Override
+	public double getViewDistance() {
+		return this instanceof IMechanicalTileEntity ? 512D : super.getViewDistance();
 	}
 
 }

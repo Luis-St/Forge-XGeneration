@@ -14,29 +14,31 @@ public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecip
 	private float currentRotation = 0F;
 	
 	public MilestoneTileEntity() {
-		super(ModTileEntityTypes.MILESTONE.get(), ModRecipeType.MILESTONE, new MilestoneRecipeHelper(), new RecipeInventory(10, 4));
+		super(ModTileEntityTypes.MILESTONE.get(), ModRecipeType.MILESTONE, new MilestoneRecipeHelper(), new RecipeInventory(10));
 	}
 	
-	public float getCurrentRotation() {
+	@Override
+	public float getCurrent() {
 		return this.currentRotation;
 	}
 	
-	public float getPreviousRotation() {
+	@Override
+	public float getPrevious() {
 		return this.previousRotation;
 	}
 	
 	@Override
-	public float getSpeed() {
+	public float getVelocity() {
 		return (this.isProgressing() ? 10F : 0F) / 100;
 	}
 
 	@Override
-	public float calc() {
+	public float getNext() {
 		float newRotation = 0F;
-		if (this.currentRotation + this.getSpeed() > 360) {
-			newRotation = (this.currentRotation + this.getSpeed()) - 360;
+		if (this.currentRotation + this.getVelocity() > 360) {
+			newRotation = (this.currentRotation + this.getVelocity()) - 360;
 		} else {
-			newRotation = this.currentRotation + this.getSpeed();
+			newRotation = this.currentRotation + this.getVelocity();
 		}
 		return newRotation;
 	}
@@ -45,12 +47,7 @@ public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecip
 	public void tick() {
 		super.tick();
 		this.previousRotation = this.currentRotation;
-		this.currentRotation = this.calc();
-	}
-	
-	@Override
-	public double getViewDistance() {
-		return 512D;
+		this.currentRotation = this.getNext();
 	}
 
 }

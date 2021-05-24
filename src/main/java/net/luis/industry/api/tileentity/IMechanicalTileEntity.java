@@ -1,10 +1,13 @@
 package net.luis.industry.api.tileentity;
 
-// TODO: change/add/rename methode
 public interface IMechanicalTileEntity {
 	
-	float getSpeed();
+	float getCurrent();
 	
-	float calc();
+	float getPrevious();
+	
+	float getVelocity();
+	
+	float getNext();
 	
 }

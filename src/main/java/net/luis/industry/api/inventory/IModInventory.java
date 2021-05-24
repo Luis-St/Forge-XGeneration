@@ -1,29 +1,28 @@
 package net.luis.industry.api.inventory;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 
 public interface IModInventory {
 	
 	ItemStackList get();
 	
-	void set(ItemStackList inventory);
+	boolean hasEmptySlots();
 	
-	int size();
+	boolean isSlotEmpty(int slot);
 	
-	int getNextEmptySlot();
+	InventorySlot getSlotWithStack(ItemStack itemStack, boolean ignoreCount, boolean ignoreTag);
 	
-	InventorySlot getNextSlotWith(ItemStack itemStack);
+	ItemStack insert(int slot, ItemStack itemStack);
 	
-	ItemStack insertItemStack(ItemStack itemStack);
-	
-	ItemStack extractNextItemStack();
-	
-	ItemStack extractItemStack(ItemStack itemStack);
-	
-	ItemStack extractItemStack(int slot);
+	ItemStack extract(int slot, ItemStack itemStack, boolean next);
 	
 	void clear();
 	
-	ItemStackList clearAndGet();
+	ItemStackList getAndClear();
+	
+	CompoundNBT serializeNBT(CompoundNBT nbt);
+	
+	void deserializeNBT(CompoundNBT nbt);
 	
 }
