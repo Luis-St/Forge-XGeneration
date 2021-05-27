@@ -13,6 +13,7 @@ public class OnTextureStitchEvent {
 	@SubscribeEvent
 	public static void TextureStitch(TextureStitchEvent.Pre event) {
 		event.addSprite(new ResourceLocation(Industry.MOD_ID, "entity/mile"));
+		event.addSprite(new ResourceLocation(Industry.MOD_ID, "entity/blood"));
 	}
 
 }

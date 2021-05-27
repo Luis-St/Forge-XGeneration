@@ -182,7 +182,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	
 	@Override
 	public double getViewDistance() {
-		return this instanceof IMechanicalTileEntity ? 512D : super.getViewDistance();
+		return this instanceof IAnimatedTileEntity ? 512D : super.getViewDistance();
 	}
 
 }

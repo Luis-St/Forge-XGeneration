@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/copper_ore"
+      "model": "industry:block/ore/copper_ore"
     }
   }
 }

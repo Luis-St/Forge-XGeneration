@@ -18,9 +18,7 @@ public class MilestoneModel extends Model {
 	private final ModelRenderer west;
 
 	public MilestoneModel() {
-		
 		super(RenderType::entitySolid);
-		
 		this.texWidth = 128;
 		this.texHeight = 128;
 

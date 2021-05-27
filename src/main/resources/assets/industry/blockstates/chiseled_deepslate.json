@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/chiseled_deepslate"
+      "model": "industry:block/deepslate/chiseled_deepslate"
     }
   }
 }

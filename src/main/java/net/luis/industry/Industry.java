@@ -45,10 +45,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+// TODO: "industry" -> "nero"
+
 @Mod(Industry.MOD_ID)
 public class Industry {
 	
-	// TODO proxy -> client and server registry -> move events in event package & itemgrops
+	// TODO proxy -> client and server registry -> move events in event package & itemgrops/ Client commen setup event
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "industry";

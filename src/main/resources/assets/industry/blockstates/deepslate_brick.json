@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "industry:block/deepslate_brick"
+      "model": "industry:block/deepslate/deepslate_brick"
     },
     "type=double": {
-      "model": "industry:block/deepslate_brick_full"
+      "model": "industry:block/deepslate/deepslate_brick_full"
     },
     "type=top": {
-      "model": "industry:block/deepslate_brick_top"
+      "model": "industry:block/deepslate/deepslate_brick_top"
     }
   }
 }

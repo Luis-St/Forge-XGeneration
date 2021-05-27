@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/deepslate_coal_ore"
+      "model": "industry:block/ore/deepslate_coal_ore"
     }
   }
 }

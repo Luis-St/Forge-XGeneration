@@ -1,6 +1,7 @@
 package net.luis.industry.event.fml;
 
 
+import net.luis.industry.client.render.tileentity.BloodAltarTileEntityRenderer;
 import net.luis.industry.client.render.tileentity.MilestoneTileEntityRenderer;
 import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,9 +16,8 @@ public class ClientSetupEvent {
 	
 	@SubscribeEvent
 	public static void doClientSetup(FMLClientSetupEvent event) {
-		
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.MILESTONE.get(), MilestoneTileEntityRenderer::new);
-		
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BLOOD_ALTAR.get(), BloodAltarTileEntityRenderer::new);
 	}
 
 }

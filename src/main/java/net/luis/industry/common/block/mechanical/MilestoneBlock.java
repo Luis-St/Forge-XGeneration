@@ -63,7 +63,7 @@ public class MilestoneBlock extends Block {
 			if (milestoneTileEntity.isProgressing()) {
 				List<ItemStack> items = milestoneTileEntity.getRecipeProgress().getRecipe().getInput();
 				for (ItemStack itemStack : items) {
-					world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+					world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemStack));
 				}
 			}
 		}

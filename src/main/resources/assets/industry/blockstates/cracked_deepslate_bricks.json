@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/cracked_deepslate_bricks"
+      "model": "industry:block/deepslate/cracked_deepslate_bricks"
     }
   }
 }

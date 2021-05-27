@@ -1,6 +1,7 @@
 package net.luis.industry.init.block.util;
 
 import net.luis.industry.Industry;
+import net.luis.industry.common.tileentity.BloodAltarTileEntity;
 import net.luis.industry.common.tileentity.MilestoneTileEntity;
 import net.luis.industry.init.block.ModBlocks;
 import net.minecraft.tileentity.TileEntityType;
@@ -15,5 +16,8 @@ public class ModTileEntityTypes {
 	
 	public static final RegistryObject<TileEntityType<MilestoneTileEntity>> MILESTONE = TILE_ENTITIES.register("milestone", 
 			() -> TileEntityType.Builder.of(MilestoneTileEntity::new, ModBlocks.MILESTONE.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<BloodAltarTileEntity>> BLOOD_ALTAR = TILE_ENTITIES.register("blood_altar", 
+			() -> TileEntityType.Builder.of(BloodAltarTileEntity::new, ModBlocks.BLOOD_ALTAR.get()).build(null));
 
 }

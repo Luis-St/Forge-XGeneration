@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/deepslate_emerald_ore"
+      "model": "industry:block/ore/deepslate_emerald_ore"
     }
   }
 }

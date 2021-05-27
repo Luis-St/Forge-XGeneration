@@ -3,6 +3,7 @@ package net.luis.industry.init.block;
 import net.luis.industry.Industry;
 import net.luis.industry.api.block.ModOreBlock;
 import net.luis.industry.common.block.fluid.PipeBlock;
+import net.luis.industry.common.block.magic.BloodAltarBlock;
 import net.luis.industry.common.block.mechanical.MilestoneBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -130,5 +131,8 @@ public class ModBlocks {
 	
 	public static final RegistryObject<Block> TUFF = BLOCKS.register("tuff", 
 			() -> new Block(Block.Properties.copy(Blocks.STONE)));
+	
+	public static final RegistryObject<Block> BLOOD_ALTAR = BLOCKS.register("blood_altar", 
+			() -> new BloodAltarBlock(Block.Properties.copy(Blocks.STONE).noOcclusion())); // TODO change Properties
 	
 }

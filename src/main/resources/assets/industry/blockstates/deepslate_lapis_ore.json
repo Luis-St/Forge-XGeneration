@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/deepslate_lapis_ore"
+      "model": "industry:block/ore/deepslate_lapis_ore"
     }
   }
 }

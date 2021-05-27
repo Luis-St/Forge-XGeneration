@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "industry:block/deepslate_bricks"
+      "model": "industry:block/deepslate/deepslate_bricks"
     }
   }
 }
