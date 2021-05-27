@@ -51,25 +51,6 @@ public class OnBiomeLoadingEvent {
 		
 	}
 	
-//	@SubscribeEvent(priority = EventPriority.HIGHEST)
-//	public static void generateOres(BiomeLoadingEvent event) {
-//		if (!(event.getCategory().equals(Biome.Category.NETHER) || !(event.getCategory().equals(Biome.Category.THEEND)))) {
-//			event.getGeneration().addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, generateOre(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-//					ModBlocks.DEEPSLATE.get().defaultBlockState(), 25, 5, 100, 10));
-//			System.out.println("Ore Generation Called for spongebob");
-//		}
-//	}
-//
-//	private static ConfiguredFeature<?, ?> generateOre(RuleTest fillerType, BlockState stateContainer, int veinSize, int minHeight, int maxHeight, int amount) {
-//		return register("test_ore", Feature.ORE.configured(new OreFeatureConfig(fillerType, stateContainer, veinSize))
-//				.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(minHeight, 0, maxHeight)))
-//				.squared().count(amount));
-//	}
-//	
-//	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
-//		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Industry.MOD_ID, name), configuredFeature);
-//	}
-	
 	@SubscribeEvent
 	public static void biomeLoadingRemove(BiomeLoadingEvent event) {
 		

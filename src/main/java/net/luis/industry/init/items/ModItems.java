@@ -39,4 +39,9 @@ public class ModItems {
 	public static final RegistryObject<Item> ANCIENT_TOME = ITEMS.register("ancient_tome", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	public static final RegistryObject<Item> HEATED_OBSIDIAN_POWDER = ITEMS.register("heated_obsidian_powder", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	
+	public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	public static final RegistryObject<Item> DAGGER = ITEMS.register("dagger", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	
+	public static final RegistryObject<Item> WATER_RUNE = ITEMS.register("water_rune", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	
 }

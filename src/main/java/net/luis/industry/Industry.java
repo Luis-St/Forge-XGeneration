@@ -50,6 +50,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(Industry.MOD_ID)
 public class Industry {
 	
+	// Config
 	// TODO proxy -> client and server registry -> move events in event package & itemgrops/ Client commen setup event
 	
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -62,7 +63,7 @@ public class Industry {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doCommonSetup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientSetup);
 		
-//		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
@@ -181,7 +182,6 @@ public class Industry {
 		}
 	};
 	
-	@SuppressWarnings("unused")
 	private void loadComplete(FMLLoadCompleteEvent event) {
 //		List<Biome> biomes = ForgeRegistries.BIOMES.getValues().stream().collect(Collectors.toList());
 //		for (Biome biome : biomes) {

@@ -4,6 +4,7 @@ import net.luis.industry.api.tileentity.IAnimatedTileEntity;
 import net.luis.industry.api.tileentity.IEnergy;
 import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -31,6 +32,17 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	public void tick() {
 		this.blood += 100;
 		this.previousBlood = this.blood;
+	}
+	
+	public ItemStack receivebloodBucket() {
+		return null;
+	}
+	
+	public ItemStack extractBloodBucket() {
+		if (this.blood >= BloodConstants.BLOOD_BUCKET) {
+			return null; // TODO: Blood Bucket
+		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -96,6 +108,18 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	@Override
 	public void load(BlockState state, CompoundNBT nbt) {
 		super.load(state, nbt);
+	}
+	
+	public class BloodConstants {
+		public static final int MAX = 37500;
+		public static final int HEART = 1000;
+		public static final int LEVEL_0 = 5000;
+		public static final int LEVEL_1 = 10000;
+		public static final int LEVEL_2 = 15000;
+		public static final int LEVEL_3 = 20000;
+		public static final int LEVEL_4 = 25000;
+		public static final int LEVEL_5 = 30000;
+		public static final int BLOOD_BUCKET = 7500;
 	}
 
 }
