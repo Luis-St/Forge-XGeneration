@@ -20,8 +20,8 @@ public class SyncPlayerCapability {
 	@SuppressWarnings("resource")
 	public static void handle(SyncPlayerCapability message, Supplier<Context> networkContext) {
 		networkContext.get().enqueueWork(() -> {
-			networkContext.get().getSender().getCapability(ModCapabilities.PLAYER, null).ifPresent(serverCapability -> {
-				Minecraft.getInstance().player.getCapability(ModCapabilities.PLAYER, null).ifPresent(clientCapability -> {
+			networkContext.get().getSender().getCapability(ModCapabilities.BLOOD, null).ifPresent(serverCapability -> {
+				Minecraft.getInstance().player.getCapability(ModCapabilities.BLOOD, null).ifPresent(clientCapability -> {
 					clientCapability.deserializeNBT(serverCapability.serializeNBT());
 				});
 			});

@@ -5,13 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.luis.industry.api.capability.CapabilityFactory;
 import net.luis.industry.api.capability.CapabilityStorage;
-import net.luis.industry.api.capability.interfaces.IItemStackCapability;
-import net.luis.industry.api.capability.interfaces.entity.IEntityCapability;
-import net.luis.industry.api.capability.interfaces.entity.ILivingEntityCapability;
-import net.luis.industry.api.capability.interfaces.entity.IPlayerCapability;
-import net.luis.industry.api.capability.interfaces.world.IChunkCapability;
-import net.luis.industry.api.capability.interfaces.world.ITileEntityCapability;
-import net.luis.industry.api.capability.interfaces.world.IWorldCapability;
+import net.luis.industry.api.capability.interfaces.entity.IBloodCapability;
 import net.luis.industry.common.world.dimension.biome.DeepslateBiomeProvider;
 import net.luis.industry.common.world.dimension.chunk.DeepslateChunkGenerator;
 import net.luis.industry.init.ModEnchantments;
@@ -50,8 +44,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(Industry.MOD_ID)
 public class Industry {
 	
-	// Config
-	// TODO proxy -> client and server registry -> move events in event package & itemgrops/ Client commen setup event
+	// TODO: proxy -> client and server registry -> move events in event package & itemgrops/ Client commen setup event
+	// TODO: change itemgrooups
+	// TODO: config common
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "industry";
@@ -93,13 +88,7 @@ public class Industry {
 	}
 
 	private void doCommonSetup(FMLCommonSetupEvent event) {
-		this.registerCapability(IChunkCapability.class);
-		this.registerCapability(IEntityCapability.class);
-		this.registerCapability(IItemStackCapability.class);
-		this.registerCapability(ILivingEntityCapability.class);
-		this.registerCapability(IPlayerCapability.class);
-		this.registerCapability(ITileEntityCapability.class);
-		this.registerCapability(IWorldCapability.class);
+		this.registerCapability(IBloodCapability.class);
 		event.enqueueWork(() -> {
 			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
 			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);

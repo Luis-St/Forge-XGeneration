@@ -1,10 +1,10 @@
 package net.luis.industry.common.tileentity;
 
+import net.luis.industry.Industry;
 import net.luis.industry.api.tileentity.IAnimatedTileEntity;
 import net.luis.industry.api.tileentity.IEnergy;
 import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -32,17 +32,6 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	public void tick() {
 		this.blood += 100;
 		this.previousBlood = this.blood;
-	}
-	
-	public ItemStack receivebloodBucket() {
-		return null;
-	}
-	
-	public ItemStack extractBloodBucket() {
-		if (this.blood >= BloodConstants.BLOOD_BUCKET) {
-			return null; // TODO: Blood Bucket
-		}
-		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -100,14 +89,21 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	}
 	
 	@Override
-	public CompoundNBT save(CompoundNBT compoundNBT) {
-		CompoundNBT nbt = super.save(compoundNBT);
+	public CompoundNBT save(CompoundNBT nbt) {
+		super.save(nbt);
+		nbt.putInt("blood", this.blood);
+		nbt.putInt("previousBlood", this.previousBlood);
+		Industry.LOGGER.debug("save: " + nbt);
 		return nbt;
 	}
 	
 	@Override
 	public void load(BlockState state, CompoundNBT nbt) {
 		super.load(state, nbt);
+		Industry.LOGGER.debug("contains blood: " + nbt.contains("blood"));
+		Industry.LOGGER.debug("contains previousBlood: " + nbt.contains("previousBlood"));
+		this.blood = nbt.getInt("blood");
+		this.previousBlood = nbt.getInt("previousBlood");
 	}
 	
 	public class BloodConstants {

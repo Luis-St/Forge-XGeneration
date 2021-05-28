@@ -1,7 +1,10 @@
 package net.luis.industry.init.items;
 
 import net.luis.industry.Industry;
+import net.luis.industry.common.enums.RuneType;
+import net.luis.industry.common.item.DaggerItem;
 import net.luis.industry.common.item.GlassShardItem;
+import net.luis.industry.common.item.RuneItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -9,6 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
+	
+	// TODO: create register methods for items (glass shard item, rune item, ...)
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Industry.MOD_ID);
 	
@@ -40,8 +45,9 @@ public class ModItems {
 	public static final RegistryObject<Item> HEATED_OBSIDIAN_POWDER = ITEMS.register("heated_obsidian_powder", () -> new Item(new Item.Properties().tab(Industry.MISC)));
 	
 	public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket", () -> new Item(new Item.Properties().tab(Industry.MISC)));
-	public static final RegistryObject<Item> DAGGER = ITEMS.register("dagger", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	public static final RegistryObject<DaggerItem> DAGGER = ITEMS.register("dagger", () -> new DaggerItem(new Item.Properties().tab(Industry.MISC)));
 	
-	public static final RegistryObject<Item> WATER_RUNE = ITEMS.register("water_rune", () -> new Item(new Item.Properties().tab(Industry.MISC)));
+	public static final RegistryObject<RuneItem> WATER_RUNE = ITEMS.register("water_rune", 
+			() -> new RuneItem(RuneType.WATER, new Item.Properties().tab(Industry.MISC)));
 	
 }

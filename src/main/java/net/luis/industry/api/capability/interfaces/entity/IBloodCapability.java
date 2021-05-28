@@ -3,28 +3,29 @@ package net.luis.industry.api.capability.interfaces.entity;
 import java.util.List;
 
 import net.luis.industry.api.capability.SynchronizedCapability;
-import net.luis.industry.api.item.OrbItem;
-import net.luis.industry.api.item.RuneItem;
+import net.luis.industry.api.item.RuneUseType;
 import net.luis.industry.api.nbt.CapabilitySerializableNBT;
-import net.minecraft.entity.player.PlayerEntity;
+import net.luis.industry.common.item.OrbItem;
+import net.luis.industry.common.item.RuneItem;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
-public interface IPlayerCapability extends CapabilitySerializableNBT, SynchronizedCapability {
+public interface IBloodCapability extends CapabilitySerializableNBT, SynchronizedCapability {
 	
-	List<OrbItem> getOrbs(PlayerEntity player);
+	List<OrbItem> getOrbs(ServerPlayerEntity player);
 	
-	boolean hasOrbs(PlayerEntity player);
+	boolean hasOrbs(ServerPlayerEntity player);
 	
 	int getBlood();
 	
-	int getMaxBlood(PlayerEntity player);
+	int getMaxBlood(ServerPlayerEntity player);
 	
-	int getBloodForMax(PlayerEntity player);
+	int getBloodForMax(ServerPlayerEntity player);
 	
-	void addBlood(PlayerEntity player, int blood);
+	void addBlood(ServerPlayerEntity player, int blood);
 	
-	boolean canBloodAdd(PlayerEntity player, int blood);
+	boolean canBloodAdd(ServerPlayerEntity player, int blood);
 	
-	int reduceBlood(int blood);
+	int reduceBlood(int blood, boolean onlyIfAll);
 	
 	boolean hasBlood();
 	
@@ -32,6 +33,6 @@ public interface IPlayerCapability extends CapabilitySerializableNBT, Synchroniz
 	
 	boolean hasMaxBlood(List<OrbItem> orbItems);
 	
-	boolean shouldDamage(RuneItem runeItem);
+	boolean shouldDamage(RuneItem runeItem, RuneUseType useType);
 	
 }

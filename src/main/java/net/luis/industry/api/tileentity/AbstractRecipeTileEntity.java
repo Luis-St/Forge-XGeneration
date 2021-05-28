@@ -143,7 +143,7 @@ public abstract class AbstractRecipeTileEntity<T extends IModRecipe> extends Til
 	
 	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(worldPosition, -1, this.save(new CompoundNBT()));
+		return new SUpdateTileEntityPacket(this.worldPosition, -1, this.save(new CompoundNBT()));
 	}
 	
 	@Override

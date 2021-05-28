@@ -3,13 +3,14 @@ package net.luis.industry.api.capability.handler.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.luis.industry.api.capability.interfaces.entity.IPlayerCapability;
-import net.luis.industry.api.item.OrbItem;
-import net.luis.industry.api.item.RuneItem;
+import net.luis.industry.api.capability.interfaces.entity.IBloodCapability;
+import net.luis.industry.api.item.RuneUseType;
+import net.luis.industry.common.item.OrbItem;
+import net.luis.industry.common.item.RuneItem;
 import net.luis.industry.core.NetworkHandler;
 import net.luis.industry.core.messages.SyncPlayerCapability;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class PlayerCapabilityHandler implements IPlayerCapability {
+public class BloodCapabilityHandler implements IBloodCapability {
 	
 	private int blood = 0;
 	
@@ -34,7 +35,7 @@ public class PlayerCapabilityHandler implements IPlayerCapability {
 	}
 
 	@Override
-	public List<OrbItem> getOrbs(PlayerEntity player) {
+	public List<OrbItem> getOrbs(ServerPlayerEntity player) {
 		List<OrbItem> orbItems = new ArrayList<OrbItem>();
 		IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
 		for (int i = 0; i < inventory.getSlots(); i++) {
@@ -47,7 +48,7 @@ public class PlayerCapabilityHandler implements IPlayerCapability {
 	}
 	
 	@Override
-	public boolean hasOrbs(PlayerEntity player) {
+	public boolean hasOrbs(ServerPlayerEntity player) {
 		return !this.getOrbs(player).isEmpty();
 	}
 	
@@ -61,43 +62,51 @@ public class PlayerCapabilityHandler implements IPlayerCapability {
 	}
 
 	@Override
-	public int getMaxBlood(PlayerEntity player) {
+	public int getMaxBlood(ServerPlayerEntity player) {
 		if (!this.hasOrbs(player)) {
 			return 0;
 		}
 		List<OrbItem> orbItems = this.getOrbs(player);
 		int maxBlood = 0;
 		for (OrbItem orbItem : orbItems) {
-			maxBlood += orbItem.getBloodCapability();
+			maxBlood += orbItem.getOrbType().getBloodCapability();
 		}
 		return maxBlood;
 	}
 	
 	@Override
-	public int getBloodForMax(PlayerEntity player) {
+	public int getBloodForMax(ServerPlayerEntity player) {
 		int maxBlood = this.getMaxBlood(player);
 		return maxBlood - getBlood();
 	}
 	
 	@Override
-	public void addBlood(PlayerEntity player, int blood) {
+	public void addBlood(ServerPlayerEntity player, int blood) {
 		int addedBlood = Math.min(this.getMaxBlood(player), this.blood + blood);
 		this.blood += addedBlood;
 		this.detectAndSendChanges();
 	}
 
 	@Override
-	public boolean canBloodAdd(PlayerEntity player, int blood) {
+	public boolean canBloodAdd(ServerPlayerEntity player, int blood) {
 		int maxBlood = this.getMaxBlood(player);
 		return maxBlood >= this.getBlood() + blood;
 	}
 
 	@Override
-	public int reduceBlood(int blood) {
+	public int reduceBlood(int blood, boolean onlyIfAll) {
 		int reducedBlood = Math.min(this.getBlood(), blood);
-		this.blood -= reducedBlood;
-		this.detectAndSendChanges();
-		return blood - reducedBlood;
+		if (onlyIfAll && reducedBlood >= blood) {
+			this.blood -= blood;
+			this.detectAndSendChanges();
+			return blood;
+		} else if (onlyIfAll && blood > reducedBlood) {
+			return 0;
+		} else {
+			this.blood -= reducedBlood;
+			this.detectAndSendChanges();
+			return reducedBlood;
+		}
 	}
 	
 	@Override
@@ -117,15 +126,24 @@ public class PlayerCapabilityHandler implements IPlayerCapability {
 		}
 		int bloodCapability = 0;
 		for (OrbItem orbItem : orbItems) {
-			bloodCapability += orbItem.getBloodCapability();
+			bloodCapability += orbItem.getOrbType().getBloodCapability();
 		}
 		return this.getBlood() >= bloodCapability;
 	}
-
 	
 	@Override
-	public boolean shouldDamage(RuneItem runeItem) {
-		return runeItem.getRuneType().getBloodCost() > 0 && this.hasBlood();
+	public boolean shouldDamage(RuneItem runeItem, RuneUseType useType) {
+		switch (useType) {
+		case HIT: {
+			return this.hasBlood(runeItem.getRuneType().getHitCost());
+		}
+		case USE: {
+			return this.hasBlood(runeItem.getRuneType().getUseCost());
+		}
+		default: {
+			throw new IllegalArgumentException("RuneUseType can't be null!");
+		}
+		}
 	}
 
 	@Override

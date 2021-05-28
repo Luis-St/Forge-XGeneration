@@ -2,6 +2,8 @@ package net.luis.industry.api.item;
 
 public interface IRuneType {
 	
-	int getBloodCost();
+	int getUseCost();
+	
+	int getHitCost();
 
 }
