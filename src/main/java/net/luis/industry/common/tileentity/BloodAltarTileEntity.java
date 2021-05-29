@@ -1,17 +1,19 @@
 package net.luis.industry.common.tileentity;
 
-import net.luis.industry.Industry;
 import net.luis.industry.api.tileentity.IAnimatedTileEntity;
 import net.luis.industry.api.tileentity.IEnergy;
 import net.luis.industry.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergy<BloodAltarTileEntity> {
 	
 	protected int blood = 0;
+	protected int currentBlood = 0;
 	protected int previousBlood = 0;
 	
 	public BloodAltarTileEntity() {
@@ -20,7 +22,7 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 
 	@Override
 	public float getCurrent() {
-		return (float) this.blood / (float) this.getEnergyMultiplier();
+		return (float) this.currentBlood / (float) this.getEnergyMultiplier();
 	}
 
 	@Override
@@ -30,8 +32,14 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 
 	@Override
 	public void tick() {
-		this.blood += 100;
-		this.previousBlood = this.blood;
+		this.currentBlood = blood;
+		this.previousBlood = this.currentBlood;
+	}
+	
+	public void update() {
+		this.blood++;
+		this.blood--;
+		this.markUpdated();
 	}
 
 	@Override
@@ -43,6 +51,7 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		int received = Math.min(this.getMaxEnergyStored() - this.getEnergyStored(), receive);
 		if (!simulate) {
 			this.blood += received;
+			this.markUpdated();
 		}
 		return received;
 	}
@@ -56,6 +65,7 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		int extracted = Math.min(this.blood, extract);
 		if (!simulate) {
 			this.blood -= extracted;
+			this.markUpdated();
 		}
 		return extracted;
 	}
@@ -65,11 +75,11 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		return this.blood;
 	}
 	
-	public float getEnergyBase() {
+	protected float getEnergyBase() {
 		return 3.75F;
 	}
 
-	public int getEnergyMultiplier() {
+	protected int getEnergyMultiplier() {
 		return 10000;
 	}
 	
@@ -82,31 +92,68 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	public boolean canExtract() {
 		return this.blood > 0;
 	}
+	
+	public boolean canExtract(int blood) {
+		return this.blood >= blood;
+	}
 
 	@Override
 	public boolean canReceive() {
 		return this.getMaxEnergyStored() > this.blood;
 	}
 	
+	public boolean canReceive(int blood) {
+		return this.getMaxEnergyStored() >= this.blood + blood;
+	}
+	
+	protected void markUpdated() {
+		if (this.getLevel() != null) {
+			this.setChanged();
+			this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+		}
+	}
+	
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(this.worldPosition, -1, this.saveData());
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+		if (this.getLevel() != null) {
+			if (this.getLevel().isAreaLoaded(this.getBlockPos(), 1)) {
+				this.loadData(packet.getTag());
+			}
+		}
+	}
+	
 	@Override
 	public CompoundNBT save(CompoundNBT nbt) {
 		super.save(nbt);
+		nbt.put("blood_altar", this.saveData());
+		return nbt;
+	}
+	
+	public CompoundNBT saveData() {
+		CompoundNBT nbt = new CompoundNBT();
 		nbt.putInt("blood", this.blood);
 		nbt.putInt("previousBlood", this.previousBlood);
-		Industry.LOGGER.debug("save: " + nbt);
 		return nbt;
 	}
 	
 	@Override
 	public void load(BlockState state, CompoundNBT nbt) {
 		super.load(state, nbt);
-		Industry.LOGGER.debug("contains blood: " + nbt.contains("blood"));
-		Industry.LOGGER.debug("contains previousBlood: " + nbt.contains("previousBlood"));
+		this.loadData(nbt.getCompound("blood_altar"));
+	}
+	
+	public void loadData(CompoundNBT nbt) {
 		this.blood = nbt.getInt("blood");
 		this.previousBlood = nbt.getInt("previousBlood");
 	}
 	
-	public class BloodConstants {
+	// TODO: change values
+	public class BloodAltarConstants {
 		public static final int MAX = 37500;
 		public static final int HEART = 1000;
 		public static final int LEVEL_0 = 5000;

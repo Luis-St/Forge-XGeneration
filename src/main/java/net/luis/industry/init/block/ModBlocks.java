@@ -133,6 +133,7 @@ public class ModBlocks {
 			() -> new Block(Block.Properties.copy(Blocks.STONE)));
 	
 	public static final RegistryObject<Block> BLOOD_ALTAR = BLOCKS.register("blood_altar", 
-			() -> new BloodAltarBlock(Block.Properties.copy(Blocks.STONE).noOcclusion())); // TODO change Properties
+			() -> new BloodAltarBlock(Block.Properties.of(Material.STONE, MaterialColor.STONE)
+					.harvestLevel(0).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(3.0F, 8.0F))); 
 	
 }

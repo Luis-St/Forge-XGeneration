@@ -1,12 +1,8 @@
 package net.luis.industry.event.capability;
 
-import net.luis.industry.Industry;
-import net.luis.industry.api.capability.provider.entity.BloodCapabilityProvider;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -23,9 +19,7 @@ public class OnAttachCapabilitiesEvent {
 	
 	@SubscribeEvent
 	public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof PlayerEntity) {
-			event.addCapability(new ResourceLocation(Industry.MOD_ID, "player"), new BloodCapabilityProvider());
-		}
+		
 	}
 	
 	@SubscribeEvent

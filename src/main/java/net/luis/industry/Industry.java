@@ -5,9 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import net.luis.industry.api.capability.CapabilityFactory;
 import net.luis.industry.api.capability.CapabilityStorage;
-import net.luis.industry.api.capability.interfaces.entity.IBloodCapability;
+import net.luis.industry.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.industry.common.world.dimension.biome.DeepslateBiomeProvider;
 import net.luis.industry.common.world.dimension.chunk.DeepslateChunkGenerator;
+import net.luis.industry.core.NetworkHandler;
 import net.luis.industry.init.ModEnchantments;
 import net.luis.industry.init.ModEntityTypes;
 import net.luis.industry.init.block.ModBlocks;
@@ -47,6 +48,10 @@ public class Industry {
 	// TODO: proxy -> client and server registry -> move events in event package & itemgrops/ Client commen setup event
 	// TODO: change itemgrooups
 	// TODO: config common
+	// TODO: mineshaft strukture (separate armor bar and armor protection)
+	// TODO: armor overwrite -> new mechanics
+	// TODO: test order of damage events (LivingDamageEvent, LivingHurtEvent, LivingAttackEvent) -> prefer the last ones
+	// TODO: use RenderGameOverlayEvent$Text to change the y pos in the deepslate dimension
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "industry";
@@ -88,7 +93,8 @@ public class Industry {
 	}
 
 	private void doCommonSetup(FMLCommonSetupEvent event) {
-		this.registerCapability(IBloodCapability.class);
+		NetworkHandler.init();
+		this.registerCapability(IBloodOrbCapability.class);
 		event.enqueueWork(() -> {
 			Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Industry.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
 			Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Industry.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
@@ -168,6 +174,13 @@ public class Industry {
 		@Override
 		public ItemStack makeIcon() {
 			return Items.POTION.getDefaultInstance();
+		}
+	};
+	
+	public static final ItemGroup BLOOD_MACIC = new ItemGroup("industry_blood_magic") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(ModItems.APPRENTICE_BLOOD_ORB.get());
 		}
 	};
 	

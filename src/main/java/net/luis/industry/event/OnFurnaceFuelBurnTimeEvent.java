@@ -13,7 +13,7 @@ public class OnFurnaceFuelBurnTimeEvent {
 	public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event) {
 		Item item = event.getItemStack().getItem();
 		if (item == ModItems.HEATED_OBSIDIAN_POWDER.get()) {
-			event.setBurnTime(50000);
+			event.setBurnTime(60000);
 		}
 	}
 

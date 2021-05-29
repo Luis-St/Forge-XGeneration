@@ -117,7 +117,7 @@ public class ModBlockItems {
 	public static final RegistryObject<BlockItem> TUFF = ITEMS.register("tuff", 
 			() -> new BlockItem(ModBlocks.TUFF.get(), new Item.Properties().tab(Industry.BUILDING_BLOCKS)));
 	
-	public static final RegistryObject<BlockItem> BLOOD_ALTAR = ITEMS.register("blood_altar", // TODO: may other tab
-			() -> new BlockItem(ModBlocks.BLOOD_ALTAR.get(), new Item.Properties().tab(Industry.DECORATIONS)));
+	public static final RegistryObject<BlockItem> BLOOD_ALTAR = ITEMS.register("blood_altar",
+			() -> new BlockItem(ModBlocks.BLOOD_ALTAR.get(), new Item.Properties().tab(Industry.BLOOD_MACIC)));
 
 }
