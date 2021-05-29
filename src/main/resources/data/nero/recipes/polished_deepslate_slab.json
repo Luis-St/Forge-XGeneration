@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nero:polished_deepslate"
+    }
+  },
+  "result": {
+    "item": "nero:polished_deepslate_slab",
+	"count": 6
+  }
+}

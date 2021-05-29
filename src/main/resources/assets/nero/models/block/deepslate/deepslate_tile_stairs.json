@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "nero:block/deepslate_tiles",
+    "top": "nero:block/deepslate_tiles",
+    "side": "nero:block/deepslate_tiles"
+  }
+}

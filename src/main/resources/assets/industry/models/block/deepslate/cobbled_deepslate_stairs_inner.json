@@ -1,8 +1,0 @@
-{
-  "parent": "block/inner_stairs",
-  "textures": {
-    "bottom": "industry:block/cobbled_deepslate",
-    "top": "industry:block/cobbled_deepslate",
-    "side": "industry:block/cobbled_deepslate"
-  }
-}

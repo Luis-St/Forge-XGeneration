@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "nero:obsidian_powder"
+  },
+  "result": "nero:heated_obsidian_powder",
+  "experience": 0.5,
+  "cookingtime": 6000
+}

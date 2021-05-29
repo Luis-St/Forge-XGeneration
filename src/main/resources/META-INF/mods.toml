@@ -6,11 +6,11 @@ license="All rights reserved"
 
 [[mods]] #mandatory
 	
-modId="industry" #mandatory
+modId="nero" #mandatory
 
 version="${file.jarVersion}" #mandatory
 
-displayName="Industry" #mandatory
+displayName="Nero" #mandatory
 
 logoFile="" #optional
 
@@ -22,7 +22,7 @@ description='''
 This mod adds some industrial machine and materials
 '''
 	
-[[dependencies.industry]] #optional
+[[dependencies.nero]] #optional
 	
     modId="forge" #mandatory
     
@@ -34,7 +34,7 @@ This mod adds some industrial machine and materials
     
     side="BOTH"
     
-[[dependencies.industry]]
+[[dependencies.nero]]
 		
     modId="minecraft"
     

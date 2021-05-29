@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "nero:block/deepslate_redstone_ore"
+  }
+}

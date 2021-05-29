@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "industry:cobbled_deepslate_wall",
-    "industry:deepslate_wall",
-    "industry:polished_deepslate_wall",
-    "industry:deepslate_brick_wall",
-    "industry:deepslate_tile_wall"
+    "nero:cobbled_deepslate_wall",
+    "nero:deepslate_wall",
+    "nero:polished_deepslate_wall",
+    "nero:deepslate_brick_wall",
+    "nero:deepslate_tile_wall"
   ]
 }

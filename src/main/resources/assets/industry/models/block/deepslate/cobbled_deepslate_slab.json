@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "industry:block/cobbled_deepslate",
-    "top": "industry:block/cobbled_deepslate",
-    "side": "industry:block/cobbled_deepslate"
-  }
-}

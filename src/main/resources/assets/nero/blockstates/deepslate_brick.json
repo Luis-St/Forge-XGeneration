@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "nero:block/deepslate/deepslate_brick"
+    },
+    "type=double": {
+      "model": "nero:block/deepslate/deepslate_brick_full"
+    },
+    "type=top": {
+      "model": "nero:block/deepslate/deepslate_brick_top"
+    }
+  }
+}

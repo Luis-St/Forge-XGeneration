@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nero:ice_shard"
+    }
+  },
+  "result": {
+    "item": "minecraft:ice",
+	"count": 1
+  }
+}
