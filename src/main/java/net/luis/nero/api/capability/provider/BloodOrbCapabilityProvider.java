@@ -1,7 +1,7 @@
 package net.luis.nero.api.capability.provider;
 
 import net.luis.nero.api.capability.handler.BloodOrbCapabilityHandler;
-import net.luis.nero.init.ModCapabilities;
+import net.luis.nero.init.capability.ModCapabilities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;

@@ -1,14 +1,20 @@
 package net.luis.nero.common.tileentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.luis.nero.api.tileentity.IAnimatedTileEntity;
 import net.luis.nero.api.tileentity.IEnergy;
+import net.luis.nero.common.recipe.BloodAltarRecipe;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.RegistryObject;
 
 public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergy<BloodAltarTileEntity> {
 	
@@ -137,6 +143,7 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	public CompoundNBT saveData() {
 		CompoundNBT nbt = new CompoundNBT();
 		nbt.putInt("blood", this.blood);
+		nbt.putInt("currentBlood", this.currentBlood);
 		nbt.putInt("previousBlood", this.previousBlood);
 		return nbt;
 	}
@@ -149,11 +156,11 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	
 	public void loadData(CompoundNBT nbt) {
 		this.blood = nbt.getInt("blood");
+		this.currentBlood = nbt.getInt("currentBlood");
 		this.previousBlood = nbt.getInt("previousBlood");
 	}
 	
-	// TODO: change values
-	public class BloodAltarConstants {
+	public static class BloodAltarConstants {
 		public static final int MAX = 37500;
 		public static final int HEART = 1000;
 		public static final int LEVEL_0 = 5000;
@@ -162,7 +169,24 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		public static final int LEVEL_3 = 20000;
 		public static final int LEVEL_4 = 25000;
 		public static final int LEVEL_5 = 30000;
+		public static final int LEVEL_6 = 37500;
 		public static final int BLOOD_BUCKET = 7500;
+	}
+	
+	@SuppressWarnings("unused")
+	public static class BloodAltarRecipes {
+		public static final List<BloodAltarRecipe> RECIPES = new ArrayList<BloodAltarRecipe>();
+		
+		
+		private static BloodAltarRecipe register(RegistryObject<? extends Item> input, RegistryObject<? extends Item> output, int time, int blood) {
+			return register(input.get(), output.get(), time, blood);
+		}
+		
+		private static BloodAltarRecipe register(Item input, Item output, int time, int blood) {
+			BloodAltarRecipe recipe = new BloodAltarRecipe(input, output, time, blood);
+			RECIPES.add(recipe);
+			return recipe;
+		}
 	}
 
 }

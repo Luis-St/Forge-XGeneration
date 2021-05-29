@@ -1,4 +1,4 @@
-package net.luis.nero.init;
+package net.luis.nero.init.entity;
 
 import net.luis.nero.Nero;
 import net.minecraft.entity.EntityType;

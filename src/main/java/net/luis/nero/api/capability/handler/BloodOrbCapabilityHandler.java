@@ -3,7 +3,7 @@ package net.luis.nero.api.capability.handler;
 import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
-import net.luis.nero.common.item.RuneItem;
+import net.luis.nero.common.item.rune.AbstractRuneItem;
 import net.minecraft.nbt.CompoundNBT;
 
 public class BloodOrbCapabilityHandler implements IBloodOrbCapability {
@@ -79,7 +79,7 @@ public class BloodOrbCapabilityHandler implements IBloodOrbCapability {
 	}
 	
 	@Override
-	public boolean shouldDamage(RuneItem runeItem, RuneUseType useType) {
+	public boolean shouldDamage(AbstractRuneItem runeItem, RuneUseType useType) {
 		switch (useType) {
 		case HIT: {
 			return this.hasBlood(runeItem.getRuneType().getHitCost());

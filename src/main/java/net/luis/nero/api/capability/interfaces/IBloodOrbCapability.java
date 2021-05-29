@@ -3,7 +3,7 @@ package net.luis.nero.api.capability.interfaces;
 import net.luis.nero.api.item.RuneUseType;
 import net.luis.nero.api.nbt.CapabilitySerializableNBT;
 import net.luis.nero.common.item.OrbItem;
-import net.luis.nero.common.item.RuneItem;
+import net.luis.nero.common.item.rune.AbstractRuneItem;
 
 public interface IBloodOrbCapability extends CapabilitySerializableNBT {
 	
@@ -25,6 +25,6 @@ public interface IBloodOrbCapability extends CapabilitySerializableNBT {
 	
 	boolean hasMaxBlood(OrbItem orbItem);
 	
-	boolean shouldDamage(RuneItem runeItem, RuneUseType useType);
+	boolean shouldDamage(AbstractRuneItem runeItem, RuneUseType useType);
 	
 }

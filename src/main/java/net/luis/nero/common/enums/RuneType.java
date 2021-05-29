@@ -4,11 +4,7 @@ import net.luis.nero.api.item.IRuneType;
 
 public enum RuneType implements IRuneType {
 	
-	SLATE(0, 0),
-	REINFORCED_SLATE(0, 0),
-	INFUSED_SLATE(0, 0),
-	DEMON_SLATE(0, 0),
-	
+	RUNE(0, 0),
 	WATER_RUNE(250, 0),
 	BRIDGE_RUNE(750, 0),
 	WIND_RUNE(500, 0),

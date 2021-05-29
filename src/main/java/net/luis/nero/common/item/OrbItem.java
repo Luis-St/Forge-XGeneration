@@ -37,7 +37,7 @@ public class OrbItem extends Item {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			IBloodOrbCapability bloodCapability = CapabilityUtil.getBloodOrbCapability(serverPlayer.getItemInHand(hand));
 			if (this.hasMore(serverPlayer)) {
-				serverPlayer.sendMessage(new StringTextComponent("You can only have one blood orb in your inventory"), serverPlayer.getUUID());
+				serverPlayer.sendMessage(new StringTextComponent("You can only use one Blood Orb"), serverPlayer.getUUID());
 			} else {
 				if (!bloodCapability.hasMaxBlood(this)) {
 					bloodCapability.addBlood(this, 500);

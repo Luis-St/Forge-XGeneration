@@ -1,4 +1,4 @@
-package net.luis.nero.init;
+package net.luis.nero.init.capability;
 
 import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.minecraftforge.common.capabilities.Capability;

@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.feature;
 
-import net.luis.nero.common.world.carver.ConfiguredModWorldCarvers;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.BiomeGenerationSettings;
@@ -48,7 +47,6 @@ public class DefaultModFeatures {
 	}
 
 	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {
-		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.OCEAN);
 //		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.CAVE);
 //		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.CANYON);
 		

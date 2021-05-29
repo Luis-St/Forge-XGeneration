@@ -72,7 +72,7 @@ public class BloodAltarBlock extends Block {
 							serverPlayer.getItemInHand(hand).hurtAndBreak(1, serverPlayer, livingEntity -> {
 								livingEntity.broadcastBreakEvent(hand);
 							});
-							serverPlayer.hurt(ModDamageSources.DAGGER, 2.0F);
+							serverPlayer.hurt(ModDamageSources.DAGGER, 4.0F);
 						}
 						return ActionResultType.SUCCESS;
 					}

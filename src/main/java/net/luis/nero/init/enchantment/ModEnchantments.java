@@ -1,4 +1,4 @@
-package net.luis.nero.init;
+package net.luis.nero.init.enchantment;
 
 import net.luis.nero.Nero;
 import net.minecraft.enchantment.Enchantment;

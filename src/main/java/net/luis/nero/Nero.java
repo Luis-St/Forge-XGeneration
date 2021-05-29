@@ -9,12 +9,12 @@ import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.world.dimension.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.dimension.chunk.DeepslateChunkGenerator;
 import net.luis.nero.core.NetworkHandler;
-import net.luis.nero.init.ModEnchantments;
-import net.luis.nero.init.ModEntityTypes;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.luis.nero.init.block.util.ModContainerTypes;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
+import net.luis.nero.init.enchantment.ModEnchantments;
+import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.init.items.ModItems;
 import net.luis.nero.init.recipe.ModRecipeSerializer;
 import net.luis.nero.init.villager.ModPointOfInterestTypes;
@@ -40,8 +40,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-// TODO: "nero" -> "nero"
-
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
@@ -51,7 +49,6 @@ public class Nero {
 	// TODO: mineshaft strukture (separate armor bar and armor protection)
 	// TODO: armor overwrite -> new mechanics
 	// TODO: test order of damage events (LivingDamageEvent, LivingHurtEvent, LivingAttackEvent) -> prefer the last ones
-	// TODO: use RenderGameOverlayEvent$Text to change the y pos in the deepslate dimension
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
@@ -185,11 +182,6 @@ public class Nero {
 	};
 	
 	private void loadComplete(FMLLoadCompleteEvent event) {
-//		List<Biome> biomes = ForgeRegistries.BIOMES.getValues().stream().collect(Collectors.toList());
-//		for (Biome biome : biomes) {
-//			Nero.LOGGER.debug("Biome: " + biome.getRegistryName());
-//			Nero.LOGGER.debug("Biome Key: " + ForgeRegistries.BIOMES.getKey(biome));
-//		}
 //		try {
 //			File itemFile = new File(System.getProperty("user.home") + "\\Desktop\\Items.txt");
 //			File blockFile = new File(System.getProperty("user.home") + "\\Desktop\\Blocks.txt");

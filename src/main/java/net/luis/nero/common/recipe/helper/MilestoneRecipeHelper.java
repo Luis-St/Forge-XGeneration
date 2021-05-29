@@ -17,7 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-// TODO: new recipe regstration -> world/tileentity capability
+// TODO: new recipe regstration
 public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe> {
 	
 	/* Stone: 20
