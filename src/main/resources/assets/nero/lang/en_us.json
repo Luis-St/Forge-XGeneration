@@ -1,4 +1,6 @@
 {
+  "effect.nero.water_rune": "Water Rune",
+	
   "death.attack.nero_orb": "%1$s killed himself while charging the Blood Orb",
   "death.attack.nero_orb.player": "%2$s killed %1$s whilst charging the Blood Orb",
   "death.attack.nero_dagger": "%1$s stabbed himself with a Dagger",
@@ -15,6 +17,9 @@
   "itemGroup.nero_brewing": "Brewing",
   "itemGroup.nero_blood_magic": "Blood Magic",
   
+#  "item.minecraft.potion.effect.water_rune": "Rune of Water Potion",
+#  "item.minecraft.splash_potion.effect.water_rune": "Rune of Water Splash Potion",
+#  "item.minecraft.lingering_potion.effect.water_rune": "Rune of Water Lingering Potion",
   "item.nero.slate": "Slate",
   "item.nero.reinforced_slate": "Reinforced Slate",
   "item.nero.infused_slate": "Infused Slate",

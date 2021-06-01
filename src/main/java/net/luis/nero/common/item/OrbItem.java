@@ -40,8 +40,13 @@ public class OrbItem extends Item {
 				serverPlayer.sendMessage(new StringTextComponent("You can only use one Blood Orb"), serverPlayer.getUUID());
 			} else {
 				if (!bloodCapability.hasMaxBlood(this)) {
-					bloodCapability.addBlood(this, 500);
-					serverPlayer.hurt(ModDamageSources.ORB, 2.0F);
+					if (player.isCreative()) {
+						bloodCapability.addBlood(this, this.orbType.getBloodCapability());
+					} else {
+						bloodCapability.addBlood(this, 500);
+						serverPlayer.hurt(ModDamageSources.ORB, 2.0F);
+					}
+					return ActionResult.success(player.getItemInHand(hand));
 				}
 			}
 		}

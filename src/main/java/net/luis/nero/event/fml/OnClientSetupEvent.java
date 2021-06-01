@@ -12,10 +12,16 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @EventBusSubscriber(bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientSetupEvent {
+public class OnClientSetupEvent {
 	
 	@SubscribeEvent
-	public static void doClientSetup(FMLClientSetupEvent event) {
+	public static void clientSetup(FMLClientSetupEvent event) {
+		event.enqueueWork(() -> {
+			registerTileEntityRenderer(event);
+		});
+	}
+	
+	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.MILESTONE.get(), MilestoneTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BLOOD_ALTAR.get(), BloodAltarTileEntityRenderer::new);
 	}

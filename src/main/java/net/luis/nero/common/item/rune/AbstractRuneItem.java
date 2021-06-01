@@ -8,6 +8,7 @@ import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.item.IRuneType;
 import net.luis.nero.api.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
+import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -34,82 +35,90 @@ public abstract class AbstractRuneItem extends Item {
 		return this.runeType;
 	}
 	
-	protected List<ItemStack> getOrbs(ServerPlayerEntity serverPlayer) {
-		IItemHandler itemHandler = serverPlayer.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElseThrow(NullPointerException::new);
-		List<ItemStack> orbs = new ArrayList<ItemStack>();
-		for (int i = 0; i < itemHandler.getSlots(); i++) {
-			ItemStack itemStack = itemHandler.getStackInSlot(i);
-			if (itemStack.getItem() instanceof OrbItem) {
-				orbs.add(itemStack);
+	protected ItemStack getOrbItem(PlayerEntity player) {
+		if (player instanceof ServerPlayerEntity) {
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			IItemHandler itemHandler = serverPlayer.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElseThrow(NullPointerException::new);
+			List<ItemStack> orbItems = new ArrayList<ItemStack>();
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack itemStack = itemHandler.getStackInSlot(i);
+				if (itemStack.getItem() instanceof OrbItem) {
+					orbItems.add(itemStack);
+				}
+			}
+			if (orbItems.isEmpty()) {
+				this.sendMessage(serverPlayer, "You need a Blood Orb");
+				return ItemStack.EMPTY;
+			} else if (orbItems.size() > 1) {
+				this.sendMessage(serverPlayer, "You can only use one Blood Orb");
+				return ItemStack.EMPTY;
+			} else {
+				return orbItems.get(0);
+			}
+		} else {
+			return ItemStack.EMPTY;
+		}
+	}
+	
+	protected boolean hasBloodOrShouldDamage(PlayerEntity player, ItemStack orbStack, int bloodCost, RuneUseType useType) {
+		if (player instanceof ServerPlayerEntity) {
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
+			if (bloodCost > 0) {
+				if (bloodOrbHandler.shouldDamage(this, useType)) {
+					bloodOrbHandler.reduceBlood(bloodCost, true);
+					return true;
+				} else {
+					float f = bloodCost;
+					serverPlayer.hurt(this.getDamageSource(), f / 100);
+					return true;
+				}
+			} else {
+				return true;
 			}
 		}
-		return orbs;
+		return false;
 	}
 	
 	protected void sendMessage(ServerPlayerEntity serverPlayer, String message) {
 		serverPlayer.sendMessage(new StringTextComponent(message), serverPlayer.getUUID());
 	}
 	
-	public abstract DamageSource getDamageSource();
+	protected ActionResult<ItemStack> success(PlayerEntity player, Hand hand) {
+		return ActionResult.success(player.getItemInHand(hand));
+	}
+	
+	public DamageSource getDamageSource() {
+		return ModDamageSources.RUNE;
+	}
 	
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		if (player instanceof ServerPlayerEntity) {
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-			List<ItemStack> orbs = this.getOrbs(serverPlayer);
-			if (orbs.isEmpty()) {
-				this.sendMessage(serverPlayer, "You need a Blood Orb");
-			} else if (orbs.size() > 1) {
-				this.sendMessage(serverPlayer, "You can only use one Blood Orb");
-			} else {
-				IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbs.get(0));
-				if (this.runeType.getUseCost() > 0) {
-					if (!bloodOrbHandler.shouldDamage(this, RuneUseType.USE)) {
-						bloodOrbHandler.reduceBlood(this.runeType.getUseCost(), true);
-						return this.useRune(world, serverPlayer, hand, orbs.get(0));
-					} else {
-						float f = this.runeType.getUseCost();
-						serverPlayer.hurt(this.getDamageSource(), f / 100);
-						return this.useRune(world, serverPlayer, hand, orbs.get(0));
-					}
-				} else {
-					return this.useRune(world, serverPlayer, hand, orbs.get(0));
-				}
+		ItemStack orbStack = this.getOrbItem(player);
+		if (!orbStack.isEmpty()) {
+			if (this.hasBloodOrShouldDamage(player, orbStack, this.runeType.getUseCost(), RuneUseType.USE)) {
+				return this.useRune(world, player, hand, orbStack);
 			}
 		}
 		return super.use(world, player, hand);
 	}
 	
-	protected abstract ActionResult<ItemStack> useRune(World world, ServerPlayerEntity serverPlayer, Hand hand, ItemStack orbStack);
+	protected abstract ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack);
 	
 	@Override
 	public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacker, LivingEntity target) {
-		if (attacker instanceof ServerPlayerEntity) {
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) attacker;
-			List<ItemStack> orbs = this.getOrbs(serverPlayer);
-			if (orbs.isEmpty()) {
-				this.sendMessage(serverPlayer, "You need a Blood Orb");
-			} else if (orbs.size() > 1) {
-				this.sendMessage(serverPlayer, "You can only use one Blood Orb");
-			} else {
-				IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbs.get(0));
-				if (this.runeType.getHitCost() > 0) {
-					if (!bloodOrbHandler.shouldDamage(this, RuneUseType.HIT)) {
-						bloodOrbHandler.reduceBlood(this.runeType.getHitCost(), true);
-						return this.hurtEnemyWithRune(itemStack, serverPlayer, target, orbs.get(0));
-					} else {
-						float f = this.runeType.getHitCost();
-						serverPlayer.hurt(this.getDamageSource(), f / 100);
-						return this.hurtEnemyWithRune(itemStack, serverPlayer, target, orbs.get(0));
-					}
-				} else {
-					return this.hurtEnemyWithRune(itemStack, serverPlayer, target, orbs.get(0));
+		if (attacker instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) attacker;
+			ItemStack orbStack = this.getOrbItem(player);
+			if (!orbStack.isEmpty()) {
+				if (this.hasBloodOrShouldDamage(player, orbStack, this.runeType.getHitCost(), RuneUseType.HIT)) {
+					this.hurtEnemyWithRune(itemStack, player, target, orbStack);
 				}
 			}
 		}
 		return super.hurtEnemy(itemStack, attacker, target);
 	}
 	
-	protected abstract boolean hurtEnemyWithRune(ItemStack itemStack, ServerPlayerEntity attacker, LivingEntity target, ItemStack orbStack);
+	protected abstract boolean hurtEnemyWithRune(ItemStack itemStack, PlayerEntity attacker, LivingEntity target, ItemStack orbStack);
 
 }

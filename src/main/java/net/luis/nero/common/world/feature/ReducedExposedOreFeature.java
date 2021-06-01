@@ -2,8 +2,6 @@ package net.luis.nero.common.world.feature;
 
 import java.util.Random;
 
-import com.mojang.serialization.Codec;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -12,8 +10,10 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class ReducedExposedOreFeature extends Feature<OreFeatureConfig> {
 
-	public ReducedExposedOreFeature(Codec<OreFeatureConfig> p_i231953_1_) {
-		super(p_i231953_1_);
+	// TODO: create
+	
+	public ReducedExposedOreFeature() {
+		super(OreFeatureConfig.CODEC);
 	}
 
 	@Override

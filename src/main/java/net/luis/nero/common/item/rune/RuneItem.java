@@ -4,6 +4,7 @@ import net.luis.nero.api.capability.CapabilityUtil;
 import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.enums.RuneType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -23,14 +24,17 @@ public class RuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected ActionResult<ItemStack> useRune(World world, ServerPlayerEntity serverPlayer, Hand hand, ItemStack orbStack) {
-		IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
-		this.sendMessage(serverPlayer, "You have {} blood in your Orb".replace("{}", String.valueOf(bloodOrbHandler.getBlood())));
-		return ActionResult.success(serverPlayer.getItemInHand(hand));
+	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
+		if (player instanceof ServerPlayerEntity) {
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
+			this.sendMessage(serverPlayer, "You have {} blood in your Orb".replace("{}", String.valueOf(bloodOrbHandler.getBlood())));
+		}
+		return this.success(player, hand);
 	}
 
 	@Override
-	protected boolean hurtEnemyWithRune(ItemStack itemStack, ServerPlayerEntity attacker, LivingEntity target, ItemStack orbStack) {
+	protected boolean hurtEnemyWithRune(ItemStack itemStack, PlayerEntity player, LivingEntity target, ItemStack orbStack) {
 		return false;
 	}
 

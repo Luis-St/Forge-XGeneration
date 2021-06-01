@@ -131,7 +131,8 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 		}
 		if (south) {
 			this.setSouth(seedReader, center, rng, width);
-		} if (west) {
+		} 
+		if (west) {
 			this.setWest(seedReader, center, rng, width);
 		}
 	}
