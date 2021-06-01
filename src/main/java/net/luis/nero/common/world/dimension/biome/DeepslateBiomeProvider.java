@@ -68,7 +68,6 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 
 	@Override
 	public Biome getNoiseBiome(int x, int y, int z) {
-		// TODO: custom layer
 		return this.noiseBiomeLayer.get(this.biomeRegistry, x, z);
 	}
 

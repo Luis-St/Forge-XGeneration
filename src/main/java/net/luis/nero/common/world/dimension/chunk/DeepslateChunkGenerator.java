@@ -1,10 +1,7 @@
 package net.luis.nero.common.world.dimension.chunk;
 
 import java.util.Random;
-import java.util.function.Supplier;
 import java.util.stream.IntStream;
-
-import javax.annotation.Nullable;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,7 +12,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.Blockreader;
@@ -24,19 +20,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
-import net.minecraft.world.gen.SimplexNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 
-@SuppressWarnings("unused")
 public class DeepslateChunkGenerator extends ChunkGenerator {
-	
-	// TODO: more biome -> later after understand of layer system
 	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(Codec.INT.fieldOf("base_height").forGetter(Settings::getBaseHeight),
@@ -60,7 +51,6 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	protected final SharedSeedRandom random;
 	private final INoiseGenerator surfaceNoise;
 	private final long seed;
-	private final int height = 256;
 
 	public DeepslateChunkGenerator(Registry<Biome> registry, Settings settings) {
 		super(new DeepslateBiomeProvider(registry), new DimensionStructuresSettings(false));
@@ -81,7 +71,6 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	
 	@Override
 	public void buildSurfaceAndBedrock(WorldGenRegion region, IChunk chunk) {
-		ChunkPos chunkpos = chunk.getPos();
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 256; y++) {
 				for (int z = 0; z < 16; z++) {

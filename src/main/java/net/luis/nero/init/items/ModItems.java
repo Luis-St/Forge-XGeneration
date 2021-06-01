@@ -99,40 +99,28 @@ public class ModItems {
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
 	public static final RegistryObject<WindRuneItem> WIND_RUNE = ITEMS.register("wind_rune",
 			() -> new WindRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	
 	public static final RegistryObject<Item> LAVA_RUNE = ITEMS.register("lava_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> DEATH_RUNE = ITEMS.register("death_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> GROWTH_RUNE = ITEMS.register("growth_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> HASTE_RUNE = ITEMS.register("haste_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> VOID_RUNE = ITEMS.register("void_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
-	public static final RegistryObject<AirRuneItem> AIR_RUNE = ITEMS.register("air_rune", // -> getViewVector(1) motion in view direction
-			() -> new AirRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
+	public static final RegistryObject<AirRuneItem> AIR_RUNE = ITEMS.register("air_rune",
+			() -> new AirRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<Item> ICE_RUNE = ITEMS.register("ice_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> WARRIOR_RUNE = ITEMS.register("warrior_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect 
-	
 	public static final RegistryObject<Item> MINING_RUNE = ITEMS.register("mining_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> NIGHT_RUNE = ITEMS.register("night_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> ELEMENTAL_RUNE = ITEMS.register("elemental_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
-	
 	public static final RegistryObject<Item> HARVEST_RUNE = ITEMS.register("harvest_rune",
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
 	
