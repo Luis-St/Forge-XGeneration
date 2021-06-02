@@ -28,7 +28,7 @@ public class WindRuneItem extends AbstractRuneItem {
 		List<LivingEntity> livingEntities = world.getEntitiesOfClass(LivingEntity.class, alignedBB, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 		livingEntities.removeIf(livingEntity -> livingEntity == player);
 		for (LivingEntity livingEntity : livingEntities) {
-			livingEntity.setRot(livingEntity.xRot, new Random().nextFloat() * 360.0F);
+			livingEntity.yRot = new Random().nextFloat() * 360.0F;
 			double windXMotion = livingEntity.getViewVector(1.0F).x() * -1;
 			double windYMotion = livingEntity instanceof PlayerEntity ? 1.5 : 1.0;
 			double windZMotion = livingEntity.getViewVector(1.0F).z() * -1;

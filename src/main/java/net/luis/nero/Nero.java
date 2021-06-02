@@ -35,6 +35,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
+	// TODO: values in config
 	// TODO: mineshaft strukture 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection)
 	// TODO: test order of damage events (LivingDamageEvent, LivingHurtEvent, LivingAttackEvent) -> prefer the last ones
