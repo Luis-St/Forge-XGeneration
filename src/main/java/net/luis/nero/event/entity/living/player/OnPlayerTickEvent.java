@@ -1,4 +1,4 @@
-package net.luis.nero.event.entity.player;
+package net.luis.nero.event.entity.living.player;
 
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

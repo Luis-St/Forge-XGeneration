@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.feature;
 
+import net.luis.nero.common.world.structure.ConfiguredModStructures;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.BiomeGenerationSettings;
@@ -39,18 +40,15 @@ public class DefaultModFeatures {
 	}
 	
 	public static void addDeepslateStructures(BiomeGenerationSettings.Builder generationBuilder) {
+		generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_MINESHAFT);
 //		int stageStructures = GenerationStage.Decoration.UNDERGROUND_ORES.ordinal();
 //		int stageLake = GenerationStage.Decoration.UNDERGROUND_ORES.ordinal();
-//		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 //		generationBuilder.addFeature(stageStructures, () -> ConfiguredModFeatures.DEEPSLATE_MONSTER_ROOM); 
 //		generationBuilder.addFeature(stageLake, () -> ConfiguredModFeatures.DEEPSLATE_WATER_LAKE);
 	}
 
 	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.CAVE);
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.CANYON);
-		
-//		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.LARGE_CANYON);
+		// TODO: add custom ones
 	}
 	
 	public static void addCommonSpawns(MobSpawnInfo.Builder mobSpawnBuilder) {

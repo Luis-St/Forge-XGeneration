@@ -3,6 +3,8 @@ package net.luis.nero.common.world.feature;
 import java.util.Random;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
 import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,7 +29,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 	private final BlockState deepslateTiles = ModBlocks.DEEPSLATE_TILES.get().defaultBlockState();
 	private final BlockState crackedDeepslateTiles = ModBlocks.CRACKED_DEEPSLATE_TILES.get().defaultBlockState();
 	
-	private final Set<Block> replaceBlocks = Set.of(ModBlocks.DEEPSLATE.get(), ModBlocks.TUFF.get());
+	private final Set<Block> replaceBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.TUFF.get());
 	
 	public ModDungeonsFeature() {
 		super(NoFeatureConfig.CODEC);

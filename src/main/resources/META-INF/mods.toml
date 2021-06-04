@@ -19,7 +19,7 @@ credits="Thanks for downloading my Mod" #optional
 authors="Luis" #optional
 
 description='''
-This mod adds some industrial machine and materials
+// TODO: add description
 '''
 	
 [[dependencies.nero]] #optional

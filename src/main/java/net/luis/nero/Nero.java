@@ -6,6 +6,9 @@ import java.nio.file.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.luis.nero.config.ModClientConfig;
+import net.luis.nero.config.ModCommonConfig;
+import net.luis.nero.config.ModServerConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.luis.nero.init.block.util.ModContainerTypes;
@@ -16,9 +19,6 @@ import net.luis.nero.init.items.ModItems;
 import net.luis.nero.init.potion.ModEffects;
 import net.luis.nero.init.potion.ModPotions;
 import net.luis.nero.init.recipe.ModRecipeSerializer;
-import net.luis.nero.init.util.config.ModClientConfig;
-import net.luis.nero.init.util.config.ModCommonConfig;
-import net.luis.nero.init.util.config.ModServerConfig;
 import net.luis.nero.init.villager.ModPointOfInterestTypes;
 import net.luis.nero.init.villager.ModVillagerProfessions;
 import net.luis.nero.init.world.ModFeatures;
@@ -37,8 +37,7 @@ public class Nero {
 	
 	// TODO: values in config
 	// TODO: mineshaft strukture 
-	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection)
-	// TODO: test order of damage events (LivingDamageEvent, LivingHurtEvent, LivingAttackEvent) -> prefer the last ones
+	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
@@ -72,6 +71,7 @@ public class Nero {
 		ModFeatures.FEATURES.register(eventBus);
 		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
+//		ModStructures.STRUCTURES.register(eventBus); // TODO: fix error
 		ModBiomes.BIOMES.register(eventBus);
 		
 		this.createConfigPath();

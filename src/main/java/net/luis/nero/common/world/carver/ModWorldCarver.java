@@ -2,10 +2,11 @@ package net.luis.nero.common.world.carver;
 
 import java.util.BitSet;
 import java.util.Random;
-import java.util.Set;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
+
+import com.google.common.collect.ImmutableSet;
 
 import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.block.BlockState;
@@ -24,11 +25,11 @@ public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	
 	public ModWorldCarver() {
 		super(ProbabilityConfig.CODEC, 256);
-		this.replaceableBlocks = Set.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
-				ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
-				ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
-				ModBlocks.DEEPSLATE_REDSTONE_ORE.get(), ModBlocks.DEEPSLATE_DIAMOND_ORE.get(),
-				ModBlocks.DEEPSLATE_EMERALD_ORE.get());
+		this.replaceableBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
+		ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
+		ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
+		ModBlocks.DEEPSLATE_REDSTONE_ORE.get(), ModBlocks.DEEPSLATE_DIAMOND_ORE.get(),
+		ModBlocks.DEEPSLATE_EMERALD_ORE.get());
 	}
 	
 	protected int getFluidFillHeight(Random rng, int chunkX, int y, int chunkZ) {
