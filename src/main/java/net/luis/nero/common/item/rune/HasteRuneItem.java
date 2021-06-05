@@ -10,22 +10,22 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class WaterRuneItem extends AbstractRuneItem {
+public class HasteRuneItem extends AbstractRuneItem {
 
-	public WaterRuneItem(Properties properties) {
-		super(RuneType.WATER, properties);
+	public HasteRuneItem(Properties properties) {
+		super(RuneType.HASTE, properties);
 	}
 
 	@Override
 	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
-		player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 1200, 0, false, false, false));
-		player.addEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 1200, 0, false, false, false));
+		player.addEffect(new EffectInstance(Effects.DIG_SPEED, 1200, 1, false, false, false));
 		return this.success(player, hand);
 	}
 
 	@Override
 	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, PlayerEntity attacker, ItemStack orbStack) {
-		return false;
+		target.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 600, 1, true, true, true));
+		return true;
 	}
 
 }

@@ -17,18 +17,16 @@ public class AirRuneItem extends AbstractRuneItem {
 
 	@Override
 	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
-		// TODO: test without clientPlayer
 		double xMotion = player.getViewVector(1.0F).x();
 		double yMotion = 1.3;
 		double zMotion = player.getViewVector(1.0F).z();
 		Vector3d vector = new Vector3d(xMotion, yMotion, zMotion);
 		player.setDeltaMovement(vector);
-		player.hurtMarked = true;
 		return this.success(player, hand);
 	}
 
 	@Override
-	protected boolean hurtEnemyWithRune(ItemStack itemStack, PlayerEntity player, LivingEntity target, ItemStack orbStack) {
+	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, PlayerEntity attacker, ItemStack orbStack) {
 		return false;
 	}
 

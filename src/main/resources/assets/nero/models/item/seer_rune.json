@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "nero:item/night_rune"
+    "layer0": "nero:item/seer_rune"
   }
 }

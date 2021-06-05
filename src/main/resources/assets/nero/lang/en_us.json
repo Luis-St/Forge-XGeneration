@@ -1,6 +1,10 @@
 {
-  "effect.nero.water_rune": "Water Rune",
+#  "effect.nero.water_rune": "Water Rune",
 	
+  "death.attack.nero_death_rune": "%1$s killed with the Death Rune",
+  "death.attack.nero_death_rune.player": "%2$s killed %1$s with the Death Rune",
+  "death.attack.nero_rune": "%1$s killed himself with a Rune",
+  "death.attack.nero_rune.player": "%2$s killed %1$s with a Rune",
   "death.attack.nero_orb": "%1$s killed himself while charging the Blood Orb",
   "death.attack.nero_orb.player": "%2$s killed %1$s whilst charging the Blood Orb",
   "death.attack.nero_dagger": "%1$s stabbed himself with a Dagger",
@@ -20,6 +24,7 @@
 #  "item.minecraft.potion.effect.water_rune": "Rune of Water Potion",
 #  "item.minecraft.splash_potion.effect.water_rune": "Rune of Water Splash Potion",
 #  "item.minecraft.lingering_potion.effect.water_rune": "Rune of Water Lingering Potion",
+  "item.nero.magician_master_blood_orb": "Magician Master Blood Orb",
   "item.nero.slate": "Slate",
   "item.nero.reinforced_slate": "Reinforced Slate",
   "item.nero.infused_slate": "Infused Slate",
@@ -37,7 +42,7 @@
   "item.nero.ice_rune": "Ice Rune",
   "item.nero.warrior_rune": "Warrior Rune",
   "item.nero.mining_rune": "Mining Rune",
-  "item.nero.night_rune": "Night Rune",
+  "item.nero.seer_rune": "Seer Rune",
   "item.nero.elemental_rune": "Elemental Rune",
   "item.nero.harvest_rune": "Harvest Rune",
   "item.nero.apprentice_blood_orb": "Apprentice Blood Orb",

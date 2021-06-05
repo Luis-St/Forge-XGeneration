@@ -6,19 +6,25 @@ public enum RuneType implements IRuneType {
 	
 	RUNE(0, 0),
 	WATER(250, 0),
-	BRIDGEE(750, 0),
+	// TODO: test and/or modify
+	BRIDGE(750, 0),
 	WIND(500, 0),
-	LAVA(250, 0),
-	DEATH(2000, 0),
+	LAVA(250, 250),
+	DEATH(2500, 1000),
+	// TODO: test and/or modify
 	GROWTHE(250, 0),
-	HAST(250, 0),
+	HASTE(250, 250),
+	// TODO: test and/or modify
 	VOID(750, 0),
 	AIR(500, 0),
+	// TODO: test and/or modify
 	ICE(500, 0),
 	WARRIOR(500, 0),
+	// TODO: test and/or modify
 	MINING(500, 0),
-	NIGHT(250, 0),
-	ELEMENTAL(750, 0),
+	SEER(250, 250),
+	ELEMENTAL(500, 0),
+	// TODO: test and/or modify
 	HARVEST(250, 0), 
 	;
 	

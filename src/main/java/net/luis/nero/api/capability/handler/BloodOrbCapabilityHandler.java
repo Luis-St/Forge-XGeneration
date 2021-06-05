@@ -26,6 +26,11 @@ public class BloodOrbCapabilityHandler implements IBloodOrbCapability {
 	public int getBlood() {
 		return this.blood;
 	}
+	
+	@Override
+	public void setBlood(int blood) {
+		this.blood = blood;
+	}
 
 	@Override
 	public int getBloodCapability(OrbItem orbItem) {
