@@ -71,7 +71,7 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 	
 	@Override
 	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return super.isStartChunk(rng, chunkX, chunkZ, config) && rng.nextInt(2) == 0;
+		return super.isStartChunk(rng, chunkX, chunkZ, config);
 	}
 	
 	@Override
@@ -100,7 +100,6 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 			}
 			this.rs[i] = f * f;
 		}
-		
 		float[] motionModifiers = new float[4];
 		motionModifiers[0] = 0.0F;
 		motionModifiers[1] = 0.0F;		
@@ -109,14 +108,9 @@ public class ModCanyonWorldCarver extends ModWorldCarver {
 			double canyonHeight = this.getCanyonHeight(rng, canyonWidth, heightMultiplier);
 			motionModifiers[2] = MathHelper.cos(axisMultiplier1);
 			motionModifiers[3] = MathHelper.sin(axisMultiplier1);
-			
-			
-			
 			posX = this.getNextXPos(rng, posX, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posY = this.getNextYPos(rng, posY, axisMultiplier0, axisMultiplier1, motionModifiers);
 			posZ = this.getNextZPos(rng, posZ, axisMultiplier0, axisMultiplier1, motionModifiers);
-			
-			
 			axisMultiplier0 += motionModifiers[0] * 0.05F;
 			motionModifiers[1] *= 0.8F;
 			motionModifiers[0] *= 0.5F;

@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.luis.nero.config.ModClientConfig;
-import net.luis.nero.config.ModCommonConfig;
-import net.luis.nero.config.ModServerConfig;
+import net.luis.nero.config.deprecated.ModClientConfig;
+import net.luis.nero.config.deprecated.ModCommonConfig;
+import net.luis.nero.config.deprecated.ModServerConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.luis.nero.init.block.util.ModContainerTypes;

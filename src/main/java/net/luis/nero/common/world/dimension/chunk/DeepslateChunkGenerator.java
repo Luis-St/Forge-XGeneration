@@ -111,7 +111,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public void fillFromNoise(IWorld world, StructureManager structureManager, IChunk chunk) {
-
+		
 	}
 
 	@Override

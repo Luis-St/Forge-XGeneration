@@ -18,7 +18,7 @@ public class ModCaveWorldCarver extends ModWorldCarver {
 	}
 	
 	@Override
-	public int getRange() {
+	public final int getRange() {
 		throw new UnsupportedOperationException();
 	}
 	

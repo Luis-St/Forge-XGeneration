@@ -52,7 +52,7 @@ public class RecipeProgress implements IRecipeProgress {
 	
 	@Override
 	@Deprecated
-	public void execute() {
+	public final void execute() {
 		throw new UnsupportedOperationException();
 	}
 

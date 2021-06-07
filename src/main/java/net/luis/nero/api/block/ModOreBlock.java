@@ -2,7 +2,7 @@ package net.luis.nero.api.block;
 
 import java.util.Random;
 
-import net.luis.nero.config.ModCommonConfig;
+import net.luis.nero.config.deprecated.ModCommonConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.block.OreBlock;
 

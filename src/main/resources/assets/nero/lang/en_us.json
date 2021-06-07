@@ -1,5 +1,5 @@
 {
-#  "effect.nero.water_rune": "Water Rune",
+  "effect.nero.harvest": "Harvest",
 	
   "death.attack.nero_death_rune": "%1$s killed with the Death Rune",
   "death.attack.nero_death_rune.player": "%2$s killed %1$s with the Death Rune",

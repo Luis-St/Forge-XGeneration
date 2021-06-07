@@ -1,4 +1,4 @@
-package net.luis.nero.config;
+package net.luis.nero.config.deprecated;
 
 import java.util.Random;
 

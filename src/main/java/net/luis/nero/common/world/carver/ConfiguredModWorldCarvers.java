@@ -26,17 +26,16 @@ public class ConfiguredModWorldCarvers {
 //	public static final ConfiguredCarver<ProbabilityConfig> SMALL_CAVE = ModCarvers.register("small_cave",
 //			ModWorldCarvers.SMALL_CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> CANYON = ConfiguredModWorldCarvers.register("canyon",
+	public static final ConfiguredCarver<ProbabilityConfig> CANYON = register("canyon",
 			ModWorldCarvers.CANYON.get().configured(new ProbabilityConfig(0.02F)));
-	
-	public static final ConfiguredCarver<ProbabilityConfig> CAVE = ConfiguredModWorldCarvers.register("cave",
+	public static final ConfiguredCarver<ProbabilityConfig> CAVE = register("cave",
 			ModWorldCarvers.CAVE.get().configured(new ProbabilityConfig(0.14285715F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = ConfiguredModWorldCarvers.register("large_canyon",
-			ModWorldCarvers.LARGE_CANYON.get().configured(new ProbabilityConfig(0.01F)));
 	
-	public static final ConfiguredCarver<ProbabilityConfig> OCEAN = ConfiguredModWorldCarvers.register("ocean",
-			ModWorldCarvers.OCEAN.get().configured(new ProbabilityConfig(0.01F)));
+	public static final ConfiguredCarver<ProbabilityConfig> LARGE_CANYON = register("large_canyon",
+			ModWorldCarvers.LARGE_CANYON.get().configured(new ProbabilityConfig(0.01F)));
+	public static final ConfiguredCarver<ProbabilityConfig> HIGHER_CANYON = register("higher_canyon",
+			ModWorldCarvers.HIGHER_CANYON.get().configured(new ProbabilityConfig(0.01F)));
 	
 	private static <WC extends ICarverConfig> ConfiguredCarver<WC> register(String name, ConfiguredCarver<WC> configuredCarver) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_CARVER, new ResourceLocation(Nero.MOD_ID, name), configuredCarver);

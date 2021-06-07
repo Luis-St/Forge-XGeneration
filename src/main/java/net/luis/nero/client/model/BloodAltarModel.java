@@ -28,7 +28,7 @@ public class BloodAltarModel extends Model {
 	
 	@Override
 	@Deprecated
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public final void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		throw new UnsupportedOperationException();
 	}
 
