@@ -1,4 +1,4 @@
-package net.luis.nero.config.deprecated;
+package net.luis.nero.config;
 
 import java.util.Random;
 
@@ -24,25 +24,25 @@ public class ModCommonConfig {
 	private static final ConfigValue<Integer> XP_EMERALD_MAX;
 
 	static {
-		BUILDER.comment("This is a working default configuration\nChanges of the default values can lead problems");
+		BUILDER.comment("This is a working default config\nChanges of the default values can lead problems");
 		BUILDER.push("Nero Common Config");
 
-		BUILDER.comment("Min/Max xp that drops deepslate coal\nDefault min value: 0");
+		BUILDER.comment("\nMin/Max xp that drops Deepslate Coal Ore\nDefault min value: 0");
 		XP_COAL_MIN = BUILDER.define("deepslateCoalOreXpMin", 0);
 		BUILDER.comment("Default max value: 4");
 		XP_COAL_MAX = BUILDER.define("deepslateCoalOreXpMax", 4);
 		
-		BUILDER.comment("Min/Max xp that drops deepslate lapis\nDefault min value: 3");
+		BUILDER.comment("\nMin/Max xp that drops Deepslate Lapis Ore\nDefault min value: 3");
 		XP_LAPIS_MIN = BUILDER.define("deepslateLapisOreXpMin", 3);
 		BUILDER.comment("Default max value: 6");
 		XP_LAPIS_MAX = BUILDER.define("deepslateLapisOreXpMax", 6);
 		
-		BUILDER.comment("Min/Max xp that drops deepslate diamond\nDefault min value: 4");
+		BUILDER.comment("\nMin/Max xp that drops Deepslate Diamond Ore\nDefault min value: 4");
 		XP_DIAMOND_MIN = BUILDER.define("deepslateDiamondOreXpMin", 4);
 		BUILDER.comment("Default max value: 8");
 		XP_DIAMOND_MAX = BUILDER.define("deepslateDiamondOreXpMax", 8);
 		
-		BUILDER.comment("Min/Max xp that drops deepslate emerald\nDefault min value: 4");
+		BUILDER.comment("\nMin/Max xp that drops Deepslate Emerald Ore\nDefault min value: 4");
 		XP_EMERALD_MIN = BUILDER.define("deepslateEmeraldOreXpMin", 4);
 		BUILDER.comment("Default max value: 8");
 		XP_EMERALD_MAX = BUILDER.define("deepslateEmeraldOreXpMax", 8);
