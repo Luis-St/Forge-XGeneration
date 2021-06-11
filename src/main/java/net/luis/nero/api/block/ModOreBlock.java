@@ -12,17 +12,17 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 @Config
 public class ModOreBlock extends OreBlock {
 	
-	@ConfigIntegerValue(name = "deepslateCoalOreXpMin", comment = "deepslateCoalOreXpMin", value = 0) private ConfigValue<Integer> coalXpMin;
-	@ConfigIntegerValue(name = "deepslateCoalOreXpMax", comment = "deepslateCoalOreXpMax", value = 4) private ConfigValue<Integer> coalXpMax;
+	@ConfigIntegerValue(name = "deepslateCoalOreXpMin", value = 0) private ConfigValue<Integer> coalXpMin;
+	@ConfigIntegerValue(name = "deepslateCoalOreXpMax", value = 4) private ConfigValue<Integer> coalXpMax;
 
-	@ConfigIntegerValue(name = "deepslateLapisOreXpMin", comment = "deepslateLapisOreXpMin", value = 3) private ConfigValue<Integer> lapisXpMin;
-	@ConfigIntegerValue(name = "deepslateLapisOreXpMax", comment = "deepslateLapisOreXpMax", value = 6) private ConfigValue<Integer> lapisXpMax;
+	@ConfigIntegerValue(name = "deepslateLapisOreXpMin", value = 3) private ConfigValue<Integer> lapisXpMin;
+	@ConfigIntegerValue(name = "deepslateLapisOreXpMax", value = 6) private ConfigValue<Integer> lapisXpMax;
 
-	@ConfigIntegerValue(name = "deepslateDiamondOreXpMin", comment = "deepslateDiamondOreXpMin", value = 4) private ConfigValue<Integer> diamondXpMin;
-	@ConfigIntegerValue(name = "deepslateDiamondOreXpMax", comment = "deepslateDiamondOreXpMax", value = 8) private ConfigValue<Integer> diamondXpMax;
+	@ConfigIntegerValue(name = "deepslateDiamondOreXpMin", value = 4) private ConfigValue<Integer> diamondXpMin;
+	@ConfigIntegerValue(name = "deepslateDiamondOreXpMax", value = 8) private ConfigValue<Integer> diamondXpMax;
 
-	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMin", comment = "deepslateEmeraldOreXpMin", value = 4) private ConfigValue<Integer> emeraldXpMin;
-	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMax", comment = "deepslateEmeraldOreXpMax", value = 8) private ConfigValue<Integer> emeraldXpMax;
+	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMin", value = 4) private ConfigValue<Integer> emeraldXpMin;
+	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMax", value = 8) private ConfigValue<Integer> emeraldXpMax;
 	
 	public ModOreBlock(Properties properties) {
 		super(properties);
