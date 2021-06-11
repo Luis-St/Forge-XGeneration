@@ -1,4 +1,4 @@
-package net.luis.nero.api.config;
+package net.luis.nero.api.config.value;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -6,13 +6,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.minecraftforge.fml.config.ModConfig;
-
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Config {
+@Target(ElementType.FIELD)
+public @interface ConfigIntegerRangeValue {
 	
-	ModConfig.Type type() default ModConfig.Type.COMMON;
+	String comment() default "";
 	
+	String name();
+	
+	int minValue();
+	
+	int defaultValue();
+	
+	int maxValue();
+
 }

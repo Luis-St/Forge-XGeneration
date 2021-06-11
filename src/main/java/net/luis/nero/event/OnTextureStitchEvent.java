@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 public class OnTextureStitchEvent {
 
 	@SubscribeEvent
-	public static void TextureStitch(TextureStitchEvent.Pre event) {
+	public static void textureStitch(TextureStitchEvent.Pre event) {
 		event.addSprite(new ResourceLocation(Nero.MOD_ID, "entity/mile"));
 		event.addSprite(new ResourceLocation(Nero.MOD_ID, "entity/blood"));
 	}

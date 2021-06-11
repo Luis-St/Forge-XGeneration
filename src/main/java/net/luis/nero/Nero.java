@@ -49,12 +49,6 @@ public class Nero {
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
-//		ModConfig config = new ModConfig();
-//		List<Class<?>> modClasses = config.getConfigClasses();
-//		for (Class<?> clazz : modClasses) {
-//			LOGGER.debug("Class: {}, is part of nero mod", clazz.getName());
-//		}
-		
 		ModBlockItems.ITEMS.register(eventBus);
 		ModContainerTypes.CONTAINERS.register(eventBus);
 		ModTileEntityTypes.TILE_ENTITIES.register(eventBus);
@@ -83,7 +77,7 @@ public class Nero {
 		this.createConfigPath();
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CONFIG, this.getConfigPath().resolve("client-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.CONFIG, this.getConfigPath().resolve("common-config.toml").toString());
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.CONFIG, this.getConfigPath().resolve("server-config.toml").toString());
 		
 	}
