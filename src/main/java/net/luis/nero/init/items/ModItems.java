@@ -9,6 +9,7 @@ import net.luis.nero.common.item.rune.AirRuneItem;
 import net.luis.nero.common.item.rune.DeathRuneItem;
 import net.luis.nero.common.item.rune.ElementalRuneItem;
 import net.luis.nero.common.item.rune.HasteRuneItem;
+import net.luis.nero.common.item.rune.IceRuneItem;
 import net.luis.nero.common.item.rune.LavaRuneItem;
 import net.luis.nero.common.item.rune.RuneItem;
 import net.luis.nero.common.item.rune.SeerRuneItem;
@@ -119,8 +120,8 @@ public class ModItems {
 			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
 	public static final RegistryObject<AirRuneItem> AIR_RUNE = ITEMS.register("air_rune",
 			() -> new AirRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	public static final RegistryObject<Item> ICE_RUNE = ITEMS.register("ice_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
+	public static final RegistryObject<IceRuneItem> ICE_RUNE = ITEMS.register("ice_rune",
+			() -> new IceRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<WarriorRuneItem> WARRIOR_RUNE = ITEMS.register("warrior_rune",
 			() -> new WarriorRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<Item> MINING_RUNE = ITEMS.register("mining_rune",

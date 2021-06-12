@@ -12,13 +12,12 @@ public enum RuneType implements IRuneType {
 	LAVA(250, 250),
 	DEATH(2500, 1000),
 	// TODO: test and/or modify
-	GROWTHE(250, 0),
+	GROWT(250, 0),
 	HASTE(250, 250),
 	// TODO: test and/or modify
 	VOID(750, 0),
 	AIR(500, 0),
-	// TODO: test and/or modify
-	ICE(500, 0),
+	ICE(0, 250),
 	WARRIOR(500, 0),
 	// TODO: test and/or modify
 	MINING(500, 0),

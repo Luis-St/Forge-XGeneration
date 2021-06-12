@@ -76,6 +76,10 @@ public abstract class AbstractRuneItem extends Item {
 		return ActionResult.success(player.getItemInHand(hand));
 	}
 	
+	protected ActionResult<ItemStack> pass(PlayerEntity player, Hand hand) {
+		return ActionResult.pass(player.getItemInHand(hand));
+	}
+	
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack orbStack = this.getOrbItem(player);

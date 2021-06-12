@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModDamageSources {
 	
+	public static final DamageSource ICE = createDamageSource("ice");
 	public static final DamageSource DEATH_RUNE = createDamageSource("death_rune");
 	public static final DamageSource RUNE = createDamageSource("rune");
 	public static final DamageSource ORB = createDamageSource("orb");

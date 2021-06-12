@@ -15,8 +15,10 @@ import net.minecraftforge.forgespi.language.ModFileScanData.AnnotationData;
 
 public class ConfigUtil {
 	
+	// TODO: test with class loader
+	
 	public static List<Class<?>> getConfigClassesForType(ModConfig.Type configType) {
-		List<Class<?>> configClasses = getConfigClasses();
+		List<Class<?>> configClasses = getConfigClasses(Nero.class.getClassLoader());
 		List<Class<?>> configTypeClasses = new ArrayList<>();
 		for (Class<?> configClass : configClasses) {
 			if (configClass.isAnnotationPresent(Config.class)) {
@@ -26,10 +28,10 @@ public class ConfigUtil {
 				}
 			}
 		}
-		return configTypeClasses;
+		return configClasses;
 	}
 	
-	public static List<Class<?>> getConfigClasses() {
+	public static List<Class<?>> getConfigClasses(ClassLoader classLoader) {
 		List<Class<?>> configClasses = new ArrayList<>();
 		Type configAnnotation = Type.getType(Config.class);
 		ModFileScanData fileScanData = ModList.get().getModFileById(Nero.MOD_ID).getFile().getScanResult();
@@ -38,9 +40,11 @@ public class ConfigUtil {
 		for (AnnotationData annotationData : annotationDatas.collect(Collectors.toList())) {
 			if (annotationData.getAnnotationType().equals(configAnnotation)) {
 				try {
-					configClasses.add(Class.forName(annotationData.getMemberName()));
+					configClasses.add(Class.forName(annotationData.getMemberName(), true, classLoader));
 				} catch (ClassNotFoundException e) {
 					Nero.LOGGER.warn("Can't find class {}", annotationData.getMemberName());
+				} catch (NullPointerException e) {
+					Nero.LOGGER.warn("Class Loader is null");
 				}
 			} else {
 				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.getAnnotationType());
