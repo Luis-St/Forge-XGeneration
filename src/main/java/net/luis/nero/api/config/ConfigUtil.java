@@ -15,8 +15,6 @@ import net.minecraftforge.forgespi.language.ModFileScanData.AnnotationData;
 
 public class ConfigUtil {
 	
-	// TODO: test with class loader
-	
 	public static List<Class<?>> getConfigClassesForType(ModConfig.Type configType) {
 		List<Class<?>> configClasses = getConfigClasses(Nero.class.getClassLoader());
 		List<Class<?>> configTypeClasses = new ArrayList<>();
@@ -28,7 +26,7 @@ public class ConfigUtil {
 				}
 			}
 		}
-		return configClasses;
+		return configTypeClasses;
 	}
 	
 	public static List<Class<?>> getConfigClasses(ClassLoader classLoader) {
@@ -43,8 +41,6 @@ public class ConfigUtil {
 					configClasses.add(Class.forName(annotationData.getMemberName(), true, classLoader));
 				} catch (ClassNotFoundException e) {
 					Nero.LOGGER.warn("Can't find class {}", annotationData.getMemberName());
-				} catch (NullPointerException e) {
-					Nero.LOGGER.warn("Class Loader is null");
 				}
 			} else {
 				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.getAnnotationType());

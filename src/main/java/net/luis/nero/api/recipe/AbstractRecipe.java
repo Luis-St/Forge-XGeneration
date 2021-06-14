@@ -92,7 +92,7 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 	
 	@Override
 	public boolean equalsId(IModRecipe toCheck) {
-		return this.getId() == toCheck.getId();
+		return this.getId().equals(toCheck.getId());
 	}
 	
 	@Override
@@ -119,7 +119,12 @@ public abstract class AbstractRecipe<T extends IModRecipe> implements IModRecipe
 					}
 				}
 			}
-			return equalRecipeItems >= this.recipeItems.size() && equalResultItems >= this.resultItems.size();
+			if (equalRecipeItems > 0 && equalResultItems > 0) {
+				if (this.equalsId(recipe) && recipe.getProgressTime() == this.progressTime) {
+					return equalRecipeItems >= this.recipeItems.size() && equalResultItems >= this.resultItems.size();
+				}
+			} 
+			return false;
 		}
 	}
 	

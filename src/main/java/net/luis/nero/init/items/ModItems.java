@@ -8,9 +8,11 @@ import net.luis.nero.common.item.SlateItem;
 import net.luis.nero.common.item.rune.AirRuneItem;
 import net.luis.nero.common.item.rune.DeathRuneItem;
 import net.luis.nero.common.item.rune.ElementalRuneItem;
+import net.luis.nero.common.item.rune.HarvestRuneItem;
 import net.luis.nero.common.item.rune.HasteRuneItem;
 import net.luis.nero.common.item.rune.IceRuneItem;
 import net.luis.nero.common.item.rune.LavaRuneItem;
+import net.luis.nero.common.item.rune.MiningRuneItem;
 import net.luis.nero.common.item.rune.RuneItem;
 import net.luis.nero.common.item.rune.SeerRuneItem;
 import net.luis.nero.common.item.rune.WarriorRuneItem;
@@ -102,6 +104,7 @@ public class ModItems {
 	public static final RegistryObject<RuneItem> RUNE = ITEMS.register("rune",
 			() -> new RuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	
+	// TODO: recipes \/
 	public static final RegistryObject<WaterRuneItem> WATER_RUNE = ITEMS.register("water_rune",
 			() -> new WaterRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<Item> BRIDGE_RUNE = ITEMS.register("bridge_rune",
@@ -112,8 +115,6 @@ public class ModItems {
 			() -> new LavaRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<DeathRuneItem> DEATH_RUNE = ITEMS.register("death_rune",
 			() -> new DeathRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	public static final RegistryObject<Item> GROWTH_RUNE = ITEMS.register("growth_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
 	public static final RegistryObject<HasteRuneItem> HASTE_RUNE = ITEMS.register("haste_rune",
 			() -> new HasteRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<Item> VOID_RUNE = ITEMS.register("void_rune",
@@ -124,13 +125,13 @@ public class ModItems {
 			() -> new IceRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<WarriorRuneItem> WARRIOR_RUNE = ITEMS.register("warrior_rune",
 			() -> new WarriorRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	public static final RegistryObject<Item> MINING_RUNE = ITEMS.register("mining_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
+	public static final RegistryObject<MiningRuneItem> MINING_RUNE = ITEMS.register("mining_rune",
+			() -> new MiningRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<SeerRuneItem> SEER_RUNE = ITEMS.register("seer_rune",
 			() -> new SeerRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<ElementalRuneItem> ELEMENTAL_RUNE = ITEMS.register("elemental_rune",
 			() -> new ElementalRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	public static final RegistryObject<Item> HARVEST_RUNE = ITEMS.register("harvest_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
+	public static final RegistryObject<HarvestRuneItem> HARVEST_RUNE = ITEMS.register("harvest_rune",
+			() -> new HarvestRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	
 }

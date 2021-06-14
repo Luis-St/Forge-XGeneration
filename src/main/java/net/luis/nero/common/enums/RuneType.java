@@ -11,21 +11,16 @@ public enum RuneType implements IRuneType {
 	WIND(500, 0),
 	LAVA(250, 250),
 	DEATH(2500, 1000),
-	// TODO: test and/or modify
-	GROWT(250, 0),
 	HASTE(250, 250),
 	// TODO: test and/or modify
 	VOID(750, 0),
 	AIR(500, 0),
 	ICE(0, 250),
 	WARRIOR(500, 0),
-	// TODO: test and/or modify
-	MINING(500, 0),
+	MINING(500, 500),
 	SEER(250, 250),
 	ELEMENTAL(500, 0),
-	// TODO: test and/or modify
-	HARVEST(250, 0), 
-	;
+	HARVEST(250, 250);
 	
 	private final int useCost;
 	private final int hitCost;

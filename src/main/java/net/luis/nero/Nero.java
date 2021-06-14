@@ -76,9 +76,9 @@ public class Nero {
 		
 		this.createConfigPath();
 		
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.CONFIG, this.getConfigPath().resolve("client-config.toml").toString());
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.CONFIG, this.getConfigPath().resolve("server-config.toml").toString());
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
 		
 	}
 	

@@ -12,17 +12,25 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 @Config
 public class ModOreBlock extends OreBlock {
 	
-	@ConfigIntegerValue(name = "deepslateCoalOreXpMin", value = 0) private ConfigValue<Integer> coalXpMin;
-	@ConfigIntegerValue(name = "deepslateCoalOreXpMax", value = 4) private ConfigValue<Integer> coalXpMax;
+	@ConfigIntegerValue(name = "deepslateCoalOreXpMin", value = 0) 
+	private static ConfigValue<Integer> COAL_XP_MIN;
+	@ConfigIntegerValue(name = "deepslateCoalOreXpMax", value = 4) 
+	private static ConfigValue<Integer> COAL_XP_MAX;
 
-	@ConfigIntegerValue(name = "deepslateLapisOreXpMin", value = 3) private ConfigValue<Integer> lapisXpMin;
-	@ConfigIntegerValue(name = "deepslateLapisOreXpMax", value = 6) private ConfigValue<Integer> lapisXpMax;
+	@ConfigIntegerValue(name = "deepslateLapisOreXpMin", value = 3) 
+	private static ConfigValue<Integer> LAPIS_XP_MIN;
+	@ConfigIntegerValue(name = "deepslateLapisOreXpMax", value = 6) 
+	private static ConfigValue<Integer> LAPIS_XP_MAX;
 
-	@ConfigIntegerValue(name = "deepslateDiamondOreXpMin", value = 4) private ConfigValue<Integer> diamondXpMin;
-	@ConfigIntegerValue(name = "deepslateDiamondOreXpMax", value = 8) private ConfigValue<Integer> diamondXpMax;
+	@ConfigIntegerValue(name = "deepslateDiamondOreXpMin", value = 4) 
+	private static ConfigValue<Integer> DIAMOND_XP_MIN;
+	@ConfigIntegerValue(name = "deepslateDiamondOreXpMax", value = 8) 
+	private static ConfigValue<Integer> DIAMOND_XP_MAX;
 
-	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMin", value = 4) private ConfigValue<Integer> emeraldXpMin;
-	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMax", value = 8) private ConfigValue<Integer> emeraldXpMax;
+	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMin", value = 4) 
+	private static ConfigValue<Integer> EMERALD_XP_MIN;
+	@ConfigIntegerValue(name = "deepslateEmeraldOreXpMax", value = 8) 
+	private static ConfigValue<Integer> EMERALD_XP_MAX;
 	
 	public ModOreBlock(Properties properties) {
 		super(properties);
@@ -31,13 +39,13 @@ public class ModOreBlock extends OreBlock {
 	@Override
 	protected int xpOnDrop(Random rng) {
 		if (this == ModBlocks.DEEPSLATE_COAL_ORE.get()) {
-			return MathHelper.nextInt(rng, this.coalXpMin.get(), this.coalXpMax.get());
+			return MathHelper.nextInt(rng, COAL_XP_MIN.get(), COAL_XP_MAX.get());
 		} else if (this == ModBlocks.DEEPSLATE_LAPIS_ORE.get()) {
-			return MathHelper.nextInt(rng, this.lapisXpMin.get(), this.lapisXpMax.get());
+			return MathHelper.nextInt(rng, LAPIS_XP_MIN.get(), LAPIS_XP_MAX.get());
 		} else if (this == ModBlocks.DEEPSLATE_DIAMOND_ORE.get()) {
-			return MathHelper.nextInt(rng, this.diamondXpMin.get(), this.diamondXpMax.get());
+			return MathHelper.nextInt(rng, DIAMOND_XP_MIN.get(), DIAMOND_XP_MAX.get());
 		} else if (this == ModBlocks.DEEPSLATE_EMERALD_ORE.get()) {
-			return MathHelper.nextInt(rng, this.emeraldXpMin.get(), this.emeraldXpMax.get());
+			return MathHelper.nextInt(rng, EMERALD_XP_MIN.get(), EMERALD_XP_MAX.get());
 		}
 		return super.xpOnDrop(rng);
 	}

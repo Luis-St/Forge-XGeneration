@@ -1,3 +1,42 @@
+Build: 1.16.5-36.1.31 - Wed Jun 09 16:35:21 GMT 2021
+	sizableshrimp:
+		Remove ModelResourceLocation patch for SAS entry (#7813)
+
+=========
+Build: 1.16.5-36.1.30 - Tue Jun 08 20:34:06 GMT 2021
+	diesieben07:
+		Fix jar file path detection if the path contains a "!" (#7790)
+
+=========
+Build: 1.16.5-36.1.29 - Tue Jun 08 19:54:50 GMT 2021
+	mrp-v2:
+		Add method to get the number of elements in a model builder (#7792)
+
+=========
+Build: 1.16.5-36.1.28 - Tue Jun 08 19:47:54 GMT 2021
+	diesieben07:
+		Fix vanilla packet splitter remote detection and add advancement packet splitting (#7802)
+
+=========
+Build: 1.16.5-36.1.27 - Tue Jun 08 19:33:44 GMT 2021
+	17338378+nightenom:
+		Add option for linear filtering of text texture (#7645)
+
+=========
+Build: 1.16.5-36.1.26 - Tue Jun 08 19:07:49 GMT 2021
+	mrp-v2:
+		Use empty model instead of missing model for non-existant layers in multilayer models (#7750)
+		
+		Fixes issues when using multi-layer models as part of composite models
+
+=========
+Build: 1.16.5-36.1.25 - Thu Jun 03 17:30:10 GMT 2021
+	lexmanos:
+		Add debug logging to packet compression encoder.
+		Should make figuring out who is sending large packets easier.
+		Disable with -Pforge.disablePacketCompressionDebug=true
+
+=========
 Build: 1.16.5-36.1.24 - Sun May 23 18:09:00 GMT 2021
 	lexmanos:
 		Removed signature line from mod list screen. #7500

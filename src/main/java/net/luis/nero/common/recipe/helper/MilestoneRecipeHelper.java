@@ -7,6 +7,7 @@ import net.luis.nero.api.recipe.AbstractRecipeHelper;
 import net.luis.nero.api.recipe.ModRecipeHelper;
 import net.luis.nero.api.recipe.item.ResultItemStack;
 import net.luis.nero.api.util.VarArgs;
+import net.luis.nero.api.util.annotation.NotTested;
 import net.luis.nero.api.util.annotation.Recipe;
 import net.luis.nero.common.enums.ModRecipeType;
 import net.luis.nero.common.recipe.MilestoneRecipe;
@@ -17,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-// TODO: new recipe regstration
+// TODO: new recipe regstration -> recipe serilazer
 public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe> {
 	
 	/* Stone: 20
@@ -102,11 +103,138 @@ public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe>
 		this.createFlowerRecipe(Items.LILAC, Items.MAGENTA_DYE, UUID.fromString("6e0226b1-a4aa-49fb-aa80-7301ee9c7f00"));
 		this.createFlowerRecipe(Items.ROSE_BUSH, Items.RED_DYE, UUID.fromString("89a03eb3-74b8-4c65-8584-73dd74caf922"));
 		this.createFlowerRecipe(Items.PEONY, Items.PINK_DYE, UUID.fromString("7f92377b-c763-41c2-9e1e-e32597a275b4"));
+		
+		for (ToolRecipes toolRecipes : ToolRecipes.values()) {
+			this.registerRecipe(toolRecipes.toRecipe());
+		}
+		for (ArmorRecipes armorRecipes : ArmorRecipes.values()) {
+			this.registerRecipe(armorRecipes.toRecipe());
+		}
 	}
 	
 	@Override
 	public ModRecipeType getRecipeType() {
 		return ModRecipeType.MILESTONE;
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "a2d17ab5-aac1-4bde-b8be-e1b15a9928c3")
+	protected MilestoneRecipe createBlazeRodRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.BLAZE_ROD));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.BLAZE_POWDER, 2, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 10, id = "03c17408-b38a-406f-bb5c-034108c74d93")
+	protected MilestoneRecipe createBoneRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.BONE));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.BONE_MEAL, 3, 4, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 10, id = "99ab6d57-20af-46d3-b5fe-464acf5f2455")
+	protected MilestoneRecipe createLeatherRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.LEATHER));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.RABBIT_HIDE, 3, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 20, id = "57de49ea-0746-4538-ae3e-660aa83c2795")
+	protected MilestoneRecipe createGoldIngotRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.GOLD_INGOT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.GOLD_NUGGET, 8, 10, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 20, id = "01de3f08-5811-4a62-99b8-ea036c8c6cee")
+	protected MilestoneRecipe createIronIngotRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.IRON_INGOT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.IRON_NUGGET, 8, 10, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "cede0450-c851-4145-aec2-a816770816a4")
+	protected MilestoneRecipe createDarkOakBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.DARK_OAK_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.DARK_OAK_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "299dbb75-897c-419b-817a-dac01f0c4bd4")
+	protected MilestoneRecipe createAcaciaBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.ACACIA_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.ACACIA_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "5d059dca-8d1a-4208-8c57-200c7f16ffa3")
+	protected MilestoneRecipe createJungleBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.JUNGLE_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.JUNGLE_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "b4a97bb8-d91e-4190-b31c-81a256c7e8c8")
+	protected MilestoneRecipe createBrichBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.BIRCH_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.BIRCH_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "6a409007-3e1e-4ac1-99c2-c117cf771ba7")
+	protected MilestoneRecipe createSpruceBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.SPRUCE_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.SPRUCE_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 15, id = "96f015db-ecf2-42fe-a27a-4ccd3746b048")
+	protected MilestoneRecipe createOakBoatRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.OAK_BOAT));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.OAK_PLANKS, 5, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	@Recipe(time = 20, id = "67657918-52ee-428c-b4b0-bd4f390cccc5")
+	protected MilestoneRecipe createRedstoneBlockRecipe(int progressTime, UUID id) {
+		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+		input.add(new ItemStack(Items.REDSTONE_BLOCK));
+		VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+		result.add(new ResultItemStack(Items.REDSTONE, 9, 100));
+		return new MilestoneRecipe(input, result, progressTime, id);
 	}
 	
 	@Recipe(time = 5, id = "aba52d0d-dbea-40cd-bd38-595bdfb00323")
@@ -192,7 +320,6 @@ public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe>
 		return new MilestoneRecipe(input, result, progressTime, id);
 	}
 	
-	// TODO: cancle place event of 2 block flowers
 	protected void createFlowerRecipe(Item flower, Item dye, UUID id) {
 		VarArgs<ItemStack> input = new VarArgs<ItemStack>();
 		input.add(new ItemStack(flower));
@@ -653,6 +780,105 @@ public class MilestoneRecipeHelper extends AbstractRecipeHelper<MilestoneRecipe>
 		result.add(new ResultItemStack(Items.DIAMOND, 5));
 		result.add(new ResultItemStack(Items.EMERALD, 2));
 		return new MilestoneRecipe(input, result, progressTime, id);
+	}
+	
+	@NotTested
+	public enum ToolRecipes {
+		
+		WOODEN_SHOVEL(Items.WOODEN_SHOVEL, Items.OAK_PLANKS, 1, 0, 0, "b4928c1f-89bc-4a59-8eed-9759ecda138a"),
+		WOODEN_PICKAXE(Items.WOODEN_PICKAXE, Items.OAK_PLANKS, 2, 0, 0, "7b990936-c541-4583-ba47-d58990e00e9b"),
+		WOODEN_AXE(Items.WOODEN_AXE, Items.OAK_PLANKS, 2, 0, 0, "a9eae20c-dbe1-4911-87b8-ff1e8dde8023"),
+		WOODEN_HOE(Items.WOODEN_HOE, Items.OAK_PLANKS, 1, 0, 0, "9cb1ce3d-afc8-41dc-8f62-e647b8d6f7ac"),
+		WOODEN_SWORD(Items.WOODEN_SWORD, Items.OAK_PLANKS, 1, 0, 0, "c845be5e-707e-4608-995c-f902e152ac99"),
+		
+		STONE_SHOVEL(Items.STONE_SHOVEL, Items.COBBLESTONE, 1, 0, 0, "93bbd93b-b6c5-4715-82ca-a769afa90a3c"),
+		STONE_PICKAXE(Items.STONE_PICKAXE, Items.COBBLESTONE, 2, 0, 0, "23645013-8f25-4240-9930-82db9a6259c1"),
+		STONE_AXE(Items.STONE_AXE, Items.COBBLESTONE, 2, 0, 0, "94ebb37d-7771-4941-8acf-2d348681e04f"),
+		STONE_HOE(Items.STONE_HOE, Items.COBBLESTONE, 1, 0, 0, "143aad25-e390-40a5-b09b-159f13faf606"),
+		STONE_SWORD(Items.STONE_SWORD, Items.COBBLESTONE, 1, 0, 0, "21baca58-2305-45df-91e9-964b179a0ca6"),
+		
+		GOLDEN_SHOVEL(Items.GOLDEN_SHOVEL, Items.GOLD_NUGGET, 4, 0, 1, "0c657409-21a7-4ad6-9bb5-a23d466a0371"),
+		GOLDEN_PICKAXE(Items.GOLDEN_PICKAXE, Items.GOLD_NUGGET, 13, 1, 3, "4e6d0d30-426e-4fbb-8ca2-54ed1ddb8a07"),
+		GOLDEN_AXE(Items.GOLDEN_AXE, Items.GOLD_NUGGET, 13, 1, 3, "f579f227-8180-484b-a551-f328f9b44939"),
+		GOLDEN_HOE(Items.GOLDEN_SHOVEL, Items.GOLD_NUGGET, 9, 0, 2, "18169117-d685-44e8-87aa-71571bef4f99"),
+		GOLDEN_SWORD(Items.GOLDEN_HOE, Items.GOLD_NUGGET, 9, 0, 2, "c66dfade-2331-435c-8b11-761da73f2728"),
+		
+		IRON_SHOVEL(Items.IRON_SHOVEL, Items.IRON_NUGGET, 4, 0, 1, "b9d8e05b-4fe4-4f74-a60d-932c3c641a64"),
+		IRON_PICKAXE(Items.IRON_PICKAXE, Items.IRON_NUGGET, 13, 1, 3, "7454c92f-b4ed-41d6-bc25-8561e928c953"),
+		IRON_AXE(Items.IRON_AXE, Items.IRON_NUGGET, 13, 1, 3, "943ce98d-e5f2-42ce-b923-146581e8e2ec"),
+		IRON_HOE(Items.IRON_HOE, Items.IRON_NUGGET, 9, 0, 2, "422e6aea-6299-4e09-8d30-b14ed1b54210"),
+		IRON_SWORD(Items.IRON_SWORD, Items.IRON_NUGGET, 9, 0, 2, "b0d48a8d-08f7-4bac-8dcb-7f4b21185976");
+		
+		private final Item input;
+		private final Item result;
+		private final int resultCount;
+		private final int min;
+		private final int max;
+		private final UUID id;
+		
+		private ToolRecipes(Item input, Item result, int resultCount, int min, int max, String id) {
+			this.input = input;
+			this.result = result;
+			this.resultCount = resultCount;
+			this.min = min;
+			this.max = max;
+			this.id = UUID.fromString(id);
+		}
+		
+		public MilestoneRecipe toRecipe() {
+			VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+			input.add(new ItemStack(this.input, 1));
+			VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+			result.add(new ResultItemStack(Items.STICK, 100));
+			result.add(new ResultItemStack(this.result, this.resultCount - this.min, this.resultCount + this.max, 100));
+			return new MilestoneRecipe(input, result, 20, this.id);
+		}
+		
+	}
+	
+	@NotTested
+	public enum ArmorRecipes {
+		
+		LEATHER_HELMET(Items.LEATHER_HELMET, Items.LEATHER, 22, 0, 10, "2ca64135-0a2f-4e87-ac6a-31acfe583bee"),
+		LEATHER_CHESTPLATE(Items.LEATHER_CHESTPLATE, Items.LEATHER, 4, 1, 3, "0e8484fc-f1b8-4d97-9065-c2c79720a7fe"),
+		LEATHER_LEGGINGS(Items.LEATHER_LEGGINGS, Items.LEATHER, 3, 0, 2, "2ff4748b-b9b5-4f81-a2a1-191e9cc77eca"),
+		LEATHER_BOOTS(Items.LEATHER_BOOTS, Items.LEATHER, 2, 0, 1, "33df8555-0437-47dd-ad2d-bddd4303f3db"),
+		
+		IRON_HELMET(Items.IRON_HELMET, Items.IRON_INGOT, 2, 0, 1, "ea94aa23-35e5-4543-9df9-ffda5b2f85ad"),
+		IRON_CHESTPLATE(Items.IRON_CHESTPLATE, Items.IRON_INGOT, 4, 0, 3, "dc857545-b0ab-4965-b2a2-8ce821f146b0"),
+		IRON_LEGGINGS(Items.IRON_LEGGINGS, Items.IRON_INGOT, 3, 0, 2, "15102fb4-6f1a-4ac5-87e5-97e38ef0d95a"),
+		IRON_BOOTS(Items.IRON_BOOTS, Items.IRON_INGOT, 2, 0, 1, "21dc8f43-f5c7-4d6a-921e-43b45cd081b2"),
+		
+		GOLDEN_HELMET(Items.GOLDEN_HELMET, Items.GOLD_INGOT, 2, 0, 1, "f3d12e3f-34bf-4633-a6d0-614ac2d025d4"),
+		GOLDEN_CHESTPLATE(Items.GOLDEN_CHESTPLATE, Items.GOLD_INGOT, 4, 0, 3, "c22df168-6e25-4fd2-8195-d13a723693af"),
+		GOLDEN_LEGGINGS(Items.GOLDEN_LEGGINGS, Items.GOLD_INGOT, 3, 0, 2, "3390e386-2795-401c-9b40-29037883c464"),
+		GOLDEN_BOOTS(Items.GOLDEN_BOOTS, Items.GOLD_INGOT, 2, 0, 1, "fe72a18f-a3be-4cb5-9042-043d65c82baa");
+		
+		private final Item input;
+		private final Item result;
+		private final int resultCount;
+		private final int min;
+		private final int max;
+		private final UUID id;
+		
+		private ArmorRecipes(Item input, Item result, int resultCount, int min, int max, String id) {
+			this.input = input;
+			this.result = result;
+			this.resultCount = resultCount;
+			this.min = min;
+			this.max = max;
+			this.id = UUID.fromString(id);
+		}
+		
+		public MilestoneRecipe toRecipe() {
+			VarArgs<ItemStack> input = new VarArgs<ItemStack>();
+			input.add(new ItemStack(this.input, 1));
+			VarArgs<ResultItemStack> result = new VarArgs<ResultItemStack>();
+			result.add(new ResultItemStack(Items.STICK, 100));
+			result.add(new ResultItemStack(this.result, this.resultCount - this.min, this.resultCount + this.max, 100));
+			return new MilestoneRecipe(input, result, 20, this.id);
+		}
+		
 	}
 	
 }

@@ -10,7 +10,7 @@ import net.luis.nero.common.recipe.helper.MilestoneRecipeHelper;
 import net.minecraft.item.ItemStack;
 
 public class MilestoneRecipe extends AbstractRecipe<MilestoneRecipe> {
-	
+
 	public MilestoneRecipe(VarArgs<ItemStack> input, VarArgs<ResultItemStack> reslut, int progressTime, UUID id) {
 		super(input, reslut, progressTime, id);
 	}

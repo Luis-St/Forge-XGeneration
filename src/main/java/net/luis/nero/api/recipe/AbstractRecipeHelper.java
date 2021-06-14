@@ -29,7 +29,7 @@ public abstract class AbstractRecipeHelper<T extends IModRecipe> implements IMod
 	@Override
 	public void registerRecipe(T recipe) {
 		if (this.isRecipeRegistered(recipe)) {
-			throw new AlreadyRegisteredException("This recipe has already been registered");
+			throw new AlreadyRegisteredException("This recipe with id: " + recipe.getId() + ", has already been registered");
 		} else {
 			if (this.existsId(recipe)) {
 				throw new AlreadyRegisteredException(recipe.getId());
