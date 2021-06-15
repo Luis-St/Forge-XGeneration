@@ -1,11 +1,8 @@
 package net.luis.nero.event.capability;
 
-import net.luis.nero.Nero;
-import net.luis.nero.api.capability.provider.PortalCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.server.ServerWorld;
@@ -39,7 +36,7 @@ public class OnAttachCapabilitiesEvent {
 	@SubscribeEvent
 	public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
 		if (event.getObject() instanceof ServerWorld) {
-			event.addCapability(new ResourceLocation(Nero.MOD_ID, "portal"), new PortalCapabilityProvider());
+			
 		}
 	}
 
