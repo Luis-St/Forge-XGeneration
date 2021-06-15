@@ -2,7 +2,7 @@ package net.luis.nero.common.world.gen.feature.structure;
 
 import java.util.Random;
 
-import net.luis.nero.init.world.structure.ModStructurePieceTypes;
+import net.luis.nero.init.world.gen.feature.structure.ModStructurePieceTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;

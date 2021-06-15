@@ -1,4 +1,4 @@
-package net.luis.nero.init.world.structure;
+package net.luis.nero.init.world.gen.feature.structure;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.gen.feature.structure.DeepslatePortalStructure;

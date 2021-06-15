@@ -1,4 +1,4 @@
-package net.luis.nero.init.world;
+package net.luis.nero.init.world.gen;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.gen.surfacebuilder.DeepslateSurfaceBuilder;

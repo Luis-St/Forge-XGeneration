@@ -2,7 +2,7 @@ package net.luis.nero.common.world.gen;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;
-import net.luis.nero.init.world.ModSurfaceBuilders;
+import net.luis.nero.init.world.gen.ModSurfaceBuilders;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;

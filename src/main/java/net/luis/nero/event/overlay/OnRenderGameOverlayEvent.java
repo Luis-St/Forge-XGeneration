@@ -2,7 +2,7 @@ package net.luis.nero.event.overlay;
 
 import java.util.Locale;
 
-import net.luis.nero.init.world.ModDimensions;
+import net.luis.nero.init.world.dimension.ModDimensionWorlds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -23,7 +23,7 @@ public class OnRenderGameOverlayEvent {
 			double x = Math.round(player.getX() * 1000);
 			double y = Math.round(player.getY() * 100000);
 			double z = Math.round(player.getZ() * 1000);
-			if (world.dimension().equals(ModDimensions.DEEPSLATE_WORLD)) {
+			if (world.dimension().equals(ModDimensionWorlds.DEEPSLATE)) {
 				double roundX = x / 1000;
 				double roundY = (y / 100000) - 255;
 				double roundZ = z / 1000;

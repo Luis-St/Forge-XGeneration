@@ -2,7 +2,7 @@
 package net.luis.nero.common.world.gen;
 
 import net.luis.nero.Nero;
-import net.luis.nero.init.world.ModWorldCarvers;
+import net.luis.nero.init.world.gen.feature.ModWorldCarvers;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.carver.ConfiguredCarver;

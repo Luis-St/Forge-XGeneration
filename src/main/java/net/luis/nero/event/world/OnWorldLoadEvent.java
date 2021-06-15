@@ -3,7 +3,7 @@ package net.luis.nero.event.world;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.luis.nero.init.world.structure.ModStructures;
+import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;

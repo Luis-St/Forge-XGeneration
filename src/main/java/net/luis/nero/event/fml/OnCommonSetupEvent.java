@@ -14,7 +14,7 @@ import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.core.NetworkHandler;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.luis.nero.init.world.structure.ModStructures;
+import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;

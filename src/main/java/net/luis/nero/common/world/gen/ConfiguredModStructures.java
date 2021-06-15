@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.gen;
 
 import net.luis.nero.Nero;
-import net.luis.nero.init.world.structure.ModStructures;
+import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.IFeatureConfig;
