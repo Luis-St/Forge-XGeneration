@@ -1,8 +1,5 @@
 package net.luis.nero.common.world.gen.feature.structure;
 
-import org.apache.logging.log4j.Level;
-
-import net.luis.nero.Nero;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -35,8 +32,7 @@ public class DeepslatePortalStructure extends Structure<NoFeatureConfig> {
 	@Override
 	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeProvider biomeProvider, long seed, SharedSeedRandom rng, int chunkX, int chunkZ, 
 			Biome biome, ChunkPos chunkPos, NoFeatureConfig config) {
-		rng.setLargeFeatureSeed(seed, chunkX, chunkZ);
-		return chunkPos.x % 3 == 0 && chunkPos.z % 3 == 0 && rng.nextInt(4) == 0;
+		return true;
 	}
 	
 	public static class Start extends StructureStart<NoFeatureConfig> {
@@ -48,10 +44,9 @@ public class DeepslatePortalStructure extends Structure<NoFeatureConfig> {
 		@Override
 		public void generatePieces(DynamicRegistries registries, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, 
 				Biome biome, NoFeatureConfig config) {
-			DeepslatePortalStructurePiece portalStructurePiece = new DeepslatePortalStructurePiece(random, (chunkX << 4) + 7, 10, (chunkZ << 4) + 7);
+			DeepslatePortalStructurePiece portalStructurePiece = new DeepslatePortalStructurePiece(random, (chunkX << 4) + 7, 5, (chunkZ << 4) + 7);
 			this.pieces.add(portalStructurePiece);
 			this.calculateBoundingBox();
-			Nero.LOGGER.log(Level.DEBUG, "Structure in chunk {}, {}", chunkX, chunkZ);
 		}
 		
 	}

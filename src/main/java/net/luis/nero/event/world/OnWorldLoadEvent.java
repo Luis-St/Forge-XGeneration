@@ -27,5 +27,5 @@ public class OnWorldLoadEvent {
 			ObfuscationReflectionHelper.setPrivateValue(DimensionStructuresSettings.class, structuresSettings, structureMap, "field_236193_d_");
 		}
 	}
-
+	
 }
