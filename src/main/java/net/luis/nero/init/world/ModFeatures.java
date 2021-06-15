@@ -1,10 +1,10 @@
 package net.luis.nero.init.world;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.feature.FlatBedrockFeature;
-import net.luis.nero.common.world.feature.ModDungeonsFeature;
-import net.luis.nero.common.world.feature.ModLakesFeature;
-import net.luis.nero.common.world.feature.ModOreFeature;
+import net.luis.nero.common.world.gen.feature.FlatBedrockFeature;
+import net.luis.nero.common.world.gen.feature.ModDungeonsFeature;
+import net.luis.nero.common.world.gen.feature.ModLakesFeature;
+import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

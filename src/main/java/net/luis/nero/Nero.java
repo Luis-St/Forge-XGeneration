@@ -25,6 +25,7 @@ import net.luis.nero.init.world.ModFeatures;
 import net.luis.nero.init.world.ModSurfaceBuilders;
 import net.luis.nero.init.world.ModWorldCarvers;
 import net.luis.nero.init.world.biome.ModBiomes;
+import net.luis.nero.init.world.structure.ModStructures;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -71,7 +72,7 @@ public class Nero {
 		ModFeatures.FEATURES.register(eventBus);
 		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
-//		ModStructures.STRUCTURES.register(eventBus); // TODO: fix error
+		ModStructures.STRUCTURES.register(eventBus); // TODO: fix error
 		ModBiomes.BIOMES.register(eventBus);
 		
 		this.createConfigPath();

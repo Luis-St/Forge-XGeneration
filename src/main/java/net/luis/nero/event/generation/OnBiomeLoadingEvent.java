@@ -2,8 +2,9 @@ package net.luis.nero.event.generation;
 
 import java.util.stream.Collectors;
 
-import net.luis.nero.common.world.feature.DefaultModFeatures;
-import net.luis.nero.common.world.feature.ModOreFeature;
+import net.luis.nero.common.world.gen.ConfiguredModStructures;
+import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
+import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -38,14 +39,13 @@ public class OnBiomeLoadingEvent {
 			
 		} else if (category == Category.THEEND) {
 			
-		} else if (category == Category.THEEND) {
-			
 		} else if (category == Category.NETHER) {
 			
 		} else { 
 			
 			DefaultModFeatures.addOreOverwrites(generationBuilder);
 			DefaultModFeatures.addFlatBedrock(generationBuilder);
+			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_PORTAL);
 			
 		}
 		

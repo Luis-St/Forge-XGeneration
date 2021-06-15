@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.biome;
 
-import net.luis.nero.common.world.feature.DefaultModFeatures;
-import net.luis.nero.common.world.surfacebuilder.ConfiguredModSurfaceBuilders;
+import net.luis.nero.common.world.gen.ConfiguredModSurfaceBuilders;
+import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;

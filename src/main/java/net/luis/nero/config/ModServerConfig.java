@@ -1,6 +1,7 @@
 package net.luis.nero.config;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.config.ConfigUtil;
@@ -23,6 +24,10 @@ public class ModServerConfig {
 		for (Class<?> configClass : ConfigUtil.getConfigClassesForType(ModConfig.Type.SERVER)) {
 			for (Field configField : configClass.getDeclaredFields()) {
 				configField.setAccessible(true);
+				if (!Modifier.isStatic(configField.getModifiers())) {
+					Nero.LOGGER.warn("The config Field {}, must be static", configField.getName());
+					continue;
+				}
 				try {
 					if (configField.isAnnotationPresent(ConfigBooleanValue.class)) {
 						ConfigBooleanValue annotation = configField.getAnnotation(ConfigBooleanValue.class);

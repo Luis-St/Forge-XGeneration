@@ -1,7 +1,7 @@
 package net.luis.nero.init.world;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.surfacebuilder.DeepslateSurfaceBuilder;
+import net.luis.nero.common.world.gen.surfacebuilder.DeepslateSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.fml.RegistryObject;

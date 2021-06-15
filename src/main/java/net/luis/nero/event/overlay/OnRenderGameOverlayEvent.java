@@ -2,7 +2,7 @@ package net.luis.nero.event.overlay;
 
 import java.util.Locale;
 
-import net.luis.nero.common.world.dimension.ModDimensions;
+import net.luis.nero.init.world.ModDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;

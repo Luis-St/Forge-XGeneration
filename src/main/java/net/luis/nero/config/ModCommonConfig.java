@@ -1,6 +1,8 @@
 package net.luis.nero.config;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.config.ConfigUtil;
@@ -16,6 +18,8 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class ModCommonConfig {
 	
+	// TODO: better annotation system
+	
 	public static ForgeConfigSpec buildConfig() {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		builder.comment("This is a working default config\nChanges of the default values can lead problems");
@@ -23,6 +27,10 @@ public class ModCommonConfig {
 		for (Class<?> configClass : ConfigUtil.getConfigClassesForType(ModConfig.Type.COMMON)) {
 			for (Field configField : configClass.getDeclaredFields()) {
 				configField.setAccessible(true);
+				if (!Modifier.isStatic(configField.getModifiers())) {
+					Nero.LOGGER.warn("The config Field {}, must be static", configField.getName());
+					continue;
+				}
 				try {
 					if (configField.isAnnotationPresent(ConfigBooleanValue.class)) {
 						ConfigBooleanValue annotation = configField.getAnnotation(ConfigBooleanValue.class);
@@ -80,6 +88,19 @@ public class ModCommonConfig {
 		}
 		builder.pop();
 		return builder.build();
+	}
+	
+	protected static String getValueName(Field field) {
+		String[] fieldNameSplit = field.getName().split("_");
+		for (int i = 0; i < fieldNameSplit.length; i++) {
+			String string = fieldNameSplit[i].toLowerCase();
+			if (i == 0) {
+				fieldNameSplit[i] = string;
+			} else {
+				fieldNameSplit[i] = string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
+			}
+		}
+		return Arrays.toString(fieldNameSplit).replace("[", "").replace("]", "").replace(", ", "");
 	}
 
 }
