@@ -107,6 +107,15 @@ public class ConfiguredModFeatures {
 	public static final ConfiguredFeature<?, ?> FLAT_BEDROCK = register("flat_bedrock", 
 			ModFeatures.FLAT_BEDROCK.get().configured(IFeatureConfig.NONE).count(FeatureSpread.fixed(1))
 			.squared().range(5));
+	
+	public static final ConfiguredFeature<?, ?> TO_DEEPSLATE_PORTAL = register("to_deepslate_portal", 
+			ModFeatures.TO_DEEPSLATE_PORTAL.get().configured(IFeatureConfig.NONE).count(FeatureSpread.fixed(1))
+			.range(5).squared());
+	
+	@Deprecated
+	protected static final ConfiguredFeature<?, ?> TO_OVERWORLD_PORTAL = register("to_overworld_portal", 
+			ModFeatures.TO_OVERWORLD_PORTAL.get().configured(IFeatureConfig.NONE).count(FeatureSpread.fixed(1))
+			.range(5).squared());
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Nero.MOD_ID, name), configuredFeature);

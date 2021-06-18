@@ -66,7 +66,7 @@ public class OnCommonSetupEvent {
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {
-		registerStructure(ModStructures.DEEPSLATE_PORTAL.get(), new StructureSeparationSettings(4, 1, 456734349), false);
+		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureSeparationSettings(4, 1, 456734349), false);
 	}
 	
 	private static <F extends Structure<?>> void registerStructure(F structure, StructureSeparationSettings settings, boolean transformLand) {

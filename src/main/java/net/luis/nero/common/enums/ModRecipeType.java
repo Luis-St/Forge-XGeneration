@@ -8,7 +8,8 @@ import net.luis.nero.common.recipe.helper.MilestoneRecipeHelper;
 
 public enum ModRecipeType {
 	
-	MILESTONE("milestone", 0, new MilestoneRecipeHelper());
+	MILESTONE("milestone", 0, new MilestoneRecipeHelper()),
+	;
 	
 	private final String name;
 	private final int id;

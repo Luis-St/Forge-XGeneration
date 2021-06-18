@@ -23,7 +23,7 @@ public class OnWorldLoadEvent {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
 			DimensionStructuresSettings structuresSettings = serverWorld.getChunkSource().generator.getSettings();
 			Map<Structure<?>, StructureSeparationSettings> structureMap = new HashMap<>(structuresSettings.structureConfig());
-			structureMap.putIfAbsent(ModStructures.DEEPSLATE_PORTAL.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructures.DEEPSLATE_PORTAL.get()));
+			structureMap.putIfAbsent(ModStructures.DEEPSLATE_MINESHAFT.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructures.DEEPSLATE_MINESHAFT.get()));
 			ObfuscationReflectionHelper.setPrivateValue(DimensionStructuresSettings.class, structuresSettings, structureMap, "field_236193_d_");
 		}
 	}

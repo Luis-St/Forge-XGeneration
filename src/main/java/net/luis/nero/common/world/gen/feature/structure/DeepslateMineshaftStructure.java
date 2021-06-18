@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.gen.feature.structure;
 
+import net.luis.nero.Nero;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -13,15 +14,15 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class DeepslatePortalStructure extends Structure<NoFeatureConfig> {
+public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 
-	public DeepslatePortalStructure() {
+	public DeepslateMineshaftStructure() {
 		super(NoFeatureConfig.CODEC);
 	}
 
 	@Override
 	public IStartFactory<NoFeatureConfig> getStartFactory() {
-		return DeepslatePortalStructure.Start::new;
+		return DeepslateMineshaftStructure.Start::new;
 	}
 	
 	@Override
@@ -30,9 +31,12 @@ public class DeepslatePortalStructure extends Structure<NoFeatureConfig> {
 	}
 	
 	@Override
-	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeProvider biomeProvider, long seed, SharedSeedRandom rng, int chunkX, int chunkZ, 
+	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeProvider biomeProvider, long seed, SharedSeedRandom seedRng, int chunkX, int chunkZ, 
 			Biome biome, ChunkPos chunkPos, NoFeatureConfig config) {
-		return true;
+//		double d = seedRng.nextDouble();
+//		Nero.LOGGER.debug("isFeatureChunk: " + (d < 0.05));
+//		Nero.LOGGER.debug("isFeatureChunk: " + d);
+		return /*d < 0.05*/true;
 	}
 	
 	public static class Start extends StructureStart<NoFeatureConfig> {
@@ -44,9 +48,11 @@ public class DeepslatePortalStructure extends Structure<NoFeatureConfig> {
 		@Override
 		public void generatePieces(DynamicRegistries registries, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, 
 				Biome biome, NoFeatureConfig config) {
-			DeepslatePortalStructurePiece portalStructurePiece = new DeepslatePortalStructurePiece(random, (chunkX << 4) + 7, 5, (chunkZ << 4) + 7);
-			this.pieces.add(portalStructurePiece);
+			DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkX << 4) + 7, 5, (chunkZ << 4) + 7);
+			this.pieces.add(structurePiece);
 			this.calculateBoundingBox();
+			this.moveInsideHeights(random, 128, 128);
+			Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
 		}
 		
 	}

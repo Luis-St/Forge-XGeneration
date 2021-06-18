@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 
 public class ConfiguredModStructures {
 	
-	public static final StructureFeature<?, ?> DEEPSLATE_PORTAL = register("deepslate_portal", ModStructures.DEEPSLATE_PORTAL.get()
+	public static final StructureFeature<?, ?> DEEPSLATE_MINESHAFT = register("deepslate_mineshaft", ModStructures.DEEPSLATE_MINESHAFT.get()
 			.configured(IFeatureConfig.NONE));
 	
 	private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(String name, StructureFeature<FC, F> structure) {

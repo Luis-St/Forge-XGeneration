@@ -23,11 +23,11 @@ import net.minecraftforge.common.DungeonHooks;
 
 public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 	
-	private final BlockState air = Blocks.CAVE_AIR.defaultBlockState();
-	private final BlockState deepslateBricks = ModBlocks.DEEPSLATE_BRICKS.get().defaultBlockState();
-	private final BlockState crackedDeepslateBrick = ModBlocks.CRACKED_DEEPSLATE_BRICKS.get().defaultBlockState();
-	private final BlockState deepslateTiles = ModBlocks.DEEPSLATE_TILES.get().defaultBlockState();
-	private final BlockState crackedDeepslateTiles = ModBlocks.CRACKED_DEEPSLATE_TILES.get().defaultBlockState();
+	protected static final BlockState CAVE_AIR = Blocks.CAVE_AIR.defaultBlockState();
+	protected static final BlockState DEEPSLATE_BRICKS = ModBlocks.DEEPSLATE_BRICKS.get().defaultBlockState();
+	protected static final BlockState CRACKED_DEEPSLATE_BRICKS = ModBlocks.CRACKED_DEEPSLATE_BRICKS.get().defaultBlockState();
+	protected static final BlockState DEEPSLATE_TILES = ModBlocks.DEEPSLATE_TILES.get().defaultBlockState();
+	protected static final BlockState CRACKED_DEEPSLATE_TILES = ModBlocks.CRACKED_DEEPSLATE_TILES.get().defaultBlockState();
 	
 	private final Set<Block> replaceBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.TUFF.get());
 	
@@ -51,16 +51,16 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 					for (int y = centerY; y <= centerY + height; y++) {
 						for (int z = centerZ - width; z <= centerZ + width; z++) {
 							BlockPos roomPos = new BlockPos(x, y, z);
-							seedReader.setBlock(roomPos, this.air, 2);
+							seedReader.setBlock(roomPos, CAVE_AIR, 2);
 						}
 					}
 				}
 				if (rng.nextInt(10) == 0) {
-					mainStone = this.deepslateTiles;
-					chanceStone = this.crackedDeepslateTiles;
+					mainStone = DEEPSLATE_TILES;
+					chanceStone = CRACKED_DEEPSLATE_TILES;
 				} else {
-					mainStone = this.deepslateBricks;
-					chanceStone = this.crackedDeepslateBrick;
+					mainStone = DEEPSLATE_BRICKS;
+					chanceStone = CRACKED_DEEPSLATE_BRICKS;
 				}
 				for (int x = centerX - width - 1; x <= centerX + width + 1; x++) {
 					for (int y = centerY - 1; y <= centerY + height + 1; y++) {

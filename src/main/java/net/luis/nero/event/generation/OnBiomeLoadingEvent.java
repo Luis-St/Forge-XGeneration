@@ -36,6 +36,7 @@ public class OnBiomeLoadingEvent {
 			DefaultModFeatures.addDeepslateStructures(generationBuilder);
 			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
 			DefaultModFeatures.addDeepslateOres(generationBuilder);
+			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_MINESHAFT);
 			
 		} else if (category == Category.THEEND) {
 			
@@ -45,7 +46,8 @@ public class OnBiomeLoadingEvent {
 			
 			DefaultModFeatures.addOreOverwrites(generationBuilder);
 			DefaultModFeatures.addFlatBedrock(generationBuilder);
-			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_PORTAL);
+			// TODO: better solution possible
+//			generationBuilder.addFeature(stageStructures, () -> ConfiguredModFeatures.TO_DEEPSLATE_PORTAL);
 			
 		}
 		

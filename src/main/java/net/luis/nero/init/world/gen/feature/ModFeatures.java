@@ -5,6 +5,7 @@ import net.luis.nero.common.world.gen.feature.FlatBedrockFeature;
 import net.luis.nero.common.world.gen.feature.ModDungeonsFeature;
 import net.luis.nero.common.world.gen.feature.ModLakesFeature;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
+import net.luis.nero.common.world.gen.feature.PortalFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +19,8 @@ public class ModFeatures {
 	public static final RegistryObject<ModLakesFeature> LAKE = FEATURES.register("lake", ModLakesFeature::new);
 	public static final RegistryObject<ModOreFeature> ORE = FEATURES.register("ore", ModOreFeature::new);
 	public static final RegistryObject<FlatBedrockFeature> FLAT_BEDROCK = FEATURES.register("flat_bedrock", FlatBedrockFeature::new);
-
+	public static final RegistryObject<PortalFeature.ToDeepslate> TO_DEEPSLATE_PORTAL = FEATURES.register("to_deepslate_portal", PortalFeature.ToDeepslate::new);
+	public static final RegistryObject<PortalFeature.ToOverworld> TO_OVERWORLD_PORTAL = FEATURES.register("to_overworld_portal", PortalFeature.ToOverworld::new);
+	
 }
 
