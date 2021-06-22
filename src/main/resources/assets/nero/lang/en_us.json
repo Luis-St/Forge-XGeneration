@@ -1,4 +1,7 @@
 {	
+  "entity.nero.soul_blaze": "Soul Blaze",
+  "entity.nero.soul_fireball": "Soul Fireball",
+  
   "effect.nero.harvest_fatigue": "Harvest Fatigue",
   "effect.nero.ice": "Ice",
   "effect.nero.harvest": "Harvest",
@@ -28,6 +31,7 @@
 #  "item.minecraft.potion.effect.water_rune": "Rune of Water Potion",
 #  "item.minecraft.splash_potion.effect.water_rune": "Rune of Water Splash Potion",
 #  "item.minecraft.lingering_potion.effect.water_rune": "Rune of Water Lingering Potion",
+  "item.nero.soul_fire_charge": "Soul Fire Charge",
   "item.nero.magician_master_blood_orb": "Magician Master Blood Orb",
   "item.nero.slate": "Slate",
   "item.nero.reinforced_slate": "Reinforced Slate",

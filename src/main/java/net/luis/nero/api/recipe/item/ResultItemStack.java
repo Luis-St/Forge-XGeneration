@@ -13,7 +13,7 @@ public class ResultItemStack {
 	protected final int max;
 	protected final Chance chance;
 	
-	public static final ResultItemStack DUMMY = new ResultItemStack(ItemStack.EMPTY, Chance.DUMMY);
+	public static final ResultItemStack EMPTY = new ResultItemStack(ItemStack.EMPTY, Chance.NULL);
 	
 	public ResultItemStack(Item item, int chance) {
 		this(item, 1, chance);

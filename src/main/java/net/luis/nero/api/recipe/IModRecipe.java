@@ -1,38 +1,26 @@
 package net.luis.nero.api.recipe;
 
-import java.util.List;
-import java.util.UUID;
-
-import net.luis.nero.api.inventory.ItemStackList;
 import net.luis.nero.api.recipe.item.ResultItemStack;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 
-public interface IModRecipe {
+public interface IModRecipe<C extends IInventory> extends IRecipe<C> {
 	
-	UUID getId();
+	@Override
+	default ItemStack getResultItem() {
+		throw new UnsupportedOperationException();
+	}
 	
-	IModRecipeHelper<?> getRecipeHelper();
+	@Override
+	default NonNullList<Ingredient> getIngredients() {
+		throw new UnsupportedOperationException();
+	}
 	
-	List<ItemStack> getInput();
+	NonNullList<ItemStack> getInput();
 	
-	List<ResultItemStack> getResultItems();
-	
-	List<ItemStack> getResult();
-	
-	int getMaxInput();
-	
-	int getMaxResult();
-	
-	int getProgressTime();
-	
-	boolean containsAll(ItemStackList inventory);
-	
-	boolean containsItemStack(ItemStack toCheck, boolean ignoreTags);
-	
-	boolean equalsId(IModRecipe toCheck);
-	
-	boolean equalsItemStack(ItemStack itemStack, ItemStack toCheck, boolean ignoreTags);
-	
-	boolean equalsResultItemStack(ResultItemStack resultStack, ResultItemStack toCheck, boolean ignoreTags);
+	NonNullList<ResultItemStack> getResult();
 	
 }

@@ -20,6 +20,7 @@ import net.luis.nero.common.item.rune.WaterRuneItem;
 import net.luis.nero.common.item.rune.WindRuneItem;
 import net.luis.nero.init.util.ModItemGroups;
 import net.minecraft.item.DyeColor;
+import net.minecraft.item.FireChargeItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -133,5 +134,8 @@ public class ModItems {
 			() -> new ElementalRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<HarvestRuneItem> HARVEST_RUNE = ITEMS.register("harvest_rune",
 			() -> new HarvestRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
+	
+	public static final RegistryObject<FireChargeItem> SOUL_FIRE_CHARGE = ITEMS.register("soul_fire_charge",
+			() -> new FireChargeItem(new Item.Properties().tab(ModItemGroups.MISC)));
 	
 }

@@ -1,33 +1,95 @@
 package net.luis.nero.common.recipe;
 
-import java.util.UUID;
+import com.google.gson.JsonObject;
 
-import net.luis.nero.api.recipe.AbstractRecipe;
-import net.luis.nero.api.recipe.IModRecipeHelper;
+import net.luis.nero.api.recipe.IModRecipe;
 import net.luis.nero.api.recipe.item.ResultItemStack;
 import net.luis.nero.api.util.VarArgs;
-import net.luis.nero.common.recipe.helper.MilestoneRecipeHelper;
+import net.luis.nero.init.block.item.ModBlockItems;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class MilestoneRecipe extends AbstractRecipe<MilestoneRecipe> {
+public class MilestoneRecipe implements IModRecipe<Inventory> {
+	
+	private final ResourceLocation id;
+	private final VarArgs<ItemStack> input;
+	private final VarArgs<ResultItemStack> result;
+	
+	public MilestoneRecipe(ResourceLocation id, VarArgs<ItemStack> input, VarArgs<ResultItemStack> result) {
+		this.id = id;
+		this.input = input;
+		this.result = result;
+	}
 
-	public MilestoneRecipe(VarArgs<ItemStack> input, VarArgs<ResultItemStack> reslut, int progressTime, UUID id) {
-		super(input, reslut, progressTime, id);
+	@Override
+	public boolean matches(Inventory inventory, World world) {
+		return false;
+	}
+
+	@Override
+	public ItemStack assemble(Inventory inventory) {
+		return null;
+	}
+
+	@Override
+	public boolean canCraftInDimensions(int width, int height) {
+		return true;
+	}
+
+	@Override
+	public NonNullList<ItemStack> getInput() {
+		return NonNullList.of(ItemStack.EMPTY, this.input.asArray());
+	}
+
+	@Override
+	public NonNullList<ResultItemStack> getResult() {
+		return NonNullList.of(ResultItemStack.EMPTY, this.result.asArray());
+	}
+
+	@Override
+	public ResourceLocation getId() {
+		return this.id;
+	}
+
+	@Override
+	public IRecipeSerializer<?> getSerializer() {
+		return null;
+	}
+
+	@Override
+	public IRecipeType<?> getType() {
+		return null;
 	}
 	
 	@Override
-	public IModRecipeHelper<MilestoneRecipe> getRecipeHelper() {
-		return new MilestoneRecipeHelper();
+	public ItemStack getToastSymbol() {
+		return new ItemStack(ModBlockItems.MILESTONE.get());
 	}
 	
-	@Override
-	public int getMaxInput() {
-		return 4;
-	}
+	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MilestoneRecipe> {
 
-	@Override
-	public int getMaxResult() {
-		return 10;
+		@Override
+		public MilestoneRecipe fromJson(ResourceLocation id, JsonObject jsonObject) {
+			return null;
+		}
+
+		@Override
+		public MilestoneRecipe fromNetwork(ResourceLocation id, PacketBuffer packetBuffer) {
+			return null;
+		}
+
+		@Override
+		public void toNetwork(PacketBuffer id, MilestoneRecipe recipe) {
+			
+		}
+		
 	}
 
 }

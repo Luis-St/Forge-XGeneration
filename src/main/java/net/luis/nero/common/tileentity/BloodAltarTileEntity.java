@@ -1,20 +1,14 @@
 package net.luis.nero.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.luis.nero.api.tileentity.IAnimatedTileEntity;
 import net.luis.nero.api.tileentity.IEnergy;
-import net.luis.nero.common.recipe.BloodAltarRecipe;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.RegistryObject;
 
 public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergy<BloodAltarTileEntity> {
 	
@@ -173,20 +167,19 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		public static final int BLOOD_BUCKET = 7500;
 	}
 	
-	@SuppressWarnings("unused")
 	public static class BloodAltarRecipes {
-		public static final List<BloodAltarRecipe> RECIPES = new ArrayList<BloodAltarRecipe>();
-		
-		
-		private static BloodAltarRecipe register(RegistryObject<? extends Item> input, RegistryObject<? extends Item> output, int time, int blood) {
-			return register(input.get(), output.get(), time, blood);
-		}
-		
-		private static BloodAltarRecipe register(Item input, Item output, int time, int blood) {
-			BloodAltarRecipe recipe = new BloodAltarRecipe(input, output, time, blood);
-			RECIPES.add(recipe);
-			return recipe;
-		}
+//		public static final List<BloodAltarRecipe> RECIPES = new ArrayList<BloodAltarRecipe>();
+//		
+//		
+//		private static BloodAltarRecipe register(RegistryObject<? extends Item> input, RegistryObject<? extends Item> output, int time, int blood) {
+//			return register(input.get(), output.get(), time, blood);
+//		}
+//		
+//		private static BloodAltarRecipe register(Item input, Item output, int time, int blood) {
+//			BloodAltarRecipe recipe = new BloodAltarRecipe(input, output, time, blood);
+//			RECIPES.add(recipe);
+//			return recipe;
+//		}
 	}
 
 }

@@ -6,7 +6,7 @@ public class Chance {
 	
 	private final int chance;
 	
-	public static final Chance DUMMY = new Chance(-1);
+	public static final Chance NULL = new Chance(-1);
 	
 	public Chance(int chance) {
 		this.chance = chance;
@@ -28,7 +28,7 @@ public class Chance {
 		return chance == 0;
 	}
 	
-	protected final boolean isDummy() {
+	protected final boolean isNull() {
 		return this.chance == -1;
 	}
 	
@@ -37,7 +37,7 @@ public class Chance {
 			return true;
 		} else if (this.isAlwaysFalse()) {
 			return false;
-		} else if (this.isDummy()) {
+		} else if (this.isNull()) {
 			return false;
 		}
 		return chance >= new Random().nextInt(100);

@@ -35,13 +35,11 @@ public class OnCommonSetupEvent {
 	
 	@SubscribeEvent
 	public static void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			registerNetwork(event);
-			registerCapability(event);
-			registerBiome(event);
-			registerUtil(event);
-			registerStructure(event);
-		});
+		registerNetwork(event);
+		registerCapability(event);
+		registerBiome(event);
+		registerUtil(event);
+		registerStructure(event);
 	}
 	
 	protected static void registerNetwork(FMLCommonSetupEvent event) {

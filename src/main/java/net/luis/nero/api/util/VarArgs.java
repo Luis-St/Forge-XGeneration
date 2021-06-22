@@ -48,4 +48,8 @@ public class VarArgs<T> {
 		return this.list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public T[] asArray() {
+		return (T[]) this.list.toArray();
+	}
 }

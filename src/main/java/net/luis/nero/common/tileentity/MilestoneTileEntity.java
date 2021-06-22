@@ -1,21 +1,12 @@
 package net.luis.nero.common.tileentity;
 
-import net.luis.nero.api.tileentity.AbstractRecipeTileEntity;
 import net.luis.nero.api.tileentity.IAnimatedTileEntity;
-import net.luis.nero.common.enums.ModRecipeType;
-import net.luis.nero.common.inventory.RecipeInventory;
-import net.luis.nero.common.recipe.MilestoneRecipe;
-import net.luis.nero.common.recipe.helper.MilestoneRecipeHelper;
-import net.luis.nero.init.block.util.ModTileEntityTypes;
+import net.minecraft.tileentity.ITickableTileEntity;
 
-public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecipe> implements IAnimatedTileEntity {
+public class MilestoneTileEntity implements IAnimatedTileEntity, ITickableTileEntity {
 	
 	private float previousRotation = 0F;
 	private float currentRotation = 0F;
-	
-	public MilestoneTileEntity() {
-		super(ModTileEntityTypes.MILESTONE.get(), ModRecipeType.MILESTONE, new MilestoneRecipeHelper(), new RecipeInventory(10));
-	}
 	
 	@Override
 	public float getCurrent() {
@@ -27,9 +18,10 @@ public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecip
 		return this.previousRotation;
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public float getVelocity() {
-		return (this.isProgressing() ? 10F : 0F) / 100;
+		return (/*this.isProgressing()*/true ? 10F : 0F) / 100;
 	}
 
 	@Override
@@ -45,7 +37,6 @@ public class MilestoneTileEntity extends AbstractRecipeTileEntity<MilestoneRecip
 	
 	@Override
 	public void tick() {
-		super.tick();
 		this.previousRotation = this.currentRotation;
 		this.currentRotation = this.getNext();
 	}
