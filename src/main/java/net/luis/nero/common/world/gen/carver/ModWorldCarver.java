@@ -21,6 +21,8 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
+//TODO: move to api package
+
 public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	
 	public ModWorldCarver() {

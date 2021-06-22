@@ -18,7 +18,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class ModCommonConfig {
 	
-	// TODO: better annotation system
+	// TODO: config value enum -> order in confifg (Entity, Block, Item, World, ...)
 	
 	public static ForgeConfigSpec buildConfig() {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

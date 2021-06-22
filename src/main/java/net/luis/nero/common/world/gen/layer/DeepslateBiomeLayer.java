@@ -10,6 +10,9 @@ import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 
+// TODO: find out how BetterEnd BiomeMap works -> and recreate
+// TODO: if finished: create/add more biomes
+
 public class DeepslateBiomeLayer {
 
 	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> createBaseLayer(LongFunction<C> function) {

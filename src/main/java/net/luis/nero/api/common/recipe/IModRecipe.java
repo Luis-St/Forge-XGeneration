@@ -9,6 +9,8 @@ import net.minecraft.util.NonNullList;
 
 public interface IModRecipe<C extends IInventory> extends IRecipe<C> {
 	
+	// TODO: finish 
+	
 	@Override
 	default ItemStack getResultItem() {
 		throw new UnsupportedOperationException();

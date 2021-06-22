@@ -4,6 +4,8 @@ import net.luis.nero.api.common.item.IRuneType;
 
 public enum RuneType implements IRuneType {
 	
+	// TODO: test if possible to use config values here
+	
 	RUNE(0, 0),
 	WATER(250, 0),
 	// TODO: test and/or modify

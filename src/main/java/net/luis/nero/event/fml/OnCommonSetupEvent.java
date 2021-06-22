@@ -7,9 +7,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.capability.CapabilityFactory;
-import net.luis.nero.api.capability.CapabilityStorage;
-import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.CapabilityFactory;
+import net.luis.nero.api.common.capability.CapabilityStorage;
+import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.core.NetworkHandler;

@@ -19,6 +19,7 @@ public class ModBiomeKeys {
 	
 	public static final RegistryKey<Biome> DEEPSLATE = register("deepslate", -1);
 	
+	// TODO: check if needed -> if not remove
 	private static RegistryKey<Biome> register(String biomeName, int id) {
 		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Nero.MOD_ID, biomeName));
 		BIOMES.add(key);

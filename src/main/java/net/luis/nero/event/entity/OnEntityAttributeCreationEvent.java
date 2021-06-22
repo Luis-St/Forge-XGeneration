@@ -1,5 +1,6 @@
 package net.luis.nero.event.entity;
 
+import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.luis.nero.common.entity.SoulBlazeEntity;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -13,6 +14,7 @@ public class OnEntityAttributeCreationEvent {
 	@SubscribeEvent
 	public static void entityAttributeCreation(EntityAttributeCreationEvent event) {
 		event.put(ModEntityTypes.SOUL_BLAZE.get(), SoulBlazeEntity.registerAttributes());
+		event.put(ModEntityTypes.HOVERING_INFERNO.get(), HoveringInfernoEntity.registerAttributes());
 	}
 
 }

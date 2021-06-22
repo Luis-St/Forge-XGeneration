@@ -14,6 +14,8 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+// TODO: finish
+
 public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 
 	public DeepslateMineshaftStructure() {

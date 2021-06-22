@@ -29,6 +29,8 @@ import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
 	
+	// TODO: get SETTINGS_CODEC from config and not form json
+	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(Codec.INT.fieldOf("base_height").forGetter(Settings::getBaseHeight),
 					Codec.INT.fieldOf("min_height").forGetter(Settings::getMinHeight),

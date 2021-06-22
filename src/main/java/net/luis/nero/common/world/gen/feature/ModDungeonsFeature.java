@@ -23,6 +23,8 @@ import net.minecraftforge.common.DungeonHooks;
 
 public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 	
+	// allow player to change loot table and chest placement via config
+	
 	protected static final BlockState CAVE_AIR = Blocks.CAVE_AIR.defaultBlockState();
 	protected static final BlockState DEEPSLATE_BRICKS = ModBlocks.DEEPSLATE_BRICKS.get().defaultBlockState();
 	protected static final BlockState CRACKED_DEEPSLATE_BRICKS = ModBlocks.CRACKED_DEEPSLATE_BRICKS.get().defaultBlockState();

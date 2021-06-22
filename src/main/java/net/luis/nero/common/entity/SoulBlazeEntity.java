@@ -28,6 +28,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	
+	// TODO: config value for Attributes
+	
 	private static final DataParameter<Byte> DATA_FLAGS_ID = EntityDataManager.defineId(BlazeEntity.class, DataSerializers.BYTE);
 	
 	public SoulBlazeEntity(World world, int x, int y, int z) {
@@ -58,8 +60,6 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 		return this.isCharged();
 	}
 	
-	// TODO: add translation key
-	// TODO: sort api package in common & client
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(4, new SoulBlazeEntity.SoulFireballAttackGoal(this));

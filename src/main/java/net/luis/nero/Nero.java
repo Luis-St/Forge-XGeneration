@@ -72,7 +72,7 @@ public class Nero {
 		ModFeatures.FEATURES.register(eventBus);
 		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
-		ModStructures.STRUCTURES.register(eventBus); // TODO: fix error
+		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
 		
 		this.createConfigPath();

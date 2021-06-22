@@ -5,6 +5,7 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
+// TODO: rename and move to other package may util
 public class ModRecipeHelper {
 	
 	public static Item glassBlockFromColor(DyeColor color) {

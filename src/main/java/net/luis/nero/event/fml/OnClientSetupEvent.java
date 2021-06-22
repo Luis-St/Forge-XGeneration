@@ -1,8 +1,8 @@
 package net.luis.nero.event.fml;
 
 
-import net.luis.nero.client.render.entity.SoulBlazeRenderer;
-import net.luis.nero.client.render.entity.SoulFireballRenderer;
+import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
+import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
 import net.luis.nero.client.render.tileentity.BloodAltarTileEntityRenderer;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;
@@ -29,8 +29,8 @@ public class OnClientSetupEvent {
 	}
 	
 	protected static void registerEntityRenderer(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_BLAZE.get(), SoulBlazeRenderer::new);
-		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_FIREBALL.get(), SoulFireballRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_BLAZE.get(), SoulBlazeEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_FIREBALL.get(), SoulFireballEntityRenderer::new);
 	}
 
 }

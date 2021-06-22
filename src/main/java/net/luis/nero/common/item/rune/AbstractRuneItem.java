@@ -3,8 +3,8 @@ package net.luis.nero.common.item.rune;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.luis.nero.api.capability.CapabilityUtil;
-import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.CapabilityUtil;
+import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.item.IRuneType;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
@@ -22,6 +22,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public abstract class AbstractRuneItem extends Item {
+	
+	// TODO: add each effect in config -> custom type RUNE
 	
 	private final IRuneType runeType;
 

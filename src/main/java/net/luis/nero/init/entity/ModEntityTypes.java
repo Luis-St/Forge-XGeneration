@@ -1,6 +1,7 @@
 package net.luis.nero.init.entity;
 
 import net.luis.nero.Nero;
+import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.luis.nero.common.entity.SoulBlazeEntity;
 import net.luis.nero.common.entity.SoulFireballEntity;
 import net.minecraft.entity.EntityClassification;
@@ -21,5 +22,9 @@ public class ModEntityTypes {
 	public static final RegistryObject<EntityType<SoulFireballEntity>> SOUL_FIREBALL = ENTITIES.register("soul_fireball", 
 			() -> EntityType.Builder.<SoulFireballEntity>of(SoulFireballEntity::new, EntityClassification.MISC).sized(0.3125F, 0.3125F)
 			.clientTrackingRange(4).updateInterval(10).build("soul_fireball"));
+	
+	public static final RegistryObject<EntityType<HoveringInfernoEntity>> HOVERING_INFERNO = ENTITIES.register("hovering_inferno", 
+			() -> EntityType.Builder.<HoveringInfernoEntity>of(HoveringInfernoEntity::new, EntityClassification.MONSTER).sized(0.3125F, 0.3125F)
+			.clientTrackingRange(8).build("hovering_inferno"));
 	
 }

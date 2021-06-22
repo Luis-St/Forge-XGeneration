@@ -11,10 +11,11 @@ import net.minecraft.world.World;
 public class IceEffect extends Effect {
 	
 	// TODO: 1.17 render ice hearts & overlay
+	// TODO: add AttributeModifier to config
 	
 	public IceEffect(EffectType effectType, int color) {
 		super(effectType, color);
-		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "acb7ea00-1235-40f3-a3b2-77a836fa3898", -0.3, AttributeModifier.Operation.MULTIPLY_TOTAL);	
+		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "acb7ea00-1235-40f3-a3b2-77a836fa3898", -0.25, AttributeModifier.Operation.MULTIPLY_TOTAL);	
 	}
 	
 	@Override

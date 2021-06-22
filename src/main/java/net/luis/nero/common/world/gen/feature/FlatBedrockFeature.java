@@ -12,6 +12,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
+// TODO: allowd modify via config (y, replace type, etc)
+
 public class FlatBedrockFeature extends Feature<NoFeatureConfig> {
 
 	public FlatBedrockFeature() {

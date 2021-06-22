@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 
-public class SoulFireballRenderer extends SpriteRenderer<SoulFireballEntity> implements ISoulFireEntityRenderer<SoulFireballEntity> {
+public class SoulFireballEntityRenderer extends SpriteRenderer<SoulFireballEntity> implements ISoulFireEntityRenderer<SoulFireballEntity> {
 
-	public SoulFireballRenderer(EntityRendererManager rendererManager) {
+	public SoulFireballEntityRenderer(EntityRendererManager rendererManager) {
 		super(rendererManager, Minecraft.getInstance().getItemRenderer(), 0.75F, true);
 	}
 	

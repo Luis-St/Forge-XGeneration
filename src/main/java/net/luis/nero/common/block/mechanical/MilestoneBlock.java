@@ -12,6 +12,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
+// TODO: finish
+
 public class MilestoneBlock extends Block {
 	
 	private static final VoxelShape SHAPE = Stream.of(Block.box(0, 0, 0, 16, 6, 16),

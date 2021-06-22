@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 // TODO: tp block
+// TODO: find better solution
 
 public abstract class PortalFeature extends Feature<NoFeatureConfig> {
 	

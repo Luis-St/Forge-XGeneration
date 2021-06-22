@@ -1,6 +1,6 @@
-package net.luis.nero.api.capability.handler;
+package net.luis.nero.api.common.capability.handler;
 
-import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.common.item.rune.AbstractRuneItem;

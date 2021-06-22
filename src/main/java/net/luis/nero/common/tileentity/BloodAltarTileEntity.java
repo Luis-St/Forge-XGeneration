@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergyTileEntity<BloodAltarTileEntity> {
 	
+	// TODO: add all constans to config
+	
 	protected int blood = 0;
 	protected int currentBlood = 0;
 	protected int previousBlood = 0;
@@ -154,6 +156,7 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 		this.previousBlood = nbt.getInt("previousBlood");
 	}
 	
+	// TODO: move in extra class
 	public static class BloodAltarConstants {
 		public static final int MAX = 37500;
 		public static final int HEART = 1000;

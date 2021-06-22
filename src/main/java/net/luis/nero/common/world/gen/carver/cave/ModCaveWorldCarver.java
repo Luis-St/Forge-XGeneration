@@ -11,6 +11,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
+//TODO: move to api package
+
 public class ModCaveWorldCarver extends ModWorldCarver {
 
 	public ModCaveWorldCarver() {

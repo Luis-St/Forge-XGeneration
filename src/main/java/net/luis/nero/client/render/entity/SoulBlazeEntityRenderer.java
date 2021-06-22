@@ -12,11 +12,11 @@ import net.minecraft.client.renderer.entity.model.BlazeModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
-public class SoulBlazeRenderer extends MobRenderer<SoulBlazeEntity, BlazeModel<SoulBlazeEntity>> implements ISoulFireEntityRenderer<SoulBlazeEntity> {
+public class SoulBlazeEntityRenderer extends MobRenderer<SoulBlazeEntity, BlazeModel<SoulBlazeEntity>> implements ISoulFireEntityRenderer<SoulBlazeEntity> {
 	
 	private static final ResourceLocation SOUL_BLAZE_LOCATION = new ResourceLocation(Nero.MOD_ID, "textures/entity/soul_blaze.png");
 
-	public SoulBlazeRenderer(EntityRendererManager rendererManager) {
+	public SoulBlazeEntityRenderer(EntityRendererManager rendererManager) {
 		super(rendererManager, new BlazeModel<>(), 0.5F);
 	}
 	

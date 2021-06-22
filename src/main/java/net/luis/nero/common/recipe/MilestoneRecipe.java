@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+// TODO: finish & custom IModRecipe
+
 public class MilestoneRecipe implements IModRecipe<Inventory> {
 	
 	private final ResourceLocation id;

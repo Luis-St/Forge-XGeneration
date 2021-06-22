@@ -12,6 +12,8 @@ import net.minecraft.util.NonNullList;
 
 public class ItemStackList extends NonNullList<ItemStack> {
 	
+	// TODO: extends ItemHandler and retirn mod variant in get cap of ItemHandlerCap
+	
 	private final List<ItemStack> itemStacks;
 	private final ItemStack defaultItemStack;
 

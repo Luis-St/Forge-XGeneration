@@ -9,6 +9,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber
 public class OnFurnaceFuelBurnTimeEvent {
 	
+	// TODO: setBurnTime via config
+	
 	@SubscribeEvent
 	public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event) {
 		Item item = event.getItemStack().getItem();

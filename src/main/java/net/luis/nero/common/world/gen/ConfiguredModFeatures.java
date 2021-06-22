@@ -22,7 +22,9 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 
 public class ConfiguredModFeatures {
-
+	
+	// TODO: allow some modifications via config
+	
 	private static final RuleTest DEEPSLATE = new BlockMatchRuleTest(ModBlocks.DEEPSLATE.get());
 	private static final RuleTest STONE = new BlockMatchRuleTest(Blocks.STONE);
 

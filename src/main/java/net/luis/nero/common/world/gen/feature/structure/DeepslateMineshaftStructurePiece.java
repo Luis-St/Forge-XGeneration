@@ -29,6 +29,7 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 	
 	// TODO: (not final) DeepslateMineshaftStructurePiece -> DeepslateMineshaftPieces & abstract add base methodes handle gen in generatePieces in Start Factory
 	// TODO: add (fix) rail & torch gen
+	// TODO: finish
 	
 	protected static final BlockState OAK_PLANKS = Blocks.OAK_PLANKS.defaultBlockState();
 	protected static final BlockState OAK_FENCE = Blocks.OAK_FENCE.defaultBlockState();

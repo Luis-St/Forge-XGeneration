@@ -1,7 +1,7 @@
 package net.luis.nero.common.item.rune;
 
-import net.luis.nero.api.capability.CapabilityUtil;
-import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.CapabilityUtil;
+import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.enums.RuneType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

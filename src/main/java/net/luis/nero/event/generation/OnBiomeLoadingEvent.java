@@ -23,6 +23,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber
 public class OnBiomeLoadingEvent {
 	
+	// TODO: disable/enable feature via config
+	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 		

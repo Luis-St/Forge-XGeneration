@@ -59,7 +59,7 @@ public class HigherCanyon extends ModCanyonWorldCarver {
 				}
 				this.carveSphere(chunk, toBiome, seed, seaLevel, chunkX, chunkZ, posX, posY, posZ, canyonWidth, canyonHeight, bitSet);
 				this.carveSphere(chunk, toBiome, seed, seaLevel, chunkX, chunkZ, posX, this.getUpperCanyonY(rng, (int) posY, canyonHeight), posZ, 
-						canyonWidth, canyonHeight - rng.nextDouble(), bitSet);
+						canyonWidth, canyonHeight - rng.nextDouble(), bitSet); 	// TODO: test and modify
 			}
 		}
 	}

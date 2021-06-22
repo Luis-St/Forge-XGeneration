@@ -1,8 +1,8 @@
 package net.luis.nero.common.item;
 
-import net.luis.nero.api.capability.CapabilityUtil;
-import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.capability.provider.BloodOrbCapabilityProvider;
+import net.luis.nero.api.common.capability.CapabilityUtil;
+import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.provider.BloodOrbCapabilityProvider;
 import net.luis.nero.api.common.item.IOrbType;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +19,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class OrbItem extends Item {
+	
+	// TODO: config value for RGBDurability 
 	
 	private final IOrbType orbType;
 	

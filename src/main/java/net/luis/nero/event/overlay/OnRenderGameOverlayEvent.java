@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(value = Dist.CLIENT)
 public class OnRenderGameOverlayEvent {
 	
+	// TODO: edit other cords that are shown -> client config allow overwirte of y values in deepslate
+	
 	@SubscribeEvent
 	@SuppressWarnings("resource")
 	public static void renderGameOverlay(RenderGameOverlayEvent.Text event) {
