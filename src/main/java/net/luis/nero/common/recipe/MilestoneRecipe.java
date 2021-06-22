@@ -2,9 +2,9 @@ package net.luis.nero.common.recipe;
 
 import com.google.gson.JsonObject;
 
-import net.luis.nero.api.recipe.IModRecipe;
-import net.luis.nero.api.recipe.item.ResultItemStack;
-import net.luis.nero.api.util.VarArgs;
+import net.luis.nero.api.common.recipe.IModRecipe;
+import net.luis.nero.api.common.recipe.item.ResultItemStack;
+import net.luis.nero.api.common.util.VarArgs;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

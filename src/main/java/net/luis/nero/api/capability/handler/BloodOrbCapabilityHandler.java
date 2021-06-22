@@ -1,7 +1,7 @@
 package net.luis.nero.api.capability.handler;
 
 import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.item.RuneUseType;
+import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.common.item.rune.AbstractRuneItem;
 import net.minecraft.nbt.CompoundNBT;

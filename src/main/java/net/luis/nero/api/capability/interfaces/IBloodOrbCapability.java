@@ -1,7 +1,7 @@
 package net.luis.nero.api.capability.interfaces;
 
-import net.luis.nero.api.item.RuneUseType;
-import net.luis.nero.api.nbt.CapabilitySerializableNBT;
+import net.luis.nero.api.common.item.RuneUseType;
+import net.luis.nero.api.common.nbt.CapabilitySerializableNBT;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.common.item.rune.AbstractRuneItem;
 import net.minecraftforge.api.distmarker.Dist;

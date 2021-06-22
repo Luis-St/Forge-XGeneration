@@ -2,7 +2,7 @@ package net.luis.nero.common.entity;
 
 import java.util.EnumSet;
 
-import net.luis.nero.api.entity.ISoulFireEntity;
+import net.luis.nero.api.common.entity.ISoulFireEntity;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

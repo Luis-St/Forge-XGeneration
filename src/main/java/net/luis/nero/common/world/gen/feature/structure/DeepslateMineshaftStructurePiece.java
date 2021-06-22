@@ -3,7 +3,7 @@ package net.luis.nero.common.world.gen.feature.structure;
 import java.util.Random;
 import java.util.function.BiPredicate;
 
-import net.luis.nero.api.world.gen.feature.structure.ModStructurePiece;
+import net.luis.nero.api.common.world.gen.feature.structure.ModStructurePiece;
 import net.luis.nero.init.util.ModLootTables;
 import net.luis.nero.init.world.gen.feature.structure.ModStructurePieceTypes;
 import net.minecraft.block.BlockState;

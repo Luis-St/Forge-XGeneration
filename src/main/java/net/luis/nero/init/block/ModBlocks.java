@@ -1,7 +1,7 @@
 package net.luis.nero.init.block;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.block.ModOreBlock;
+import net.luis.nero.api.common.block.ModOreBlock;
 import net.luis.nero.common.block.fluid.PipeBlock;
 import net.luis.nero.common.block.magic.BloodAltarBlock;
 import net.luis.nero.common.block.mechanical.MilestoneBlock;

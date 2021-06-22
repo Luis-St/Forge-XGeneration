@@ -3,7 +3,7 @@ package net.luis.nero.common.item;
 import net.luis.nero.api.capability.CapabilityUtil;
 import net.luis.nero.api.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.capability.provider.BloodOrbCapabilityProvider;
-import net.luis.nero.api.item.IOrbType;
+import net.luis.nero.api.common.item.IOrbType;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;

@@ -1,6 +1,6 @@
 package net.luis.nero.common.tileentity;
 
-import net.luis.nero.api.tileentity.IAnimatedTileEntity;
+import net.luis.nero.api.common.tileentity.IAnimatedTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 
 public class MilestoneTileEntity implements IAnimatedTileEntity, ITickableTileEntity {

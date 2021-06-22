@@ -1,7 +1,7 @@
 package net.luis.nero.common.tileentity;
 
-import net.luis.nero.api.tileentity.IAnimatedTileEntity;
-import net.luis.nero.api.tileentity.IEnergy;
+import net.luis.nero.api.common.tileentity.IAnimatedTileEntity;
+import net.luis.nero.api.common.tileentity.IEnergyTileEntity;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergy<BloodAltarTileEntity> {
+public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergyTileEntity<BloodAltarTileEntity> {
 	
 	protected int blood = 0;
 	protected int currentBlood = 0;
