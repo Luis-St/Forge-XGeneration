@@ -37,7 +37,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 public class Nero {
 	
 	// TODO: values in config
-	// TODO: mineshaft strukture 
+	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
 	// TODO: debug register time for all entrys and events
 	

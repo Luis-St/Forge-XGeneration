@@ -15,8 +15,6 @@ public @interface ConfigIntegerRangeValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
-	String name();
-	
 	String comment() default "";
 	
 	int minValue();

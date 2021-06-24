@@ -15,8 +15,6 @@ public @interface ConfigDoubleRangeValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
-	String name();
-	
 	String comment() default "";
 	
 	double minValue();

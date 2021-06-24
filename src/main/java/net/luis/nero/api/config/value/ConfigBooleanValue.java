@@ -16,8 +16,6 @@ public @interface ConfigBooleanValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
-	String name();
-	
 	String comment() default "";
 	
 	boolean value();

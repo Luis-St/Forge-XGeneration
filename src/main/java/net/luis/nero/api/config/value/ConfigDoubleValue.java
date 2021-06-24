@@ -15,8 +15,6 @@ public @interface ConfigDoubleValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
-	String name();
-	
 	String comment() default "";
 	
 	double value();

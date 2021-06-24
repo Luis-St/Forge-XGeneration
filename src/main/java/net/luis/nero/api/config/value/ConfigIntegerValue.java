@@ -15,8 +15,6 @@ public @interface ConfigIntegerValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
-	String name();
-	
 	String comment() default "";
 	
 	int value();
