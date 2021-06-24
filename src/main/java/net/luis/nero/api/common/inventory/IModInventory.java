@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundNBT;
 
 public interface IModInventory {
 	
-	// TODO: test and modify
+	// TODO: test & modify -> change to own impl of IItemHandler
 	
 	ItemStackList get();
 	

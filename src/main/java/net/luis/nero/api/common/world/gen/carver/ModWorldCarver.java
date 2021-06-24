@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.gen.carver;
+package net.luis.nero.api.common.world.gen.carver;
 
 import java.util.BitSet;
 import java.util.Random;
@@ -20,8 +20,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-
-//TODO: move to api package
 
 public abstract class ModWorldCarver extends WorldCarver<ProbabilityConfig> {
 	

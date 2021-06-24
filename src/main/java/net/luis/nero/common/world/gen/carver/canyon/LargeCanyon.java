@@ -2,6 +2,7 @@ package net.luis.nero.common.world.gen.carver.canyon;
 
 import java.util.Random;
 
+import net.luis.nero.api.common.world.gen.carver.ModCanyonWorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public class LargeCanyon extends ModCanyonWorldCarver {

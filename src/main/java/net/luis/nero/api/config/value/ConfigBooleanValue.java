@@ -7,14 +7,18 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import net.luis.nero.api.config.ConfigValueType;
+
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ConfigBooleanValue {
 	
-	String comment() default "";
+	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
 	String name();
+	
+	String comment() default "";
 	
 	boolean value();
 

@@ -1,17 +1,14 @@
-package net.luis.nero.common.world.gen.carver.canyon;
+package net.luis.nero.api.common.world.gen.carver;
 
 import java.util.BitSet;
 import java.util.Random;
 import java.util.function.Function;
 
-import net.luis.nero.common.world.gen.carver.ModWorldCarver;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-
-// TODO: move to api package
 
 public class ModCanyonWorldCarver extends ModWorldCarver {
 	

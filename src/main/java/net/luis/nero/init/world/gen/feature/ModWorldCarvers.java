@@ -1,10 +1,10 @@
 package net.luis.nero.init.world.gen.feature;
 
 import net.luis.nero.Nero;
+import net.luis.nero.api.common.world.gen.carver.ModCanyonWorldCarver;
+import net.luis.nero.api.common.world.gen.carver.ModCaveWorldCarver;
 import net.luis.nero.common.world.gen.carver.canyon.HigherCanyon;
 import net.luis.nero.common.world.gen.carver.canyon.LargeCanyon;
-import net.luis.nero.common.world.gen.carver.canyon.ModCanyonWorldCarver;
-import net.luis.nero.common.world.gen.carver.cave.ModCaveWorldCarver;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraftforge.fml.RegistryObject;
