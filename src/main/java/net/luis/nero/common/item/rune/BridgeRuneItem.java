@@ -1,25 +1,24 @@
 package net.luis.nero.common.item.rune;
 
-import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.common.capability.util.CapabilityUtil;
 import net.luis.nero.common.enums.RuneType;
+import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class RuneItem extends AbstractRuneItem {
-
-	public RuneItem(Properties properties) {
-		super(RuneType.RUNE, properties);
+public class BridgeRuneItem extends AbstractRuneItem {
+	
+	public BridgeRuneItem(Properties properties) {
+		super(RuneType.BRIDGE, properties);
 	}
 
 	@Override
 	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
-		IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
-		this.sendMessage(player, "You have {} Blood in your Orb".replace("{}", String.valueOf(bloodOrbHandler.getBlood())));
+		player.addEffect(new EffectInstance(ModEffects.BRIDGE.get(), 1200, 0, false, false, false));
 		return this.success(player, hand);
 	}
 

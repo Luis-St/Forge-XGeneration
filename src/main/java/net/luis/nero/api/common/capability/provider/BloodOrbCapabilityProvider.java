@@ -10,8 +10,8 @@ import net.minecraftforge.common.util.LazyOptional;
 
 public class BloodOrbCapabilityProvider implements ICapabilitySerializable<CompoundNBT> {
 	
-	private BloodOrbCapabilityHandler handler = new BloodOrbCapabilityHandler();
-	private LazyOptional<BloodOrbCapabilityHandler> optional = LazyOptional.of(() ->  this.handler);
+	private final BloodOrbCapabilityHandler handler = new BloodOrbCapabilityHandler();
+	private final LazyOptional<BloodOrbCapabilityHandler> optional = LazyOptional.of(() ->  this.handler);
 	
 	@Override
 	@SuppressWarnings("unchecked")

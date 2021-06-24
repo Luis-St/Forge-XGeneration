@@ -4,8 +4,11 @@ package net.luis.nero.event.fml;
 import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
 import net.luis.nero.client.render.tileentity.BloodAltarTileEntityRenderer;
+import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -21,6 +24,7 @@ public class OnClientSetupEvent {
 	public static void clientSetup(FMLClientSetupEvent event) {
 		registerEntityRenderer(event);
 		registerTileEntityRenderer(event);
+		registerBlockRenderType(event);
 	}
 	
 	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
@@ -31,6 +35,10 @@ public class OnClientSetupEvent {
 	protected static void registerEntityRenderer(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_BLAZE.get(), SoulBlazeEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SOUL_FIREBALL.get(), SoulFireballEntityRenderer::new);
+	}
+	
+	protected static void registerBlockRenderType(FMLClientSetupEvent event) {
+		RenderTypeLookup.setRenderLayer(ModBlocks.BRIDGE_BLOCK.get(), RenderType.translucent());
 	}
 
 }

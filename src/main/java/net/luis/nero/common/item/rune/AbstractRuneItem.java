@@ -3,8 +3,8 @@ package net.luis.nero.common.item.rune;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.luis.nero.api.common.capability.CapabilityUtil;
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.api.common.capability.util.CapabilityUtil;
 import net.luis.nero.api.common.item.IRuneType;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;

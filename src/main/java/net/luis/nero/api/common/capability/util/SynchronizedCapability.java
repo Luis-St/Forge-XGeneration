@@ -1,4 +1,4 @@
-package net.luis.nero.api.common.capability;
+package net.luis.nero.api.common.capability.util;
 
 public interface SynchronizedCapability {
 	

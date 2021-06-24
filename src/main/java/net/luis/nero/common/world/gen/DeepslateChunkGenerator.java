@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.gen;
+ package net.luis.nero.common.world.gen;
 
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -49,7 +49,6 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			.apply(instance, DeepslateChunkGenerator::new));
 
 	private final Settings settings;
-	
 	protected final SharedSeedRandom random;
 	private final INoiseGenerator surfaceNoise;
 	private final long seed;

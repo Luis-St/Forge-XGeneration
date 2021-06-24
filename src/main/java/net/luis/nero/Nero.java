@@ -39,6 +39,7 @@ public class Nero {
 	// TODO: values in config
 	// TODO: mineshaft strukture 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
+	// TODO: debug register time for all entrys and events
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";

@@ -1,6 +1,7 @@
 package net.luis.nero.event.capability;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -20,7 +21,9 @@ public class OnAttachCapabilitiesEvent {
 	
 	@SubscribeEvent
 	public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		
+		if (event.getObject() instanceof PlayerEntity) {
+			
+		}
 	}
 	
 	@SubscribeEvent

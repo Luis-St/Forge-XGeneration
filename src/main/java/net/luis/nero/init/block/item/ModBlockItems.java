@@ -13,6 +13,7 @@ public class ModBlockItems {
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Nero.MOD_ID);
 	
+	
 	public static final RegistryObject<BlockItem> FLUID_PIPE = ITEMS.register("fluid_pipe", 
 			() -> new BlockItem(ModBlocks.FLUID_PIPE.get(), new Item.Properties().tab(ModItemGroups.DECORATIONS)));
 	

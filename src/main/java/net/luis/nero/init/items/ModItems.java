@@ -6,6 +6,7 @@ import net.luis.nero.common.item.GlassShardItem;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.common.item.SlateItem;
 import net.luis.nero.common.item.rune.AirRuneItem;
+import net.luis.nero.common.item.rune.BridgeRuneItem;
 import net.luis.nero.common.item.rune.DeathRuneItem;
 import net.luis.nero.common.item.rune.ElementalRuneItem;
 import net.luis.nero.common.item.rune.HarvestRuneItem;
@@ -29,6 +30,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Nero.MOD_ID);
+	
 	
 	public static final RegistryObject<GlassShardItem> BLACK_GLASS_SHARD = ITEMS.register("black_glass_shard", 
 			() -> new GlassShardItem(DyeColor.BLACK));
@@ -108,8 +110,8 @@ public class ModItems {
 	// TODO: recipes \/
 	public static final RegistryObject<WaterRuneItem> WATER_RUNE = ITEMS.register("water_rune",
 			() -> new WaterRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	public static final RegistryObject<Item> BRIDGE_RUNE = ITEMS.register("bridge_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
+	public static final RegistryObject<BridgeRuneItem> BRIDGE_RUNE = ITEMS.register("bridge_rune",
+			() -> new BridgeRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<WindRuneItem> WIND_RUNE = ITEMS.register("wind_rune",
 			() -> new WindRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<LavaRuneItem> LAVA_RUNE = ITEMS.register("lava_rune",
@@ -119,7 +121,7 @@ public class ModItems {
 	public static final RegistryObject<HasteRuneItem> HASTE_RUNE = ITEMS.register("haste_rune",
 			() -> new HasteRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<Item> VOID_RUNE = ITEMS.register("void_rune",
-			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1))); // TODO: rune item and effect
+			() -> new Item(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<AirRuneItem> AIR_RUNE = ITEMS.register("air_rune",
 			() -> new AirRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<IceRuneItem> ICE_RUNE = ITEMS.register("ice_rune",

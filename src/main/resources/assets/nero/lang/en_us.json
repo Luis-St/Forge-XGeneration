@@ -2,6 +2,7 @@
   "entity.nero.soul_blaze": "Soul Blaze",
   "entity.nero.soul_fireball": "Soul Fireball",
   
+  "effect.nero.bridge": "Bridge",
   "effect.nero.harvest_fatigue": "Harvest Fatigue",
   "effect.nero.ice": "Ice",
   "effect.nero.harvest": "Harvest",
@@ -84,6 +85,7 @@
   "item.nero.yellow_glass_shard": "Yellow Glass Shard",
   "item.nero.purple_glass_shard": "Purple Glass Shard",
   
+  "block.nero.bridge_block": "Bridge Block",
   "block.nero.blood_altar": "Blood Altar",
   "block.nero.tuff": "Tuff",
   "block.nero.copper_ore": "Copper Ore",

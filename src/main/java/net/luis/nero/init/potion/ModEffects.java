@@ -19,5 +19,6 @@ public class ModEffects {
 	public static final RegistryObject<ModEffect> HARVEST = EFFECTS.register("harvest", () -> new ModEffect(EffectType.BENEFICIAL, 1301533));
 	public static final RegistryObject<ModEffect> HARVEST_FATIGUE = EFFECTS.register("harvest_fatigue", () -> new ModEffect(EffectType.BENEFICIAL, 8978478));
 	public static final RegistryObject<IceEffect> ICE = EFFECTS.register("ice", () -> new IceEffect(EffectType.HARMFUL, 10878975));
+	public static final RegistryObject<ModEffect> BRIDGE = EFFECTS.register("bridge", () -> new ModEffect(EffectType.BENEFICIAL, 0));
 
 }
