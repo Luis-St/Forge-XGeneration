@@ -9,14 +9,12 @@ import java.lang.annotation.Target;
 import net.luis.nero.api.config.ConfigValueType;
 
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ConfigIntegerValue {
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ConfigValue {
 	
 	ConfigValueType valueType() default ConfigValueType.UTIL;
 	
 	String comment() default "";
 	
-	int value();
-
 }

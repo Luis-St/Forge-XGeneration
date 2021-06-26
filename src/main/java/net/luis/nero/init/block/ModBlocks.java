@@ -2,13 +2,13 @@ package net.luis.nero.init.block;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.block.ModOreBlock;
+import net.luis.nero.api.common.block.ModRedstoneOreBlock;
 import net.luis.nero.common.block.BridgeBlock;
 import net.luis.nero.common.block.fluid.PipeBlock;
 import net.luis.nero.common.block.magic.BloodAltarBlock;
 import net.luis.nero.common.block.mechanical.MilestoneBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.RedstoneOreBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StairsBlock;
@@ -91,8 +91,8 @@ public class ModBlocks {
 			() -> new Block(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
 	public static final RegistryObject<ModOreBlock> DEEPSLATE_LAPIS_ORE = BLOCKS.register("deepslate_lapis_ore", 
 			() -> new ModOreBlock(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
-	public static final RegistryObject<RedstoneOreBlock> DEEPSLATE_REDSTONE_ORE = BLOCKS.register("deepslate_redstone_ore", 
-			() -> new RedstoneOreBlock(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
+	public static final RegistryObject<ModRedstoneOreBlock> DEEPSLATE_REDSTONE_ORE = BLOCKS.register("deepslate_redstone_ore", 
+			() -> new ModRedstoneOreBlock(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
 	public static final RegistryObject<ModOreBlock> DEEPSLATE_DIAMOND_ORE = BLOCKS.register("deepslate_diamond_ore", 
 			() -> new ModOreBlock(Block.Properties.copy(ModBlocks.DEEPSLATE_COAL_ORE.get())));
 	public static final RegistryObject<ModOreBlock> DEEPSLATE_EMERALD_ORE = BLOCKS.register("deepslate_emerald_ore", 

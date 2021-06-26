@@ -12,6 +12,11 @@ public interface IModRecipe<C extends IInventory> extends IRecipe<C> {
 	// TODO: finish 
 	
 	@Override
+	default ItemStack assemble(C inventory) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	default ItemStack getResultItem() {
 		throw new UnsupportedOperationException();
 	}

@@ -1,5 +1,7 @@
 package net.luis.nero.common.entity;
 
+import net.luis.nero.api.config.Config;
+import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -19,9 +21,19 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 // TODO: finish
 
+@Config
 public class HoveringInfernoEntity extends BlazeEntity {
 	
-	// TODO: config value for Attributes
+	@ConfigValue
+	public static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
+	@ConfigValue
+	public static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
+	@ConfigValue
+	public static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
+	@ConfigValue
+	public static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.1;
+	@ConfigValue
+	public static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
 	
 	public HoveringInfernoEntity(World world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
@@ -54,11 +66,11 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	
 	public static AttributeModifierMap registerAttributes() {
 	      return MonsterEntity.createMonsterAttributes()
-	    		  .add(Attributes.ATTACK_DAMAGE, 10.0D)
-	    		  .add(Attributes.MOVEMENT_SPEED, 0.3)
-	    		  .add(Attributes.FOLLOW_RANGE, 64.0D)
-	    		  .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
-	    		  .add(Attributes.MAX_HEALTH, 40.0D).build();
+	    		  .add(Attributes.ATTACK_DAMAGE, HOVERING_INFERNO_ATTACK_DAMAGE)
+	    		  .add(Attributes.MOVEMENT_SPEED, HOVERING_INFERNO_MOVEMENT_SPEED)
+	    		  .add(Attributes.FOLLOW_RANGE, HOVERING_INFERNO_FOLLOW_RANGE)
+	    		  .add(Attributes.KNOCKBACK_RESISTANCE, HOVERING_INFERNO_KNOCKBACK_RESISTANCE)
+	    		  .add(Attributes.MAX_HEALTH, HOVERING_INFERNO_MAX_HEALTH).build();
 	}
 	
 	@Override

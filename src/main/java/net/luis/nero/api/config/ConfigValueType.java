@@ -9,10 +9,11 @@ public enum ConfigValueType {
 	CAPABILITY,
 	RECIPE,
 	WORLD,
-	CARVER,
 	BIOME,
+	CARVER,
 	FEATURE,
 	STRUCTURE,
+	EVENT,
 	UTIL;
 	
 	

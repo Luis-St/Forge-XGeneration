@@ -36,11 +36,6 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 	}
 
 	@Override
-	public ItemStack assemble(Inventory inventory) {
-		return null;
-	}
-
-	@Override
 	public boolean canCraftInDimensions(int width, int height) {
 		return true;
 	}
@@ -79,12 +74,12 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 
 		@Override
 		public MilestoneRecipe fromJson(ResourceLocation id, JsonObject jsonObject) {
-			return null;
+			return new MilestoneRecipe(id, null, null);
 		}
 
 		@Override
 		public MilestoneRecipe fromNetwork(ResourceLocation id, PacketBuffer packetBuffer) {
-			return null;
+			return new MilestoneRecipe(id, null, null);
 		}
 
 		@Override

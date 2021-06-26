@@ -10,12 +10,6 @@ import java.util.stream.Stream;
 import org.objectweb.asm.Type;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.config.value.ConfigBooleanValue;
-import net.luis.nero.api.config.value.ConfigDoubleRangeValue;
-import net.luis.nero.api.config.value.ConfigDoubleValue;
-import net.luis.nero.api.config.value.ConfigIntegerRangeValue;
-import net.luis.nero.api.config.value.ConfigIntegerValue;
-import net.luis.nero.api.config.value.ConfigStringValue;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.ModList;
@@ -24,6 +18,10 @@ import net.minecraftforge.forgespi.language.ModFileScanData;
 import net.minecraftforge.forgespi.language.ModFileScanData.AnnotationData;
 
 public class ConfigUtil {
+	
+	protected static final List<ModConfigValue> CLIENT_VALUES = new ArrayList<>();
+	protected static final List<ModConfigValue> COMMON_VALUES = new ArrayList<>();
+	protected static final List<ModConfigValue> SERVER_VALUES = new ArrayList<>();
 	
 	public static List<Class<?>> getConfigClassesForType(ModConfig.Type configType) {
 		List<Class<?>> configClasses = getConfigClasses(Nero.class.getClassLoader());
@@ -39,7 +37,7 @@ public class ConfigUtil {
 		return configTypeClasses;
 	}
 	
-	public static List<Class<?>> getConfigClasses(ClassLoader classLoader) {
+	protected static List<Class<?>> getConfigClasses(ClassLoader classLoader) {
 		List<Class<?>> configClasses = new ArrayList<>();
 		Type configAnnotation = Type.getType(Config.class);
 		ModFileScanData fileScanData = ModList.get().getModFileById(Nero.MOD_ID).getFile().getScanResult();
@@ -51,6 +49,7 @@ public class ConfigUtil {
 					configClasses.add(Class.forName(annotationData.getMemberName(), true, classLoader));
 				} catch (ClassNotFoundException e) {
 					Nero.LOGGER.warn("Can't find class {}", annotationData.getMemberName());
+					Nero.LOGGER.warn("Something went wrong when build the config ", e);
 				}
 			} else {
 				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.getAnnotationType());
@@ -67,10 +66,10 @@ public class ConfigUtil {
 		return configFields;
 	}
 	
-	public static List<Field> getConfigValuesForType(Class<?> configClass, ConfigValueType configValueType) {
+	protected static List<Field> getConfigValuesForType(Class<?> configClass, ConfigValueType configValueType) {
 		List<Field> configFields = new ArrayList<>();
 		for (Field configField : configClass.getDeclaredFields()) {
-			ConfigValueType fieldValueType = getConfigValueType(configField);
+			ConfigValueType fieldValueType = getConfigValueType(configField, configClass, false);
 			if (fieldValueType == configValueType) {
 				configFields.add(configField);
 			}
@@ -78,82 +77,37 @@ public class ConfigUtil {
 		return configFields;
 	}
 	
-	public static ConfigValueType getConfigValueType(Field configField) {
-		if (configField.isAnnotationPresent(ConfigBooleanValue.class)) {
-			ConfigBooleanValue annotation = configField.getAnnotation(ConfigBooleanValue.class);
-			return annotation.valueType();
-		} else if (configField.isAnnotationPresent(ConfigDoubleValue.class)) {
-			ConfigDoubleValue annotation = configField.getAnnotation(ConfigDoubleValue.class);
-			return annotation.valueType();
-		} else if (configField.isAnnotationPresent(ConfigIntegerValue.class)) {
-			ConfigIntegerValue annotation = configField.getAnnotation(ConfigIntegerValue.class);
-			return annotation.valueType();
-		} else if (configField.isAnnotationPresent(ConfigStringValue.class)) {
-			ConfigStringValue annotation = configField.getAnnotation(ConfigStringValue.class);
-			return annotation.valueType();
-		} else if (configField.isAnnotationPresent(ConfigDoubleRangeValue.class)) {
-			ConfigDoubleRangeValue annotation = configField.getAnnotation(ConfigDoubleRangeValue.class);
-			return annotation.valueType();
-		} else if (configField.isAnnotationPresent(ConfigIntegerRangeValue.class)) {
-			ConfigIntegerRangeValue annotation = configField.getAnnotation(ConfigIntegerRangeValue.class);
-			return annotation.valueType();
+	public static ConfigValueType getConfigValueType(Field configField, Class<?> configClass, boolean allowedNull) {
+		ConfigValueType configValueType = getConfigValueTypeByClass(configClass);
+		if (configField.isAnnotationPresent(net.luis.nero.api.config.value.ConfigValue.class)) {
+			if (configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class).valueType() != ConfigValueType.UTIL) {
+				return configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class).valueType();
+			}
 		}
-		return null;
+		return configValueType == null && allowedNull ? configValueType : ConfigValueType.UTIL;
 	}
 	
-	public static void buildConfigValue(ForgeConfigSpec.Builder builder, Field configField)
-			throws IllegalArgumentException, IllegalAccessException {
-		if (configField.isAnnotationPresent(ConfigBooleanValue.class)) {
-			ConfigBooleanValue annotation = configField.getAnnotation(ConfigBooleanValue.class);
+	public static void buildConfigValue(ForgeConfigSpec.Builder builder, Class<?> configClass, Field configField) throws IllegalArgumentException, IllegalAccessException {
+		if (configField.isAnnotationPresent(net.luis.nero.api.config.value.ConfigValue.class)) {
+			net.luis.nero.api.config.value.ConfigValue annotation = configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class);
 			if (!annotation.comment().isEmpty()) {
 				builder.comment(annotation.comment());
+			} else {
+				builder.comment(getValueComment(configField));
 			}
-			ConfigValue<Boolean> booleanValue = builder.define(getValueName(configField), annotation.value());
-			configField.set(null, booleanValue);
-		} else if (configField.isAnnotationPresent(ConfigDoubleValue.class)) {
-			ConfigDoubleValue annotation = configField.getAnnotation(ConfigDoubleValue.class);
-			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
+			ConfigValue<Object> value = builder.define(getValueName(configField), configField.get(null));
+			if (configClass.getDeclaredAnnotation(Config.class).type() == ModConfig.Type.CLIENT) {
+				CLIENT_VALUES.add(new ModConfigValue(configClass, configField, value));
+			} else if (configClass.getDeclaredAnnotation(Config.class).type() == ModConfig.Type.SERVER) {
+				SERVER_VALUES.add(new ModConfigValue(configClass, configField, value));
+			} else {
+				COMMON_VALUES.add(new ModConfigValue(configClass, configField, value));
 			}
-			builder.comment(annotation.comment());
-
-			ConfigValue<Double> doubleValue = builder.define(getValueName(configField), annotation.value());
-			configField.set(null, doubleValue);
-		} else if (configField.isAnnotationPresent(ConfigIntegerValue.class)) {
-			ConfigIntegerValue annotation = configField.getAnnotation(ConfigIntegerValue.class);
-			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
-			}
-			ConfigValue<Integer> integerValue = builder.define(getValueName(configField), annotation.value());
-			configField.set(ConfigValue.class.getClass(), integerValue);
-		} else if (configField.isAnnotationPresent(ConfigStringValue.class)) {
-			ConfigStringValue annotation = configField.getAnnotation(ConfigStringValue.class);
-			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
-			}
-			ConfigValue<String> stringValue = builder.define(getValueName(configField), annotation.value());
-			configField.set(null, stringValue);
-		} else if (configField.isAnnotationPresent(ConfigDoubleRangeValue.class)) {
-			ConfigDoubleRangeValue annotation = configField.getAnnotation(ConfigDoubleRangeValue.class);
-			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
-			}
-			ConfigValue<Double> doubleValue = builder.defineInRange(getValueName(configField), annotation.defaultValue(),
-					annotation.minValue(), annotation.maxValue());
-			configField.set(null, doubleValue);
-		} else if (configField.isAnnotationPresent(ConfigIntegerRangeValue.class)) {
-			ConfigIntegerRangeValue annotation = configField.getAnnotation(ConfigIntegerRangeValue.class);
-			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
-			}
-			ConfigValue<Integer> integerValue = builder.defineInRange(getValueName(configField), annotation.defaultValue(),
-					annotation.minValue(), annotation.maxValue());
-			configField.set(null, integerValue);
 		}
 	}
 	
-	protected static String getValueName(Field field) {
-		String[] fieldName = field.getName().split("_");
+	protected static String getValueName(Field configField) {
+		String[] fieldName = configField.getName().split("_");
 		for (int i = 0; i < fieldName.length; i++) {
 			String string = fieldName[i].toLowerCase();
 			if (i == 0) {
@@ -163,6 +117,86 @@ public class ConfigUtil {
 			}
 		}
 		return Arrays.toString(fieldName).replace("[", "").replace("]", "").replace(", ", "");
+	}
+	
+	protected static String getValueComment(Field configField) throws IllegalArgumentException, IllegalAccessException {
+		return "Default value of " + configField.getName().toLowerCase().replace("_", " ") + " is " + configField.get(null);
+	}
+	
+	public static void setConfigValues() {
+		for (ModConfigValue configValue : CLIENT_VALUES) {
+			try {
+				configValue.getConfigField().setAccessible(true);
+				configValue.getConfigField().set(null, configValue.getConfigValue().get());
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			} catch (IllegalAccessException e) {
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			}
+		}
+		for (ModConfigValue configValue : COMMON_VALUES) {
+			try {
+				configValue.getConfigField().setAccessible(true);
+				configValue.getConfigField().set(null, configValue.getConfigValue().get());
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			} catch (IllegalAccessException e) {
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			}
+		}
+		for (ModConfigValue configValue : SERVER_VALUES) {
+			try {
+				configValue.getConfigField().setAccessible(true);
+				configValue.getConfigField().set(null, configValue.getConfigValue().get());
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			} catch (IllegalAccessException e) {
+				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
+						configValue.getConfigValue().get());
+				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+			}
+		}
+	}
+	
+	protected static ConfigValueType getConfigValueTypeByClass(Class<?> configClass) {
+		String className = configClass.getName();
+		if (className.contains("Block")) {
+			return ConfigValueType.BLOCK;
+		} else if (className.contains("Item")) {
+			return ConfigValueType.ITEM;
+		} else if (className.contains("Entity")) {
+			return ConfigValueType.ENTITY;
+		} else if (className.contains("Enchantment")) {
+			return ConfigValueType.ENCHANTMENT;
+		} else if (className.contains("Capability")) {
+			return ConfigValueType.CAPABILITY;
+		} else if (className.contains("Recipe")) {
+			return ConfigValueType.RECIPE;
+		} else if (className.contains("Biome")) {
+			return ConfigValueType.BIOME;
+		} else if (className.contains("Canyon") || className.contains("Cave") || className.contains("Carver")) {
+			return ConfigValueType.CARVER;
+		} else if (className.contains("Feature")) {
+			return ConfigValueType.FEATURE;
+		} else if (className.contains("Structure")) {
+			return ConfigValueType.STRUCTURE;
+		} else if (className.contains("Event")) {
+			return ConfigValueType.EVENT;
+		}
+		return null;
 	}
 	
 }

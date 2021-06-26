@@ -63,8 +63,8 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(4, new SoulBlazeEntity.SoulFireballAttackGoal(this));
-		this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
+		this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0, 0.0F));
 		this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
@@ -97,9 +97,9 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	
 	public static AttributeModifierMap registerAttributes() {
 	      return MonsterEntity.createMonsterAttributes()
-	    		  .add(Attributes.ATTACK_DAMAGE, 6.0D)
+	    		  .add(Attributes.ATTACK_DAMAGE, 6.0)
 	    		  .add(Attributes.MOVEMENT_SPEED, 0.23)
-	    		  .add(Attributes.FOLLOW_RANGE, 48.0D).build();
+	    		  .add(Attributes.FOLLOW_RANGE, 48.0).build();
 	}
 	
 	public static class SoulFireballAttackGoal extends Goal {

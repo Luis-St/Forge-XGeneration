@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.luis.nero.api.config.ConfigUtil;
 import net.luis.nero.config.ModClientConfig;
 import net.luis.nero.config.ModCommonConfig;
 import net.luis.nero.config.ModServerConfig;
@@ -76,11 +77,8 @@ public class Nero {
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
 		
-		this.createConfigPath();
-		
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
+		this.buildConfig();
+		ConfigUtil.setConfigValues();
 		
 	}
 	
@@ -90,6 +88,13 @@ public class Nero {
 	
 	public Path getConfigPath()  {
 		return new File(String.valueOf(FMLPaths.CONFIGDIR.get().resolve(Nero.MOD_ID))).toPath();
+	}
+	
+	protected void buildConfig() {
+		this.createConfigPath();
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
 	}
 	
 	private void createConfigPath() {
