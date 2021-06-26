@@ -25,15 +25,15 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class HoveringInfernoEntity extends BlazeEntity {
 	
 	@ConfigValue
-	public static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
+	private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
 	@ConfigValue
-	public static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
+	private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
 	@ConfigValue
-	public static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
+	private static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
 	@ConfigValue
-	public static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.1;
+	private static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.1;
 	@ConfigValue
-	public static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
+	private static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
 	
 	public HoveringInfernoEntity(World world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);

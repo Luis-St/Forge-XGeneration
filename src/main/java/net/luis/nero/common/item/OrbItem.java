@@ -4,6 +4,8 @@ import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.capability.provider.BloodOrbCapabilityProvider;
 import net.luis.nero.api.common.capability.util.CapabilityUtil;
 import net.luis.nero.api.common.item.IOrbType;
+import net.luis.nero.api.config.Config;
+import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -18,9 +20,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+@Config
 public class OrbItem extends Item {
 	
-	// TODO: config value for RGBDurability 
+	@ConfigValue
+	public static Integer ORB_RGB_DURABILITY_BAR = 11796480;
 	
 	private final IOrbType orbType;
 	
@@ -36,7 +40,7 @@ public class OrbItem extends Item {
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
 		double blood = CapabilityUtil.getBloodOrbCapability(stack).getBlood();
-		double bloodCapability = this.orbType.getBloodCapability();
+		double bloodCapability = this.orbType.getBloodCapacity();
 		return 1 - (blood / bloodCapability);
 	}
 	
@@ -49,7 +53,7 @@ public class OrbItem extends Item {
 	
 	@Override
 	public int getRGBDurabilityForDisplay(ItemStack stack) {
-		return 11796480;
+		return ORB_RGB_DURABILITY_BAR;
 	}
 	
 	@Override
@@ -62,7 +66,7 @@ public class OrbItem extends Item {
 		} else {
 			if (!bloodCapability.hasMaxBlood(this)) {
 				if (player.isCreative()) {
-					bloodCapability.addBlood(this, this.orbType.getBloodCapability());
+					bloodCapability.addBlood(this, this.orbType.getBloodCapacity());
 				} else {
 					bloodCapability.addBlood(this, 500);
 					player.hurt(ModDamageSources.ORB, 2.0F);

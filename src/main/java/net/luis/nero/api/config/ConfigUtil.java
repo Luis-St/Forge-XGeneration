@@ -177,10 +177,18 @@ public class ConfigUtil {
 			return ConfigValueType.BLOCK;
 		} else if (className.contains("Item")) {
 			return ConfigValueType.ITEM;
+		}  else if (className.contains("Orb")) {
+			return ConfigValueType.ORB;
+		} else if (className.contains("Rune")) {
+			return ConfigValueType.RUNE;
 		} else if (className.contains("Entity")) {
 			return ConfigValueType.ENTITY;
 		} else if (className.contains("Enchantment")) {
 			return ConfigValueType.ENCHANTMENT;
+		} else if (className.contains("Potion")) {
+			return ConfigValueType.POTION;
+		} else if (className.contains("Effect")) {
+			return ConfigValueType.POTION;
 		} else if (className.contains("Capability")) {
 			return ConfigValueType.CAPABILITY;
 		} else if (className.contains("Recipe")) {

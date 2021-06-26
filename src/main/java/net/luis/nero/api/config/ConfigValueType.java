@@ -4,8 +4,11 @@ public enum ConfigValueType {
 	
 	BLOCK,
 	ITEM,
+	ORB,
+	RUNE,
 	ENTITY,
 	ENCHANTMENT,
+	POTION,
 	CAPABILITY,
 	RECIPE,
 	WORLD,

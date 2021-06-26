@@ -35,7 +35,7 @@ public class BloodOrbCapabilityHandler implements IBloodOrbCapability, IItemCapa
 
 	@Override
 	public int getBloodCapability(OrbItem orbItem) {
-		return orbItem.getOrbType().getBloodCapability();
+		return orbItem.getOrbType().getBloodCapacity();
 	}
 	
 	@Override
