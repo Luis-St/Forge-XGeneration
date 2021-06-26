@@ -10,6 +10,8 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class ModCommonConfig {
 	
+	// TODO: space beetwen two differnt config value types
+	
 	private static final String CONFIG_TYPE_NAME = "Common";
 	private static final ModConfig.Type CONFIG_TYPE = ModConfig.Type.COMMON;
 	

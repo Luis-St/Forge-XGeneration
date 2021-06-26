@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 
 public class InventorySlot {
 	
-	private final ItemStack itemStack;
-	private final int slot;
+	protected final ItemStack itemStack;
+	protected final int slot;
 	
 	public InventorySlot(ItemStack itemStack, int slot) {
 		this.itemStack = itemStack;

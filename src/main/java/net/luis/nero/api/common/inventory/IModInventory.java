@@ -5,9 +5,7 @@ import net.minecraft.nbt.CompoundNBT;
 
 public interface IModInventory {
 	
-	// TODO: test & modify -> change to own impl of IItemHandler
-	
-	ItemStackList get();
+	ModItemStackHandler get();
 	
 	boolean hasEmptySlots();
 	
@@ -21,7 +19,7 @@ public interface IModInventory {
 	
 	void clear();
 	
-	ItemStackList getAndClear();
+	ModItemStackHandler getAndClear();
 	
 	CompoundNBT serializeNBT(CompoundNBT nbt);
 	

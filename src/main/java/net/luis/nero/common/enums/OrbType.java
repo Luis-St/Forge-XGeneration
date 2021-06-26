@@ -2,14 +2,14 @@ package net.luis.nero.common.enums;
 
 import net.luis.nero.api.common.item.IOrbType;
 
-public enum OrbType implements IOrbType {
+public class OrbType implements IOrbType {
 	
-	// TODO: test if possible to use config values here
+	// TODO: use config values here
 	
-	APPRENTICE(10000),
-	MAGICIAN(25000),
-	MASTER(50000),
-	MAGICIAN_MASTER(100000);
+	public static final OrbType APPRENTICE = new OrbType(10000);
+	public static final OrbType MAGICIAN = new OrbType(25000);
+	public static final OrbType MASTER = new OrbType(50000);
+	public static final OrbType MAGICIAN_MASTER = new OrbType(100000);
 	
 	private final int bloodCapability;
 	

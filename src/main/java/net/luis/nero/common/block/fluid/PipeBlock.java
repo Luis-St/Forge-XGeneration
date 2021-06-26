@@ -23,8 +23,6 @@ import net.minecraft.world.IWorld;
 
 public class PipeBlock extends SixWayBlock {
 	
-	// TODO: add config value dispatcherShape -> in range 0-6
-	
 	public PipeBlock(Properties properties) {
 		super(0.25F, properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(DOWN, Boolean.valueOf(false)).setValue(UP, Boolean.valueOf(false))

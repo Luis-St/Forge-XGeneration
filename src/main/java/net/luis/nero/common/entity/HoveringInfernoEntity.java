@@ -17,6 +17,8 @@ import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+// TODO: finish
+
 public class HoveringInfernoEntity extends BlazeEntity {
 	
 	// TODO: config value for Attributes

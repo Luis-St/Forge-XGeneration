@@ -2,25 +2,25 @@ package net.luis.nero.common.enums;
 
 import net.luis.nero.api.common.item.IRuneType;
 
-public enum RuneType implements IRuneType {
+public class RuneType implements IRuneType {
 	
-	// TODO: test if possible to use config values here
+	// TODO: use config values here
 	
-	RUNE(0, 0),
-	WATER(250, 0),
-	BRIDGE(750, 0),
-	WIND(500, 0),
-	LAVA(250, 250),
-	DEATH(2500, 1000),
-	HASTE(250, 250),
-	VOID(750, 0), // TODO: ideas? or remove
-	AIR(500, 0),
-	ICE(0, 250),
-	WARRIOR(500, 0),
-	MINING(500, 500),
-	SEER(250, 250),
-	ELEMENTAL(500, 0),
-	HARVEST(250, 250);
+	public static final RuneType RUNE = new RuneType(0, 0);
+	public static final RuneType WATER = new RuneType(250, 0);
+	public static final RuneType BRIDGE = new RuneType(750, 0);
+	public static final RuneType WIND = new RuneType(500, 0);
+	public static final RuneType LAVA = new RuneType(250, 250);
+	public static final RuneType DEATH = new RuneType(2500, 1000);
+	public static final RuneType HASTE = new RuneType(250, 250);
+	public static final RuneType VOID = new RuneType(750, 0); // TODO: ideas? or remove
+	public static final RuneType AIR = new RuneType(500, 0);
+	public static final RuneType ICE = new RuneType(0, 250);
+	public static final RuneType WARRIOR = new RuneType(500, 0);
+	public static final RuneType MINING = new RuneType(500, 500);
+	public static final RuneType SEER = new RuneType(250, 250);
+	public static final RuneType ELEMENTAL = new RuneType(500, 0);
+	public static final RuneType HARVEST = new RuneType(250, 250);
 	
 	private final int useCost;
 	private final int hitCost;
