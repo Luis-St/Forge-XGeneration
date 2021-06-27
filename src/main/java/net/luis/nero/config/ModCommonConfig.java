@@ -10,7 +10,8 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class ModCommonConfig {
 	
-	// TODO: add in range values
+	// TODO: add in range values & create for each type own config (only common and for ConfigValueType#values)
+	// TODO: remove getSortedConfigValues beacuse /\
 	
 	private static final String CONFIG_TYPE_NAME = "Common";
 	private static final ModConfig.Type CONFIG_TYPE = ModConfig.Type.COMMON;

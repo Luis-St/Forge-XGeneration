@@ -18,7 +18,7 @@ public class ModWorldCarvers {
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CANYON = WORLD_CARVERS.register("canyon", ModCanyonWorldCarver::new);
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CAVE = WORLD_CARVERS.register("cave", ModCaveWorldCarver::new);
 	
-	// TODO: add mor custom cave and canyons
+	// TODO: add more custom cave and canyons
 	
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> LARGE_CANYON = WORLD_CARVERS.register("large_canyon", LargeCanyon::new);
 	public static final RegistryObject<WorldCarver<ProbabilityConfig>> HIGHER_CANYON = WORLD_CARVERS.register("higher_canyon", HigherCanyon::new); 

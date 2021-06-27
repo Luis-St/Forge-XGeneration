@@ -2,6 +2,7 @@ package net.luis.nero.event.generation;
 
 import java.util.stream.Collectors;
 
+import net.luis.nero.api.config.Config;
 import net.luis.nero.common.world.gen.ConfiguredModStructures;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
@@ -20,6 +21,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@Config
 @EventBusSubscriber
 public class OnBiomeLoadingEvent {
 	

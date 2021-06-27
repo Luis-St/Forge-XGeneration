@@ -9,6 +9,7 @@ import net.minecraft.world.gen.GenerationStage;
 
 public class DefaultModFeatures {
 	
+	// TODO: disable/enable feature via config
 	public static void addDeepslateOres(BiomeGenerationSettings.Builder generationBuilder) {
 		int stageOre = GenerationStage.Decoration.UNDERGROUND_ORES.ordinal();
 		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.DEEPSLATE_COAL_ORE);
@@ -22,6 +23,7 @@ public class DefaultModFeatures {
 		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.DEEPSLATE_EMERALD_ORE);
 	}
 	
+	// TODO: disable/enable feature via configvv
 	public static void addOreOverwrites(BiomeGenerationSettings.Builder generationBuilder) {
 		int stageOre = GenerationStage.Decoration.UNDERGROUND_ORES.ordinal();
 		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.COAL_ORE);
@@ -32,6 +34,7 @@ public class DefaultModFeatures {
 		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.GOLD_ORE);
 	}
 	
+	// TODO: disable/enable feature via config
 	public static void addDeepslateUndergroundVariety(BiomeGenerationSettings.Builder generationBuilder) {
 		int stageOre = GenerationStage.Decoration.UNDERGROUND_ORES.ordinal();
 		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.TUFF_ORE);
@@ -49,6 +52,7 @@ public class DefaultModFeatures {
 //		generationBuilder.addCarver(GenerationStage.Carving.AIR, ConfiguredModWorldCarvers.HIGHER_CANYON);
 	}
 	
+	// TODO: disable/enable feature via config
 	public static void addCommonSpawns(MobSpawnInfo.Builder mobSpawnBuilder) {
 		mobSpawnBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.SPIDER, 100, 4, 4));
 		mobSpawnBuilder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 95, 4, 4));

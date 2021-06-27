@@ -1,5 +1,7 @@
 package net.luis.nero.common.item.rune;
 
+import net.luis.nero.api.config.Config;
+import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;
 import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +12,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+@Config
 public class BridgeRuneItem extends AbstractRuneItem {
+	
+	@ConfigValue
+	private static Integer BRIDGE_RUNE_BRIDGE_DURATION = 1200; 
 	
 	public BridgeRuneItem(Properties properties) {
 		super(RuneType.BRIDGE, properties);
@@ -18,7 +24,7 @@ public class BridgeRuneItem extends AbstractRuneItem {
 
 	@Override
 	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
-		player.addEffect(new EffectInstance(ModEffects.BRIDGE.get(), 1200, 0, false, false, false));
+		player.addEffect(new EffectInstance(ModEffects.BRIDGE.get(), BRIDGE_RUNE_BRIDGE_DURATION, 0, false, false, false));
 		return this.success(player, hand);
 	}
 

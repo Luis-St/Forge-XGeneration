@@ -37,7 +37,6 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
-	// TODO: values in config
 	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
 	// TODO: debug register time for all entrys and events
@@ -52,10 +51,10 @@ public class Nero {
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
+		ModBlocks.BLOCKS.register(eventBus);
 		ModBlockItems.ITEMS.register(eventBus);
 		ModContainerTypes.CONTAINERS.register(eventBus);
 		ModTileEntityTypes.TILE_ENTITIES.register(eventBus);
-		ModBlocks.BLOCKS.register(eventBus);
 		
 		ModItems.ITEMS.register(eventBus);
 		

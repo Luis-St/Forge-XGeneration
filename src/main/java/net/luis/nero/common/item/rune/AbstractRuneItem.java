@@ -23,8 +23,6 @@ import net.minecraftforge.items.IItemHandler;
 
 public abstract class AbstractRuneItem extends Item {
 	
-	// TODO: add each effect in config -> custom type RUNE
-	
 	private final IRuneType runeType;
 
 	public AbstractRuneItem(IRuneType runeType, Properties properties) {
