@@ -19,5 +19,4 @@ public enum ConfigValueType {
 	EVENT,
 	UTIL;
 	
-	
 }

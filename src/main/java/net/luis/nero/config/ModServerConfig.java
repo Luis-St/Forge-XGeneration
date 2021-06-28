@@ -18,7 +18,7 @@ public class ModServerConfig {
 		builder.comment("This is a working default config\nChanges of the default values can lead problems");
 		builder.push("Nero " + CONFIG_TYPE_NAME + " Config");
 		for (Class<?> configClass : ConfigUtil.getConfigClassesForType(CONFIG_TYPE)) {
-			for (Field configField : ConfigUtil.getSortedConfigValues(configClass)) {
+			for (Field configField : ConfigUtil.getConfigValues(configClass)) {
 				configField.setAccessible(true);
 				if (!Modifier.isStatic(configField.getModifiers())) {
 					Nero.LOGGER.warn("The Config Field {}, in Class {}, in {} Config, must be static!", configField.getName(), configClass.getName(), CONFIG_TYPE_NAME);

@@ -10,8 +10,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class ModCommonConfig {
 	
-	// TODO: add in range values & create for each type own config (only common and for ConfigValueType#values)
-	// TODO: remove getSortedConfigValues beacuse /\
+	// TODO: add in range values
 	
 	private static final String CONFIG_TYPE_NAME = "Common";
 	private static final ModConfig.Type CONFIG_TYPE = ModConfig.Type.COMMON;
@@ -21,7 +20,7 @@ public class ModCommonConfig {
 		builder.comment("This is a working default config\nChanges of the default values can lead problems");
 		builder.push("Nero " + CONFIG_TYPE_NAME + " Config");
 		for (Class<?> configClass : ConfigUtil.getConfigClassesForType(CONFIG_TYPE)) {
-			for (Field configField : ConfigUtil.getSortedConfigValues(configClass)) {
+			for (Field configField : ConfigUtil.getConfigValues(configClass)) {
 				configField.setAccessible(true);
 				if (!Modifier.isStatic(configField.getModifiers())) {
 					Nero.LOGGER.warn("The Config Field {}, in Class {}, in {} Config, must be static!", configField.getName(), configClass.getName(), CONFIG_TYPE_NAME);

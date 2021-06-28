@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 
 import org.objectweb.asm.Type;
 
+import com.google.common.collect.Lists;
+
 import net.luis.nero.Nero;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -58,42 +60,19 @@ public class ConfigUtil {
 		return configClasses;
 	}
 	
-	public static List<Field> getSortedConfigValues(Class<?> configClass) {
-		List<Field> configFields = new ArrayList<>();
-		for (ConfigValueType valueType : ConfigValueType.values()) {
-			configFields.addAll(getConfigValuesForType(configClass, valueType));
-		}
+	public static List<Field> getConfigValues(Class<?> configClass) {
+		List<Field> configFields = Lists.newArrayList(configClass.getDeclaredFields());
+		configFields.removeIf(configField -> !configField.isAnnotationPresent(net.luis.nero.api.config.value.ConfigValue.class));
 		return configFields;
-	}
-	
-	protected static List<Field> getConfigValuesForType(Class<?> configClass, ConfigValueType configValueType) {
-		List<Field> configFields = new ArrayList<>();
-		for (Field configField : configClass.getDeclaredFields()) {
-			ConfigValueType fieldValueType = getConfigValueType(configField, configClass, false);
-			if (fieldValueType == configValueType) {
-				configFields.add(configField);
-			}
-		}
-		return configFields;
-	}
-	
-	public static ConfigValueType getConfigValueType(Field configField, Class<?> configClass, boolean allowedNull) {
-		ConfigValueType configValueType = getConfigValueTypeByClass(configClass);
-		if (configField.isAnnotationPresent(net.luis.nero.api.config.value.ConfigValue.class)) {
-			if (configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class).valueType() != ConfigValueType.UTIL) {
-				return configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class).valueType();
-			}
-		}
-		return configValueType == null && allowedNull ? configValueType : ConfigValueType.UTIL;
 	}
 	
 	public static void buildConfigValue(ForgeConfigSpec.Builder builder, Class<?> configClass, Field configField) throws IllegalArgumentException, IllegalAccessException {
 		if (configField.isAnnotationPresent(net.luis.nero.api.config.value.ConfigValue.class)) {
 			net.luis.nero.api.config.value.ConfigValue annotation = configField.getAnnotation(net.luis.nero.api.config.value.ConfigValue.class);
 			if (!annotation.comment().isEmpty()) {
-				builder.comment(annotation.comment());
+				builder.comment("", annotation.comment());
 			} else {
-				builder.comment(getValueComment(configField));
+				builder.comment("", getValueComment(configField));
 			}
 			ConfigValue<Object> value = builder.define(getValueName(configField), configField.get(null));
 			if (configClass.getDeclaredAnnotation(Config.class).type() == ModConfig.Type.CLIENT) {
@@ -169,42 +148,6 @@ public class ConfigUtil {
 				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			}
 		}
-	}
-	
-	protected static ConfigValueType getConfigValueTypeByClass(Class<?> configClass) {
-		String className = configClass.getName();
-		if (className.contains("Block")) {
-			return ConfigValueType.BLOCK;
-		} else if (className.contains("Rune")) {
-			return ConfigValueType.RUNE;
-		} else if (className.contains("Item")) {
-			return ConfigValueType.ITEM;
-		} else if (className.contains("Orb")) {
-			return ConfigValueType.ORB;
-		} else if (className.contains("Entity")) {
-			return ConfigValueType.ENTITY;
-		} else if (className.contains("Enchantment")) {
-			return ConfigValueType.ENCHANTMENT;
-		} else if (className.contains("Potion")) {
-			return ConfigValueType.POTION;
-		} else if (className.contains("Effect")) {
-			return ConfigValueType.POTION;
-		} else if (className.contains("Capability")) {
-			return ConfigValueType.CAPABILITY;
-		} else if (className.contains("Recipe")) {
-			return ConfigValueType.RECIPE;
-		} else if (className.contains("Biome")) {
-			return ConfigValueType.BIOME;
-		} else if (className.contains("Canyon") || className.contains("Cave") || className.contains("Carver")) {
-			return ConfigValueType.CARVER;
-		} else if (className.contains("Feature")) {
-			return ConfigValueType.FEATURE;
-		} else if (className.contains("Structure")) {
-			return ConfigValueType.STRUCTURE;
-		} else if (className.contains("Event")) {
-			return ConfigValueType.EVENT;
-		}
-		return null;
 	}
 	
 }
