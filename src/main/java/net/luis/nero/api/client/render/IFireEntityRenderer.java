@@ -13,15 +13,15 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
-public interface ISoulFireEntityRenderer<T extends Entity> {
+public interface IFireEntityRenderer<T extends Entity> {
 	
-	public static final RenderMaterial SOUL_FIRE_0 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_0"));
-	public static final RenderMaterial SOUL_FIRE_1 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_1"));
+	public static final RenderMaterial FIRE_0 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/fire_0"));
+	public static final RenderMaterial FIRE_1 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/fire_1"));
 	
 	@SuppressWarnings("resource")
-	default void renderSoulFire(T entity, MatrixStack matrix, IRenderTypeBuffer renderBuffer) {
-		TextureAtlasSprite soulFireSprite0 = SOUL_FIRE_0.sprite();
-		TextureAtlasSprite soulFireSprite1 = SOUL_FIRE_1.sprite();
+	default void renderFire(T entity, MatrixStack matrix, IRenderTypeBuffer renderBuffer) {
+		TextureAtlasSprite fireSprite0 = FIRE_0.sprite();
+		TextureAtlasSprite fireSprite1 = FIRE_1.sprite();
 		matrix.pushPose();
 		float entityWidth = entity.getBbWidth() * 1.4F;
 		matrix.scale(entityWidth, entityWidth, entityWidth);
@@ -35,21 +35,21 @@ public interface ISoulFireEntityRenderer<T extends Entity> {
 		IVertexBuilder vertexBuilder = renderBuffer.getBuffer(Atlases.cutoutBlockSheet());
 
 		for (MatrixStack.Entry matrixEntry = matrix.last(); entityHeight > 0.0F; ++i) {
-			TextureAtlasSprite soulFireSprite = i % 2 == 0 ? soulFireSprite0 : soulFireSprite1;
-			float u0 = soulFireSprite.getU0();
-			float v0 = soulFireSprite.getV0();
-			float u1 = soulFireSprite.getU1();
-			float v1 = soulFireSprite.getV1();
+			TextureAtlasSprite fireSprite = i % 2 == 0 ? fireSprite0 : fireSprite1;
+			float u0 = fireSprite.getU0();
+			float v0 = fireSprite.getV0();
+			float u1 = fireSprite.getU1();
+			float v1 = fireSprite.getV1();
 			if (i / 2 % 2 == 0) {
 				float f = u1;
 				u1 = u0;
 				u0 = f;
 			}
 
-			soulFireVertex(matrixEntry, vertexBuilder, x - 0.0F, 0.0F - f4, f5, u1, v1);
-			soulFireVertex(matrixEntry, vertexBuilder, -x - 0.0F, 0.0F - f4, f5, u0, v1);
-			soulFireVertex(matrixEntry, vertexBuilder, -x - 0.0F, 1.4F - f4, f5, u0, v0);
-			soulFireVertex(matrixEntry, vertexBuilder, x - 0.0F, 1.4F - f4, f5, u1, v0);
+			fireVertex(matrixEntry, vertexBuilder, x - 0.0F, 0.0F - f4, f5, u1, v1);
+			fireVertex(matrixEntry, vertexBuilder, -x - 0.0F, 0.0F - f4, f5, u0, v1);
+			fireVertex(matrixEntry, vertexBuilder, -x - 0.0F, 1.4F - f4, f5, u0, v0);
+			fireVertex(matrixEntry, vertexBuilder, x - 0.0F, 1.4F - f4, f5, u1, v0);
 			entityHeight -= 0.45F;
 			f4 -= 0.45F;
 			x *= 0.9F;
@@ -58,9 +58,9 @@ public interface ISoulFireEntityRenderer<T extends Entity> {
 		matrix.popPose();
 	}
 	
-	static void soulFireVertex(MatrixStack.Entry matrixEntry, IVertexBuilder vertexBuilder, float x, float y, float z, float u, float v) {
+	static void fireVertex(MatrixStack.Entry matrixEntry, IVertexBuilder vertexBuilder, float x, float y, float z, float u, float v) {
 		vertexBuilder.vertex(matrixEntry.pose(), x, y, z).color(255, 255, 255, 255).uv(u, v).overlayCoords(0, 10)
 				.uv2(240).normal(matrixEntry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
 	}
-
+	
 }
