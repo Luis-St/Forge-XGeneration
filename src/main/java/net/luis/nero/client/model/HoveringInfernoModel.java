@@ -108,9 +108,9 @@ public class HoveringInfernoModel<T extends Entity> extends EntityModel<T> {
 				this.setZRotation180(this.shieldWest, 0);
 			} else {
 				this.setXRotation180(this.shieldNorth, 300);
-				this.setZRotation180(this.shieldEast, 60 * ageInTicks);
-				this.setXRotation180(this.shieldSouth, 300 * ageInTicks);
-				this.setZRotation180(this.shieldWest, 300 * ageInTicks);
+				this.setZRotation180(this.shieldEast, 60);
+				this.setXRotation180(this.shieldSouth, 300);
+				this.setZRotation180(this.shieldWest, 300);
 			}
 		}
 	}
