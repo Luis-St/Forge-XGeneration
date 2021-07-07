@@ -1,6 +1,7 @@
 package net.luis.nero.event.fml;
 
 
+import net.luis.nero.Nero;
 import net.luis.nero.client.render.entity.HoveringInfernoEntityRenderer;
 import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@EventBusSubscriber(bus = Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Nero.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class OnClientSetupEvent {
 	
 	@SubscribeEvent

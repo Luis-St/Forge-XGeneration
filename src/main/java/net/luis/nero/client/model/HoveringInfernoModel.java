@@ -3,14 +3,19 @@ package net.luis.nero.client.model;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import net.luis.nero.Nero;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.IHasHead;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
-// TODO: finish
-public class HoveringInfernoModel<T extends Entity> extends EntityModel<T> {
+// TODO: use LayerRenderer to render the shields
+// TODO: 3 positons of the shields
+// - 1: normal
+// - 2: cover
+// - 3: large ring with 8 shields 
+// TODO: create enum for shield positons
+// TODO: add custom HeadLayer to HoveringInfernoEntity 
+public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> implements IHasHead {
 	
 	private final ModelRenderer head;
 	private final ModelRenderer shieldNorth;
@@ -82,48 +87,40 @@ public class HoveringInfernoModel<T extends Entity> extends EntityModel<T> {
 		}
 	}
 	
-	
-	
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
+	public void setupAnim(HoveringInfernoEntity hoveringInferno, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
 		this.head.yRot = (float) (headYaw * (Math.PI / 180));
 		this.head.xRot = (float) (headPitch * (Math.PI / 180));
-		if (entity instanceof HoveringInfernoEntity) {
-			HoveringInfernoEntity infernoEntity = (HoveringInfernoEntity) entity;
-			/*if (infernoEntity.areShieldsActive()) { // Temp disabled, only for testing!
-				this.setXRotation180(this.shieldNorth, 355);
-				this.setZRotation180(this.shieldEast, 5);
-				this.setXRotation180(this.shieldSouth, 355);
-				this.setZRotation180(this.shieldWest, 355);
-			} else {
-				this.setXRotation180(this.shieldNorth, 345);
-				this.setZRotation180(this.shieldEast, 15);
-				this.setXRotation180(this.shieldSouth, 345);
-				this.setZRotation180(this.shieldWest, 345);
-			}*/
-			if (infernoEntity.areShieldsActive()) {
-				this.setXRotation180(this.shieldNorth, 0);
-				this.setZRotation180(this.shieldEast, 0);
-				this.setXRotation180(this.shieldSouth, 0);
-				this.setZRotation180(this.shieldWest, 0);
-			} else {
-				this.setXRotation180(this.shieldNorth, 300);
-				this.setZRotation180(this.shieldEast, 60);
-				this.setXRotation180(this.shieldSouth, 300);
-				this.setZRotation180(this.shieldWest, 300);
-			}
-		}
+//		if (infernoEntity.areShieldsActive()) {
+//			this.setXRotation180(this.shieldNorth, 355);
+//			this.setZRotation180(this.shieldEast, 5);
+//			this.setXRotation180(this.shieldSouth, 355);
+//			this.setZRotation180(this.shieldWest, 355);
+//		} else {
+//
+//		}
+		this.setXRotation180(this.shieldNorth, 345);
+		this.setZRotation180(this.shieldEast, 15);
+		this.setXRotation180(this.shieldSouth, 345);
+		this.setZRotation180(this.shieldWest, 345);
+		this.shieldNorth.y = 6;
+		this.shieldNorth.z = 1;
+		this.shieldEast.y = 6;
+		this.shieldEast.x = 1;
+		this.shieldSouth.y = 6;
+		this.shieldSouth.z = -1;
+		this.shieldWest.y = 6;
+		this.shieldWest.x = -1;
 	}
 	
 	@Override
-	public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTick) {
+	public void prepareMobModel(HoveringInfernoEntity hoveringInferno, float limbSwing, float limbSwingAmount, float partialTick) {
 		
 	}
 	
 
 	@Override
 	public void renderToBuffer(MatrixStack matrix, IVertexBuilder vertexBuilder, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Nero.LOGGER.debug("HoveringInfernoEntity#renderToBuffer");
 		this.renderStatic(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.renderAnimated(matrix, vertexBuilder, packedLight, packedOverlay);
 	}
@@ -139,5 +136,24 @@ public class HoveringInfernoModel<T extends Entity> extends EntityModel<T> {
 		this.shieldSouth.render(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.shieldEast.render(matrix, vertexBuilder, packedLight, packedOverlay);
 	}
+
+	@Override
+	public ModelRenderer getHead() {
+		return this.head;
+	}
 	
 }
+
+/*
+shields far away from the entity:
+this.shieldNorth.y = 8;
+this.shieldNorth.z = -10;
+this.shieldEast.y = 8;
+this.shieldEast.x = -10;
+this.shieldSouth.y = 8;
+this.shieldSouth.z = 10;
+this.shieldWest.y = 8;
+this.shieldWest.x = 10;
+ */
+
+

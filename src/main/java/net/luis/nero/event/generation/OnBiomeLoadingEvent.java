@@ -2,6 +2,7 @@ package net.luis.nero.event.generation;
 
 import java.util.stream.Collectors;
 
+import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.common.world.gen.ConfiguredModStructures;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
@@ -22,7 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @Config
-@EventBusSubscriber
+@EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnBiomeLoadingEvent {
 	
 	// TODO: disable/enable feature via config

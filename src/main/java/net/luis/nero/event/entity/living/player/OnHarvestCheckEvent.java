@@ -1,5 +1,6 @@
 package net.luis.nero.event.entity.living.player;
 
+import net.luis.nero.Nero;
 import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -8,7 +9,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnHarvestCheckEvent {
 	
 	@SubscribeEvent

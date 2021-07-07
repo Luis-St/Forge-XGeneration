@@ -7,6 +7,8 @@ import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.util.Reflections;
 import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
+import net.luis.nero.common.world.test.TestBiomeProvider;
+import net.luis.nero.common.world.test.TestChunkGenerator;
 import net.luis.nero.core.NetworkHandler;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
@@ -24,7 +26,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@EventBusSubscriber(bus = Bus.MOD)
+@EventBusSubscriber(modid = Nero.MOD_ID, bus = Bus.MOD)
 public class OnCommonSetupEvent {
 	
 	@SubscribeEvent
@@ -54,7 +56,10 @@ public class OnCommonSetupEvent {
 	
 	protected static void registerUtil(FMLCommonSetupEvent event) {
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
-		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC);
+		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "biomes"), DeepslateBiomeProvider.CODEC); // TODO: deepslate_biome_provider
+		
+		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "test_chunk_generator"), TestChunkGenerator.CODEC);
+		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biomes"), TestBiomeProvider.CODEC);
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {

@@ -1,5 +1,6 @@
 package net.luis.nero.event.world;
 
+import net.luis.nero.Nero;
 import net.luis.nero.api.common.util.Reflections;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraft.world.server.ServerWorld;
@@ -7,7 +8,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnWorldLoadEvent {
 
 	@SubscribeEvent

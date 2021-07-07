@@ -1,5 +1,6 @@
 package net.luis.nero.event.entity.living.player;
 
+import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.block.AirBlock;
@@ -12,7 +13,7 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnPlayerTickEvent {
 
 	@SubscribeEvent

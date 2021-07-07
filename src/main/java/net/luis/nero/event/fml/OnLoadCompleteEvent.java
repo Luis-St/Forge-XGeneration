@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-//@EventBusSubscriber(bus = Bus.MOD)
+//@@EventBusSubscriber(modid = Nero.MOD_ID, bus = Bus.MOD)
 public class OnLoadCompleteEvent {
 	
 	@SubscribeEvent

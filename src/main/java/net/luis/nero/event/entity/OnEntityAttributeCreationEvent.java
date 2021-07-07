@@ -1,5 +1,6 @@
 package net.luis.nero.event.entity;
 
+import net.luis.nero.Nero;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.luis.nero.common.entity.SoulBlazeEntity;
 import net.luis.nero.init.entity.ModEntityTypes;
@@ -8,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@EventBusSubscriber(bus = Bus.MOD)
+@EventBusSubscriber(modid = Nero.MOD_ID, bus = Bus.MOD)
 public class OnEntityAttributeCreationEvent {
 	
 	@SubscribeEvent

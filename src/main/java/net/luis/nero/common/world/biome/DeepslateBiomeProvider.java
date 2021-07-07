@@ -40,7 +40,7 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 	}
 
 	private static List<Biome> getStartBiomes(Registry<Biome> registry) {
-		return DeepslateBiomeProvider.BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList());
+		return BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList());
 	}
 	
 	public long getSeed() {
@@ -62,7 +62,7 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 	}
 
 	@Override
-	public BiomeProvider withSeed(long seed) {
+	public DeepslateBiomeProvider withSeed(long seed) {
 		return new DeepslateBiomeProvider(this.biomeRegistry, seed);
 	}
 

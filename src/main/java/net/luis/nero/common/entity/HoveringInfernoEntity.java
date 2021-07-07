@@ -16,7 +16,10 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -88,18 +91,10 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	@Override
 	public void tick() {
 		super.tick();
+		if (this.areShieldsActive()) {
+			this.setShieldActiveTime(this.getShieldActiveTime() - 1);
+		}
 	}
-	
-/*	@Override
-	public void readAdditionalSaveData(CompoundNBT compoundNBT) {
-		super.readAdditionalSaveData(compoundNBT);
-	}
-	
-	@Override
-	public CompoundNBT saveWithoutId(CompoundNBT compoundNBT) {
-		CompoundNBT nbt = new CompoundNBT();
-		return super.saveWithoutId(compoundNBT);
-	}*/
 	
 	@Override
 	public IPacket<?> getAddEntityPacket() {
@@ -122,7 +117,7 @@ public class HoveringInfernoEntity extends BlazeEntity {
 			LivingEntity attacker = (LivingEntity) damageSource.getEntity();
 			if (attacker.getMainHandItem().getItem() instanceof AxeItem) {
 				useAxe = true;
-				amount /= 2;
+				amount /= 3;
 				this.setShieldActiveTime(0);
 			}
 		}
@@ -131,9 +126,14 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		}
 		boolean hurt = super.hurt(damageSource, amount);
 		if (hurt && !useAxe) {
-			this.setShieldActiveTime(MathHelper.nextInt(this.random, 5, 15) + this.random.nextInt(10));
+			this.setShieldActiveTime(MathHelper.nextInt(this.random, 100, 300) + this.random.nextInt(150));
 		}
 		return hurt;
+	}
+	
+	@Override
+	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
+		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
 	}
 	
 	public boolean areShieldsActive() {
@@ -149,7 +149,7 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		if (nbt.contains("shieldActiveTime")) {
 			nbt.remove("shieldActiveTime");
 		}
-		nbt.putInt("shieldActiveTime", MathHelper.clamp(shieldActiveTime, 0, 30) * 20);
+		nbt.putInt("shieldActiveTime", MathHelper.clamp(shieldActiveTime, 0, 600));
 		this.entityData.set(NBT_DATA, nbt);
 	}
 	
