@@ -9,5 +9,6 @@ import net.minecraft.world.World;
 public class ModDimensionWorlds {
 	
     public static final RegistryKey<World> DEEPSLATE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(Nero.MOD_ID, "deepslate"));
+    public static final RegistryKey<World> TEST = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(Nero.MOD_ID, "test"));
 
 }
