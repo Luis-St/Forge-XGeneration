@@ -25,11 +25,13 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+// Try move jigsaw system
 public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 	
-	// TODO: (not final) DeepslateMineshaftStructurePiece -> DeepslateMineshaftPieces & abstract add base methodes handle gen in generatePieces in Start Factory
-	// TODO: add (fix) rail & torch gen
+	// TODO: base shaft (part shaft 3 hight, 3 width, 1 length) -> move to direction (check also axis)
+	// TODO: create seed -> form seed create mieshaft
 	// TODO: finish
+	// TODO: fix minecrat generation
 	
 	protected static final BlockState OAK_PLANKS = Blocks.OAK_PLANKS.defaultBlockState();
 	protected static final BlockState OAK_FENCE = Blocks.OAK_FENCE.defaultBlockState();
@@ -44,7 +46,7 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 		return rng.nextInt(10) > 3;
 	};
 	protected static final BiPredicate<ISeedReader, Random> CHEST_MINECART_PREDICATE = (seedReader, rng) -> {
-		return rng.nextInt(100) == 0;
+		return /*rng.nextInt(100) == 0*/false; // TODO: fix -> temp disabled
 	};
 	
 	public DeepslateMineshaftStructurePiece(Random rng, int x, int y, int z) {
@@ -56,14 +58,78 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 	}
 	
 	@Override
+	// TODO: better mineshaft gen -> less code/methods (use count)
 	public boolean postProcess(ISeedReader seedReader, StructureManager structureManager, ChunkGenerator chunkGenerator,
 			Random rng, MutableBoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		this.placeShaftZ(seedReader, boundingBox, 0, 0, 0, rng, false, false, false, true);
+		this.placeCrossShaftWithSize(seedReader, boundingBox, 0, 0, 0, 1, 1, rng);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 0, -4, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 0, -9, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 0, -14, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 0, -19, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 0, -24, rng, Direction.NORTH);
+//		this.placeShaftWithRange(seedReader, boundingBox, 0, 0, 0, 10, true, rng, Direction.SOUTH);
+/*		this.placeDefaultShaft(seedReader, boundingBox, 0, 4, -4, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 4, 4, 0, rng, Direction.EAST);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, 4, 4, rng, Direction.SOUTH);
+		this.placeDefaultShaft(seedReader, boundingBox, -4, 4, 0, rng, Direction.WEST);
+		
+		this.placeDefaultShaft(seedReader, boundingBox, 0, -4, -4, rng, Direction.NORTH);
+		this.placeDefaultShaft(seedReader, boundingBox, 4, -4, 0, rng, Direction.EAST);
+		this.placeDefaultShaft(seedReader, boundingBox, 0, -4, 4, rng, Direction.SOUTH);
+		this.placeDefaultShaft(seedReader, boundingBox, -4, -4, 0, rng, Direction.WEST);*/
+		
 		this.updateBoundingBox(seedReader, boundingBox);
 		return true;
 	}
 	
-	// x -> do things on z
+	protected void placeDefaultShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
+		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, true, false, false, true, direction);
+	}
+	
+	protected void placeSpawnerShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
+		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, false, true, true, false, direction);
+	}
+	
+	protected void placeChestMinecratShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
+		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, false, false, false, true, direction);
+	}
+	
+	protected void placeRandomShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction, boolean allowCross) {
+		int rngShaft = rng.nextInt(100);
+		if (rngShaft > 90) {
+			this.placeSpawnerShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, direction);
+		} else if (allowCross && rngShaft > 75) {
+			this.placeDefaultCrossShaft(seedReader, boundingBox, xIn, yIn, zIn, rng);
+		} else {
+			this.placeDefaultShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, direction);
+		}
+	}
+	
+	@Deprecated
+	protected void placeShaftWithRange(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, int range, boolean rngShaft, Random rng, 
+			Direction direction) {
+		xIn += direction.getStepX() * 4;
+		zIn += direction.getStepZ() * 4;
+		for (int i = 0; i <= range * 5; i += 5) {
+			int x = xIn + (direction.getStepX() * i);
+			int z = zIn + (direction.getStepZ() * i);
+			if (rngShaft) {
+				this.placeRandomShaft(seedReader, boundingBox, x, yIn, z, rng, direction, rng.nextInt(10) > 5);
+			} else {
+				this.placeDefaultShaft(seedReader, boundingBox, x, yIn, z, rng, direction);
+			}
+		}
+	}
+	
+	private void placeShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, 
+			boolean rngCobweb, boolean spawnerCobweb, boolean spawner, boolean chestMinecrat, Direction direction) {
+		if (direction.getAxis() == Axis.X) {
+			this.placeShaftX(seedReader, boundingBox, xIn, yIn, zIn, rng, rngCobweb, spawnerCobweb, spawner, chestMinecrat);
+		} else if (direction.getAxis() == Axis.Z) {
+			this.placeShaftZ(seedReader, boundingBox, xIn, yIn, zIn, rng, rngCobweb, spawnerCobweb, spawner, chestMinecrat);
+		}
+	}
+	
 	private void placeShaftX(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, 
 			boolean rngCobweb, boolean spawnerCobweb, boolean spawner, boolean chestMinecrat) {
 		this.generateAirCube(seedReader, boundingBox, xIn - 2, yIn - 1, zIn - 1, xIn + 2, yIn + 1, zIn + 1);
@@ -115,8 +181,8 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 				for (int z = -1; z <= 1; z++) {
 					if (CHEST_MINECART_PREDICATE.test(seedReader, rng)) {
 						if (x == xIn && z != 0) {
-							int i = rng.nextBoolean() ? -1 : 1;
-							this.spawnChestMinecart(seedReader, boundingBox, x + i, yIn - 1, z, rng);
+							int xOffset = rng.nextBoolean() ? -1 : 1;
+							this.spawnChestMinecart(seedReader, boundingBox, x + xOffset, yIn - 1, z, rng);
 						} else {
 							this.spawnChestMinecart(seedReader, boundingBox, x, yIn - 1, z, rng);
 						}
@@ -126,7 +192,6 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 		}
 	}
 	
-	// z -> do things on x
 	private void placeShaftZ(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, 
 			boolean rngCobweb, boolean spawnerCobweb, boolean spawner, boolean chestMinecrat) {
 		this.generateAirCube(seedReader, boundingBox, xIn - 1, yIn - 1, zIn - 2, xIn + 1, yIn + 1, zIn + 2);
@@ -178,8 +243,8 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 				for (int z = -2; z <= 2; z++) {
 					if (CHEST_MINECART_PREDICATE.test(seedReader, rng)) {
 						if (x != 0 && z == zIn) {
-							int i = rng.nextBoolean() ? -1 : 1;
-							this.spawnChestMinecart(seedReader, boundingBox, x, yIn - 1, z + i, rng);
+							int zOffset = rng.nextBoolean() ? -1 : 1;
+							this.spawnChestMinecart(seedReader, boundingBox, x, yIn - 1, z + zOffset, rng);
 						} else {
 							this.spawnChestMinecart(seedReader, boundingBox, x, yIn - 1, z, rng);
 						}
@@ -189,37 +254,15 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 		}
 	}
 	
-	private void placeShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, 
-			boolean rngCobweb, boolean spawnerCobweb, boolean spawner, boolean chestMinecrat, Direction direction) {
-		if (direction.getAxis() == Axis.X) {
-			this.placeShaftX(seedReader, boundingBox, xIn, zIn, yIn, rng, rngCobweb, spawnerCobweb, spawner, chestMinecrat);
-		} else if (direction.getAxis() == Axis.Z) {
-			this.placeShaftZ(seedReader, boundingBox, xIn, zIn, yIn, rng, rngCobweb, spawnerCobweb, spawner, chestMinecrat);
-		}
-	}
-	
-	protected void placeDefaultShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
-		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, true, false, false, true, direction);
-	}
-	
-	protected void placeSpawnerShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
-		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, false, true, true, false, direction);
-	}
-	
-	protected void placeChestMinecratShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int yIn, int zIn, Random rng, Direction direction) {
-		this.placeShaft(seedReader, boundingBox, xIn, yIn, zIn, rng, false, false, false, true, direction);
-	}
-	
-	// TODO: base shaft (part shaft 3 hight, 3 width, 1 length) -> move to direction (check also axis)
 	protected void placeStairsUpShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, BlockPos pos, Random rng, Direction direction) {
 		
 	}
 	
-	// TODO: base shaft (part shaft 3 hight, 3 width, 1 length) -> move to direction (check also axis)
 	protected void placeStairsDownShaft(ISeedReader seedReader, MutableBoundingBox boundingBox, BlockPos pos, Random rng, Direction direction) {
 		
 	}
 	
+	// TODO: gen in each direction start shaft parts
 	private void placeCross(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int zIn, int yStart, int yEnd, Random rng) {
 		int xMin = xIn - 1;
 		int yMin = yStart - 1;
@@ -257,9 +300,11 @@ public class DeepslateMineshaftStructurePiece extends ModStructurePiece {
 		this.placeCross(seedReader, boundingBox, xIn, zIn, yIn - 4, yIn, rng);
 	}
 	
-	protected void placeCrossShaftWithSize(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int zIn, int yIn, int yUp,
-			int yDown, Random rng) {
-		this.placeCross(seedReader, boundingBox, xIn, zIn, yIn - yDown + 2, yIn + yUp - 2, rng);
+	protected void placeCrossShaftWithSize(ISeedReader seedReader, MutableBoundingBox boundingBox, int xIn, int zIn, int yIn, int shaftCountUp,
+			int shaftCountDown, Random rng) {
+		int yDown = shaftCountDown * 4;
+		int yUp = shaftCountUp * 4;
+		this.placeCross(seedReader, boundingBox, xIn, zIn, yIn - yDown, yIn + yUp, rng);
 	}
 	
 	protected void spawnChestMinecart(ISeedReader seedReader, MutableBoundingBox boundingBox, int x, int y, int z, Random rng) {

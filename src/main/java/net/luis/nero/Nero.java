@@ -37,6 +37,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
+	// TODO: custom strong hold in deepslate -> without portal & god loot
 	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
 	// TODO: debug register time for all entrys and events

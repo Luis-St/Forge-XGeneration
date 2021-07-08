@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class ReducedExposedOreFeature extends Feature<OreFeatureConfig> {
 
-	// TODO: create
+	// TODO: create -> 1.17 not needed copy vanilla create custom for removing/overwriteing of ores
 	
 	public ReducedExposedOreFeature() {
 		super(OreFeatureConfig.CODEC);
