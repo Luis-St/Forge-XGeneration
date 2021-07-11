@@ -36,49 +36,4 @@ public abstract class ModStructurePiece extends ScatteredStructurePiece {
 		return true;
 	}
 	
-	protected void generateCube(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin,int xMax, int yMax, int zMax, 
-			BlockState blockState) {
-		for (int x = xMin; x <= xMax; x++) {
-			for (int y = yMin; y <= yMax; y++) {
-				for (int z = zMin; z <= zMax; z++) {
-					this.placeBlock(seedReader, blockState, x, y, z, boundingBox);
-				}
-			}
-		}
-	}
-	
-	protected void generateCube(ISeedReader seedReader, MutableBoundingBox boundingBox, BlockPos minPos, BlockPos maxPos, BlockState blockState) {
-		for (int x = minPos.getX(); x <= maxPos.getX(); x++) {
-			for (int y = minPos.getY(); y <= maxPos.getY(); y++) {
-				for (int z = minPos.getZ(); z <= maxPos.getZ(); z++) {
-					this.placeBlock(seedReader, blockState, x, y, z, boundingBox);
-				}
-			}
-		}
-	}
-
-	protected void generateAirCube(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax) {
-		this.generateCube(seedReader, boundingBox, xMin, yMin, zMin, xMax, yMax, zMax, CAVE_AIR);
-	}
-
-	protected void generateStoneCube(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax) {
-		this.generateCube(seedReader, boundingBox, xMin, yMin, zMin, xMax, yMax, zMax, STONE);
-	}
-
-	protected void generateDeepslateCube(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax) {
-		this.generateCube(seedReader, boundingBox, xMin, yMin, zMin, xMax, yMax, zMax, DEEPSLATE);
-	}
-	
-	protected void generateRoom(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin,int xMax, int yMax, int zMax, 
-			BlockState boundaryBlockState, BlockState insideBlockState) {
-		this.generateCube(seedReader, boundingBox, xMin, yMin, zMin, xMax, yMax, zMax, boundaryBlockState);
-		this.generateCube(seedReader, boundingBox, xMin +1 , yMin + 1, zMin + 1, xMax - 1, yMax - 1, zMax - 1, insideBlockState);
-	}
-	
-	protected void generateAirRoom(ISeedReader seedReader, MutableBoundingBox boundingBox, int xMin, int yMin, int zMin,int xMax, int yMax, int zMax, 
-			BlockState boundaryBlockState) {
-		this.generateCube(seedReader, boundingBox, xMin, yMin, zMin, xMax, yMax, zMax, boundaryBlockState);
-		this.generateAirCube(seedReader, boundingBox, xMin +1 , yMin + 1, zMin + 1, xMax - 1, yMax - 1, zMax - 1);
-	}
-	
 }

@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.luis.nero.Nero;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
@@ -54,7 +55,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 		this.settings = settings;
 		this.seed = new Random().nextLong();
 		this.rng = new SharedSeedRandom(this.seed);
-		this.noise = new PerlinNoiseGenerator(rng, IntStream.rangeClosed(-3, 0));
+		this.noise = new PerlinNoiseGenerator(this.rng, IntStream.rangeClosed(-3, 0));
 	}
 
 	public Settings getDimensionSettings() {
@@ -70,32 +71,21 @@ public class TestChunkGenerator extends ChunkGenerator {
 		BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
 		BlockState stone = Blocks.STONE.defaultBlockState();
 		ChunkPos chunkpos = chunk.getPos();
-
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				chunk.setBlockState(new BlockPos(x, 0, z), bedrock, false);
 			}
 		}
-		// int noise = (int) (65.0 + Math.sin(realx / 10.0) * 16.0 + Math.cos(realz /
-		// 10.0) * 16.0);
-		// int noise = (int) (75.0 + Math.sin(realx / 100.0) * 32.0 + Math.cos(realz /
-		// 100.0) * 32.0); -> first good world
-		// int noise = (int) (75.0 + Math.sin(realx / 500.0) * 16.0 + Math.cos(realz /
-		// 500.0) * 16.0); -> second good world
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				int worldX = chunkpos.x * 16 + x; 
 				int worldZ = chunkpos.z * 16 + z; 
-/*				int noise =(int) (75.0 + Math.sin(worldX / 64.0) * 16.0 + Math.sin(worldZ / 64.0) * 16.0);*/
-				// 65 -> height
-				// 10.0 (1) -> sin stretch
-				// 10.0 (2) -> cos stretch
-				// 16.0 (1) -> sin height
-				// 16.0 (2) -> sin height
-				// f(x) = 65+sin(x/10)*16+cos(x/10)*16
-				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, worldX * 0.0625) * 16;
+				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 3;
+				Nero.LOGGER.debug(noise);
+				// from -4 to 16
+//				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 16; // TODO: use for biome map
 				for (int y = 1; y < 10 + noise; y++) {
-					chunk.setBlockState(new BlockPos(x, y, z), stone, false);
+					chunk.setBlockState(new BlockPos(x, 10 + noise, z), stone, false);
 				}
 			}
 		}
