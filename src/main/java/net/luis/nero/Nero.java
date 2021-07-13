@@ -3,6 +3,8 @@ package net.luis.nero;
 import java.io.File;
 import java.nio.file.Path;
 
+import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -83,6 +85,7 @@ public class Nero {
 		
 	}
 	
+	@Nullable
 	public static Nero getInstance() {
 		return nero;
 	}

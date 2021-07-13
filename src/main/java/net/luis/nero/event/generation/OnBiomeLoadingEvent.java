@@ -30,7 +30,7 @@ public class OnBiomeLoadingEvent {
 	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
-		
+
 		ResourceLocation biomeName = event.getName();
 		Category category = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();

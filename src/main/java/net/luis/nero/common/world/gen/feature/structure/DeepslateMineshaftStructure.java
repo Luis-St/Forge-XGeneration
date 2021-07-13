@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.gen.feature.structure;
 
-import net.luis.nero.Nero;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -50,11 +49,11 @@ public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 		@Override
 		public void generatePieces(DynamicRegistries registries, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, 
 				Biome biome, NoFeatureConfig config) {
-			DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkX << 4) + 7, 5, (chunkZ << 4) + 7);
+			DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
 			this.pieces.add(structurePiece);
 			this.calculateBoundingBox();
-			this.moveInsideHeights(random, 128, 128);
-			Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
+//			this.moveInsideHeights(random, 128, 128);
+//			Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
 		}
 		
 	}
