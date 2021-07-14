@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.gen.layer;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -53,7 +52,6 @@ public class BiomeMap {
 		double noise = this.getNoise(x, z);
 		List<NoiseBiome> biomes = this.biomes.stream().filter(noiseBiome -> noiseBiome.isNoiseBetween(noise)).collect(Collectors.toList());
 		if (!biomes.isEmpty()) {
-			Collections.shuffle(biomes);
 			return this.biomes.get(0).getBiome();
 		}
 		return this.defaultBiome;

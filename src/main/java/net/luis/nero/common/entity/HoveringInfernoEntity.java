@@ -27,29 +27,32 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-// TODO: finish
-
+// TODO: custom attack goal
+// TODO: order values/methods, remove uneeded things
 @Config
 public class HoveringInfernoEntity extends BlazeEntity {
 	
 	public static final DataParameter<CompoundNBT> NBT_DATA = EntityDataManager.defineId(HoveringInfernoEntity.class, DataSerializers.COMPOUND_TAG);
+	@ConfigValue private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
+	@ConfigValue private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
+	@ConfigValue private static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
+	@ConfigValue private static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
+	@ConfigValue private static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.5;
+	@ConfigValue private static Double HOVERING_INFERNO_DAMAGE_RESISTANCE = 0.25;
 	
-	@ConfigValue
-	private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
-	@ConfigValue
-	private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
-	@ConfigValue
-	private static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
-	@ConfigValue
-	private static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
-	@ConfigValue
-	private static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.5;
-	@ConfigValue
-	private static Double HOVERING_INFERNO_DAMAGE_RESISTANCE = 0.25;
+	public float yRotN = 0;
+	public float yRotNO = 0;
+	public float yRotE = 0;
+	public float yRotEO = 0;
+	public float yRotS = 0;
+	public float yRotSO = 0;
+	public float yRotW = 0;
+	public float yRotWO = 0;
 	
 	public HoveringInfernoEntity(World world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
@@ -91,9 +94,43 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	@Override
 	public void tick() {
 		super.tick();
+		this.updateShields();
 		if (this.areShieldsActive()) {
 			this.setShieldActiveTime(this.getShieldActiveTime() - 1);
 		}
+	}
+	
+	private void updateShields() {
+		this.yRotNO = this.yRotN;
+		this.yRotN++;
+		this.yRotEO = this.yRotE;
+		this.yRotE++;
+		this.yRotSO = this.yRotS;
+		this.yRotS++;
+		this.yRotWO = this.yRotW;
+		this.yRotW++;
+	}
+	
+	public float getShieldRot(Direction direction) {
+		switch (direction) {
+		case NORTH: return this.yRotN;
+		case EAST: return this.yRotE;
+		case SOUTH: return this.yRotS;
+		case WEST: return this.yRotW;
+		default: break;
+		}
+		throw new IllegalArgumentException("No shield rotation for direction: " + direction);
+	}
+	
+	public float getShieldRotOld(Direction direction) {
+		switch (direction) {
+		case NORTH: return this.yRotNO;
+		case EAST: return this.yRotEO;
+		case SOUTH: return this.yRotSO;
+		case WEST: return this.yRotWO;
+		default: break;
+		}
+		throw new IllegalArgumentException("No shield rotation for direction: " + direction);
 	}
 	
 	@Override
@@ -160,6 +197,19 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	    		  .add(Attributes.FOLLOW_RANGE, HOVERING_INFERNO_FOLLOW_RANGE)
 	    		  .add(Attributes.KNOCKBACK_RESISTANCE, HOVERING_INFERNO_KNOCKBACK_RESISTANCE)
 	    		  .add(Attributes.MAX_HEALTH, HOVERING_INFERNO_MAX_HEALTH).build();
+	}
+	
+	// TODO: move entity.util
+	public static enum ShieldStage {
+		
+		COVER,
+		ATTACK;
+		
+	}
+	
+	// TODO: move entity.util
+	public static class ShieldPos {
+		
 	}
 	
 }
