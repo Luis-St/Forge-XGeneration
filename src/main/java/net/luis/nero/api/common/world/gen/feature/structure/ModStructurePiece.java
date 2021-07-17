@@ -20,20 +20,12 @@ public abstract class ModStructurePiece extends StructurePiece {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
-		// Work
-		this.setOrientation(Direction.Plane.HORIZONTAL.getRandomDirection(rng));
+		this.setOrientation(Direction.NORTH); // Don't work
+		this.setOrientation(Direction.Plane.HORIZONTAL.getRandomDirection(rng)); // Work
 		if (this.getOrientation().getAxis() == Direction.Axis.Z) {
 			this.boundingBox = new MutableBoundingBox(x, y, z, x + width - 1, y + height - 1, z + depth - 1);
 		} else {
 			this.boundingBox = new MutableBoundingBox(x, y, z, x + depth - 1, y + height - 1, z + width - 1);
-		}
-		
-		// Don't work
-		this.setOrientation(Direction.NORTH);
-		if (this.getOrientation().getAxis() == Direction.Axis.Z) {
-			this.boundingBox = new MutableBoundingBox(x - width + 1, y, z + depth - 1, x + width - 1, y + height - 1, z + depth - 1);
-		} else {
-			this.boundingBox = new MutableBoundingBox(x - depth + 1, y, z - width + 1, x + depth - 1, y + height - 1, z + width - 1);
 		}
 	}
 
@@ -43,12 +35,12 @@ public abstract class ModStructurePiece extends StructurePiece {
 		this.height = nbt.getInt("Height");
 		this.depth = nbt.getInt("Depth");
 	}
-	
+	 
 	@Override
 	protected void addAdditionalSaveData(CompoundNBT nbt) {
 		nbt.putInt("Width", this.width);
 		nbt.putInt("Height", this.height);
 		nbt.putInt("Depth", this.depth);
 	}
-
+	
 }
