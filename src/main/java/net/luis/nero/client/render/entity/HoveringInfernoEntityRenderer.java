@@ -1,8 +1,8 @@
 package net.luis.nero.client.render.entity;
 
 import net.luis.nero.Nero;
-import net.luis.nero.client.model.HoveringInfernoModel;
 import net.luis.nero.client.render.entity.layer.HoveringInfernoShieldLayer;
+import net.luis.nero.client.render.entity.model.HoveringInfernoModel;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

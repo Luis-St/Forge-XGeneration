@@ -46,7 +46,7 @@ I have tested a lot and can't find the problem. even simple structures (a room o
 		Nero.LOGGER.debug("MutableBoundingBox: minX {}, minY {}, minZ {}, maxX {}, maxY {}, maxZ {} and spanX {}, spanY {}, spanZ {}", 
 				this.boundingBox.x0, this.boundingBox.y0, this.boundingBox.z0, this.boundingBox.x1, 
 				this.boundingBox.y1, this.boundingBox.z1, this.boundingBox.getXSpan(), this.boundingBox.getYSpan(), this.boundingBox.getZSpan());
-//		this.boundingBox;
+
 		this.generateAirBox(seedReader, boundingBox, 16, 16, 16, 32, 32, 32); // -> issu with generating
 
 		

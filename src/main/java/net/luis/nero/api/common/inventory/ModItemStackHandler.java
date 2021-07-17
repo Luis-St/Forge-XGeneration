@@ -3,11 +3,13 @@ package net.luis.nero.api.common.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ModItemStackHandler extends ItemStackHandler {
+public class ModItemStackHandler extends ItemStackHandler implements IInventory {
 	
 	public ModItemStackHandler() {
 		this(1);
@@ -81,6 +83,51 @@ public class ModItemStackHandler extends ItemStackHandler {
 			return toCheck.getCount() >= itemStack.getCount();
 		}
 		return false;
+	}
+	// TODO: impl: methods below:
+	@Override
+	public void clearContent() {
+		
+	}
+
+	@Override
+	public int getContainerSize() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public ItemStack getItem(int slot) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItem(int slot, int count) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItemNoUpdate(int count) {
+		return null;
+	}
+
+	@Override
+	public void setItem(int slot, ItemStack itemStack) {
+		
+	}
+
+	@Override
+	public void setChanged() {
+		
+	}
+
+	@Override
+	public boolean stillValid(PlayerEntity player) {
+		return true;
 	}
 	
 }

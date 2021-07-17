@@ -2,7 +2,7 @@ package net.luis.nero.client.render.entity.layer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import net.luis.nero.client.model.HoveringInfernoModel;
+import net.luis.nero.client.render.entity.model.HoveringInfernoModel;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;

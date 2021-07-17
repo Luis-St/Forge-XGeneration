@@ -42,7 +42,7 @@ public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 	
 	public static class Start extends StructureStart<NoFeatureConfig> {
 
-		public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ,MutableBoundingBox boundingBox, int reference, long seed) {
+		public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
 			super(structure, chunkX, chunkZ, boundingBox, reference, seed);
 		}
 

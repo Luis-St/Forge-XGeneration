@@ -1,4 +1,4 @@
-package net.luis.nero.client.model;
+package net.luis.nero.client.render.entity.model;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

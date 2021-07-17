@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.luis.nero.Nero;
-import net.luis.nero.client.model.BloodAltarModel;
+import net.luis.nero.client.render.tileentity.model.BloodAltarModel;
 import net.luis.nero.common.tileentity.BloodAltarTileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
