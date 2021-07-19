@@ -1,4 +1,4 @@
-package net.luis.nero.event.entity.living.player;
+package net.luis.nero.event.entity.living.player.tick;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;

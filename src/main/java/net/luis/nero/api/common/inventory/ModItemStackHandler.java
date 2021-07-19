@@ -75,6 +75,57 @@ public class ModItemStackHandler extends ItemStackHandler implements IInventory 
 		return contains;
 	}
 	
+	@Override
+	public void clearContent() {
+		this.clearSlots();
+	}
+
+	@Override
+	public int getContainerSize() {
+		return this.getSlots();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		boolean empty = true;
+		for (ItemStack itemStack : this.stacks) {
+			if (!this.equalItemStack(ItemStack.EMPTY, itemStack)) {
+				empty = false;
+			}
+		}
+		return empty;
+	}
+
+	@Override
+	public ItemStack getItem(int slot) {
+		return this.getStackInSlot(slot);
+	}
+
+	@Override
+	public ItemStack removeItem(int slot, int count) {
+		return this.extractItem(slot, count, false);
+	}
+
+	@Override
+	public ItemStack removeItemNoUpdate(int count) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setItem(int slot, ItemStack itemStack) {
+		this.insertItem(slot, itemStack, false);
+	}
+
+	@Override
+	public void setChanged() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean stillValid(PlayerEntity player) {
+		return true;
+	}
+	
 	private boolean equalItemStack(ItemStack itemStack, ItemStack toCheck) {
 		if (itemStack.isEmpty()) {
 			return toCheck.isEmpty();
@@ -83,51 +134,6 @@ public class ModItemStackHandler extends ItemStackHandler implements IInventory 
 			return toCheck.getCount() >= itemStack.getCount();
 		}
 		return false;
-	}
-	// TODO: impl: methods below:
-	@Override
-	public void clearContent() {
-		
-	}
-
-	@Override
-	public int getContainerSize() {
-		return 0;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return false;
-	}
-
-	@Override
-	public ItemStack getItem(int slot) {
-		return null;
-	}
-
-	@Override
-	public ItemStack removeItem(int slot, int count) {
-		return null;
-	}
-
-	@Override
-	public ItemStack removeItemNoUpdate(int count) {
-		return null;
-	}
-
-	@Override
-	public void setItem(int slot, ItemStack itemStack) {
-		
-	}
-
-	@Override
-	public void setChanged() {
-		
-	}
-
-	@Override
-	public boolean stillValid(PlayerEntity player) {
-		return true;
 	}
 	
 }

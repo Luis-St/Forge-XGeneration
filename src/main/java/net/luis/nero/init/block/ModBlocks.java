@@ -4,6 +4,7 @@ import net.luis.nero.Nero;
 import net.luis.nero.api.common.block.ModOreBlock;
 import net.luis.nero.api.common.block.ModRedstoneOreBlock;
 import net.luis.nero.common.block.BridgeBlock;
+import net.luis.nero.common.block.DriftSandBlock;
 import net.luis.nero.common.block.fluid.PipeBlock;
 import net.luis.nero.common.block.magic.BloodAltarBlock;
 import net.luis.nero.common.block.mechanical.MilestoneBlock;
@@ -104,6 +105,9 @@ public class ModBlocks {
 					.harvestLevel(0).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(3.0F, 8.0F)));
 	public static final RegistryObject<BridgeBlock> BRIDGE_BLOCK = BLOCKS.register("bridge_block", 
 			() -> new BridgeBlock(Block.Properties.of(Material.GLASS, MaterialColor.COLOR_BLACK)
-					.harvestLevel(0).noDrops().instabreak().noOcclusion().sound(SoundType.GLASS))); 
+					.harvestLevel(0).noDrops().instabreak().noOcclusion().sound(SoundType.GLASS)));
+	public static final RegistryObject<DriftSandBlock> DRIFT_SAND = BLOCKS.register("drift_sand", 
+			() -> new DriftSandBlock(14728571, Block.Properties.copy(Blocks.SAND).strength(0.6F).harvestTool(ToolType.SHOVEL)
+					.noOcclusion()));
 	
 }

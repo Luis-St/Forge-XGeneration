@@ -3,8 +3,6 @@ package net.luis.nero;
 import java.io.File;
 import java.nio.file.Path;
 
-import javax.annotation.Nullable;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +37,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
-	// TODO: add drift sand -> spawn in beach and desert biomes
+	// TODO: add drift sand -> spawn desert biome
 	// TODO: custom strong hold in deepslate -> without portal & god loot
 	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
@@ -86,7 +84,6 @@ public class Nero {
 		
 	}
 	
-	@Nullable
 	public static Nero getInstance() {
 		return nero;
 	}

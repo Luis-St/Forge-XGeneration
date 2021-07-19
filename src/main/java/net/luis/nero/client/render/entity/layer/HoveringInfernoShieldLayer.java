@@ -15,9 +15,9 @@ import net.minecraft.util.math.MathHelper;
 // TODO: 3 positons of the shields
 // - 1: normal
 // - 2: cover
-// - 3: large ring with 8 shields 
+// - 3: attack
 // TODO: create enum for shield positons
-public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEntity, HoveringInfernoModel>{
+public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEntity, HoveringInfernoModel> {
 
 	public HoveringInfernoShieldLayer(IEntityRenderer<HoveringInfernoEntity, HoveringInfernoModel> entityRenderer) {
 		super(entityRenderer);
@@ -27,33 +27,33 @@ public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEnt
 	public void render(MatrixStack matrix, IRenderTypeBuffer renderBuffer, int packedLight, HoveringInfernoEntity hoveringInferno, float limbSwing, 
 			float limbSwingAmount, float partialTicks, float ageInTicks, float headYaw, float headPitch) {
 		matrix.pushPose();
-		ModelRenderer shieldNorth = this.getParentModel().getNorthShield();
-		this.renderShield(shieldNorth, hoveringInferno, partialTicks, Direction.NORTH, 0F);
-		ModelRenderer shieldEast = this.getParentModel().getEastShield();
-		this.renderShield(shieldEast, hoveringInferno, partialTicks, Direction.EAST, 1.5708F);
-		ModelRenderer shieldSouth = this.getParentModel().getSouthShield();
-		this.renderShield(shieldSouth, hoveringInferno, partialTicks, Direction.SOUTH, 3.14159F);
-		ModelRenderer shieldWest = this.getParentModel().getWestShield();
-		this.renderShield(shieldWest, hoveringInferno, partialTicks, Direction.WEST, 4.71239F);
+		this.renderShield(hoveringInferno, partialTicks);
 		matrix.popPose();
 	}
 	
-	// TODO: higher rot speed if shields cover
-	protected void renderShield(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction, float offset) {
-		float oldRot = hoveringInferno.getShieldRotOld(direction) / 20;
-		float newRot = hoveringInferno.getShieldRot(direction) / 20;
-		shield.yRot = (MathHelper.lerp(partialTicks, oldRot, newRot) % 360) + offset;
+	protected void renderShield(HoveringInfernoEntity hoveringInferno, float partialTicks) {
+		float[] offsets = new float[] { 0F, 1.5708F, 3.14159F, 4.71239F};
+ 		for (int i = 0; i < 4; i++) {
+			Direction direction = Direction.from2DDataValue(i);
+			this.renderShieldYRotation(this.getParentModel().getShield(direction), hoveringInferno, partialTicks, direction, offsets[i]);
+			this.renderShieldXRotation(this.getParentModel().getShield(direction), hoveringInferno, partialTicks, direction);
+		}
 	}
 	
-	/*
-	 * shields far away from the entity: 
-	 * this.shieldNorth.y = 8; 
-	 * this.shieldNorth.z = -10; this.shieldEast.y = 8; 
-	 * this.shieldEast.x = -10; 
-	 * this.shieldSouth.y = 8; 
-	 * this.shieldSouth.z = 10; 
-	 * this.shieldWest.y = 8; 
-	 * this.shieldWest.x = 10;
-	 */
+	protected void renderShieldYRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction, float offset) {
+		float yRotO = hoveringInferno.getShieldPos(direction).yRotO * (hoveringInferno.attacking ? 1.45875f : 1.45875f);
+		float yRot = hoveringInferno.getShieldPos(direction).yRot * (hoveringInferno.attacking ? 1.45875f : 1.45875f);
+		shield.yRot = MathHelper.lerp(partialTicks, yRotO, yRot) + offset;
+	}
+	
+	protected void renderShieldXRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction) {
+		float xRotO = hoveringInferno.getShieldPos(direction).xRotO;
+		float xRot = hoveringInferno.getShieldPos(direction).xRot;
+		shield.xRot = MathHelper.lerp(partialTicks, xRotO, xRot);
+	}
+	
+	protected void renderShieldAttackRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction) {
+		
+	}
 	
 }

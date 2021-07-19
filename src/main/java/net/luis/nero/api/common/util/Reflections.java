@@ -6,12 +6,30 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import net.minecraft.client.world.DimensionRenderInfo;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class Reflections {
+	
+	public static void addDimensionRenderInfos(Map<ResourceLocation, DimensionRenderInfo> renderInfos) {
+		Object2ObjectMap<ResourceLocation, DimensionRenderInfo> effects = Util.make(new Object2ObjectArrayMap<>(), (map) -> {
+			DimensionRenderInfo.Overworld overworldRenderInfo = new DimensionRenderInfo.Overworld();
+			map.defaultReturnValue(overworldRenderInfo);
+			map.put(DimensionType.OVERWORLD_EFFECTS, overworldRenderInfo);
+			map.put(DimensionType.NETHER_EFFECTS, new DimensionRenderInfo.Nether());
+			map.put(DimensionType.END_EFFECTS, new DimensionRenderInfo.End());
+			map.putAll(renderInfos);
+		});
+		ObfuscationReflectionHelper.setPrivateValue(DimensionRenderInfo.class, null, effects, "field_239208_a_");
+	}
 	
 	public static void addStructureSetting(DimensionStructuresSettings structuresSettings, Structure<?> structure) {
 		Map<Structure<?>, StructureSeparationSettings> structureMap = new HashMap<>(structuresSettings.structureConfig());

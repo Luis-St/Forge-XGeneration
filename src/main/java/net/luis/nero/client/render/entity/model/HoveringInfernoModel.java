@@ -31,7 +31,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 
 		this.shieldWest = new ModelRenderer(this);
 		this.shieldWest.setPos(0.0F, 10.0F, 0.0F);
-		this.setRotationAngle(this.shieldWest, 0.0F, 0.0F, 0.0F); // y=-1.5708F
+		this.setRotationAngle(this.shieldWest, 0.0F, 0.0F, 0.0F);
 		this.shieldWest.texOffs(26, 0).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
 
 		this.shieldSouth = new ModelRenderer(this);
@@ -41,7 +41,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 
 		this.shieldEast = new ModelRenderer(this);
 		this.shieldEast.setPos(0.0F, 10.0F, 0.0F);
-		this.setRotationAngle(this.shieldEast, 0.0F, 0.0F, 0.0F); // y=1.5708F
+		this.setRotationAngle(this.shieldEast, 0.0F, 0.0F, 0.0F);
 		this.shieldEast.texOffs(26, 23).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
 
 		this.body = new ModelRenderer(this);
@@ -54,30 +54,6 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 		modelRenderer.xRot = xRot;
 		modelRenderer.yRot = yRot;
 		modelRenderer.zRot = zRot;
-	}
-	
-	protected void setRotations180(ModelRenderer modelRenderer, double xRot, double yRot, double zRot) {
-		this.setXRotation180(modelRenderer, xRot);
-		this.setYRotation180(modelRenderer, yRot);
-		this.setZRotation180(modelRenderer, zRot);
-	}
-	
-	protected void setXRotation180(ModelRenderer modelRenderer, double rot) {
-		if (modelRenderer.xRot != rot && rot > 0) {
-			modelRenderer.xRot = (float) (rot * (Math.PI / 180));
-		}
-	}
-	
-	protected void setYRotation180(ModelRenderer modelRenderer, double rot) {
-		if (modelRenderer.yRot != rot && rot > 0) {
-			modelRenderer.yRot = (float) (rot * (Math.PI / 180));
-		}
-	}
-	
-	protected void setZRotation180(ModelRenderer modelRenderer, double rot) {
-		if (modelRenderer.zRot != rot && rot > 0) {
-			modelRenderer.zRot = (float) (rot * (Math.PI / 180));
-		}
 	}
 	
 	@Override
@@ -96,10 +72,6 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	public void renderToBuffer(MatrixStack matrix, IVertexBuilder vertexBuilder, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		this.head.render(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.body.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.renderAnimated(matrix, vertexBuilder, packedLight, packedOverlay);
-	}
-	
-	protected void renderAnimated(MatrixStack matrix, IVertexBuilder vertexBuilder, int packedLight, int packedOverlay) {
 		this.shieldNorth.render(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.shieldEast.render(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.shieldSouth.render(matrix, vertexBuilder, packedLight, packedOverlay);

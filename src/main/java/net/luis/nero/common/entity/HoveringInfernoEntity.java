@@ -1,7 +1,14 @@
 package net.luis.nero.common.entity;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
+import net.luis.nero.common.entity.util.EntityRenderPos;
+import net.luis.nero.common.entity.util.ShieldStage;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -20,7 +27,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -34,10 +40,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 // TODO: custom attack goal
 // TODO: order values/methods, remove uneeded things
+// TODO: EntitySpawnPlacementRegistry
 @Config
 public class HoveringInfernoEntity extends BlazeEntity {
 	
-	public static final DataParameter<CompoundNBT> NBT_DATA = EntityDataManager.defineId(HoveringInfernoEntity.class, DataSerializers.COMPOUND_TAG);
+	private static final DataParameter<Integer> DATA = EntityDataManager.defineId(HoveringInfernoEntity.class, DataSerializers.INT);
+	
 	@ConfigValue private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
 	@ConfigValue private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
 	@ConfigValue private static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
@@ -45,14 +53,14 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	@ConfigValue private static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.5;
 	@ConfigValue private static Double HOVERING_INFERNO_DAMAGE_RESISTANCE = 0.25;
 	
-	public float yRotN = 0;
-	public float yRotNO = 0;
-	public float yRotE = 0;
-	public float yRotEO = 0;
-	public float yRotS = 0;
-	public float yRotSO = 0;
-	public float yRotW = 0;
-	public float yRotWO = 0;
+	public EntityRenderPos shieldNorth = new EntityRenderPos();
+	public EntityRenderPos shieldEast = new EntityRenderPos();
+	public EntityRenderPos shieldSouth = new EntityRenderPos();
+	public EntityRenderPos shieldWest = new EntityRenderPos();
+	public List<EntityRenderPos> shields = Lists.newArrayList(this.shieldNorth, this.shieldEast, this.shieldSouth, this.shieldWest);
+	
+	public boolean attacking = false;
+	public ShieldStage shieldStage = ShieldStage.NORMAL;
 	
 	public HoveringInfernoEntity(World world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
@@ -80,9 +88,15 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (this.level.isClientSide) {
+		if (this.isClientSide()) {
 			this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
 		}
+	}
+	
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(DATA, 0);
 	}
 	
 	@Override
@@ -100,50 +114,62 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		}
 	}
 	
+	// TODO: fix bug of moving (switch between xRot && xRotO)
+	// TODO: use Math#min or Math#max to set correct pos
 	private void updateShields() {
-		this.yRotNO = this.yRotN;
-		this.yRotN++;
-		this.yRotEO = this.yRotE;
-		this.yRotE++;
-		this.yRotSO = this.yRotS;
-		this.yRotS++;
-		this.yRotWO = this.yRotW;
-		this.yRotW++;
+		if (this.isClientSide()) {
+			this.shields.forEach(shield -> {
+				shield.yRotO = shield.yRot;
+				shield.yRot += 0.017453292;
+			});
+			if (this.areShieldsActive()) {
+				this.shields.forEach(shield -> {
+					// -0.2617994f <-> 0.0f
+					if (shield.xRot > -0.26179942f && 0.0f >= shield.xRot) {
+						shield.xRotO = shield.xRot;
+						shield.xRot = (shield.xRot - 0.017453292f) % 6.283185307179586f;
+					} else if (0 == shield.xRot) {
+						// TODO: remove >= -> > set xRot && xRotO fix
+					} else {
+						// TODO: set to start
+					}
+//					shield.xRotO = shield.xRot;
+//					shield.xRot = (shield.xRot - 0.017453292f) % 6.283185307179586f;
+					// 6.021386f - 6.3006387f
+//					shield.xRot = 6.021386f;
+					Nero.LOGGER.debug("shield.xRot: {}", shield.xRot);
+				});
+			} else {
+				this.shields.forEach(shield -> {
+					// 0.017453281
+					if (shield.xRot >= -0.26179942f && 0.0f > shield.xRot) {
+						shield.xRotO = shield.xRot;
+						shield.xRot = (shield.xRot + 0.017453292f) % 6.283185307179586f;
+					}
+//					shield.xRotO = 0.0f;
+//					shield.xRot = 0.0f;
+					Nero.LOGGER.debug("shield.xRot: {}", shield.xRot);
+				});
+			}
+		}
 	}
 	
-	public float getShieldRot(Direction direction) {
-		switch (direction) {
-		case NORTH: return this.yRotN;
-		case EAST: return this.yRotE;
-		case SOUTH: return this.yRotS;
-		case WEST: return this.yRotW;
-		default: break;
+	public EntityRenderPos getShieldPos(Direction direction) {
+		if (this.isClientSide()) {
+			switch (direction) {
+			case NORTH: return this.shieldNorth;
+			case EAST: return this.shieldEast;
+			case SOUTH: return this.shieldSouth;
+			case WEST: return this.shieldWest;
+			default: break;
+			}
 		}
-		throw new IllegalArgumentException("No shield rotation for direction: " + direction);
-	}
-	
-	public float getShieldRotOld(Direction direction) {
-		switch (direction) {
-		case NORTH: return this.yRotNO;
-		case EAST: return this.yRotEO;
-		case SOUTH: return this.yRotSO;
-		case WEST: return this.yRotWO;
-		default: break;
-		}
-		throw new IllegalArgumentException("No shield rotation for direction: " + direction);
+		throw new IllegalArgumentException("No shield position for direction: " + direction);
 	}
 	
 	@Override
 	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-	
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		CompoundNBT nbt = new CompoundNBT();
-		nbt.putInt("shieldActiveTime", 0);
-		this.entityData.define(NBT_DATA, nbt);
 	}
 	
 	@Override
@@ -168,26 +194,25 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		return hurt;
 	}
 	
+	public boolean isClientSide() {
+		return this.level.isClientSide;
+	}
+	
 	@Override
 	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
 		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
 	}
 	
 	public boolean areShieldsActive() {
-		return this.entityData.get(NBT_DATA).getInt("shieldActiveTime") > 0;
+		return this.entityData.get(DATA) > 0;
 	}
 	
 	public int getShieldActiveTime() {
-		return this.entityData.get(NBT_DATA).getInt("shieldActiveTime");
+		return this.entityData.get(DATA);
 	}
 	
 	public void setShieldActiveTime(int shieldActiveTime) {
-		CompoundNBT nbt = this.entityData.get(NBT_DATA);
-		if (nbt.contains("shieldActiveTime")) {
-			nbt.remove("shieldActiveTime");
-		}
-		nbt.putInt("shieldActiveTime", MathHelper.clamp(shieldActiveTime, 0, 600));
-		this.entityData.set(NBT_DATA, nbt);
+		this.entityData.set(DATA, MathHelper.clamp(shieldActiveTime, 0, 600));
 	}
 	
 	public static AttributeModifierMap registerAttributes() {
@@ -197,19 +222,6 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	    		  .add(Attributes.FOLLOW_RANGE, HOVERING_INFERNO_FOLLOW_RANGE)
 	    		  .add(Attributes.KNOCKBACK_RESISTANCE, HOVERING_INFERNO_KNOCKBACK_RESISTANCE)
 	    		  .add(Attributes.MAX_HEALTH, HOVERING_INFERNO_MAX_HEALTH).build();
-	}
-	
-	// TODO: move entity.util
-	public static enum ShieldStage {
-		
-		COVER,
-		ATTACK;
-		
-	}
-	
-	// TODO: move entity.util
-	public static class ShieldPos {
-		
 	}
 	
 }
