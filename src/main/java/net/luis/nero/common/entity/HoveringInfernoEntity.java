@@ -37,7 +37,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 // TODO: custom attack goal
-// TODO: order values/methods, remove uneeded things
 // TODO: EntitySpawnPlacementRegistry
 @Config
 public class HoveringInfernoEntity extends BlazeEntity {
@@ -68,7 +67,7 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		this.setPos(x, y, z);
 	}
 	
-	public HoveringInfernoEntity(EntityType<? extends BlazeEntity> entityType, World world) {
+	public HoveringInfernoEntity(EntityType<? extends HoveringInfernoEntity> entityType, World world) {
 		super(entityType, world);
 	}
 	
@@ -100,6 +99,38 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	public boolean isOnFire() {
 		boolean flag = this.level != null && this.level.isClientSide;
 		return !this.fireImmune() && (this.getRemainingFireTicks() > 0 || flag && this.getSharedFlag(0));
+	}
+	
+	@Override
+	public IPacket<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+	
+	@Override
+	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
+		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
+	}
+	
+	@Override
+	public boolean hurt(DamageSource damageSource, float amount) {
+		amount *= 1 - HOVERING_INFERNO_DAMAGE_RESISTANCE;
+		boolean useAxe = false;
+		if (damageSource.getEntity() instanceof LivingEntity) {
+			LivingEntity attacker = (LivingEntity) damageSource.getEntity();
+			if (attacker.getMainHandItem().getItem() instanceof AxeItem) {
+				useAxe = true;
+				amount /= 3;
+				this.setShieldActiveTime(0);
+			}
+		}
+		if (this.areShieldsActive()) {
+			return false;
+		}
+		boolean hurt = super.hurt(damageSource, amount);
+		if (hurt && !useAxe) {
+			this.setShieldActiveTime(MathHelper.nextInt(this.random, 100, 300) + this.random.nextInt(150));
+		}
+		return hurt;
 	}
 	
 	@Override
@@ -167,42 +198,10 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		throw new IllegalArgumentException("No shield position for direction: " + direction);
 	}
 	
-	@Override
-	public IPacket<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-	
-	@Override
-	public boolean hurt(DamageSource damageSource, float amount) {
-		amount *= 1 - HOVERING_INFERNO_DAMAGE_RESISTANCE;
-		boolean useAxe = false;
-		if (damageSource.getEntity() instanceof LivingEntity) {
-			LivingEntity attacker = (LivingEntity) damageSource.getEntity();
-			if (attacker.getMainHandItem().getItem() instanceof AxeItem) {
-				useAxe = true;
-				amount /= 3;
-				this.setShieldActiveTime(0);
-			}
-		}
-		if (this.areShieldsActive()) {
-			return false;
-		}
-		boolean hurt = super.hurt(damageSource, amount);
-		if (hurt && !useAxe) {
-			this.setShieldActiveTime(MathHelper.nextInt(this.random, 100, 300) + this.random.nextInt(150));
-		}
-		return hurt;
-	}
-	
 	public boolean isClientSide() {
 		return this.level.isClientSide;
 	}
-	
-	@Override
-	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
-		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
-	}
-	
+		
 	public boolean areShieldsActive() {
 		return this.entityData.get(DATA) > 0;
 	}
