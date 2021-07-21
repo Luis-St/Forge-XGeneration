@@ -1,4 +1,4 @@
-package net.luis.nero.common.entity.util;
+package net.luis.nero.client.render.entity;
 
 public class EntityRenderPos {
 	

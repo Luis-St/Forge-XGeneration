@@ -4,11 +4,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
-import net.luis.nero.common.entity.util.EntityRenderPos;
-import net.luis.nero.common.entity.util.ShieldStage;
+import net.luis.nero.client.render.entity.EntityRenderPos;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -60,7 +58,6 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	public List<EntityRenderPos> shields = Lists.newArrayList(this.shieldNorth, this.shieldEast, this.shieldSouth, this.shieldWest);
 	
 	public boolean attacking = false;
-	public ShieldStage shieldStage = ShieldStage.NORMAL;
 	
 	public HoveringInfernoEntity(World world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
@@ -114,8 +111,6 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		}
 	}
 	
-	// TODO: fix bug of moving (switch between xRot && xRotO)
-	// TODO: use Math#min or Math#max to set correct pos
 	private void updateShields() {
 		if (this.isClientSide()) {
 			this.shields.forEach(shield -> {
@@ -124,34 +119,39 @@ public class HoveringInfernoEntity extends BlazeEntity {
 			});
 			if (this.areShieldsActive()) {
 				this.shields.forEach(shield -> {
-					// -0.2617994f <-> 0.0f
-					if (shield.xRot > -0.26179942f && 0.0f >= shield.xRot) {
+					if (shield.xRot == -0.27f || shield.xRot == -0.26f) {
+						shield.xRotO = -0.26f;
+						shield.xRot = -0.26f;
+					} else if (shield.xRot > -0.26f && 0.0f >= shield.xRot) {
 						shield.xRotO = shield.xRot;
-						shield.xRot = (shield.xRot - 0.017453292f) % 6.283185307179586f;
-					} else if (0 == shield.xRot) {
-						// TODO: remove >= -> > set xRot && xRotO fix
-					} else {
-						// TODO: set to start
+						shield.xRot = this.floorRot(shield.xRot, -0.01f);
 					}
-//					shield.xRotO = shield.xRot;
-//					shield.xRot = (shield.xRot - 0.017453292f) % 6.283185307179586f;
-					// 6.021386f - 6.3006387f
-//					shield.xRot = 6.021386f;
-					Nero.LOGGER.debug("shield.xRot: {}", shield.xRot);
 				});
 			} else {
 				this.shields.forEach(shield -> {
-					// 0.017453281
-					if (shield.xRot >= -0.26179942f && 0.0f > shield.xRot) {
+					if (shield.xRot == 0.0f || shield.xRot == 0.1f) {
+						shield.xRotO = 0.0f;
+						shield.xRot = 0.0f;
+					} else if (shield.xRot >= -0.26f && 0.0f > shield.xRot) {
 						shield.xRotO = shield.xRot;
-						shield.xRot = (shield.xRot + 0.017453292f) % 6.283185307179586f;
+						shield.xRot = this.floorRot(shield.xRot, 0.01f);
 					}
-//					shield.xRotO = 0.0f;
-//					shield.xRot = 0.0f;
-					Nero.LOGGER.debug("shield.xRot: {}", shield.xRot);
 				});
 			}
 		}
+	}
+	
+	private final float floorRot(float f0, float g0) {
+		float f1 = Math.round(f0 * 100);
+		int f2 = (int) f1;
+		
+		float g1 = g0 * 100;
+		int g2 = (int) g1;
+		
+		int h0 = f2 + g2;
+		float h1 = h0;
+		float h2 = h1 / 100;
+		return h2;
 	}
 	
 	public EntityRenderPos getShieldPos(Direction direction) {

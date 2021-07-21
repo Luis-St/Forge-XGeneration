@@ -11,12 +11,6 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 
-// TODO: create anim for shields
-// TODO: 3 positons of the shields
-// - 1: normal
-// - 2: cover
-// - 3: attack
-// TODO: create enum for shield positons
 public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEntity, HoveringInfernoModel> {
 
 	public HoveringInfernoShieldLayer(IEntityRenderer<HoveringInfernoEntity, HoveringInfernoModel> entityRenderer) {
@@ -50,10 +44,6 @@ public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEnt
 		float xRotO = hoveringInferno.getShieldPos(direction).xRotO;
 		float xRot = hoveringInferno.getShieldPos(direction).xRot;
 		shield.xRot = MathHelper.lerp(partialTicks, xRotO, xRot);
-	}
-	
-	protected void renderShieldAttackRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction) {
-		
 	}
 	
 }
