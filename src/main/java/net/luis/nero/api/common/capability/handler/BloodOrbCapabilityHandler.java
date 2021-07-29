@@ -13,14 +13,14 @@ public class BloodOrbCapabilityHandler implements IBloodOrbCapability, IItemCapa
 	
 	@Override
 	public CompoundTag serializeNBT() {
-		CompoundTag nbt = new CompoundTag();
-		nbt.putInt("blood", this.blood);
-		return nbt;
+		CompoundTag tag = new CompoundTag();
+		tag.putInt("blood", this.blood);
+		return tag;
 	}
 
 	@Override
-	public void deserializeNBT(CompoundTag nbt) {
-		this.blood = nbt.getInt("blood");
+	public void deserializeNBT(CompoundTag tag) {
+		this.blood = tag.getInt("blood");
 	}
 
 	@Override

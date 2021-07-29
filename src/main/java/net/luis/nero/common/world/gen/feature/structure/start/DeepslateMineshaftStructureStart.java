@@ -19,7 +19,7 @@ public class DeepslateMineshaftStructureStart extends StructureStart<NoneFeature
 	}
 
 	@Override
-	public void generatePieces(RegistryAccess registries, ChunkGenerator chunkGenerator, StructureManager templateManagerIn, ChunkPos chunkPos, Biome biome, 
+	public void generatePieces(RegistryAccess registry, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos chunkPos, Biome biome, 
 			NoneFeatureConfiguration config, LevelHeightAccessor levelAccessor) {
 		DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkPos.x << 4) + 7, 128, (chunkPos.z << 4) + 7);
 		this.pieces.add(structurePiece);

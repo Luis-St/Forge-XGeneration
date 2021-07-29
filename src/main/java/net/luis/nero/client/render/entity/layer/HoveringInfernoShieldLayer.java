@@ -18,11 +18,11 @@ public class HoveringInfernoShieldLayer extends RenderLayer<HoveringInfernoEntit
 	}
 	
 	@Override
-	public void render(PoseStack matrix, MultiBufferSource renderBuffer, int packedLight, HoveringInfernoEntity hoveringInferno, float limbSwing, 
+	public void render(PoseStack pose, MultiBufferSource bufferSource, int packedLight, HoveringInfernoEntity hoveringInferno, float limbSwing, 
 			float limbSwingAmount, float partialTicks, float ageInTicks, float headYaw, float headPitch) {
-		matrix.pushPose();
+		pose.pushPose();
 		this.renderShield(hoveringInferno, partialTicks);
-		matrix.popPose();
+		pose.popPose();
 	}
 	
 	protected void renderShield(HoveringInfernoEntity hoveringInferno, float partialTicks) {

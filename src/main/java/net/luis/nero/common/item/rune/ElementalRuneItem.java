@@ -27,7 +27,7 @@ public class ElementalRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, ELEMENTAL_RUNE_WATER_BREATHING_DURATION, 0, false, false, false));
 		player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, ELEMENTAL_RUNE_DOLPHINS_GRACE_DURATION, 0, false, false, false));
 		player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, ELEMENTAL_RUNE_FIRE_RESISTANCE_DURATION, 0, false, false, false));

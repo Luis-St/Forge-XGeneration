@@ -28,9 +28,9 @@ public class DeepslateMineshaftStructure extends StructureFeature<NoneFeatureCon
 	}
 	
 	@Override
-	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeSource biomeProvider, long seed, WorldgenRandom seedRng, ChunkPos chunkPos, Biome biome, 
-			ChunkPos potentialChunkPos, NoneFeatureConfiguration config, LevelHeightAccessor leveltAccessor) {
-//		double d = seedRng.nextDouble();
+	protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long seed, WorldgenRandom worldRandom, ChunkPos chunkPos, Biome biome, 
+			ChunkPos potentialChunkPos, NoneFeatureConfiguration config, LevelHeightAccessor levelAccessor) {
+//		double d = worldRandom.nextDouble();
 //		Nero.LOGGER.debug("isFeatureChunk: " + (d < 0.05));
 //		Nero.LOGGER.debug("isFeatureChunk: " + d);
 		return /*d < 0.05*/true;

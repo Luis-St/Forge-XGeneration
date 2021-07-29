@@ -64,8 +64,9 @@ public class DefaultModFeatures {
 		mobSpawnBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.WITCH, 5, 1, 1));
 	}
 	
+	// TODO: disable/enable feature via config -> list with features in config boolean list
 	public static void addFlatBedrock(BiomeGenerationSettings.Builder generationBuilder) {
-//		generationBuilder.addFeature(GenerationStep.Decoration.RAW_GENERATION, ConfiguredModFeatures.FLAT_BEDROCK);
+		generationBuilder.addFeature(GenerationStep.Decoration.RAW_GENERATION, ConfiguredModFeatures.FLAT_BEDROCK);
 	}
 
 }

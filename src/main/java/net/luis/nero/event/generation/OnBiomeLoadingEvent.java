@@ -34,11 +34,11 @@ public class OnBiomeLoadingEvent {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 
-		ResourceLocation biomeName = event.getName();
-		BiomeCategory category = event.getCategory();
+		ResourceLocation biome = event.getName();
+		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		
-		if (biomeName.equals(ModBiomeKeys.DEEPSLATE.location())) {
+		if (biome.equals(ModBiomeKeys.DEEPSLATE.location())) {
 			
 			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
 			DefaultModFeatures.addDeepslateStructures(generationBuilder);
@@ -46,9 +46,9 @@ public class OnBiomeLoadingEvent {
 			DefaultModFeatures.addDeepslateOres(generationBuilder);
 			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_MINESHAFT);
 			
-		} else if (category == BiomeCategory.THEEND) {
+		} else if (biomeCategory == BiomeCategory.THEEND) {
 			
-		} else if (category == BiomeCategory.NETHER) {
+		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
 		} else { 
 			
@@ -62,20 +62,19 @@ public class OnBiomeLoadingEvent {
 	@SubscribeEvent
 	public static void biomeLoadingRemove(BiomeLoadingEvent event) {
 		
-		BiomeCategory category = event.getCategory();
-		BiomeGenerationSettingsBuilder genBuilder = event.getGeneration();
+		BiomeCategory biomeCategory = event.getCategory();
+		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		
-		if (category == BiomeCategory.THEEND) {
+		if (biomeCategory == BiomeCategory.THEEND) {
 			
-		} else if (category == BiomeCategory.NETHER) {
+		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
 		} else { 
 			for (Decoration stage : GenerationStep.Decoration.values()) {
-				genBuilder.getFeatures(stage).removeIf((supplier) -> {
-					ConfiguredFeature<?, ?> configuredFeature = supplier.get();
-					for (ConfiguredFeature<?, ?> feature : configuredFeature.getFeatures().collect(Collectors.toList())) {
-						if (feature.feature instanceof OreFeature && !(feature.feature instanceof ModOreFeature)) {
-							OreConfiguration oreConfig = (OreConfiguration) feature.config;
+				generationBuilder.getFeatures(stage).removeIf((supplier) -> {
+					for (ConfiguredFeature<?, ?> configuredFeature : supplier.get().getFeatures().collect(Collectors.toList())) {
+						if (configuredFeature.feature instanceof OreFeature && !(configuredFeature.feature instanceof ModOreFeature)) {
+							OreConfiguration oreConfig = (OreConfiguration) configuredFeature.config;
 							List<Block> oreConigBlocks = oreConfig.targetStates.stream().map(targetState -> targetState.state)
 									.map(BlockState::getBlock).collect(Collectors.toList());
 							if (oreConigBlocks.contains(Blocks.COAL_ORE)) {

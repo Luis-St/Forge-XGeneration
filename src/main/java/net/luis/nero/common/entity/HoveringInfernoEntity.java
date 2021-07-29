@@ -10,6 +10,7 @@ import net.luis.nero.client.render.entity.EntityRenderPos;
 import net.luis.nero.common.entity.goal.FireballRingAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -57,17 +58,17 @@ public class HoveringInfernoEntity extends Blaze {
 	
 	public boolean attacking = false;
 	
-	public HoveringInfernoEntity(Level world, int x, int y, int z) {
-		this(world, (double) x, (double) y, (double) z);
+	public HoveringInfernoEntity(Level level, int x, int y, int z) {
+		this(level, (double) x, (double) y, (double) z);
 	}
 	
-	public HoveringInfernoEntity(Level world, double x, double y, double z) {
-		this(ModEntityTypes.HOVERING_INFERNO.get(), world);
+	public HoveringInfernoEntity(Level level, double x, double y, double z) {
+		this(ModEntityTypes.HOVERING_INFERNO.get(), level);
 		this.setPos(x, y, z);
 	}
 	
-	public HoveringInfernoEntity(EntityType<? extends HoveringInfernoEntity> entityType, Level world) {
-		super(entityType, world);
+	public HoveringInfernoEntity(EntityType<? extends HoveringInfernoEntity> entityType, Level level) {
+		super(entityType, level);
 	}
 	
 	@Override
@@ -83,10 +84,10 @@ public class HoveringInfernoEntity extends Blaze {
 	
 	@Override
 	public void aiStep() {
-//		super.aiStep();
-//		if (this.isClientSide()) {
-//			this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
-//		}
+		super.aiStep();
+		if (this.isClientSide()) {
+			this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+		}
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package net.luis.nero.api.common.inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
+
 public interface IModInventory {
 	
 	ModItemStackHandler get();
@@ -21,8 +22,8 @@ public interface IModInventory {
 	
 	ModItemStackHandler getAndClear();
 	
-	CompoundTag serializeNBT(CompoundTag nbt);
+	CompoundTag serializeNBT(CompoundTag tag);
 	
-	void deserializeNBT(CompoundTag nbt);
+	void deserializeNBT(CompoundTag tag);
 	
 }

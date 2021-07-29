@@ -15,7 +15,7 @@ public class DeepslateSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderBaseCo
 	}
 
 	@Override
-	public void apply(Random rng, ChunkAccess chunk, Biome biome, int worldX, int worldZ, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, 
+	public void apply(Random rng, ChunkAccess chunkAccess, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, 
 			int seaLevel, int minSurfaceLevel, long seed, SurfaceBuilderBaseConfiguration config) {
 		
 	}

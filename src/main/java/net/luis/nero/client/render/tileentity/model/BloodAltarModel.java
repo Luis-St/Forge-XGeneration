@@ -22,9 +22,9 @@ public class BloodAltarModel extends Model {
 		this.blood = modelPart.getChild("blood");
 	}
 	
-	public void renderBlood(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float bloodHeigth) {
+	public void renderBlood(PoseStack pose, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float bloodHeigth) {
 		this.blood.y = Mth.clamp(bloodHeigth + 6, 6.0F, 9.75F);
-		this.blood.render(matrixStack, buffer, packedLight, packedOverlay);
+		this.blood.render(pose, vertexConsumer, packedLight, packedOverlay);
 	}
 	
 	public static LayerDefinition createLayerDefinition() {
@@ -37,7 +37,7 @@ public class BloodAltarModel extends Model {
 	
 	@Override
 	@Deprecated
-	public final void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public final void renderToBuffer(PoseStack pose, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		throw new UnsupportedOperationException();
 	}
 

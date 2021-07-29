@@ -17,9 +17,9 @@ public class RuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
-		this.sendMessage(player, "You have {} Blood in your Orb".replace("{}", String.valueOf(bloodOrbHandler.getBlood())));
+		this.sendMessage(player, "You have" + bloodOrbHandler.getBlood() + "Blood in your Orb");
 		return this.success(player, hand);
 	}
 

@@ -31,7 +31,7 @@ public class DeepslateBiomeLayer {
 		INSTANCE;
 		
 		@Override
-		public int applyPixel(Context rng, int x, int z) {
+		public int applyPixel(Context context, int x, int z) {
 			return -1;
 		}
 	}

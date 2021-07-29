@@ -18,17 +18,17 @@ public class FlatBedrockFeature extends Feature<NoneFeatureConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-		ChunkAccess chunk = context.level().getChunk(context.origin());
+		ChunkAccess chunkAccess = context.level().getChunk(context.origin());
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 5; y++) {
 				for (int z = 0; z < 16; z++) {
-					BlockPos chunkPos = new BlockPos(x, y, z);
+					BlockPos pos = new BlockPos(x, y, z);
 					if (y == 0 || y == 1) {
-						chunk.setBlockState(chunkPos, Blocks.BEDROCK.defaultBlockState(), false);
+						chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
 					} else {
-						Block block = chunk.getBlockState(chunkPos).getBlock();
+						Block block = chunkAccess.getBlockState(pos).getBlock();
 						if (block == Blocks.BEDROCK || block == Blocks.LAVA || block == Blocks.WATER || block instanceof AirBlock) {
-							chunk.setBlockState(chunkPos, Blocks.STONE.defaultBlockState(), false);
+							chunkAccess.setBlockState(pos, Blocks.STONE.defaultBlockState(), false);
 						}
 					}
 				}

@@ -30,7 +30,7 @@ public class LavaRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, LAVA_RUNE_FIRE_RESISTANCE_DURATION, 0, false, false, false));
 		return this.success(player, hand);
 	}

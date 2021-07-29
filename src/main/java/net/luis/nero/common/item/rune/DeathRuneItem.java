@@ -30,13 +30,13 @@ public class DeathRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		double x = player.getX();
 		double y = player.getY();
 		double z = player.getZ();
 		AABB alignedBB = new AABB(x - DEATH_RUNE_ENTITY_AREA_X, y - DEATH_RUNE_ENTITY_AREA_Y, z - DEATH_RUNE_ENTITY_AREA_Z, 
 				x + DEATH_RUNE_ENTITY_AREA_X, y + DEATH_RUNE_ENTITY_AREA_Y, z + DEATH_RUNE_ENTITY_AREA_Z);
-		List<LivingEntity> livingEntities = world.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+		List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
 		livingEntities.removeIf(livingEntity -> livingEntity == player);
 		for (LivingEntity livingEntity : livingEntities) {
 			float damage = livingEntity instanceof Player ? livingEntity.getHealth() / 4 : Float.MAX_VALUE;

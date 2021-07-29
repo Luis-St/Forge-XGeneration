@@ -20,10 +20,10 @@ public class ModBiomeKeys {
 	public static final ResourceKey<Biome> DEEPSLATE = register("deepslate", -1);
 	
 	private static ResourceKey<Biome> register(String biomeName, int id) {
-		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Nero.MOD_ID, biomeName));
-		BIOMES.add(key);
-		BIOME_IDS.put(id, key);
-		return key;
+		ResourceKey<Biome> resourceKey = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Nero.MOD_ID, biomeName));
+		BIOMES.add(resourceKey);
+		BIOME_IDS.put(id, resourceKey);
+		return resourceKey;
 	}
 	
 	public static ResourceKey<Biome> byId(int id) {

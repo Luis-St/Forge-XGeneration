@@ -34,13 +34,13 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 		return makeConnections(context.getLevel(), context.getClickedPos());
 	}
 	
-	public BlockState makeConnections(BlockGetter blockReader, BlockPos pos) {
-		Block down = blockReader.getBlockState(pos.below()).getBlock();
-		Block up = blockReader.getBlockState(pos.above()).getBlock();
-		Block north = blockReader.getBlockState(pos.north()).getBlock();
-		Block east = blockReader.getBlockState(pos.east()).getBlock();
-		Block south = blockReader.getBlockState(pos.south()).getBlock();
-		Block west = blockReader.getBlockState(pos.west()).getBlock();
+	public BlockState makeConnections(BlockGetter blockGetter, BlockPos pos) {
+		Block down = blockGetter.getBlockState(pos.below()).getBlock();
+		Block up = blockGetter.getBlockState(pos.above()).getBlock();
+		Block north = blockGetter.getBlockState(pos.north()).getBlock();
+		Block east = blockGetter.getBlockState(pos.east()).getBlock();
+		Block south = blockGetter.getBlockState(pos.south()).getBlock();
+		Block west = blockGetter.getBlockState(pos.west()).getBlock();
 		return this.defaultBlockState().setValue(DOWN, Boolean.valueOf(PipeBlock.isAllowedConnection(down)))
 				.setValue(UP, Boolean.valueOf(PipeBlock.isAllowedConnection(up)))
 				.setValue(NORTH, Boolean.valueOf(PipeBlock.isAllowedConnection(north)))
@@ -50,8 +50,8 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		VoxelShape pipeShape = super.getShape(state, world, pos, context);
+	public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
+		VoxelShape pipeShape = super.getShape(state, blockGetter, pos, context);
 		VoxelShape dispatcherShape = Shapes.join(Block.box(2, 2, 2, 14, 14, 14), pipeShape, BooleanOp.OR);
 		List<BooleanProperty> properties = PROPERTY_BY_DIRECTION.values().stream().collect(Collectors.toList());
 		properties.removeIf(property -> !state.getValue(property));
@@ -59,9 +59,9 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	}
 	
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor levelAccessor, BlockPos currentPos, BlockPos facingPos) {
 		boolean flag = PipeBlock.isAllowedConnection(facingState.getBlock());
-		return stateIn.setValue(PROPERTY_BY_DIRECTION.get(facing), Boolean.valueOf(flag));	
+		return state.setValue(PROPERTY_BY_DIRECTION.get(facing), Boolean.valueOf(flag));	
 	}
 	
 	public static boolean isAllowedConnection(Block block) {
@@ -74,7 +74,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	}
 	
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter blockGetter, BlockPos pos, PathComputationType pathType) {
 		return false;
 	}
 	

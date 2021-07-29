@@ -22,7 +22,7 @@ public class AirRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		double xMotion = player.getViewVector(1.0F).x();
 		double yMotion = AIR_RUNE_Y_MOTION;
 		double zMotion = player.getViewVector(1.0F).z();

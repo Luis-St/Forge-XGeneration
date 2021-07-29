@@ -1,6 +1,6 @@
-package net.luis.nero.api.common.tileentity;
+package net.luis.nero.api.common.block.entity;
 
-public interface IAnimatedTileEntity {
+public interface IAnimatedBlockEntity {
 	
 	float getCurrent();
 	

@@ -57,7 +57,7 @@ public class OrbItem extends Item {
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		IBloodOrbCapability bloodCapability = CapabilityUtil.getBloodOrbCapability(player.getItemInHand(hand));
 		if (this.hasMore(player)) {
 			if (player instanceof ServerPlayer) {
@@ -74,7 +74,7 @@ public class OrbItem extends Item {
 				return InteractionResultHolder.success(player.getItemInHand(hand));
 			}
 		}
-		return super.use(world, player, hand);
+		return super.use(level, player, hand);
 	}
 	
 	protected boolean hasMore(Player player) {

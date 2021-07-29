@@ -1,11 +1,11 @@
-package net.luis.nero.common.tileentity;
+package net.luis.nero.common.block.entity;
 
-import net.luis.nero.api.common.tileentity.IAnimatedTileEntity;
+import net.luis.nero.api.common.block.entity.IAnimatedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class MilestoneTileEntity implements IAnimatedTileEntity {
+public class MilestoneBlockEntity implements IAnimatedBlockEntity {
 	
 	private float previousRotation = 0F;
 	private float currentRotation = 0F;
@@ -37,7 +37,7 @@ public class MilestoneTileEntity implements IAnimatedTileEntity {
 		return newRotation;
 	}
 	
-	public static void serverTick(Level level, BlockPos pos, BlockState state, MilestoneTileEntity milestoneTileEntity) {
+	public static void serverTick(Level level, BlockPos pos, BlockState state, MilestoneBlockEntity milestoneTileEntity) {
 		milestoneTileEntity.previousRotation = milestoneTileEntity.currentRotation;
 		milestoneTileEntity.currentRotation = milestoneTileEntity.getNext();
 	}

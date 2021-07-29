@@ -23,8 +23,8 @@ public class FireballRingAttackGoal extends Goal {
 	
 	@Override
 	public boolean canUse() {
-		LivingEntity livingentity = this.hoveringInferno.getTarget();
-		return livingentity != null && livingentity.isAlive() && this.hoveringInferno.canAttack(livingentity);
+		LivingEntity livingEntity = this.hoveringInferno.getTarget();
+		return livingEntity != null && livingEntity.isAlive() && this.hoveringInferno.canAttack(livingEntity);
 	}
 
 	@Override
@@ -34,9 +34,6 @@ public class FireballRingAttackGoal extends Goal {
 
 	@Override
 	public void stop() {
-//		this.hoveringInferno.setOnFire(false);
-//		this.hoveringInferno.setShielding(false);
-//		this.hoveringInferno.setAttacking(false);
 		this.firedRecentlyTimer = 0;
 	}
 
@@ -44,7 +41,6 @@ public class FireballRingAttackGoal extends Goal {
 	public void tick() {
 		--this.attackTime;
 		LivingEntity target = this.hoveringInferno.getTarget();
-//		this.hoveringInferno.setAttacking(false);
 		if (target != null) {
 			boolean canSee = this.hoveringInferno.getSensing().hasLineOfSight(target);
 			if (canSee) {
@@ -54,12 +50,9 @@ public class FireballRingAttackGoal extends Goal {
 			}
 			double distance = this.hoveringInferno.distanceToSqr(target);
 			if (distance < 4.0D) {
-//				this.hoveringInferno.setOnFire(true);
 				if (this.attackTime <= 0) {
-//					this.hoveringInferno.setAttacking(true);
 					this.attackTime = 5;
 					this.hoveringInferno.doHurtTarget(target);
-//					target.setFire(4);
 				}
 				this.hoveringInferno.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0D);
 			} else if (distance < this.getFollowDistance() * this.getFollowDistance() && canSee) {
@@ -76,21 +69,16 @@ public class FireballRingAttackGoal extends Goal {
 					++maxAttackSteps;
 				}
 				if (this.attackTime <= 0) {
-//					this.hoveringInferno.setShielding(false);
 					++this.attackStep;
 					if (this.attackStep == 1) {
 						this.attackTime = (int) (40 * healthPercent + 20);
-//						this.hoveringInferno.setOnFire(true);
 					} else if (this.attackStep <= maxAttackSteps) {
 						this.attackTime = (int) (25 * healthPercent + 5);
 					} else {
 						this.attackTime = 200;
 						this.attackStep = 0;
-//						this.hoveringInferno.setOnFire(false);
-//						this.hoveringInferno.setAttacking(false);
 					}
 					if (this.attackStep > 1) {
-//						this.hoveringInferno.setAttacking(true);
 						if (!this.hoveringInferno.isSilent()) {
 							this.hoveringInferno.level.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.hoveringInferno.blockPosition(), 0);
 						}
@@ -112,12 +100,8 @@ public class FireballRingAttackGoal extends Goal {
 						}
 					}
 				} else if (this.attackTime < 160 + health && this.attackTime > 90 - health) {
-//					this.hoveringInferno.setShielding(true);
 				} else if (this.attackTime >= 30 && this.attackTime >= 50) {
-//					this.hoveringInferno.setShielding(false);
-//					this.hoveringInferno.shieldDisabled = false;
 				}
-//				this.hoveringInferno.setInvulnerable(this.hoveringInferno.getShielding());
 				this.hoveringInferno.getLookControl().setLookAt(hoveringInferno, 10.0F, 10.0F);
 			} else if (this.firedRecentlyTimer < 5) {
 				this.hoveringInferno.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0D);

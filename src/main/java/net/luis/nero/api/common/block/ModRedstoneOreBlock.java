@@ -13,7 +13,7 @@ public class ModRedstoneOreBlock extends RedStoneOreBlock {
 	}
 	
 	@Override
-	public int getExpDrop(BlockState state, LevelReader world, BlockPos pos, int fortune, int silktouch) {
+	public int getExpDrop(BlockState state, LevelReader levelReader, BlockPos pos, int fortune, int silktouch) {
 		return silktouch == 0 ? Mth.nextInt(RANDOM, ModOreBlock.DEEPSLATE_REDSTONE_XP_MIN, ModOreBlock.DEEPSLATE_REDSTONE_XP_MAX) : 0;
 	}
 	

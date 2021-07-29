@@ -36,17 +36,17 @@ public class SoulBlazeEntity extends Blaze implements ISoulFireEntity {
 	
 	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(Blaze.class, EntityDataSerializers.BYTE);
 	
-	public SoulBlazeEntity(Level world, int x, int y, int z) {
-		this(world, (double) x, (double) y, (double) z);
+	public SoulBlazeEntity(Level level, int x, int y, int z) {
+		this(level, (double) x, (double) y, (double) z);
 	}
 	
-	public SoulBlazeEntity(Level world, double x, double y, double z) {
-		this(ModEntityTypes.SOUL_BLAZE.get(), world);
+	public SoulBlazeEntity(Level level, double x, double y, double z) {
+		this(ModEntityTypes.SOUL_BLAZE.get(), level);
 		this.setPos(x, y, z);
 	}
 	
-	public SoulBlazeEntity(EntityType<? extends Blaze> entityType, Level world) {
-		super(entityType, world);
+	public SoulBlazeEntity(EntityType<? extends Blaze> entityType, Level level) {
+		super(entityType, level);
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class SoulBlazeEntity extends Blaze implements ISoulFireEntity {
 	
 	@Override
 	public boolean isOnFire() {
-		return this.isCharged();
+		return this.isCharge();
 	}
 	
 	@Override
@@ -80,13 +80,13 @@ public class SoulBlazeEntity extends Blaze implements ISoulFireEntity {
 		this.entityData.define(DATA_FLAGS_ID, (byte) 0);
 	}
 
-	public boolean isCharged() {
+	public boolean isCharge() {
 		return (this.entityData.get(DATA_FLAGS_ID) & 1) != 0;
 	}
 	
-	public void setCharge(boolean charged) {
+	public void setCharge(boolean charge) {
 		byte b = this.entityData.get(DATA_FLAGS_ID);
-		if (charged) {
+		if (charge) {
 			b = (byte) (b | 1);
 		} else {
 			b = (byte) (b & -2);

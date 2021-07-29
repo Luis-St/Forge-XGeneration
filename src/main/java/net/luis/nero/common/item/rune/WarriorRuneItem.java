@@ -23,7 +23,7 @@ public class WarriorRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, WARRIOR_RUNE_STRENGTH_DURATION, 1, false, false, false));
 		return this.success(player, hand);
 	}

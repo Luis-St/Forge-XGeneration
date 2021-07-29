@@ -22,23 +22,23 @@ public class DriftSandBlock extends SandBlock {
 	}
 
 	@Override
-	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
+	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter blockGetter, BlockPos pos, Mob mob) {
 		return BlockPathTypes.WALKABLE;
 	}
 
 	@Override
-	public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
 		entity.fallDistance = 0;
 	}
 	
 	@Override
-	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		entity.fallDistance = 0;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext context) {
-		if (!(blockReader.getBlockState(pos.above()).getBlock() instanceof AirBlock)) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
+		if (!(blockGetter.getBlockState(pos.above()).getBlock() instanceof AirBlock)) {
 			return Shapes.block();
 		}
 		return Shapes.empty();

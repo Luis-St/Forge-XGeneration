@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.biome;
+package net.luis.nero.api.common.world.biome;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;

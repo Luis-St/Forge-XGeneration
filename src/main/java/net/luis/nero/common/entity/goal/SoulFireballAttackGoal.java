@@ -22,8 +22,8 @@ public class SoulFireballAttackGoal extends Goal {
 	
 	@Override
 	public boolean canUse() {
-		LivingEntity livingentity = this.blaze.getTarget();
-		return livingentity != null && livingentity.isAlive() && this.blaze.canAttack(livingentity);
+		LivingEntity livingEntity = this.blaze.getTarget();
+		return livingEntity != null && livingEntity.isAlive() && this.blaze.canAttack(livingEntity);
 	}
 	
 	@Override
@@ -66,13 +66,13 @@ public class SoulFireballAttackGoal extends Goal {
 					++this.attackStep;
 					if (this.attackStep == 1) {
 						this.attackTime = 60;
-//						this.blaze.setCharged(true);
+						this.blaze.setCharge(true);
 					} else if (this.attackStep <= 4) {
 						this.attackTime = 6;
 					} else {
 						this.attackTime = 100;
 						this.attackStep = 0;
-//						this.blaze.setCharged(false);
+						this.blaze.setCharge(false);
 					}
 					if (this.attackStep > 1) {
 						float distanceSqrt = (float) (Math.sqrt(Math.sqrt(distance)) * 0.5F);

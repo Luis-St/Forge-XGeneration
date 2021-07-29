@@ -23,7 +23,7 @@ public class BridgeRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(ModEffects.BRIDGE.get(), BRIDGE_RUNE_BRIDGE_DURATION, 0, false, false, false));
 		return this.success(player, hand);
 	}

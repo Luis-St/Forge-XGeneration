@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 public class OnAttachCapabilitiesEvent {
 	
 	@SubscribeEvent
-	public static void attachChunkCapabilities(AttachCapabilitiesEvent<LevelChunk> event) {
+	public static void attachLevelChunkCapabilities(AttachCapabilitiesEvent<LevelChunk> event) {
 		
 	}
 	
@@ -32,12 +32,12 @@ public class OnAttachCapabilitiesEvent {
 	}
 	
 	@SubscribeEvent
-	public static void attachTileEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
+	public static void attachBlockEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
 		
 	}
 	
 	@SubscribeEvent
-	public static void attachWorldCapabilities(AttachCapabilitiesEvent<Level> event) {
+	public static void attachLevelCapabilities(AttachCapabilitiesEvent<Level> event) {
 		if (event.getObject() instanceof ServerLevel) {
 			
 		}

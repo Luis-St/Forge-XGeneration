@@ -69,19 +69,19 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	
 
 	@Override
-	public void renderToBuffer(PoseStack matrix, VertexConsumer vertexBuilder, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		matrix.pushPose();
-		this.head.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.body.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.shieldNorth.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.shieldEast.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.shieldSouth.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		this.shieldWest.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		matrix.popPose();
-		matrix.pushPose();
-		matrix.scale(1.1f, 1.1f, 1.1f);
-		this.helmet.render(matrix, vertexBuilder, packedLight, packedOverlay);
-		matrix.popPose();
+	public void renderToBuffer(PoseStack pose, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		pose.pushPose();
+		this.head.render(pose, vertexConsumer, packedLight, packedOverlay);
+		this.body.render(pose, vertexConsumer, packedLight, packedOverlay);
+		this.shieldNorth.render(pose, vertexConsumer, packedLight, packedOverlay);
+		this.shieldEast.render(pose, vertexConsumer, packedLight, packedOverlay);
+		this.shieldSouth.render(pose, vertexConsumer, packedLight, packedOverlay);
+		this.shieldWest.render(pose, vertexConsumer, packedLight, packedOverlay);
+		pose.popPose();
+		pose.pushPose();
+		pose.scale(1.1f, 1.1f, 1.1f);
+		this.helmet.render(pose, vertexConsumer, packedLight, packedOverlay);
+		pose.popPose();
 	}
 	
 	public ModelPart getNorthShield() {

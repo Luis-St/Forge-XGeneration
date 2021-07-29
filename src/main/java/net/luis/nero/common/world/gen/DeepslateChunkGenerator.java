@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
+import net.luis.nero.common.world.biome.DeepslateBiomeSource;
 import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -51,17 +51,17 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			.apply(instance, DeepslateChunkGenerator::new));
 
 	private final Settings settings;
-	protected final WorldgenRandom random;
+	protected final WorldgenRandom worldRandom;
 	private final SurfaceNoise surfaceNoise;
 	private final long seed;
 
 	public DeepslateChunkGenerator(Registry<Biome> registry, Settings settings) {
-		super(new DeepslateBiomeProvider(registry), new StructureSettings(false));
+		super(new DeepslateBiomeSource(registry), new StructureSettings(false));
 		this.settings = settings;
 		this.seed = new Random().nextLong();
-		this.random = new WorldgenRandom(this.seed);
-		this.surfaceNoise = new PerlinNoise(this.random, IntStream.rangeClosed(-3, 0));
-		this.random.consumeCount(2620);
+		this.worldRandom = new WorldgenRandom(this.seed);
+		this.surfaceNoise = new PerlinNoise(this.worldRandom, IntStream.rangeClosed(-3, 0));
+		this.worldRandom.consumeCount(2620);
 	}
 
 	public Settings getDimensionSettings() {
@@ -69,37 +69,37 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	}
 
 	public Registry<Biome> getBiomeRegistry() {
-		return ((DeepslateBiomeProvider) this.biomeSource).getBiomeRegistry();
+		return ((DeepslateBiomeSource) this.biomeSource).getBiomeRegistry();
 	}
 	
 	@Override
-	public void buildSurfaceAndBedrock(WorldGenRegion region, ChunkAccess chunk) {
+	public void buildSurfaceAndBedrock(WorldGenRegion genRegion, ChunkAccess chunkAccess) {
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 256; y++) {
 				for (int z = 0; z < 16; z++) {
 					BlockPos pos = new BlockPos(x, y, z);
-					chunk.setBlockState(pos, ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
-					this.buildBedrock(chunk, pos);
-					this.buildSurface(chunk, region.getBiome(pos), pos, z);
+					chunkAccess.setBlockState(pos, ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
+					this.buildBedrock(chunkAccess, pos);
+					this.buildSurface(chunkAccess, genRegion.getBiome(pos), pos, z);
 				}
 			}
 		}
 	}
 
-	protected void buildBedrock(ChunkAccess chunk, BlockPos pos) {
+	protected void buildBedrock(ChunkAccess chunkAccess, BlockPos pos) {
 		if (pos.getY() > this.getDimensionSettings().getBedrockTopLayer() - this.getDimensionSettings().getBedrockTopLayerSize() - 1) {
-			chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
-		} else if (pos.getY() <= this.random.nextInt(5)) {
-			chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+			chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+		} else if (pos.getY() <= this.worldRandom.nextInt(5)) {
+			chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
 		}
 	}
 	
-	protected void buildSurface(ChunkAccess chunk, Biome biome, BlockPos pos, long seed) {
-		int worldX = chunk.getPos().getMinBlockX() + pos.getX();
-		int worldZ = chunk.getPos().getMinBlockZ() + pos.getZ();
-		int y = chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
+	protected void buildSurface(ChunkAccess chunkAccess, Biome biome, BlockPos pos, long seed) {
+		int worldX = chunkAccess.getPos().getMinBlockX() + pos.getX();
+		int worldZ = chunkAccess.getPos().getMinBlockZ() + pos.getZ();
+		int y = chunkAccess.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
 		double noise = this.surfaceNoise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, pos.getX() * 0.0625) * 15;
-		biome.buildSurfaceAt(this.random, chunk, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
+		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, StructureFeatureManager structureManager, ChunkAccess chunk) {
-		return CompletableFuture.supplyAsync(() -> chunk, executor);
+	public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, StructureFeatureManager structureManager, ChunkAccess chunkAccess) {
+		return CompletableFuture.supplyAsync(() -> chunkAccess, executor);
 	}
 
 	@Override

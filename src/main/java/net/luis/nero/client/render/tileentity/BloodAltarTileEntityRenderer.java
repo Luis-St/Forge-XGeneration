@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.luis.nero.Nero;
 import net.luis.nero.client.render.entity.model.ModModelLayers;
 import net.luis.nero.client.render.tileentity.model.BloodAltarModel;
-import net.luis.nero.common.tileentity.BloodAltarTileEntity;
+import net.luis.nero.common.block.entity.BloodAltarBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 
-public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAltarTileEntity> {
+public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAltarBlockEntity> {
 	
 	public static final Material TEXTURE_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(Nero.MOD_ID, "entity/blood"));
 	private final BloodAltarModel altarModel;
@@ -26,13 +26,13 @@ public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAl
 	}
 	
 	@Override
-	public void render(BloodAltarTileEntity bloodAltarTileEntity, float partialTicks, PoseStack matrix, MultiBufferSource renderBuffer, int light, int overlay) {
-		matrix.pushPose();
-		matrix.translate(1, 1, 1);
-		VertexConsumer vertexBuilder = TEXTURE_LOCATION.buffer(renderBuffer, RenderType::entitySolid); // TODO: anim texture -> like wild blaze texture in outvoted
-		float bloodHeigth = Mth.lerp(partialTicks, bloodAltarTileEntity.getPrevious(), bloodAltarTileEntity.getCurrent());
-		this.altarModel.renderBlood(matrix, vertexBuilder, light, overlay, bloodHeigth);
-		matrix.popPose();
+	public void render(BloodAltarBlockEntity bloodAltarBlockEntity, float partialTicks, PoseStack pose, MultiBufferSource bufferSource, int light, int overlay) {
+		pose.pushPose();
+		pose.translate(1, 1, 1);
+		VertexConsumer vertexBuilder = TEXTURE_LOCATION.buffer(bufferSource, RenderType::entitySolid); // TODO: anim texture -> like wild blaze texture in outvoted
+		float bloodHeigth = Mth.lerp(partialTicks, bloodAltarBlockEntity.getPrevious(), bloodAltarBlockEntity.getCurrent());
+		this.altarModel.renderBlood(pose, vertexBuilder, light, overlay, bloodHeigth);
+		pose.popPose();
 	}
 
 }

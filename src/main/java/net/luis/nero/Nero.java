@@ -13,15 +13,15 @@ import net.luis.nero.config.ModCommonConfig;
 import net.luis.nero.config.ModServerConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
-import net.luis.nero.init.block.util.ModContainerTypes;
-import net.luis.nero.init.block.util.ModTileEntityTypes;
+import net.luis.nero.init.block.util.ModMenuTypes;
+import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.luis.nero.init.enchantment.ModEnchantments;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.init.items.ModItems;
 import net.luis.nero.init.potion.ModEffects;
 import net.luis.nero.init.potion.ModPotions;
 import net.luis.nero.init.recipe.ModRecipeSerializer;
-import net.luis.nero.init.villager.ModPointOfInterestTypes;
+import net.luis.nero.init.villager.ModPoiTypes;
 import net.luis.nero.init.villager.ModVillagerProfessions;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.luis.nero.init.world.gen.ModSurfaceBuilders;
@@ -35,8 +35,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
-// TODO: commit to github
-// TODO: rename all varibales & mod classes
 // TODO: new order of packages & classes (client, ...)
 // TODO: do all 1.17 adds -> replace mod deepslate with vanilla
 // TODO: if all done start with new stuff
@@ -50,7 +48,7 @@ public class Nero {
 	// TODO: debug register time for all entrys and events
 	// TODO: custom DimensionRenderInfo -> net.minecraft.client.world
 	
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger("");
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
 	private static Nero nero;
@@ -63,14 +61,14 @@ public class Nero {
 		
 		ModBlocks.BLOCKS.register(eventBus);
 		ModBlockItems.ITEMS.register(eventBus);
-		ModContainerTypes.CONTAINERS.register(eventBus);
-		ModTileEntityTypes.TILE_ENTITIES.register(eventBus);
+		ModMenuTypes.CONTAINERS.register(eventBus);
+		ModBlockEntityTypes.BLOCK_ENTITIES.register(eventBus);
 		
 		ModItems.ITEMS.register(eventBus);
 		
 		ModRecipeSerializer.RECIPE_SERIALIZERS.register(eventBus);
 		
-		ModPointOfInterestTypes.POI_TYPES.register(eventBus);
+		ModPoiTypes.POI_TYPES.register(eventBus);
 		ModVillagerProfessions.PROFESSIONS.register(eventBus);
 		
 		ModEnchantments.ENCHANTMENTS.register(eventBus);

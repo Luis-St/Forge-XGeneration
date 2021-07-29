@@ -13,7 +13,8 @@ public class ConfiguredModStructures {
 	public static final ConfiguredStructureFeature<?, ?> DEEPSLATE_MINESHAFT = register("deepslate_mineshaft", ModStructures.DEEPSLATE_MINESHAFT.get()
 			.configured(FeatureConfiguration.NONE));
 	
-	private static <FC extends FeatureConfiguration, F extends StructureFeature<FC>> ConfiguredStructureFeature<FC, F> register(String name, ConfiguredStructureFeature<FC, F> structure) {
+	private static <FC extends FeatureConfiguration, F extends StructureFeature<FC>> ConfiguredStructureFeature<FC, F> 
+			register(String name, ConfiguredStructureFeature<FC, F> structure) {
 		return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(Nero.MOD_ID, name), structure);
 	}
 

@@ -17,19 +17,18 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-//TODO: fix
 public class SoulFireballEntity extends Fireball implements ISoulFireEntity {
 
-	public SoulFireballEntity(Level world, LivingEntity shooter, double x, double y, double z) {
-		super(ModEntityTypes.SOUL_FIREBALL.get(), shooter, x, y, z, world);
+	public SoulFireballEntity(Level level, LivingEntity shooter, double x, double y, double z) {
+		super(ModEntityTypes.SOUL_FIREBALL.get(), shooter, x, y, z, level);
 	}
 
-	public SoulFireballEntity(Level world, double x, double y, double z, double xPower, double yPower, double zPower) {
-		super(ModEntityTypes.SOUL_FIREBALL.get(), x, y, z, xPower, yPower, zPower, world);
+	public SoulFireballEntity(Level level, double x, double y, double z, double xPower, double yPower, double zPower) {
+		super(ModEntityTypes.SOUL_FIREBALL.get(), x, y, z, xPower, yPower, zPower, level);
 	}
 
-	public SoulFireballEntity(EntityType<? extends SoulFireballEntity> entityType, Level world) {
-		super(entityType, world);
+	public SoulFireballEntity(EntityType<? extends SoulFireballEntity> entityType, Level level) {
+		super(entityType, level);
 	}
 	
 	@Override
@@ -37,10 +36,10 @@ public class SoulFireballEntity extends Fireball implements ISoulFireEntity {
 		super.onHitEntity(hitResult);
 		if (!this.level.isClientSide) {
 			Entity entity = hitResult.getEntity();
-			Entity entity1 = this.getOwner();
-			entity.hurt(DamageSource.fireball(this, entity1), 6.0F);
-			if (entity1 instanceof LivingEntity) {
-				this.doEnchantDamageEffects((LivingEntity) entity1, entity);
+			Entity owner = this.getOwner();
+			entity.hurt(DamageSource.fireball(this, owner), 6.0F);
+			if (owner instanceof LivingEntity) {
+				this.doEnchantDamageEffects((LivingEntity) owner, entity);
 			}
 
 		}

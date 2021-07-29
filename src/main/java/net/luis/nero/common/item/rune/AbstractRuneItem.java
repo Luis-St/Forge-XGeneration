@@ -81,17 +81,17 @@ public abstract class AbstractRuneItem extends Item {
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack orbStack = this.getOrbItem(player);
 		if (!orbStack.isEmpty()) {
 			if (this.hasBloodOrShouldDamage(player, orbStack, this.runeType.getUseCost(), RuneUseType.USE)) {
-				return this.useRune(world, player, hand, orbStack);
+				return this.useRune(level, player, hand, orbStack);
 			}
 		}
-		return super.use(world, player, hand);
+		return super.use(level, player, hand);
 	}
 	
-	protected abstract InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack);
+	protected abstract InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack);
 	
 	@Override
 	public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {

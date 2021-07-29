@@ -25,7 +25,7 @@ public class HasteRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, HASTE_RUNE_HASTE_DURATION, 1, false, false, false));
 		return this.success(player, hand);
 	}

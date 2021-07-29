@@ -42,7 +42,7 @@ public class ModOreBlock extends OreBlock {
 	}
 	
 	@Override
-	public int getExpDrop(BlockState state, LevelReader reader, BlockPos pos, int fortune, int silkTouch) {
+	public int getExpDrop(BlockState state, LevelReader levelReader, BlockPos pos, int fortune, int silkTouch) {
 		if (silkTouch == 0) {
 			if (this == ModBlocks.DEEPSLATE_COAL_ORE.get()) {
 				return Mth.nextInt(RANDOM, DEEPSLATE_COAL_XP_MIN, DEEPSLATE_COAL_XP_MAX);

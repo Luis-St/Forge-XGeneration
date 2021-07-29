@@ -1,8 +1,8 @@
-package net.luis.nero.common.tileentity;
+package net.luis.nero.common.block.entity;
 
-import net.luis.nero.api.common.tileentity.IAnimatedTileEntity;
-import net.luis.nero.api.common.tileentity.IEnergyTileEntity;
-import net.luis.nero.init.block.util.ModTileEntityTypes;
+import net.luis.nero.api.common.block.entity.IAnimatedBlockEntity;
+import net.luis.nero.api.common.block.entity.IEnergyBlockEntity;
+import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -11,14 +11,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BloodAltarTileEntity extends BlockEntity implements IAnimatedTileEntity, IEnergyTileEntity<BloodAltarTileEntity> {
+public class BloodAltarBlockEntity extends BlockEntity implements IAnimatedBlockEntity, IEnergyBlockEntity<BloodAltarBlockEntity> {
 	
 	protected int blood = 0;
 	protected int currentBlood = 0;
 	protected int previousBlood = 0;
 	
-	public BloodAltarTileEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.BLOOD_ALTAR.get(), pos, state);
+	public BloodAltarBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntityTypes.BLOOD_ALTAR.get(), pos, state);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BloodAltarTileEntity extends BlockEntity implements IAnimatedTileEn
 		return (float) this.previousBlood / (float) this.getEnergyMultiplier();
 	}
 	
-	public static void serverTick(Level level, BlockPos pos, BlockState state, BloodAltarTileEntity bloodAltarTileEntity) {
+	public static void serverTick(Level level, BlockPos pos, BlockState state, BloodAltarBlockEntity bloodAltarTileEntity) {
 		bloodAltarTileEntity.currentBlood = bloodAltarTileEntity.blood;
 		bloodAltarTileEntity.previousBlood = bloodAltarTileEntity.currentBlood;
 	}
@@ -119,7 +119,7 @@ public class BloodAltarTileEntity extends BlockEntity implements IAnimatedTileEn
 	}
 	
 	@Override
-	public void onDataPacket(Connection networkManager, ClientboundBlockEntityDataPacket packet) {
+	public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
 		if (this.getLevel() != null) {
 			if (this.getLevel().isAreaLoaded(this.getBlockPos(), 1)) {
 				this.loadData(packet.getTag());
@@ -128,30 +128,30 @@ public class BloodAltarTileEntity extends BlockEntity implements IAnimatedTileEn
 	}
 	
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
-		super.save(nbt);
-		nbt.put("blood_altar", this.saveData());
-		return nbt;
+	public CompoundTag save(CompoundTag tag) {
+		super.save(tag);
+		tag.put("blood_altar", this.saveData());
+		return tag;
 	}
 	
 	public CompoundTag saveData() {
-		CompoundTag nbt = new CompoundTag();
-		nbt.putInt("blood", this.blood);
-		nbt.putInt("currentBlood", this.currentBlood);
-		nbt.putInt("previousBlood", this.previousBlood);
-		return nbt;
+		CompoundTag tag = new CompoundTag();
+		tag.putInt("blood", this.blood);
+		tag.putInt("currentBlood", this.currentBlood);
+		tag.putInt("previousBlood", this.previousBlood);
+		return tag;
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
-		super.load(nbt);
-		this.loadData(nbt.getCompound("blood_altar"));
+	public void load(CompoundTag tag) {
+		super.load(tag);
+		this.loadData(tag.getCompound("blood_altar"));
 	}
 	
-	public void loadData(CompoundTag nbt) {
-		this.blood = nbt.getInt("blood");
-		this.currentBlood = nbt.getInt("currentBlood");
-		this.previousBlood = nbt.getInt("previousBlood");
+	public void loadData(CompoundTag tag) {
+		this.blood = tag.getInt("blood");
+		this.currentBlood = tag.getInt("currentBlood");
+		this.previousBlood = tag.getInt("previousBlood");
 	}
 	
 	public static class BloodAltarConstants {

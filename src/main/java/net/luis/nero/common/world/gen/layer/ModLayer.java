@@ -22,19 +22,19 @@ public class ModLayer extends Layer {
 	}
 	
 	@Override
-	public Biome get(Registry<Biome> biomeRegistry, int x, int z) {
+	public Biome get(Registry<Biome> registry, int x, int z) {
 		int i = this.area.get(x, z);
-		ResourceKey<Biome> registrykey = getBiome(i);
-		if (registrykey == null) {
+		ResourceKey<Biome> resourceKey = getBiome(i);
+		if (resourceKey == null) {
 			throw new IllegalStateException("Unknown biome id emitted by layers: " + i);
 		} else {
-			Biome biome = biomeRegistry.get(registrykey);
+			Biome biome = registry.get(resourceKey);
 			if (biome == null) {
 				if (SharedConstants.IS_RUNNING_IN_IDE) {
 					throw Util.pauseInIde(new IllegalStateException("Unknown biome id: " + i));
 				} else {
 					Nero.LOGGER.warn("Unknown biome id: ", i);
-					return biomeRegistry.get(Biomes.byId(0));
+					return registry.get(Biomes.byId(0));
 				}
 			} else {
 				return biome;
@@ -43,13 +43,13 @@ public class ModLayer extends Layer {
 	}
 	
 	public static ResourceKey<Biome> getBiome(int keyValue) {
-		ResourceKey<Biome> registrykey = null;
+		ResourceKey<Biome> resourceKey = null;
 		if (keyValue >= 0) {
-			registrykey = Biomes.byId(keyValue);
+			resourceKey = Biomes.byId(keyValue);
 		} else {
-			registrykey = ModBiomeKeys.byId(keyValue);
+			resourceKey = ModBiomeKeys.byId(keyValue);
 		}
-		return registrykey;
+		return resourceKey;
 	}
 	
 }

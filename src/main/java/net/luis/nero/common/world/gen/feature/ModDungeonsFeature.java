@@ -86,94 +86,94 @@ public class ModDungeonsFeature extends Feature<NoneFeatureConfiguration> {
 		return true;
 	}
 	
-	protected void setSpawner(WorldGenLevel seedReader, BlockPos center, Random rng) {
+	protected void setSpawner(WorldGenLevel worldLevel, BlockPos center, Random rng) {
 		final BlockState spawner = Blocks.SPAWNER.defaultBlockState();
-		seedReader.setBlock(center, spawner, 2);
-		SpawnerBlockEntity spawnerTileEntity = (SpawnerBlockEntity) seedReader.getBlockEntity(center);
-		spawnerTileEntity.getSpawner().setEntityId(this.randomEntityId(rng));
+		worldLevel.setBlock(center, spawner, 2);
+		SpawnerBlockEntity spawnerBlockEntity = (SpawnerBlockEntity) worldLevel.getBlockEntity(center);
+		spawnerBlockEntity.getSpawner().setEntityId(this.randomEntityId(rng));
 	}
 	
 	protected EntityType<?> randomEntityId(Random rng) {
 		return DungeonHooks.getRandomDungeonMob(rng);
 	}
 	
-	protected void setChestPos(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
+	protected void setChestPos(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
 		if (width == 2) {
 			boolean northOrSouth = rng.nextBoolean();
 			boolean eastOrWest = rng.nextBoolean();
-			this.setChestAndLoot(seedReader, center, rng, width, northOrSouth, eastOrWest);
+			this.setChestAndLoot(worldLevel, center, rng, width, northOrSouth, eastOrWest);
 		} else if (width == 3) {
 			boolean north = rng.nextBoolean();
 			boolean east = north ? rng.nextBoolean() : true;
 			boolean south = north && east ? rng.nextBoolean() : true;
 			boolean west = north && east && south ? false : true;
-			this.setChestAndLoot(seedReader, center, rng, width, north, east, south, west);
+			this.setChestAndLoot(worldLevel, center, rng, width, north, east, south, west);
 		} else if (width == 4) {
-			this.setChestAndLoot(seedReader, center, rng, width);
+			this.setChestAndLoot(worldLevel, center, rng, width);
 		}
 	}
 	
-	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width, boolean northOrSouth, boolean eastOrWest) {
+	protected void setChestAndLoot(WorldGenLevel worldLevel, BlockPos center, Random rng, int width, boolean northOrSouth, boolean eastOrWest) {
 		if (northOrSouth) {
-			this.setNorth(seedReader, center, rng, width);
+			this.setNorth(worldLevel, center, rng, width);
 		} else {
-			this.setEast(seedReader, center, rng, width);
+			this.setEast(worldLevel, center, rng, width);
 		}
 		if (eastOrWest) {
-			this.setSouth(seedReader, center, rng, width);
+			this.setSouth(worldLevel, center, rng, width);
 		} else {
-			this.setWest(seedReader, center, rng, width);
+			this.setWest(worldLevel, center, rng, width);
 		}
 	}
 	
-	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width, boolean north, boolean east, boolean south, boolean west) {
+	protected void setChestAndLoot(WorldGenLevel worldLevel, BlockPos center, Random rng, int width, boolean north, boolean east, boolean south, boolean west) {
 		if (north) {
-			this.setNorth(seedReader, center, rng, width);
+			this.setNorth(worldLevel, center, rng, width);
 		} 
 		if (east) {
-			this.setEast(seedReader, center, rng, width);
+			this.setEast(worldLevel, center, rng, width);
 		}
 		if (south) {
-			this.setSouth(seedReader, center, rng, width);
+			this.setSouth(worldLevel, center, rng, width);
 		} 
 		if (west) {
-			this.setWest(seedReader, center, rng, width);
+			this.setWest(worldLevel, center, rng, width);
 		}
 	}
 	
-	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
-		this.setNorth(seedReader, center, rng, width);
-		this.setEast(seedReader, center, rng, width);
-		this.setSouth(seedReader, center, rng, width);
-		this.setWest(seedReader, center, rng, width);
+	protected void setChestAndLoot(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
+		this.setNorth(worldLevel, center, rng, width);
+		this.setEast(worldLevel, center, rng, width);
+		this.setSouth(worldLevel, center, rng, width);
+		this.setWest(worldLevel, center, rng, width);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setNorth(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
+	protected void setNorth(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.CLOCKWISE_180);
-		seedReader.setBlock(center.north(width), chest, 2);
-		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.north(width), BuiltInLootTables.SIMPLE_DUNGEON);
+		worldLevel.setBlock(center.north(width), chest, 2);
+		RandomizableContainerBlockEntity.setLootTable(worldLevel, rng, center.north(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setEast(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
+	protected void setEast(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.COUNTERCLOCKWISE_90);
-		seedReader.setBlock(center.east(width), chest, 2);
-		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.east(width), BuiltInLootTables.SIMPLE_DUNGEON);
+		worldLevel.setBlock(center.east(width), chest, 2);
+		RandomizableContainerBlockEntity.setLootTable(worldLevel, rng, center.east(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setSouth(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
+	protected void setSouth(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.NONE);
-		seedReader.setBlock(center.south(width), chest, 2);
-		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.south(width), BuiltInLootTables.SIMPLE_DUNGEON);
+		worldLevel.setBlock(center.south(width), chest, 2);
+		RandomizableContainerBlockEntity.setLootTable(worldLevel, rng, center.south(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setWest(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
+	protected void setWest(WorldGenLevel worldLevel, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.CLOCKWISE_90);
-		seedReader.setBlock(center.west(width), chest, 2);
-		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.west(width), BuiltInLootTables.SIMPLE_DUNGEON);
+		worldLevel.setBlock(center.west(width), chest, 2);
+		RandomizableContainerBlockEntity.setLootTable(worldLevel, rng, center.west(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	protected boolean canReplace(BlockState state) {

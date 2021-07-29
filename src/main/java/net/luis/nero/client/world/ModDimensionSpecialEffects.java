@@ -3,11 +3,11 @@ package net.luis.nero.client.world;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
 
-public class ModDimensionRenderInfo extends DimensionSpecialEffects {
+public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
 	
-	public static final DimensionSpecialEffects DEEPSLATE = new ModDimensionRenderInfo(Float.NaN, true, SkyType.NONE, true, false);
+	public static final DimensionSpecialEffects DEEPSLATE = new ModDimensionSpecialEffects(Float.NaN, true, SkyType.NONE, true, false);
 	
-	private ModDimensionRenderInfo(float cloudLevel, boolean hasGround, SkyType skyType, boolean brightLightmap, boolean ambientLight) {
+	private ModDimensionSpecialEffects(float cloudLevel, boolean hasGround, SkyType skyType, boolean brightLightmap, boolean ambientLight) {
 		super(cloudLevel, hasGround, skyType, brightLightmap, ambientLight);
 	}
 

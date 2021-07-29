@@ -22,6 +22,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 public class ConfiguredModFeatures {
 	
 	// TODO: allow some modifications via config
+	// TODO: add airExposure -> float in OreConfiguration 0.0 = 0% airExposure, 1.0 = 100% airExposure
 	
 	private static final RuleTest DEEPSLATE = new BlockMatchTest(ModBlocks.DEEPSLATE.get());
 	private static final RuleTest STONE = new BlockMatchTest(Blocks.STONE);

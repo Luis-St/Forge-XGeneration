@@ -6,7 +6,7 @@ import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
 import net.luis.nero.client.render.tileentity.BloodAltarTileEntityRenderer;
 import net.luis.nero.init.block.ModBlocks;
-import net.luis.nero.init.block.util.ModTileEntityTypes;
+import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -31,7 +31,7 @@ public class OnClientSetupEvent {
 	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
 //		BlockEntityRenderers.register(ModTileEntityTypes.MILESTONE.get(), MilestoneTileEntityRenderer::new);
 		
-		BlockEntityRenderers.register(ModTileEntityTypes.BLOOD_ALTAR.get(), BloodAltarTileEntityRenderer::new);
+		BlockEntityRenderers.register(ModBlockEntityTypes.BLOOD_ALTAR.get(), BloodAltarTileEntityRenderer::new);
 	}
 	
 	protected static void registerEntityRenderer(FMLClientSetupEvent event) {

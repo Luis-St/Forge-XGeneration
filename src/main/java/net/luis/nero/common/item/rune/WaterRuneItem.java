@@ -25,7 +25,7 @@ public class WaterRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, WATER_RUNE_WATER_BREATHING_DURATION, 0, false, false, false));
 		player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, WATER_RUNE_DOLPHINS_GRACE_DURATION, 0, false, false, false));
 		return this.success(player, hand);

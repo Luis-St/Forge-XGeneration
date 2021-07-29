@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.test;
+package net.luis.nero.common.world.biome;
 
 import java.util.List;
 import java.util.Random;
@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.mojang.serialization.Codec;
 
-import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.gen.layer.DeepslateBiomeLayer;
 import net.luis.nero.common.world.gen.layer.ModLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
@@ -17,24 +16,26 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 
-public class TestBiomeProvider extends BiomeSource {
-	
-	public static final Codec<DeepslateBiomeProvider> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
-			.xmap(DeepslateBiomeProvider::new, DeepslateBiomeProvider::getBiomeRegistry).codec();
+public class DeepslateBiomeSource extends BiomeSource {
+
+	// TODO: custom tp engine for deepslate dimension
+
+	public static final Codec<DeepslateBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
+			.xmap(DeepslateBiomeSource::new, DeepslateBiomeSource::getBiomeRegistry).codec();
 	
 	private final long seed;
-	private final Registry<Biome> biomeRegistry;
+	private final Registry<Biome> registry;
 	private final ModLayer noiseBiomeLayer;
 	private static final List<ResourceKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
 	
-	public TestBiomeProvider(Registry<Biome> biomeRegistry) {
+	public DeepslateBiomeSource(Registry<Biome> biomeRegistry) {
 		this(biomeRegistry, new Random().nextLong());
 	}
 	
-	public TestBiomeProvider(Registry<Biome> biomeRegistry, long seed) {
+	public DeepslateBiomeSource(Registry<Biome> biomeRegistry, long seed) {
 		super(getStartBiomes(biomeRegistry));
 		this.seed = seed;
-		this.biomeRegistry = biomeRegistry;
+		this.registry = biomeRegistry;
 		this.noiseBiomeLayer = DeepslateBiomeLayer.createLayer(seed);
 	}
 
@@ -47,7 +48,7 @@ public class TestBiomeProvider extends BiomeSource {
 	}
 	
 	public Registry<Biome> getBiomeRegistry() {
-		return this.biomeRegistry;
+		return this.registry;
 	}
 
 	@Override
@@ -57,17 +58,17 @@ public class TestBiomeProvider extends BiomeSource {
 
 	@Override
 	protected Codec<? extends BiomeSource> codec() {
-		return DeepslateBiomeProvider.CODEC;
+		return DeepslateBiomeSource.CODEC;
 	}
 
 	@Override
-	public DeepslateBiomeProvider withSeed(long seed) {
-		return new DeepslateBiomeProvider(this.biomeRegistry, seed);
+	public DeepslateBiomeSource withSeed(long seed) {
+		return new DeepslateBiomeSource(this.registry, seed);
 	}
 
 	@Override
 	public Biome getNoiseBiome(int x, int y, int z) {
-		return this.noiseBiomeLayer.get(this.biomeRegistry, x, z);
+		return this.noiseBiomeLayer.get(this.registry, x, z);
 	}
 
 }

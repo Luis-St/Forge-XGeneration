@@ -46,16 +46,16 @@ public class TestChunkGenerator extends ChunkGenerator {
 			.apply(instance, TestChunkGenerator::new));
 
 	private final Settings settings;
-	protected final WorldgenRandom rng;
+	protected final WorldgenRandom worldRandom;
 	private final long seed;
 	private final PerlinSimplexNoise noise;
 
 	public TestChunkGenerator(Registry<Biome> registry, Settings settings) {
-		super(new TestBiomeProvider(registry), new StructureSettings(false));
+		super(new TestBiomeSource(registry), new StructureSettings(false));
 		this.settings = settings;
 		this.seed = new Random().nextLong();
-		this.rng = new WorldgenRandom(this.seed);
-		this.noise = new PerlinSimplexNoise(this.rng, IntStream.rangeClosed(-3, 0));
+		this.worldRandom = new WorldgenRandom(this.seed);
+		this.noise = new PerlinSimplexNoise(this.worldRandom, IntStream.rangeClosed(-3, 0));
 	}
 
 	public Settings getDimensionSettings() {
@@ -63,17 +63,17 @@ public class TestChunkGenerator extends ChunkGenerator {
 	}
 
 	public Registry<Biome> getBiomeRegistry() {
-		return ((TestBiomeProvider) this.biomeSource).getBiomeRegistry();
+		return ((TestBiomeSource) this.biomeSource).getBiomeRegistry();
 	}
 	
 	@Override
-	public void buildSurfaceAndBedrock(WorldGenRegion region, ChunkAccess chunk) {
+	public void buildSurfaceAndBedrock(WorldGenRegion genRegion, ChunkAccess chunkAccess) {
 		BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
 		BlockState stone = Blocks.STONE.defaultBlockState();
-		ChunkPos chunkpos = chunk.getPos();
+		ChunkPos chunkpos = chunkAccess.getPos();
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				chunk.setBlockState(new BlockPos(x, 0, z), bedrock, false);
+				chunkAccess.setBlockState(new BlockPos(x, 0, z), bedrock, false);
 			}
 		}
 		for (int x = 0; x < 16; x++) {
@@ -84,7 +84,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 				// from -4 to 16
 //				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 16; // TODO: use for biome map
 				for (int y = 1; y < 10 + noise; y++) {
-					chunk.setBlockState(new BlockPos(x, 10 + noise, z), stone, false);
+					chunkAccess.setBlockState(new BlockPos(x, 10 + noise, z), stone, false);
 				}
 			}
 		}
@@ -92,26 +92,26 @@ public class TestChunkGenerator extends ChunkGenerator {
 //		this.buildSurface(chunk);
 	}
 	
-	protected void buildSurface(ChunkAccess chunk) {
-		ChunkPos chunkPos = chunk.getPos();
+	protected void buildSurface(ChunkAccess chunkAccess) {
+		ChunkPos chunkPos = chunkAccess.getPos();
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				int worldX = chunkPos.x * 16 + x;
 				int worldZ = chunkPos.z * 16 + z;
 				int noise = (int) (65 + Math.sin(worldX / 20.0) * 10 + Math.cos(worldZ / 20.0) * 10);
 				for (int y = 0; y < noise; y++) {
-					chunk.setBlockState(new BlockPos(x, z, y), Blocks.STONE.defaultBlockState(), false);
+					chunkAccess.setBlockState(new BlockPos(x, z, y), Blocks.STONE.defaultBlockState(), false);
 				}
 			}
 		}
 	}
 	
-	protected void buildBedrock(ChunkAccess chunk) {
+	protected void buildBedrock(ChunkAccess chunkAccess) {
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 128; y++) {
 				for (int z = 0; z < 16; z++) {
-					if (y <= this.rng.nextInt(5)) {
-						chunk.setBlockState(new BlockPos(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
+					if (y <= this.worldRandom.nextInt(5)) {
+						chunkAccess.setBlockState(new BlockPos(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
 					}
 				}
 			}

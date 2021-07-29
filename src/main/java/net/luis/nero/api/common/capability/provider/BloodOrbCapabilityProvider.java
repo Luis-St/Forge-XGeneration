@@ -15,7 +15,7 @@ public class BloodOrbCapabilityProvider implements ICapabilitySerializable<Compo
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction direction) {
 		return cap == ModCapabilities.BLOOD_ORB ? (LazyOptional<T>) this.optional : LazyOptional.empty();
 	}
 
@@ -25,8 +25,8 @@ public class BloodOrbCapabilityProvider implements ICapabilitySerializable<Compo
 	}
 
 	@Override
-	public void deserializeNBT(CompoundTag nbt) {
-		 this.handler.deserializeNBT(nbt);
+	public void deserializeNBT(CompoundTag tag) {
+		 this.handler.deserializeNBT(tag);
 	}
 
 }

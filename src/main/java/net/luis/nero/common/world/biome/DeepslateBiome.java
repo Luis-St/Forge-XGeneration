@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.biome;
 
+import net.luis.nero.api.common.world.biome.IBiome;
 import net.luis.nero.common.world.gen.ConfiguredModSurfaceBuilders;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.minecraft.world.level.biome.Biome;

@@ -3,9 +3,11 @@ package net.luis.nero.api.common.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class VarArgs<T> {
+public class VarArgs<T> implements Iterable<T> {
 	
 	private final List<T> list;
 	
@@ -52,4 +54,14 @@ public class VarArgs<T> {
 	public T[] asArray() {
 		return (T[]) this.list.toArray();
 	}
+	
+	public Stream<T> asStream() {
+		return this.list.stream();
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return this.list.iterator();
+	}
+	
 }

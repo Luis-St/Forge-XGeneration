@@ -4,9 +4,12 @@ import java.util.Random;
 
 public class Chance {
 	
+	public static final Chance NULL = new Chance(-1);
+	
+	private static final Random RNG = new Random();
 	private final int chance;
 	
-	public static final Chance NULL = new Chance(-1);
+
 	
 	public Chance(int chance) {
 		this.chance = chance;
@@ -21,11 +24,11 @@ public class Chance {
 	}
 	
 	public boolean isAlwaysTrue() {
-		return chance >= 100;
+		return this.chance >= 100;
 	}
 	
 	public boolean isAlwaysFalse() {
-		return chance == 0;
+		return this.chance == 0;
 	}
 	
 	protected final boolean isNull() {
@@ -40,11 +43,15 @@ public class Chance {
 		} else if (this.isNull()) {
 			return false;
 		}
-		return chance >= new Random().nextInt(100);
+		return this.chance >= RNG.nextInt(100);
 	}
 	
 	public boolean equals(Chance chance) {
 		return chance.getValue() == this.getValue();
+	}
+	
+	public static void setSeed(long seed) {
+		RNG.setSeed(seed);
 	}
 	
 }

@@ -15,10 +15,10 @@ public class SoulFireballEntityRenderer extends ThrownItemRenderer<SoulFireballE
 	}
 	
 	@Override
-	public void render(SoulFireballEntity soulFireball, float entityYaw, float partialTicks, PoseStack matrix, MultiBufferSource renderBuffer, int packedLight) {
-		super.render(soulFireball, entityYaw, partialTicks, matrix, renderBuffer, packedLight);
+	public void render(SoulFireballEntity soulFireball, float entityYaw, float partialTicks, PoseStack pose, MultiBufferSource bufferSource, int packedLight) {
+		super.render(soulFireball, entityYaw, partialTicks, pose, bufferSource, packedLight);
 		if (soulFireball.displaySoulFireAnimation()) {
-			this.renderSoulFire(soulFireball, matrix, renderBuffer);
+			this.renderSoulFire(soulFireball, pose, bufferSource);
 		}
 	}
 

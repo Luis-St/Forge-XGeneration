@@ -19,8 +19,8 @@ public class DeepslateMineshaftStructurePiece extends /*ScatteredStructurePiece*
 	
 	protected final Random rng;
 	
-	public DeepslateMineshaftStructurePiece(ServerLevel serverWorld, CompoundTag nbt) {
-		super(ModStructurePieceTypes.DEEPSLATE_MINESHAFT, nbt);
+	public DeepslateMineshaftStructurePiece(ServerLevel serverLevel, CompoundTag tag) {
+		super(ModStructurePieceTypes.DEEPSLATE_MINESHAFT, tag);
 		this.rng = new WorldgenRandom();
 	}
 
@@ -31,19 +31,19 @@ public class DeepslateMineshaftStructurePiece extends /*ScatteredStructurePiece*
 	
 	@Override
 	// TODO: better mineshaft gen -> less code/methods (use count)
-	public boolean postProcess(WorldGenLevel seedReader, StructureFeatureManager structureManager, ChunkGenerator chunkGenerator,
-			Random rng, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		this.generateAirBox(seedReader, boundingBox, this.getX(-8), this.getY(-8), this.getZ(-8), this.getX(8), this.getY(8), this.getZ(8)); // -> issu with generating
-//		this.updateBoundingBox(seedReader, boundingBox);
+	public boolean postProcess(WorldGenLevel worldLevel, StructureFeatureManager structureManager, ChunkGenerator chunkGenerator, Random rng, BoundingBox boundingBox, 
+			ChunkPos chunkPos, BlockPos blockPos) {
+		this.generateAirBox(worldLevel, boundingBox, this.getX(-8), this.getY(-8), this.getZ(-8), this.getX(8), this.getY(8), this.getZ(8)); // -> issu with generating
+//		this.updateBoundingBox(worldLevel, boundingBox);
 		return true;
 	}
 
-//	protected void updateBoundingBox(ISeedReader seedReader, MutableBoundingBox boundingBox) {
+//	protected void updateBoundingBox(WorldGenLevel worldLevel, BoundingBox boundingBox) {
 //		for (int x = boundingBox.x0; x <= boundingBox.x1; x++) {
 //			for (int y = boundingBox.y0; y <= boundingBox.y1; y++) {
 //				for (int z = boundingBox.z0; z <= boundingBox.z1; z++) {
 //					BlockPos pos = new BlockPos(x, y, z);
-//					seedReader.getChunk(pos).markPosForPostprocessing(pos);
+//					worldLevel.getChunk(pos).markPosForPostprocessing(pos);
 //				}
 //			}
 //		}

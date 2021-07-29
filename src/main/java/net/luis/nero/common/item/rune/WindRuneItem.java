@@ -34,14 +34,14 @@ public class WindRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
-		if (!world.isClientSide()) {
+	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
+		if (!level.isClientSide()) {
 			double x = player.getX();
 			double y = player.getY();
 			double z = player.getZ();
 			AABB alignedBB = new AABB(x - WIND_RUNE_ENTITY_AREA_X, y - WIND_RUNE_ENTITY_AREA_Y, z - WIND_RUNE_ENTITY_AREA_Z, x + WIND_RUNE_ENTITY_AREA_X, 
 					y + WIND_RUNE_ENTITY_AREA_Y, z + WIND_RUNE_ENTITY_AREA_Z);
-			List<LivingEntity> livingEntities = world.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+			List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
 			livingEntities.removeIf(livingEntity -> livingEntity == player);
 			for (LivingEntity livingEntity : livingEntities) {
 				livingEntity.yHeadRot = new Random().nextFloat() * 360.0F;

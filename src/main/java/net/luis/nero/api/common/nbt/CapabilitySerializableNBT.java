@@ -6,6 +6,6 @@ public interface CapabilitySerializableNBT {
 	
 	CompoundTag serializeNBT();
 
-	void deserializeNBT(CompoundTag nbt);
+	void deserializeNBT(CompoundTag tag);
 	
 }

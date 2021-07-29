@@ -65,13 +65,4 @@ public abstract class ModStructurePiece extends StructurePiece {
 		}
 	}
 	
-	/*	@Override
-	protected void placeBlock(ISeedReader seedReader, BlockState state, int x, int y, int z, MutableBoundingBox boundingBox) {
-		super.placeBlock(seedReader, state, x, y, z, boundingBox);
-		BlockPos startPos = new BlockPos(boundingBox.x0, boundingBox.y0, boundingBox.z0);
-		BlockPos endPos = new BlockPos(boundingBox.x1, boundingBox.y1, boundingBox.z1);
-		BlockPos pos = new BlockPos(this.getWorldX(x, z), this.getWorldY(y), this.getWorldZ(x, z));
-		Nero.LOGGER.debug("BoundingBox from {} to {}, and is pos {} inside: {}", startPos, endPos, pos, boundingBox.isInside(pos));
-	}*/
-	
 }

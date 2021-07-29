@@ -18,12 +18,12 @@ public class OnPlayerClientTickEvent {
 	@SubscribeEvent
 	public static void playerTick(TickEvent.PlayerTickEvent event) {
 		if (event.phase == Phase.START && event.side == LogicalSide.CLIENT) {
-			LocalPlayer player = (LocalPlayer) event.player;
-			ClientLevel world = (ClientLevel) player.getCommandSenderWorld();
-			BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-			if (world.getBlockState(pos).getBlock() instanceof DriftSandBlock) {
-				if (!player.isSpectator()) {
-					player.setDeltaMovement(0, -0.1, 0);
+			LocalPlayer localPlayer = (LocalPlayer) event.player;
+			ClientLevel clientLevel = (ClientLevel) localPlayer.getCommandSenderWorld();
+			BlockPos pos = new BlockPos(localPlayer.getX(), localPlayer.getY(), localPlayer.getZ());
+			if (clientLevel.getBlockState(pos).getBlock() instanceof DriftSandBlock) {
+				if (!localPlayer.isSpectator()) {
+					localPlayer.setDeltaMovement(0, -0.1, 0);
 				}
 			}
 		}
