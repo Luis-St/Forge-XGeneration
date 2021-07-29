@@ -1,9 +1,9 @@
 package net.luis.nero.api.common.capability.interfaces;
 
+import net.luis.nero.api.common.item.AbstractRuneItem;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.api.common.nbt.CapabilitySerializableNBT;
 import net.luis.nero.common.item.OrbItem;
-import net.luis.nero.common.item.rune.AbstractRuneItem;
 
 public interface IBloodOrbCapability extends CapabilitySerializableNBT {
 	

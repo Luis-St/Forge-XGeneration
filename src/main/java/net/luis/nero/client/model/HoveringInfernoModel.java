@@ -1,4 +1,4 @@
-package net.luis.nero.client.render.entity.model;
+package net.luis.nero.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

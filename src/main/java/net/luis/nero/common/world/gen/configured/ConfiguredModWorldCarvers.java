@@ -1,5 +1,5 @@
 
-package net.luis.nero.common.world.gen;
+package net.luis.nero.common.world.gen.configured;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.world.gen.feature.ModWorldCarvers;

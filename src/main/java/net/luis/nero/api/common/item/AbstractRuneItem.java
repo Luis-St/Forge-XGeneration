@@ -1,12 +1,10 @@
- package net.luis.nero.common.item.rune;
+ package net.luis.nero.api.common.item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.capability.util.CapabilityUtil;
-import net.luis.nero.api.common.item.IRuneType;
-import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.network.chat.TextComponent;

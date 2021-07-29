@@ -2,7 +2,7 @@ package net.luis.nero.event.fml;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.common.util.Reflections;
+import net.luis.nero.api.util.Reflections;
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeSource;

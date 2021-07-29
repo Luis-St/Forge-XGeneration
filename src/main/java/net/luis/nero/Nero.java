@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.luis.nero.api.config.ConfigUtil;
-import net.luis.nero.client.render.entity.model.ModEntityModelSet;
+import net.luis.nero.client.model.ModEntityModelSet;
 import net.luis.nero.config.ModClientConfig;
 import net.luis.nero.config.ModCommonConfig;
 import net.luis.nero.config.ModServerConfig;

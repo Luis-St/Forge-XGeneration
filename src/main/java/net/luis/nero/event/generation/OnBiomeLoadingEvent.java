@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
-import net.luis.nero.common.world.gen.ConfiguredModStructures;
+import net.luis.nero.common.world.gen.configured.ConfiguredModStructures;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;

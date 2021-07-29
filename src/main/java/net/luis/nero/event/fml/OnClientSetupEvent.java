@@ -1,10 +1,10 @@
 package net.luis.nero.event.fml;
 
 import net.luis.nero.Nero;
+import net.luis.nero.client.render.blockentity.BloodAltarTileEntityRenderer;
 import net.luis.nero.client.render.entity.HoveringInfernoEntityRenderer;
 import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
-import net.luis.nero.client.render.tileentity.BloodAltarTileEntityRenderer;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;

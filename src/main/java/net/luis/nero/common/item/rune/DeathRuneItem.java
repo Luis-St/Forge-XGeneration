@@ -2,6 +2,7 @@ package net.luis.nero.common.item.rune;
 
 import java.util.List;
 
+import net.luis.nero.api.common.item.AbstractRuneItem;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;

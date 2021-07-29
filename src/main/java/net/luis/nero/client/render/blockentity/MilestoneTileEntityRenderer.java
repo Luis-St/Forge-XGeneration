@@ -1,4 +1,4 @@
-package net.luis.nero.client.render.tileentity;
+package net.luis.nero.client.render.blockentity;
 
 public class MilestoneTileEntityRenderer /*extends TileEntityRenderer<MilestoneTileEntity>*/ {
 /*	

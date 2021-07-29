@@ -1,11 +1,11 @@
-package net.luis.nero.client.render.tileentity;
+package net.luis.nero.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.luis.nero.Nero;
-import net.luis.nero.client.render.entity.model.ModModelLayers;
-import net.luis.nero.client.render.tileentity.model.BloodAltarModel;
+import net.luis.nero.client.model.BloodAltarModel;
+import net.luis.nero.client.model.ModModelLayers;
 import net.luis.nero.common.block.entity.BloodAltarBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

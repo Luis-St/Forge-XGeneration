@@ -1,4 +1,4 @@
-package net.luis.nero.api.common.util.exception;
+package net.luis.nero.api.util.exception;
 
 public class NotRegisteredException extends RuntimeException {
 	

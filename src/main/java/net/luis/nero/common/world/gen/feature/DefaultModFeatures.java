@@ -1,6 +1,6 @@
 package net.luis.nero.common.world.gen.feature;
 
-import net.luis.nero.common.world.gen.ConfiguredModFeatures;
+import net.luis.nero.common.world.gen.configured.ConfiguredModFeatures;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;

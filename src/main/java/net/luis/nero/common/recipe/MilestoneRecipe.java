@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import net.luis.nero.api.common.recipe.IModRecipe;
 import net.luis.nero.api.common.recipe.item.ResultItemStack;
-import net.luis.nero.api.common.util.VarArgs;
+import net.luis.nero.api.util.VarArgs;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;

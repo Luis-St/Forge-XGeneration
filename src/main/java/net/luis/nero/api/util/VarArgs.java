@@ -1,4 +1,4 @@
-package net.luis.nero.api.common.util;
+package net.luis.nero.api.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
