@@ -1,12 +1,12 @@
 package net.luis.nero.event.capability;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,13 +15,13 @@ import net.minecraftforge.fml.common.Mod;
 public class OnAttachCapabilitiesEvent {
 	
 	@SubscribeEvent
-	public static void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
+	public static void attachChunkCapabilities(AttachCapabilitiesEvent<LevelChunk> event) {
 		
 	}
 	
 	@SubscribeEvent
 	public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof PlayerEntity) {
+		if (event.getObject() instanceof Player) {
 			
 		}
 	}
@@ -32,13 +32,13 @@ public class OnAttachCapabilitiesEvent {
 	}
 	
 	@SubscribeEvent
-	public static void attachTileEntityCapabilities(AttachCapabilitiesEvent<TileEntity> event) {
+	public static void attachTileEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
 		
 	}
 	
 	@SubscribeEvent
-	public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-		if (event.getObject() instanceof ServerWorld) {
+	public static void attachWorldCapabilities(AttachCapabilitiesEvent<Level> event) {
+		if (event.getObject() instanceof ServerLevel) {
 			
 		}
 	}

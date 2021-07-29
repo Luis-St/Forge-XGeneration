@@ -1,7 +1,7 @@
 package net.luis.nero.common.item;
 
 import net.luis.nero.init.items.ModItems;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public class SlateItem extends Item {
 	

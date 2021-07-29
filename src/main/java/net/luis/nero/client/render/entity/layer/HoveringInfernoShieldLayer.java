@@ -1,24 +1,24 @@
 package net.luis.nero.client.render.entity.layer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.luis.nero.client.render.entity.model.HoveringInfernoModel;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 
-public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEntity, HoveringInfernoModel> {
+public class HoveringInfernoShieldLayer extends RenderLayer<HoveringInfernoEntity, HoveringInfernoModel> {
 
-	public HoveringInfernoShieldLayer(IEntityRenderer<HoveringInfernoEntity, HoveringInfernoModel> entityRenderer) {
+	public HoveringInfernoShieldLayer(RenderLayerParent<HoveringInfernoEntity, HoveringInfernoModel> entityRenderer) {
 		super(entityRenderer);
 	}
 	
 	@Override
-	public void render(MatrixStack matrix, IRenderTypeBuffer renderBuffer, int packedLight, HoveringInfernoEntity hoveringInferno, float limbSwing, 
+	public void render(PoseStack matrix, MultiBufferSource renderBuffer, int packedLight, HoveringInfernoEntity hoveringInferno, float limbSwing, 
 			float limbSwingAmount, float partialTicks, float ageInTicks, float headYaw, float headPitch) {
 		matrix.pushPose();
 		this.renderShield(hoveringInferno, partialTicks);
@@ -34,16 +34,16 @@ public class HoveringInfernoShieldLayer extends LayerRenderer<HoveringInfernoEnt
 		}
 	}
 	
-	protected void renderShieldYRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction, float offset) {
+	protected void renderShieldYRotation(ModelPart shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction, float offset) {
 		float yRotO = hoveringInferno.getShieldPos(direction).yRotO * (hoveringInferno.attacking ? 1.45875f : 1.45875f);
 		float yRot = hoveringInferno.getShieldPos(direction).yRot * (hoveringInferno.attacking ? 1.45875f : 1.45875f);
-		shield.yRot = MathHelper.lerp(partialTicks, yRotO, yRot) + offset;
+		shield.yRot = Mth.lerp(partialTicks, yRotO, yRot) + offset;
 	}
 	
-	protected void renderShieldXRotation(ModelRenderer shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction) {
+	protected void renderShieldXRotation(ModelPart shield, HoveringInfernoEntity hoveringInferno, float partialTicks, Direction direction) {
 		float xRotO = hoveringInferno.getShieldPos(direction).xRotO;
 		float xRot = hoveringInferno.getShieldPos(direction).xRot;
-		shield.xRot = MathHelper.lerp(partialTicks, xRotO, xRot);
+		shield.xRot = Mth.lerp(partialTicks, xRotO, xRot);
 	}
 	
 }

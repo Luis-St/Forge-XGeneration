@@ -3,21 +3,22 @@ package net.luis.nero.common.tileentity;
 import net.luis.nero.api.common.tileentity.IAnimatedTileEntity;
 import net.luis.nero.api.common.tileentity.IEnergyTileEntity;
 import net.luis.nero.init.block.util.ModTileEntityTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class BloodAltarTileEntity extends TileEntity implements ITickableTileEntity, IAnimatedTileEntity, IEnergyTileEntity<BloodAltarTileEntity> {
+public class BloodAltarTileEntity extends BlockEntity implements IAnimatedTileEntity, IEnergyTileEntity<BloodAltarTileEntity> {
 	
 	protected int blood = 0;
 	protected int currentBlood = 0;
 	protected int previousBlood = 0;
 	
-	public BloodAltarTileEntity() {
-		super(ModTileEntityTypes.BLOOD_ALTAR.get());
+	public BloodAltarTileEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.BLOOD_ALTAR.get(), pos, state);
 	}
 
 	@Override
@@ -29,11 +30,10 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	public float getPrevious() {
 		return (float) this.previousBlood / (float) this.getEnergyMultiplier();
 	}
-
-	@Override
-	public void tick() {
-		this.currentBlood = blood;
-		this.previousBlood = this.currentBlood;
+	
+	public static void serverTick(Level level, BlockPos pos, BlockState state, BloodAltarTileEntity bloodAltarTileEntity) {
+		bloodAltarTileEntity.currentBlood = bloodAltarTileEntity.blood;
+		bloodAltarTileEntity.previousBlood = bloodAltarTileEntity.currentBlood;
 	}
 	
 	public void update() {
@@ -114,12 +114,12 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	}
 	
 	@Override
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.worldPosition, -1, this.saveData());
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.saveData());
 	}
 	
 	@Override
-	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+	public void onDataPacket(Connection networkManager, ClientboundBlockEntityDataPacket packet) {
 		if (this.getLevel() != null) {
 			if (this.getLevel().isAreaLoaded(this.getBlockPos(), 1)) {
 				this.loadData(packet.getTag());
@@ -128,14 +128,14 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	}
 	
 	@Override
-	public CompoundNBT save(CompoundNBT nbt) {
+	public CompoundTag save(CompoundTag nbt) {
 		super.save(nbt);
 		nbt.put("blood_altar", this.saveData());
 		return nbt;
 	}
 	
-	public CompoundNBT saveData() {
-		CompoundNBT nbt = new CompoundNBT();
+	public CompoundTag saveData() {
+		CompoundTag nbt = new CompoundTag();
 		nbt.putInt("blood", this.blood);
 		nbt.putInt("currentBlood", this.currentBlood);
 		nbt.putInt("previousBlood", this.previousBlood);
@@ -143,12 +143,12 @@ public class BloodAltarTileEntity extends TileEntity implements ITickableTileEnt
 	}
 	
 	@Override
-	public void load(BlockState state, CompoundNBT nbt) {
-		super.load(state, nbt);
+	public void load(CompoundTag nbt) {
+		super.load(nbt);
 		this.loadData(nbt.getCompound("blood_altar"));
 	}
 	
-	public void loadData(CompoundNBT nbt) {
+	public void loadData(CompoundTag nbt) {
 		this.blood = nbt.getInt("blood");
 		this.currentBlood = nbt.getInt("currentBlood");
 		this.previousBlood = nbt.getInt("previousBlood");

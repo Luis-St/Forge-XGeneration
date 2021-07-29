@@ -3,8 +3,8 @@ package net.luis.nero.api.common.recipe.item;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.luis.nero.api.common.util.Chance;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class ResultItemStack {
 	

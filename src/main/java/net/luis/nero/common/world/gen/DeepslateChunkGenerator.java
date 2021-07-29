@@ -1,6 +1,8 @@
  package net.luis.nero.common.world.gen;
 
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.stream.IntStream;
 
 import com.mojang.serialization.Codec;
@@ -8,24 +10,24 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.init.block.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryLookupCodec;
-import net.minecraft.world.Blockreader;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.INoiseGenerator;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
-import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.RegistryLookupCodec;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.synth.PerlinNoise;
+import net.minecraft.world.level.levelgen.synth.SurfaceNoise;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
 	
@@ -49,16 +51,16 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			.apply(instance, DeepslateChunkGenerator::new));
 
 	private final Settings settings;
-	protected final SharedSeedRandom random;
-	private final INoiseGenerator surfaceNoise;
+	protected final WorldgenRandom random;
+	private final SurfaceNoise surfaceNoise;
 	private final long seed;
 
 	public DeepslateChunkGenerator(Registry<Biome> registry, Settings settings) {
-		super(new DeepslateBiomeProvider(registry), new DimensionStructuresSettings(false));
+		super(new DeepslateBiomeProvider(registry), new StructureSettings(false));
 		this.settings = settings;
 		this.seed = new Random().nextLong();
-		this.random = new SharedSeedRandom(this.seed);
-		this.surfaceNoise = new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-3, 0));
+		this.random = new WorldgenRandom(this.seed);
+		this.surfaceNoise = new PerlinNoise(this.random, IntStream.rangeClosed(-3, 0));
 		this.random.consumeCount(2620);
 	}
 
@@ -71,7 +73,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	}
 	
 	@Override
-	public void buildSurfaceAndBedrock(WorldGenRegion region, IChunk chunk) {
+	public void buildSurfaceAndBedrock(WorldGenRegion region, ChunkAccess chunk) {
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 256; y++) {
 				for (int z = 0; z < 16; z++) {
@@ -84,7 +86,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		}
 	}
 
-	protected void buildBedrock(IChunk chunk, BlockPos pos) {
+	protected void buildBedrock(ChunkAccess chunk, BlockPos pos) {
 		if (pos.getY() > this.getDimensionSettings().getBedrockTopLayer() - this.getDimensionSettings().getBedrockTopLayerSize() - 1) {
 			chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
 		} else if (pos.getY() <= this.random.nextInt(5)) {
@@ -92,12 +94,12 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		}
 	}
 	
-	protected void buildSurface(IChunk chunk, Biome biome, BlockPos pos, long seed) {
+	protected void buildSurface(ChunkAccess chunk, Biome biome, BlockPos pos, long seed) {
 		int worldX = chunk.getPos().getMinBlockX() + pos.getX();
 		int worldZ = chunk.getPos().getMinBlockZ() + pos.getZ();
-		int y = chunk.getHeight(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
+		int y = chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
 		double noise = this.surfaceNoise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, pos.getX() * 0.0625) * 15;
-		biome.buildSurfaceAt(this.random, chunk, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), seed);
+		biome.buildSurfaceAt(this.random, chunk, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
 	}
 
 	@Override
@@ -111,12 +113,12 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public void fillFromNoise(IWorld world, StructureManager structureManager, IChunk chunk) {
-		
+	public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, StructureFeatureManager structureManager, ChunkAccess chunk) {
+		return CompletableFuture.supplyAsync(() -> chunk, executor);
 	}
 
 	@Override
-	public int getBaseHeight(int x, int z, Heightmap.Type heightmapType) {
+	public int getBaseHeight(int x, int z, Types types, LevelHeightAccessor levelAccessor) {
 		return this.getDimensionSettings().getBaseHeight();
 	}
 	
@@ -126,8 +128,8 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public IBlockReader getBaseColumn(int x, int z) {
-		return new Blockreader(new BlockState[0]);
+	public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor levelAccessor) {
+		return new NoiseColumn(0, new BlockState[0]);
 	}
 
 	static class Settings {

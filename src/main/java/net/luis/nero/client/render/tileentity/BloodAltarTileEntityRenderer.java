@@ -1,35 +1,36 @@
 package net.luis.nero.client.render.tileentity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.luis.nero.Nero;
+import net.luis.nero.client.render.entity.model.ModModelLayers;
 import net.luis.nero.client.render.tileentity.model.BloodAltarModel;
 import net.luis.nero.common.tileentity.BloodAltarTileEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.RenderMaterial;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.InventoryMenu;
 
-public class BloodAltarTileEntityRenderer extends TileEntityRenderer<BloodAltarTileEntity> {
+public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAltarTileEntity> {
 	
-	public static final RenderMaterial TEXTURE_LOCATION = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation(Nero.MOD_ID, "entity/blood"));
-	private final BloodAltarModel altarModel = new BloodAltarModel();
+	public static final Material TEXTURE_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(Nero.MOD_ID, "entity/blood"));
+	private final BloodAltarModel altarModel;
 	
-	public BloodAltarTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
-		super(rendererDispatcher);
+	public BloodAltarTileEntityRenderer(Context context) {
+		this.altarModel = new BloodAltarModel(Nero.getInstance().getModModelSet().bakeLayer(ModModelLayers.BLOOD));
 	}
-
+	
 	@Override
-	public void render(BloodAltarTileEntity bloodAltarTileEntity, float partialTicks, MatrixStack matrix, IRenderTypeBuffer renderBuffer, int light, int overlay) {
+	public void render(BloodAltarTileEntity bloodAltarTileEntity, float partialTicks, PoseStack matrix, MultiBufferSource renderBuffer, int light, int overlay) {
 		matrix.pushPose();
 		matrix.translate(1, 1, 1);
-		IVertexBuilder vertexBuilder = TEXTURE_LOCATION.buffer(renderBuffer, RenderType::entitySolid);
-		float bloodHeigth = MathHelper.lerp(partialTicks, bloodAltarTileEntity.getPrevious(), bloodAltarTileEntity.getCurrent());
+		VertexConsumer vertexBuilder = TEXTURE_LOCATION.buffer(renderBuffer, RenderType::entitySolid); // TODO: anim texture -> like wild blaze texture in outvoted
+		float bloodHeigth = Mth.lerp(partialTicks, bloodAltarTileEntity.getPrevious(), bloodAltarTileEntity.getCurrent());
 		this.altarModel.renderBlood(matrix, vertexBuilder, light, overlay, bloodHeigth);
 		matrix.popPose();
 	}

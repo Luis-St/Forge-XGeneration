@@ -2,7 +2,7 @@ package net.luis.nero.api.common.capability.util;
 
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.init.capability.ModCapabilities;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class CapabilityUtil {
 	

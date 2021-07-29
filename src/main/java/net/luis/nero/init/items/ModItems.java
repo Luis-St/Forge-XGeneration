@@ -20,10 +20,10 @@ import net.luis.nero.common.item.rune.WarriorRuneItem;
 import net.luis.nero.common.item.rune.WaterRuneItem;
 import net.luis.nero.common.item.rune.WindRuneItem;
 import net.luis.nero.init.util.ModItemGroups;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.FireChargeItem;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.FireChargeItem;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

@@ -6,19 +6,19 @@ import net.luis.nero.api.common.recipe.IModRecipe;
 import net.luis.nero.api.common.recipe.item.ResultItemStack;
 import net.luis.nero.api.common.util.VarArgs;
 import net.luis.nero.init.block.item.ModBlockItems;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 // TODO: finish & custom IModRecipe
 
-public class MilestoneRecipe implements IModRecipe<Inventory> {
+public class MilestoneRecipe implements IModRecipe<SimpleContainer> {
 	
 	private final ResourceLocation id;
 	private final VarArgs<ItemStack> input;
@@ -31,7 +31,7 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 	}
 
 	@Override
-	public boolean matches(Inventory inventory, World world) {
+	public boolean matches(SimpleContainer inventory, Level world) {
 		return false;
 	}
 
@@ -56,12 +56,12 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return null;
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return null;
 	}
 	
@@ -70,7 +70,7 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 		return new ItemStack(ModBlockItems.MILESTONE.get());
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MilestoneRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<MilestoneRecipe> {
 
 		@Override
 		public MilestoneRecipe fromJson(ResourceLocation id, JsonObject jsonObject) {
@@ -78,12 +78,12 @@ public class MilestoneRecipe implements IModRecipe<Inventory> {
 		}
 
 		@Override
-		public MilestoneRecipe fromNetwork(ResourceLocation id, PacketBuffer packetBuffer) {
+		public MilestoneRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf packetBuffer) {
 			return new MilestoneRecipe(id, null, null);
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer id, MilestoneRecipe recipe) {
+		public void toNetwork(FriendlyByteBuf id, MilestoneRecipe recipe) {
 			
 		}
 		

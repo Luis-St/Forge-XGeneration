@@ -4,24 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.init.util.tags.ModBlockTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SixWayBlock;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PipeBlock extends SixWayBlock {
+public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	
 	public PipeBlock(Properties properties) {
 		super(0.25F, properties);
@@ -31,11 +30,11 @@ public class PipeBlock extends SixWayBlock {
 	}
 	
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return makeConnections(context.getLevel(), context.getClickedPos());
 	}
 	
-	public BlockState makeConnections(IBlockReader blockReader, BlockPos pos) {
+	public BlockState makeConnections(BlockGetter blockReader, BlockPos pos) {
 		Block down = blockReader.getBlockState(pos.below()).getBlock();
 		Block up = blockReader.getBlockState(pos.above()).getBlock();
 		Block north = blockReader.getBlockState(pos.north()).getBlock();
@@ -51,16 +50,16 @@ public class PipeBlock extends SixWayBlock {
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		VoxelShape pipeShape = super.getShape(state, world, pos, context);
-		VoxelShape dispatcherShape = VoxelShapes.join(Block.box(2, 2, 2, 14, 14, 14), pipeShape, IBooleanFunction.OR);
+		VoxelShape dispatcherShape = Shapes.join(Block.box(2, 2, 2, 14, 14, 14), pipeShape, BooleanOp.OR);
 		List<BooleanProperty> properties = PROPERTY_BY_DIRECTION.values().stream().collect(Collectors.toList());
 		properties.removeIf(property -> !state.getValue(property));
 		return properties.size() >= 3 ? dispatcherShape : pipeShape;
 	}
 	
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		boolean flag = PipeBlock.isAllowedConnection(facingState.getBlock());
 		return stateIn.setValue(PROPERTY_BY_DIRECTION.get(facing), Boolean.valueOf(flag));	
 	}
@@ -75,7 +74,7 @@ public class PipeBlock extends SixWayBlock {
 	}
 	
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
 		return false;
 	}
 	

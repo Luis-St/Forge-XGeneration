@@ -9,40 +9,38 @@ import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.client.render.entity.EntityRenderPos;
 import net.luis.nero.common.entity.goal.FireballRingAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.monster.BlazeEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-// TODO: custom attack goal
 // TODO: EntitySpawnPlacementRegistry
 @Config
-public class HoveringInfernoEntity extends BlazeEntity {
+public class HoveringInfernoEntity extends Blaze {
 	
-	private static final DataParameter<Integer> DATA = EntityDataManager.defineId(HoveringInfernoEntity.class, DataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DATA = SynchedEntityData.defineId(HoveringInfernoEntity.class, EntityDataSerializers.INT);
 	
 	@ConfigValue private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
 	@ConfigValue private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
@@ -59,16 +57,16 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	
 	public boolean attacking = false;
 	
-	public HoveringInfernoEntity(World world, int x, int y, int z) {
+	public HoveringInfernoEntity(Level world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
 	}
 	
-	public HoveringInfernoEntity(World world, double x, double y, double z) {
+	public HoveringInfernoEntity(Level world, double x, double y, double z) {
 		this(ModEntityTypes.HOVERING_INFERNO.get(), world);
 		this.setPos(x, y, z);
 	}
 	
-	public HoveringInfernoEntity(EntityType<? extends HoveringInfernoEntity> entityType, World world) {
+	public HoveringInfernoEntity(EntityType<? extends HoveringInfernoEntity> entityType, Level world) {
 		super(entityType, world);
 	}
 	
@@ -76,19 +74,19 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(4, new FireballRingAttackGoal(this));
 		this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
-		this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	}
 	
 	@Override
 	public void aiStep() {
-		super.aiStep();
-		if (this.isClientSide()) {
-			this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
-		}
+//		super.aiStep();
+//		if (this.isClientSide()) {
+//			this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+//		}
 	}
 	
 	@Override
@@ -104,13 +102,13 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	}
 	
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
 	@Override
-	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
-		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
+	public ItemStack getItemBySlot(EquipmentSlot slotType) {
+		return slotType == EquipmentSlot.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
 	}
 	
 	@Override
@@ -135,7 +133,7 @@ public class HoveringInfernoEntity extends BlazeEntity {
 		}
 		boolean hurt = super.hurt(damageSource, amount);
 		if (hurt && !useAxe) {
-			this.setShieldActiveTime(MathHelper.nextInt(this.random, 100, 300) + this.random.nextInt(150));
+			this.setShieldActiveTime(Mth.nextInt(this.random, 100, 300) + this.random.nextInt(150));
 		}
 		return hurt;
 	}
@@ -218,11 +216,11 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	}
 	
 	public void setShieldActiveTime(int shieldActiveTime) {
-		this.entityData.set(DATA, MathHelper.clamp(shieldActiveTime, 0, 600));
+		this.entityData.set(DATA, Mth.clamp(shieldActiveTime, 0, 600));
 	}
 	
-	public static AttributeModifierMap registerAttributes() {
-	      return MonsterEntity.createMonsterAttributes()
+	public static AttributeSupplier registerAttributes() {
+	      return Monster.createMonsterAttributes()
 	    		  .add(Attributes.ATTACK_DAMAGE, HOVERING_INFERNO_ATTACK_DAMAGE)
 	    		  .add(Attributes.MOVEMENT_SPEED, HOVERING_INFERNO_MOVEMENT_SPEED)
 	    		  .add(Attributes.FOLLOW_RANGE, HOVERING_INFERNO_FOLLOW_RANGE)

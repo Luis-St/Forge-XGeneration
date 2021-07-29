@@ -1,25 +1,25 @@
 package net.luis.nero.api.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.RenderMaterial;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Vector3f;
 
 public interface IFireEntityRenderer<T extends Entity> {
 	
-	public static final RenderMaterial FIRE_0 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/fire_0"));
-	public static final RenderMaterial FIRE_1 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/fire_1"));
+	public static final Material FIRE_0 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/fire_0"));
+	public static final Material FIRE_1 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/fire_1"));
 	
 	@SuppressWarnings("resource")
-	default void renderFire(T entity, MatrixStack matrix, IRenderTypeBuffer renderBuffer) {
+	default void renderFire(T entity, PoseStack matrix, MultiBufferSource renderBuffer) {
 		TextureAtlasSprite fireSprite0 = FIRE_0.sprite();
 		TextureAtlasSprite fireSprite1 = FIRE_1.sprite();
 		matrix.pushPose();
@@ -32,9 +32,9 @@ public interface IFireEntityRenderer<T extends Entity> {
 		matrix.translate(0.0D, 0.0D, (double) (-0.3F + (float) ((int) entityHeight) * 0.02F));
 		float f5 = 0.0F;
 		int i = 0;
-		IVertexBuilder vertexBuilder = renderBuffer.getBuffer(Atlases.cutoutBlockSheet());
+		VertexConsumer vertexBuilder = renderBuffer.getBuffer(Sheets.cutoutBlockSheet());
 
-		for (MatrixStack.Entry matrixEntry = matrix.last(); entityHeight > 0.0F; ++i) {
+		for (PoseStack.Pose matrixEntry = matrix.last(); entityHeight > 0.0F; ++i) {
 			TextureAtlasSprite fireSprite = i % 2 == 0 ? fireSprite0 : fireSprite1;
 			float u0 = fireSprite.getU0();
 			float v0 = fireSprite.getV0();
@@ -58,7 +58,7 @@ public interface IFireEntityRenderer<T extends Entity> {
 		matrix.popPose();
 	}
 	
-	static void fireVertex(MatrixStack.Entry matrixEntry, IVertexBuilder vertexBuilder, float x, float y, float z, float u, float v) {
+	static void fireVertex(PoseStack.Pose matrixEntry, VertexConsumer vertexBuilder, float x, float y, float z, float u, float v) {
 		vertexBuilder.vertex(matrixEntry.pose(), x, y, z).color(255, 255, 255, 255).uv(u, v).overlayCoords(0, 10)
 				.uv2(240).normal(matrixEntry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
 	}

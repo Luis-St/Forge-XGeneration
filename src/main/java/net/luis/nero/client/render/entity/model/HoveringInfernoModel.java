@@ -1,71 +1,57 @@
 package net.luis.nero.client.render.entity.model;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.Direction;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.core.Direction;
 import net.minecraftforge.fml.config.ModConfig.Type;
 
 @Config(type = Type.CLIENT)
 public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	
 	@ConfigValue
-	private static final Boolean RENDER_HOVERING_INFERNO_HELMET = true;
+	private static Boolean RENDER_HOVERING_INFERNO_HELMET = true;
 	
-	private final ModelRenderer head;
-	private final ModelRenderer helmet; // TODO: fix helme rendering
-	private final ModelRenderer shieldNorth;
-	private final ModelRenderer shieldWest;
-	private final ModelRenderer shieldSouth;
-	private final ModelRenderer shieldEast;
-	private final ModelRenderer body;
+	private final ModelPart head;
+	private final ModelPart helmet; // TODO: fix helme rendering
+	private final ModelPart body;
+	private final ModelPart shieldNorth;
+	private final ModelPart shieldWest;
+	private final ModelPart shieldSouth;
+	private final ModelPart shieldEast;
 
-	public HoveringInfernoModel() {
-		this.texWidth = 128;
-		this.texHeight = 128;
-		
-		this.head = new ModelRenderer(this);
-		this.head.setPos(0.0F, 2.0F, 0.0F);
-		this.head.texOffs(44, 38).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-		
-		this.helmet = new ModelRenderer(this);
-		this.helmet.setPos(0.0F, 24.0F, 0.0F);
-		this.helmet.texOffs(16, 46).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-		
-		this.shieldNorth = new ModelRenderer(this);
-		this.shieldNorth.setPos(0.0F, 10.0F, 0.0F);
-		this.shieldNorth.texOffs(26, 23).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
-
-		this.shieldWest = new ModelRenderer(this);
-		this.shieldWest.setPos(0.0F, 10.0F, 0.0F);
-		this.setRotationAngle(this.shieldWest, 0.0F, 0.0F, 0.0F);
-		this.shieldWest.texOffs(26, 0).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
-
-		this.shieldSouth = new ModelRenderer(this);
-		this.shieldSouth.setPos(0.0F, 10.0F, 0.0F);
-		this.setRotationAngle(this.shieldSouth, 0.0F, 0.0F, 0.0F);
-		this.shieldSouth.texOffs(0, 23).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
-
-		this.shieldEast = new ModelRenderer(this);
-		this.shieldEast.setPos(0.0F, 10.0F, 0.0F);
-		this.setRotationAngle(this.shieldEast, 0.0F, 0.0F, 0.0F);
-		this.shieldEast.texOffs(26, 23).addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F, 0.0F, false);
-
-		this.body = new ModelRenderer(this);
-		this.body.setPos(0.0F, 8.0F, 0.0F);
-		this.body.texOffs(0, 46).addBox(-2.0F, -6.0F, -2.0F, 4.0F, 21.0F, 4.0F, 0.0F, false);
-		
+	public HoveringInfernoModel(ModelPart modelPart) {
+		this.head = modelPart.getChild("head");
+		this.helmet = modelPart.getChild("helmet");
+		this.body = modelPart.getChild("body");
+		this.shieldNorth = modelPart.getChild("shieldNorth");
+		this.shieldEast = modelPart.getChild("shieldEast");
+		this.shieldSouth = modelPart.getChild("shieldSouth");
+		this.shieldWest = modelPart.getChild("shieldWest");
 	}
 	
-	protected void setRotationAngle(ModelRenderer modelRenderer, float xRot, float yRot, float zRot) {
-		modelRenderer.xRot = xRot;
-		modelRenderer.yRot = yRot;
-		modelRenderer.zRot = zRot;
+	public static LayerDefinition createLayerDefinition() {
+		MeshDefinition meshDefinition = new MeshDefinition();
+		PartDefinition partDefinition = meshDefinition.getRoot();
+		partDefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(44, 38).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.offset(0.0F, 2.0F, 0.0F));
+		partDefinition.addOrReplaceChild("helmet", CubeListBuilder.create().texOffs(16, 46).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.offset(0.0F, 2.0F, 0.0F));
+		partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 46).addBox(-2.0F, -6.0F, -2.0F, 4.0F, 21.0F, 4.0F), PartPose.offset(0.0F, 8.0F, 0.0F));
+		CubeListBuilder shield = CubeListBuilder.create().addBox(-6.0F, -8.0F, -11.0F, 12.0F, 22.0F, 1.0F);
+		partDefinition.addOrReplaceChild("shieldNorth", shield.texOffs(0, 0), PartPose.offset(0.0F, 10.0F, 0.0F));
+		partDefinition.addOrReplaceChild("shieldEast", shield.texOffs(26, 23), PartPose.offset(0.0F, 10.0F, 0.0F));
+		partDefinition.addOrReplaceChild("shieldSouth", shield.texOffs(0, 23), PartPose.offset(0.0F, 10.0F, 0.0F));
+		partDefinition.addOrReplaceChild("shieldWest", shield.texOffs(26, 0), PartPose.offset(0.0F, 10.0F, 0.0F));
+		return LayerDefinition.create(meshDefinition, 128, 128);
 	}
 	
 	@Override
@@ -83,7 +69,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	
 
 	@Override
-	public void renderToBuffer(MatrixStack matrix, IVertexBuilder vertexBuilder, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack matrix, VertexConsumer vertexBuilder, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		matrix.pushPose();
 		this.head.render(matrix, vertexBuilder, packedLight, packedOverlay);
 		this.body.render(matrix, vertexBuilder, packedLight, packedOverlay);
@@ -98,23 +84,23 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 		matrix.popPose();
 	}
 	
-	public ModelRenderer getNorthShield() {
+	public ModelPart getNorthShield() {
 		return this.shieldNorth;
 	}
 	
-	public ModelRenderer getEastShield() {
+	public ModelPart getEastShield() {
 		return this.shieldEast;
 	}
 	
-	public ModelRenderer getSouthShield() {
+	public ModelPart getSouthShield() {
 		return this.shieldSouth;
 	}
 	
-	public ModelRenderer getWestShield() {
+	public ModelPart getWestShield() {
 		return this.shieldWest;
 	}
 	
-	public ModelRenderer getShield(Direction direction) {
+	public ModelPart getShield(Direction direction) {
 		switch (direction) {
 		case NORTH: return this.getNorthShield();
 		case EAST: return this.getEastShield();

@@ -1,17 +1,17 @@
 package net.luis.nero.common.block;
 
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SandBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.SandBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DriftSandBlock extends SandBlock {
 
@@ -22,26 +22,26 @@ public class DriftSandBlock extends SandBlock {
 	}
 
 	@Override
-	public PathNodeType getAiPathNodeType(BlockState state, IBlockReader world, BlockPos pos, MobEntity entity) {
-		return PathNodeType.WALKABLE;
+	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
+		return BlockPathTypes.WALKABLE;
 	}
 
 	@Override
-	public void fallOn(World world, BlockPos pos, Entity entity, float fallDistance) {
+	public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+		entity.fallDistance = 0;
+	}
+	
+	@Override
+	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
 		entity.fallDistance = 0;
 	}
 
 	@Override
-	public void stepOn(World world, BlockPos pos, Entity entity) {
-		entity.fallDistance = 0;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext context) {
 		if (!(blockReader.getBlockState(pos.above()).getBlock() instanceof AirBlock)) {
-			return VoxelShapes.block();
+			return Shapes.block();
 		}
-		return VoxelShapes.empty();
+		return Shapes.empty();
 	}
 
 }

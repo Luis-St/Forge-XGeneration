@@ -1,28 +1,24 @@
 package net.luis.nero.common.world.gen.feature;
 
-import java.util.Random;
-
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 // TODO: allowd modify via config (y, replace type, etc)
-
-public class FlatBedrockFeature extends Feature<NoFeatureConfig> {
+public class FlatBedrockFeature extends Feature<NoneFeatureConfiguration> {
 
 	public FlatBedrockFeature() {
-		super(NoFeatureConfig.CODEC);
+		super(NoneFeatureConfiguration.CODEC);
 	}
 
 	@Override
-	public boolean place(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random rng, BlockPos pos, NoFeatureConfig config) {
-		IChunk chunk = seedReader.getChunk(pos);
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		ChunkAccess chunk = context.level().getChunk(context.origin());
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 5; y++) {
 				for (int z = 0; z < 16; z++) {

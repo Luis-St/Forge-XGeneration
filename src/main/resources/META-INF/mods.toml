@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 	
-loaderVersion="[35,)" #mandatory 
+loaderVersion="[37,)" #mandatory 
 
 license="All rights reserved"
 
@@ -28,7 +28,7 @@ description='''
     
     mandatory=true #mandatory
     
-    versionRange="[35,)" #mandatory
+    versionRange="[37,)" #mandatory
     
     ordering="NONE"
     
@@ -40,7 +40,7 @@ description='''
     
     mandatory=true
 
-    versionRange="[1.16.4,1.17)"
+    versionRange="[1.17.1,1.18)"
     
     ordering="NONE"
     

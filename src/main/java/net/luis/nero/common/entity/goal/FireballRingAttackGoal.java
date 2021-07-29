@@ -3,10 +3,10 @@ package net.luis.nero.common.entity.goal;
 import java.util.EnumSet;
 
 import net.luis.nero.common.entity.HoveringInfernoEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.projectile.SmallFireballEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraftforge.common.util.Constants;
 
 public class FireballRingAttackGoal extends Goal {
@@ -46,7 +46,7 @@ public class FireballRingAttackGoal extends Goal {
 		LivingEntity target = this.hoveringInferno.getTarget();
 //		this.hoveringInferno.setAttacking(false);
 		if (target != null) {
-			boolean canSee = this.hoveringInferno.getSensing().canSee(target);
+			boolean canSee = this.hoveringInferno.getSensing().hasLineOfSight(target);
 			if (canSee) {
 				this.firedRecentlyTimer = 0;
 			} else {
@@ -106,7 +106,7 @@ public class FireballRingAttackGoal extends Goal {
 							if (maxDepressAngle > toRadians(50.0)) {
 								y = -Math.tan(toRadians(50.0)) * (Math.sqrt((distanceX * distanceX) + (distanceZ * distanceZ)));
 							}
-							SmallFireballEntity fireballEntity = new SmallFireballEntity(this.hoveringInferno.level, this.hoveringInferno, x, y, z);
+							SmallFireball fireballEntity = new SmallFireball(this.hoveringInferno.level, this.hoveringInferno, x, y, z);
 							fireballEntity.setPos(fireballEntity.getX(), this.hoveringInferno.getY(0.5D), fireballEntity.getZ());
 							this.hoveringInferno.level.addFreshEntity(fireballEntity);
 						}

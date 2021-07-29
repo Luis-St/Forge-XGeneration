@@ -6,14 +6,14 @@ import java.util.Random;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 @Config
 public class WindRuneItem extends AbstractRuneItem {
@@ -34,19 +34,19 @@ public class WindRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack) {
+	protected InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack) {
 		if (!world.isClientSide()) {
 			double x = player.getX();
 			double y = player.getY();
 			double z = player.getZ();
-			AxisAlignedBB alignedBB = new AxisAlignedBB(x - WIND_RUNE_ENTITY_AREA_X, y - WIND_RUNE_ENTITY_AREA_Y, z - WIND_RUNE_ENTITY_AREA_Z, x + WIND_RUNE_ENTITY_AREA_X, 
+			AABB alignedBB = new AABB(x - WIND_RUNE_ENTITY_AREA_X, y - WIND_RUNE_ENTITY_AREA_Y, z - WIND_RUNE_ENTITY_AREA_Z, x + WIND_RUNE_ENTITY_AREA_X, 
 					y + WIND_RUNE_ENTITY_AREA_Y, z + WIND_RUNE_ENTITY_AREA_Z);
-			List<LivingEntity> livingEntities = world.getEntitiesOfClass(LivingEntity.class, alignedBB, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+			List<LivingEntity> livingEntities = world.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
 			livingEntities.removeIf(livingEntity -> livingEntity == player);
 			for (LivingEntity livingEntity : livingEntities) {
-				livingEntity.yRot = new Random().nextFloat() * 360.0F;
+				livingEntity.yHeadRot = new Random().nextFloat() * 360.0F;
 				double windXMotion = livingEntity.getViewVector(1.0F).x() * -1;
-				double windYMotion = livingEntity instanceof PlayerEntity ? WIND_RUNE_PLAYER_Y_MOTION : WIND_RUNE_ENTITY_Y_MOTION;
+				double windYMotion = livingEntity instanceof Player ? WIND_RUNE_PLAYER_Y_MOTION : WIND_RUNE_ENTITY_Y_MOTION;
 				double windZMotion = livingEntity.getViewVector(1.0F).z() * -1;
 				livingEntity.setDeltaMovement(windXMotion, windYMotion, windZMotion);
 			}
@@ -55,7 +55,7 @@ public class WindRuneItem extends AbstractRuneItem {
 	}
 
 	@Override
-	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, PlayerEntity attacker, ItemStack orbStack) {
+	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, Player attacker, ItemStack orbStack) {
 		return false;
 	}
 

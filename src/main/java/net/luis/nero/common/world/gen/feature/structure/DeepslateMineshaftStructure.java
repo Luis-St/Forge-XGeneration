@@ -1,29 +1,25 @@
 package net.luis.nero.common.world.gen.feature.structure;
 
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.luis.nero.common.world.gen.feature.structure.start.DeepslateMineshaftStructureStart;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-// TODO: finish
-
-public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
+public class DeepslateMineshaftStructure extends StructureFeature<NoneFeatureConfiguration> {
 
 	public DeepslateMineshaftStructure() {
-		super(NoFeatureConfig.CODEC);
+		super(NoneFeatureConfiguration.CODEC);
 	}
 
 	@Override
-	public IStartFactory<NoFeatureConfig> getStartFactory() {
-		return DeepslateMineshaftStructure.Start::new;
+	public StructureStartFactory<NoneFeatureConfiguration> getStartFactory() {
+		return DeepslateMineshaftStructureStart::new;
 	}
 	
 	@Override
@@ -32,30 +28,12 @@ public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 	}
 	
 	@Override
-	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeProvider biomeProvider, long seed, SharedSeedRandom seedRng, int chunkX, int chunkZ, 
-			Biome biome, ChunkPos chunkPos, NoFeatureConfig config) {
+	protected boolean isFeatureChunk(ChunkGenerator generator, BiomeSource biomeProvider, long seed, WorldgenRandom seedRng, ChunkPos chunkPos, Biome biome, 
+			ChunkPos potentialChunkPos, NoneFeatureConfiguration config, LevelHeightAccessor leveltAccessor) {
 //		double d = seedRng.nextDouble();
 //		Nero.LOGGER.debug("isFeatureChunk: " + (d < 0.05));
 //		Nero.LOGGER.debug("isFeatureChunk: " + d);
 		return /*d < 0.05*/true;
-	}
-	
-	public static class Start extends StructureStart<NoFeatureConfig> {
-
-		public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
-			super(structure, chunkX, chunkZ, boundingBox, reference, seed);
-		}
-
-		@Override
-		public void generatePieces(DynamicRegistries registries, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, 
-				Biome biome, NoFeatureConfig config) {
-			DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
-			this.pieces.add(structurePiece);
-			this.calculateBoundingBox();
-			this.moveInsideHeights(random, 128, 128);
-//			Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
-		}
-		
 	}
 
 }

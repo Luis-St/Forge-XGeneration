@@ -1,7 +1,7 @@
 package net.luis.nero.init.villager;
 
 import net.luis.nero.Nero;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

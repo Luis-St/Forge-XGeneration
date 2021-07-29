@@ -1,11 +1,11 @@
 package net.luis.nero.api.common.nbt;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public interface CapabilitySerializableNBT {
 	
-	CompoundNBT serializeNBT();
+	CompoundTag serializeNBT();
 
-	void deserializeNBT(CompoundNBT nbt);
+	void deserializeNBT(CompoundTag nbt);
 	
 }

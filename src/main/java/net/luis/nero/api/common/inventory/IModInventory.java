@@ -1,7 +1,7 @@
 package net.luis.nero.api.common.inventory;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 
 public interface IModInventory {
 	
@@ -21,8 +21,8 @@ public interface IModInventory {
 	
 	ModItemStackHandler getAndClear();
 	
-	CompoundNBT serializeNBT(CompoundNBT nbt);
+	CompoundTag serializeNBT(CompoundTag nbt);
 	
-	void deserializeNBT(CompoundNBT nbt);
+	void deserializeNBT(CompoundTag nbt);
 	
 }

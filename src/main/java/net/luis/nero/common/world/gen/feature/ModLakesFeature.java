@@ -1,29 +1,28 @@
 package net.luis.nero.common.world.gen.feature;
 
-import java.util.Random;
-
 import net.luis.nero.init.block.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.SectionPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
+import net.minecraft.world.level.material.Material;
 
-public class ModLakesFeature extends Feature<BlockStateFeatureConfig> {
+public class ModLakesFeature extends Feature<BlockStateConfiguration> {
 
 	private static final BlockState AIR = Blocks.CAVE_AIR.defaultBlockState();
 
 	public ModLakesFeature() {
-		super(BlockStateFeatureConfig.CODEC);
+		super(BlockStateConfiguration.CODEC);
 	}
 
-	public boolean place(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random rng, BlockPos pos, BlockStateFeatureConfig config) {
-		while (pos.getY() > 5 && seedReader.isEmptyBlock(pos)) {
+	@Override
+	public boolean place(FeaturePlaceContext<BlockStateConfiguration> context) {
+		BlockPos pos = context.origin();
+		while (pos.getY() > 5 && context.level().isEmptyBlock(pos)) {
 			pos = pos.below();
 		}
 
@@ -31,18 +30,18 @@ public class ModLakesFeature extends Feature<BlockStateFeatureConfig> {
 			return false;
 		} else {
 			pos = pos.below(4);
-			if (seedReader.startsForFeature(SectionPos.of(pos), Structure.VILLAGE).findAny().isPresent()) {
+			if (context.level().startsForFeature(SectionPos.of(pos), StructureFeature.VILLAGE).findAny().isPresent()) {
 				return false;
 			} else {
 				boolean[] aboolean = new boolean[2048];
-				int i = rng.nextInt(4) + 4;
+				int i = context.random().nextInt(4) + 4;
 				for (int j = 0; j < i; ++j) {
-					double d0 = rng.nextDouble() * 6.0D + 3.0D;
-					double d1 = rng.nextDouble() * 4.0D + 2.0D;
-					double d2 = rng.nextDouble() * 6.0D + 3.0D;
-					double d3 = rng.nextDouble() * (16.0D - d0 - 2.0D) + 1.0D + d0 / 2.0D;
-					double d4 = rng.nextDouble() * (8.0D - d1 - 4.0D) + 2.0D + d1 / 2.0D;
-					double d5 = rng.nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
+					double d0 = context.random().nextDouble() * 6.0D + 3.0D;
+					double d1 = context.random().nextDouble() * 4.0D + 2.0D;
+					double d2 = context.random().nextDouble() * 6.0D + 3.0D;
+					double d3 = context.random().nextDouble() * (16.0D - d0 - 2.0D) + 1.0D + d0 / 2.0D;
+					double d4 = context.random().nextDouble() * (8.0D - d1 - 4.0D) + 2.0D + d1 / 2.0D;
+					double d5 = context.random().nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
 
 					for (int l = 1; l < 15; ++l) {
 						for (int i1 = 1; i1 < 15; ++i1) {
@@ -66,11 +65,11 @@ public class ModLakesFeature extends Feature<BlockStateFeatureConfig> {
 											|| l2 > 0 && aboolean[(k1 * 16 + (l2 - 1)) * 8 + k] || k < 7 && aboolean[(k1 * 16 + l2) * 8 + k + 1]
 											|| k > 0 && aboolean[(k1 * 16 + l2) * 8 + (k - 1)]);
 							if (flag) {
-								Material material = seedReader.getBlockState(pos.offset(k1, k, l2)).getMaterial();
+								Material material = context.level().getBlockState(pos.offset(k1, k, l2)).getMaterial();
 								if (k >= 4 && material.isLiquid()) {
 									return false;
 								}
-								if (k < 4 && !material.isSolid() && seedReader.getBlockState(pos.offset(k1, k, l2)) != config.state) {
+								if (k < 4 && !material.isSolid() && context.level().getBlockState(pos.offset(k1, k, l2)) != context.config().state) {
 									return false;
 								}
 							}
@@ -81,12 +80,12 @@ public class ModLakesFeature extends Feature<BlockStateFeatureConfig> {
 					for (int i3 = 0; i3 < 16; ++i3) {
 						for (int i4 = 0; i4 < 8; ++i4) {
 							if (aboolean[(l1 * 16 + i3) * 8 + i4]) {
-								seedReader.setBlock(pos.offset(l1, i4, i3), i4 >= 4 ? AIR : config.state, 2);
+								context.level().setBlock(pos.offset(l1, i4, i3), i4 >= 4 ? AIR : context.config().state, 2);
 							}
 						}
 					}
 				}
-				if (config.state.getMaterial() == Material.LAVA) {
+				if (context.config().state.getMaterial() == Material.LAVA) {
 					for (int j2 = 0; j2 < 16; ++j2) {
 						for (int k3 = 0; k3 < 16; ++k3) {
 							for (int k4 = 0; k4 < 8; ++k4) {
@@ -94,8 +93,8 @@ public class ModLakesFeature extends Feature<BlockStateFeatureConfig> {
 										&& (j2 < 15 && aboolean[((j2 + 1) * 16 + k3) * 8 + k4] || j2 > 0 && aboolean[((j2 - 1) * 16 + k3) * 8 + k4]
 												|| k3 < 15 && aboolean[(j2 * 16 + k3 + 1) * 8 + k4] || k3 > 0 && aboolean[(j2 * 16 + (k3 - 1)) * 8 + k4]
 												|| k4 < 7 && aboolean[(j2 * 16 + k3) * 8 + k4 + 1] || k4 > 0 && aboolean[(j2 * 16 + k3) * 8 + (k4 - 1)]);
-								if (flag1 && (k4 < 4 || rng.nextInt(2) != 0) && seedReader.getBlockState(pos.offset(j2, k4, k3)).getMaterial().isSolid()) {
-									seedReader.setBlock(pos.offset(j2, k4, k3), ModBlocks.DEEPSLATE.get().defaultBlockState(), 2);
+								if (flag1 && (k4 < 4 || context.random().nextInt(2) != 0) && context.level().getBlockState(pos.offset(j2, k4, k3)).getMaterial().isSolid()) {
+									context.level().setBlock(pos.offset(j2, k4, k3), ModBlocks.DEEPSLATE.get().defaultBlockState(), 2);
 								}
 							}
 						}

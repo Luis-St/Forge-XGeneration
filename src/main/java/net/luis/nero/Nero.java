@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.luis.nero.api.config.ConfigUtil;
+import net.luis.nero.client.render.entity.model.ModEntityModelSet;
 import net.luis.nero.config.ModClientConfig;
 import net.luis.nero.config.ModCommonConfig;
 import net.luis.nero.config.ModServerConfig;
@@ -34,6 +35,11 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
+// TODO: commit to github
+// TODO: rename all varibales & mod classes
+// TODO: new order of packages & classes (client, ...)
+// TODO: do all 1.17 adds -> replace mod deepslate with vanilla
+// TODO: if all done start with new stuff
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
@@ -48,6 +54,8 @@ public class Nero {
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
 	private static Nero nero;
+	
+	private final ModEntityModelSet modModelSet;
 	
 	public Nero() {
 		nero = this;
@@ -81,6 +89,7 @@ public class Nero {
 		this.buildConfig();
 		ConfigUtil.setConfigValues();
 		
+		this.modModelSet = new ModEntityModelSet();
 	}
 	
 	public static Nero getInstance() {
@@ -103,6 +112,10 @@ public class Nero {
 		if (!configDirectory.exists()) {
 			configDirectory.mkdirs();
 		}
+	}
+	
+	public ModEntityModelSet getModModelSet() {
+		return this.modModelSet;
 	}
 	
 }

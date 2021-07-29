@@ -3,13 +3,13 @@ package net.luis.nero.api.common.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ModItemStackHandler extends ItemStackHandler implements IInventory {
+public class ModItemStackHandler extends ItemStackHandler implements Container {
 	
 	public ModItemStackHandler() {
 		this(1);
@@ -122,7 +122,7 @@ public class ModItemStackHandler extends ItemStackHandler implements IInventory 
 	}
 
 	@Override
-	public boolean stillValid(PlayerEntity player) {
+	public boolean stillValid(Player player) {
 		return true;
 	}
 	

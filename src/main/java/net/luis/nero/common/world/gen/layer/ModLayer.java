@@ -2,21 +2,21 @@ package net.luis.nero.common.world.gen.layer;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.SharedConstants;
-import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeRegistry;
-import net.minecraft.world.gen.area.IAreaFactory;
-import net.minecraft.world.gen.area.LazyArea;
-import net.minecraft.world.gen.layer.Layer;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.SharedConstants;
+import net.minecraft.Util;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.data.worldgen.biome.Biomes;
+import net.minecraft.world.level.newbiome.area.AreaFactory;
+import net.minecraft.world.level.newbiome.area.LazyArea;
+import net.minecraft.world.level.newbiome.layer.Layer;
 
 public class ModLayer extends Layer {
 	
 	private final LazyArea area;
 	
-	public ModLayer(IAreaFactory<LazyArea> areaFactory) {
+	public ModLayer(AreaFactory<LazyArea> areaFactory) {
 		super(areaFactory);
 		this.area = areaFactory.make();
 	}
@@ -24,7 +24,7 @@ public class ModLayer extends Layer {
 	@Override
 	public Biome get(Registry<Biome> biomeRegistry, int x, int z) {
 		int i = this.area.get(x, z);
-		RegistryKey<Biome> registrykey = getBiome(i);
+		ResourceKey<Biome> registrykey = getBiome(i);
 		if (registrykey == null) {
 			throw new IllegalStateException("Unknown biome id emitted by layers: " + i);
 		} else {
@@ -34,7 +34,7 @@ public class ModLayer extends Layer {
 					throw Util.pauseInIde(new IllegalStateException("Unknown biome id: " + i));
 				} else {
 					Nero.LOGGER.warn("Unknown biome id: ", i);
-					return biomeRegistry.get(BiomeRegistry.byId(0));
+					return biomeRegistry.get(Biomes.byId(0));
 				}
 			} else {
 				return biome;
@@ -42,10 +42,10 @@ public class ModLayer extends Layer {
 		}
 	}
 	
-	public static RegistryKey<Biome> getBiome(int keyValue) {
-		RegistryKey<Biome> registrykey = null;
+	public static ResourceKey<Biome> getBiome(int keyValue) {
+		ResourceKey<Biome> registrykey = null;
 		if (keyValue >= 0) {
-			registrykey = BiomeRegistry.byId(keyValue);
+			registrykey = Biomes.byId(keyValue);
 		} else {
 			registrykey = ModBiomeKeys.byId(keyValue);
 		}

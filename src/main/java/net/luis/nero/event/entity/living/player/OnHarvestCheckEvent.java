@@ -2,9 +2,9 @@ package net.luis.nero.event.entity.living.player;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.potion.ModEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.TieredItem;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TieredItem;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -14,7 +14,7 @@ public class OnHarvestCheckEvent {
 	
 	@SubscribeEvent
 	public static void harvestCheck(PlayerEvent.HarvestCheck event) {
-		PlayerEntity player = event.getPlayer();
+		Player player = event.getPlayer();
 		if (player.hasEffect(ModEffects.HARVEST.get()) && !event.canHarvest()) {
 			Item mainHand = player.getMainHandItem().getItem();
 			int effectAmplifier = player.getEffect(ModEffects.HARVEST.get()).getAmplifier() + 1;

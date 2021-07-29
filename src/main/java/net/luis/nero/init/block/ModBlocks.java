@@ -8,16 +8,16 @@ import net.luis.nero.common.block.DriftSandBlock;
 import net.luis.nero.common.block.fluid.PipeBlock;
 import net.luis.nero.common.block.magic.BloodAltarBlock;
 import net.luis.nero.common.block.mechanical.MilestoneBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -59,16 +59,16 @@ public class ModBlocks {
 			() -> new WallBlock(Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
 	public static final RegistryObject<WallBlock> DEEPSLATE_TILE_WALL = BLOCKS.register("deepslate_tile_wall", 
 			() -> new WallBlock(Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
-	public static final RegistryObject<StairsBlock> COBBLED_DEEPSLATE_STAIRS = BLOCKS.register("cobbled_deepslate_stairs", 
-			() -> new StairsBlock(COBBLED_DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
-	public static final RegistryObject<StairsBlock> DEEPSLATE_STAIRS = BLOCKS.register("deepslate_stairs", 
-			() -> new StairsBlock(DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
-	public static final RegistryObject<StairsBlock> POLISHED_DEEPSLATE_STAIRS = BLOCKS.register("polished_deepslate_stairs", 
-			() -> new StairsBlock(POLISHED_DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
-	public static final RegistryObject<StairsBlock> DEEPSLATE_BRICK_STAIRS = BLOCKS.register("deepslate_brick_stairs", 
-			() -> new StairsBlock(DEEPSLATE_BRICKS.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
-	public static final RegistryObject<StairsBlock> DEEPSLATE_TILE_STAIRS = BLOCKS.register("deepslate_tile_stairs", 
-			() -> new StairsBlock(DEEPSLATE_TILES.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
+	public static final RegistryObject<StairBlock> COBBLED_DEEPSLATE_STAIRS = BLOCKS.register("cobbled_deepslate_stairs", 
+			() -> new StairBlock(COBBLED_DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
+	public static final RegistryObject<StairBlock> DEEPSLATE_STAIRS = BLOCKS.register("deepslate_stairs", 
+			() -> new StairBlock(DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
+	public static final RegistryObject<StairBlock> POLISHED_DEEPSLATE_STAIRS = BLOCKS.register("polished_deepslate_stairs", 
+			() -> new StairBlock(POLISHED_DEEPSLATE.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
+	public static final RegistryObject<StairBlock> DEEPSLATE_BRICK_STAIRS = BLOCKS.register("deepslate_brick_stairs", 
+			() -> new StairBlock(DEEPSLATE_BRICKS.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
+	public static final RegistryObject<StairBlock> DEEPSLATE_TILE_STAIRS = BLOCKS.register("deepslate_tile_stairs", 
+			() -> new StairBlock(DEEPSLATE_TILES.get()::defaultBlockState, Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
 	public static final RegistryObject<SlabBlock> COBBLED_DEEPSLATE_SLAB = BLOCKS.register("cobbled_deepslate_slab", 
 			() -> new SlabBlock(Block.Properties.copy(ModBlocks.DEEPSLATE.get())));
 	public static final RegistryObject<SlabBlock> DEEPSLATE_SLAB = BLOCKS.register("deepslate_slab", 

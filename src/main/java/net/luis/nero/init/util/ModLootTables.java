@@ -1,7 +1,7 @@
 package net.luis.nero.init.util;
 
 import net.luis.nero.Nero;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModLootTables {
 	

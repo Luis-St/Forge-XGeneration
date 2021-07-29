@@ -1,7 +1,7 @@
 package net.luis.nero.init.util.tags;
 
 import net.luis.nero.Nero;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModBlockTags {
 	

@@ -2,8 +2,8 @@ package net.luis.nero.init.world.biome;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.biome.DeepslateBiome;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

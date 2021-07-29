@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Registry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 

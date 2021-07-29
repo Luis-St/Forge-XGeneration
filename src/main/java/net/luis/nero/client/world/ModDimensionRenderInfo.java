@@ -1,18 +1,18 @@
 package net.luis.nero.client.world;
 
-import net.minecraft.client.world.DimensionRenderInfo;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.world.phys.Vec3;
 
-public class ModDimensionRenderInfo extends DimensionRenderInfo {
+public class ModDimensionRenderInfo extends DimensionSpecialEffects {
 	
-	public static final DimensionRenderInfo DEEPSLATE = new ModDimensionRenderInfo(Float.NaN, true, FogType.NONE, true, false);
+	public static final DimensionSpecialEffects DEEPSLATE = new ModDimensionRenderInfo(Float.NaN, true, SkyType.NONE, true, false);
 	
-	private ModDimensionRenderInfo(float cloudLevel, boolean hasGround, FogType skyType, boolean brightLightmap, boolean ambientLight) {
+	private ModDimensionRenderInfo(float cloudLevel, boolean hasGround, SkyType skyType, boolean brightLightmap, boolean ambientLight) {
 		super(cloudLevel, hasGround, skyType, brightLightmap, ambientLight);
 	}
 
 	@Override
-	public Vector3d getBrightnessDependentFogColor(Vector3d vector, float worldTime) {
+	public Vec3 getBrightnessDependentFogColor(Vec3 vector, float worldTime) {
 		return vector.multiply(worldTime * 0.94F + 0.06F, worldTime * 0.94F + 0.06F, worldTime * 0.91F + 0.09F);
 	}
 

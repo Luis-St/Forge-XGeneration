@@ -1,10 +1,10 @@
 package net.luis.nero.api.common.capability.util;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 public interface IPlayerCapability {
 	
-	PlayerEntity getPlayer();
+	Player getPlayer();
 	
 	boolean isServerPlayer();
 	

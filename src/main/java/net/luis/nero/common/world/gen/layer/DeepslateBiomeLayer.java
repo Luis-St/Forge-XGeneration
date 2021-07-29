@@ -2,36 +2,36 @@ package net.luis.nero.common.world.gen.layer;
 
 import java.util.function.LongFunction;
 
-import net.minecraft.world.gen.IExtendedNoiseRandom;
-import net.minecraft.world.gen.INoiseRandom;
-import net.minecraft.world.gen.LazyAreaLayerContext;
-import net.minecraft.world.gen.area.IArea;
-import net.minecraft.world.gen.area.IAreaFactory;
-import net.minecraft.world.gen.area.LazyArea;
-import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
+import net.minecraft.world.level.newbiome.context.BigContext;
+import net.minecraft.world.level.newbiome.context.Context;
+import net.minecraft.world.level.newbiome.context.LazyAreaContext;
+import net.minecraft.world.level.newbiome.area.Area;
+import net.minecraft.world.level.newbiome.area.AreaFactory;
+import net.minecraft.world.level.newbiome.area.LazyArea;
+import net.minecraft.world.level.newbiome.layer.traits.AreaTransformer0;
 
 // TODO: find out how BetterEnd BiomeMap works -> and recreate
 // TODO: if finished: create/add more biomes
 
 public class DeepslateBiomeLayer {
 
-	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> createBaseLayer(LongFunction<C> function) {
-		IAreaFactory<T> areaFactory = BaseLayer.INSTANCE.run(function.apply(0L));
+	public static <T extends Area, C extends BigContext<T>> AreaFactory<T> createBaseLayer(LongFunction<C> function) {
+		AreaFactory<T> areaFactory = BaseLayer.INSTANCE.run(function.apply(0L));
 		return areaFactory;
 	}
 
 	public static ModLayer createLayer(long seed) {
-		IAreaFactory<LazyArea> factory = createBaseLayer((seedModifier) -> {
-			return new LazyAreaLayerContext(25, seedModifier, seed);
+		AreaFactory<LazyArea> factory = createBaseLayer((seedModifier) -> {
+			return new LazyAreaContext(25, seedModifier, seed);
 		});
 		return new ModLayer(factory);
 	}
 
-	protected enum BaseLayer implements IAreaTransformer0 {
+	protected enum BaseLayer implements AreaTransformer0 {
 		INSTANCE;
 		
 		@Override
-		public int applyPixel(INoiseRandom rng, int x, int z) {
+		public int applyPixel(Context rng, int x, int z) {
 			return -1;
 		}
 	}

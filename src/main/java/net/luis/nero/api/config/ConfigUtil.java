@@ -44,17 +44,17 @@ public class ConfigUtil {
 		Type configAnnotation = Type.getType(Config.class);
 		ModFileScanData fileScanData = ModList.get().getModFileById(Nero.MOD_ID).getFile().getScanResult();
 		Stream<AnnotationData> annotationDatas = fileScanData.getAnnotations().stream()
-				.filter(annotation -> configAnnotation.equals(annotation.getAnnotationType()));
+				.filter(annotation -> configAnnotation.equals(annotation.annotationType()));
 		for (AnnotationData annotationData : annotationDatas.collect(Collectors.toList())) {
-			if (annotationData.getAnnotationType().equals(configAnnotation)) {
+			if (annotationData.annotationType().equals(configAnnotation)) {
 				try {
-					configClasses.add(Class.forName(annotationData.getMemberName(), true, classLoader));
+					configClasses.add(Class.forName(annotationData.memberName(), true, classLoader));
 				} catch (ClassNotFoundException e) {
-					Nero.LOGGER.warn("Can't find class {}", annotationData.getMemberName());
+					Nero.LOGGER.warn("Can't find class {}", annotationData.memberName());
 					Nero.LOGGER.warn("Something went wrong when build the config ", e);
 				}
 			} else {
-				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.getAnnotationType());
+				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.annotationType());
 			}
 		}
 		return configClasses;

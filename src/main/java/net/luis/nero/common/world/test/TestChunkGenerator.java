@@ -1,30 +1,30 @@
 package net.luis.nero.common.world.test;
 
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.stream.IntStream;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.luis.nero.Nero;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryLookupCodec;
-import net.minecraft.world.Blockreader;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.PerlinNoiseGenerator;
-import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.RegistryLookupCodec;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 public class TestChunkGenerator extends ChunkGenerator {
 	
@@ -46,16 +46,16 @@ public class TestChunkGenerator extends ChunkGenerator {
 			.apply(instance, TestChunkGenerator::new));
 
 	private final Settings settings;
-	protected final SharedSeedRandom rng;
+	protected final WorldgenRandom rng;
 	private final long seed;
-	private final PerlinNoiseGenerator noise;
+	private final PerlinSimplexNoise noise;
 
 	public TestChunkGenerator(Registry<Biome> registry, Settings settings) {
-		super(new TestBiomeProvider(registry), new DimensionStructuresSettings(false));
+		super(new TestBiomeProvider(registry), new StructureSettings(false));
 		this.settings = settings;
 		this.seed = new Random().nextLong();
-		this.rng = new SharedSeedRandom(this.seed);
-		this.noise = new PerlinNoiseGenerator(this.rng, IntStream.rangeClosed(-3, 0));
+		this.rng = new WorldgenRandom(this.seed);
+		this.noise = new PerlinSimplexNoise(this.rng, IntStream.rangeClosed(-3, 0));
 	}
 
 	public Settings getDimensionSettings() {
@@ -67,7 +67,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 	}
 	
 	@Override
-	public void buildSurfaceAndBedrock(WorldGenRegion region, IChunk chunk) {
+	public void buildSurfaceAndBedrock(WorldGenRegion region, ChunkAccess chunk) {
 		BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
 		BlockState stone = Blocks.STONE.defaultBlockState();
 		ChunkPos chunkpos = chunk.getPos();
@@ -80,8 +80,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 			for (int z = 0; z < 16; z++) {
 				int worldX = chunkpos.x * 16 + x; 
 				int worldZ = chunkpos.z * 16 + z; 
-				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 3;
-				Nero.LOGGER.debug(noise);
+				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0, 0) * 16;
 				// from -4 to 16
 //				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 16; // TODO: use for biome map
 				for (int y = 1; y < 10 + noise; y++) {
@@ -93,7 +92,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 //		this.buildSurface(chunk);
 	}
 	
-	protected void buildSurface(IChunk chunk) {
+	protected void buildSurface(ChunkAccess chunk) {
 		ChunkPos chunkPos = chunk.getPos();
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
@@ -107,7 +106,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 		}
 	}
 	
-	protected void buildBedrock(IChunk chunk) {
+	protected void buildBedrock(ChunkAccess chunk) {
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 128; y++) {
 				for (int z = 0; z < 16; z++) {
@@ -130,12 +129,12 @@ public class TestChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public void fillFromNoise(IWorld world, StructureManager structureManager, IChunk chunk) {
-		
+	public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, StructureFeatureManager structureManager, ChunkAccess chunk) {
+		return CompletableFuture.supplyAsync(() -> chunk, executor);
 	}
 
 	@Override
-	public int getBaseHeight(int x, int z, Heightmap.Type heightmapType) {
+	public int getBaseHeight(int x, int z, Types types, LevelHeightAccessor levelAccessor) {
 		return this.getDimensionSettings().getBaseHeight();
 	}
 	
@@ -145,10 +144,10 @@ public class TestChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public IBlockReader getBaseColumn(int x, int z) {
-		return new Blockreader(new BlockState[0]);
+	public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor levelAccessor) {
+		return new NoiseColumn(0, new BlockState[0]);
 	}
-
+	
 	static class Settings {
 		
 		private final int baseHeight;

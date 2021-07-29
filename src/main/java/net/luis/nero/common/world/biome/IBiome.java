@@ -1,16 +1,16 @@
 package net.luis.nero.common.world.biome;
 
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.BiomeAmbience;
-import net.minecraft.world.biome.BiomeGenerationSettings;
-import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public interface IBiome {
 	
 	default Biome createBiome() {
-		Biome.Builder biomeBuilder = new Biome.Builder();
+		Biome.BiomeBuilder biomeBuilder = new Biome.BiomeBuilder();
 		biomeBuilder.precipitation(this.getRainType());
 		biomeBuilder.biomeCategory(this.getCategory());
 		biomeBuilder.depth(this.getDepth());
@@ -23,9 +23,9 @@ public interface IBiome {
 		return biomeBuilder.build();
 	}
 	
-	Biome.RainType getRainType();
+	Biome.Precipitation getRainType();
 	
-	Category getCategory();
+	BiomeCategory getCategory();
 	
 	float getDepth();
 	
@@ -35,15 +35,15 @@ public interface IBiome {
 	
 	float getDownfall();
 	
-	BiomeAmbience getBiomeAmbience();
+	BiomeSpecialEffects getBiomeAmbience();
 	
 	default int calculateSkyColor(float f) {
 		float g = f / 3.0F;
-		g = MathHelper.clamp(g, -1.0F, 1.0F);
-		return MathHelper.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
+		g = Mth.clamp(g, -1.0F, 1.0F);
+		return Mth.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
 	}
 	
-	MobSpawnInfo getMobSpawnSettings();
+	MobSpawnSettings getMobSpawnSettings();
 	
 	BiomeGenerationSettings getBiomeGenerationSettings();
 

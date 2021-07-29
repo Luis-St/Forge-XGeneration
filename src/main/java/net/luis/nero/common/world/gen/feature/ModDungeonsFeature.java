@@ -6,22 +6,22 @@ import java.util.Set;
 import com.google.common.collect.ImmutableSet;
 
 import net.luis.nero.init.block.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.loot.LootTables;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.MobSpawnerTileEntity;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.common.DungeonHooks;
 
-public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
+public class ModDungeonsFeature extends Feature<NoneFeatureConfiguration> {
 	
 	// allow player to change loot table and chest placement via config
 	
@@ -34,18 +34,18 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 	private final Set<Block> replaceBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.TUFF.get());
 	
 	public ModDungeonsFeature() {
-		super(NoFeatureConfig.CODEC);
+		super(NoneFeatureConfiguration.CODEC);
 	}
-
+	
 	@Override
-	public boolean place(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random seedRng, BlockPos pos, NoFeatureConfig config) {
-		if (seedRng.nextInt(1000) == 0) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		if (context.random().nextInt(1000) == 0) {
 			Random rng = new Random();
 			BlockState mainStone;
 			BlockState chanceStone;
-			int centerX = pos.getX();
-			int centerY = pos.getY();
-			int centerZ = pos.getZ();
+			int centerX = context.origin().getX();
+			int centerY = context.origin().getY();
+			int centerZ = context.origin().getZ();
 			int width = 2 + rng.nextInt(3);
 			int height = 3 + rng.nextInt(2);
 			if (centerY > 5 && centerY < 245) {
@@ -53,7 +53,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 					for (int y = centerY; y <= centerY + height; y++) {
 						for (int z = centerZ - width; z <= centerZ + width; z++) {
 							BlockPos roomPos = new BlockPos(x, y, z);
-							seedReader.setBlock(roomPos, CAVE_AIR, 2);
+							context.level().setBlock(roomPos, CAVE_AIR, 2);
 						}
 					}
 				}
@@ -69,27 +69,27 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 						for (int z = centerZ - width - 1; z <= centerZ + width + 1; z++) {
 							BlockPos roomPos = new BlockPos(x, y, z);
 							int stone = rng.nextInt(4);
-							if (this.canReplace(seedReader.getBlockState(roomPos))) {
+							if (this.canReplace(context.level().getBlockState(roomPos))) {
 								if (stone == 0) {
-									seedReader.setBlock(roomPos, chanceStone, stone);
+									context.level().setBlock(roomPos, chanceStone, stone);
 								} else {
-									seedReader.setBlock(roomPos, mainStone, stone);
+									context.level().setBlock(roomPos, mainStone, stone);
 								}
 							}
 						}
 					}
 				}
-				this.setChestPos(seedReader, pos, rng, width);
-				this.setSpawner(seedReader, pos, rng);
+				this.setChestPos(context.level(), context.origin(), rng, width);
+				this.setSpawner(context.level(), context.origin(), rng);
 			}
 		}
 		return true;
 	}
 	
-	protected void setSpawner(ISeedReader seedReader, BlockPos center, Random rng) {
+	protected void setSpawner(WorldGenLevel seedReader, BlockPos center, Random rng) {
 		final BlockState spawner = Blocks.SPAWNER.defaultBlockState();
 		seedReader.setBlock(center, spawner, 2);
-		MobSpawnerTileEntity spawnerTileEntity = (MobSpawnerTileEntity) seedReader.getBlockEntity(center);
+		SpawnerBlockEntity spawnerTileEntity = (SpawnerBlockEntity) seedReader.getBlockEntity(center);
 		spawnerTileEntity.getSpawner().setEntityId(this.randomEntityId(rng));
 	}
 	
@@ -97,7 +97,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 		return DungeonHooks.getRandomDungeonMob(rng);
 	}
 	
-	protected void setChestPos(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setChestPos(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		if (width == 2) {
 			boolean northOrSouth = rng.nextBoolean();
 			boolean eastOrWest = rng.nextBoolean();
@@ -113,7 +113,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 		}
 	}
 	
-	protected void setChestAndLoot(ISeedReader seedReader, BlockPos center, Random rng, int width, boolean northOrSouth, boolean eastOrWest) {
+	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width, boolean northOrSouth, boolean eastOrWest) {
 		if (northOrSouth) {
 			this.setNorth(seedReader, center, rng, width);
 		} else {
@@ -126,7 +126,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 		}
 	}
 	
-	protected void setChestAndLoot(ISeedReader seedReader, BlockPos center, Random rng, int width, boolean north, boolean east, boolean south, boolean west) {
+	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width, boolean north, boolean east, boolean south, boolean west) {
 		if (north) {
 			this.setNorth(seedReader, center, rng, width);
 		} 
@@ -141,7 +141,7 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 		}
 	}
 	
-	protected void setChestAndLoot(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setChestAndLoot(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		this.setNorth(seedReader, center, rng, width);
 		this.setEast(seedReader, center, rng, width);
 		this.setSouth(seedReader, center, rng, width);
@@ -149,31 +149,31 @@ public class ModDungeonsFeature extends Feature<NoFeatureConfig> {
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setNorth(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setNorth(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.CLOCKWISE_180);
 		seedReader.setBlock(center.north(width), chest, 2);
-		LockableLootTileEntity.setLootTable(seedReader, rng, center.north(width), LootTables.SIMPLE_DUNGEON);
+		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.north(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setEast(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setEast(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.COUNTERCLOCKWISE_90);
 		seedReader.setBlock(center.east(width), chest, 2);
-		LockableLootTileEntity.setLootTable(seedReader, rng, center.east(width), LootTables.SIMPLE_DUNGEON);
+		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.east(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setSouth(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setSouth(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.NONE);
 		seedReader.setBlock(center.south(width), chest, 2);
-		LockableLootTileEntity.setLootTable(seedReader, rng, center.south(width), LootTables.SIMPLE_DUNGEON);
+		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.south(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected void setWest(ISeedReader seedReader, BlockPos center, Random rng, int width) {
+	protected void setWest(WorldGenLevel seedReader, BlockPos center, Random rng, int width) {
 		BlockState chest = Blocks.CHEST.defaultBlockState().rotate(Rotation.CLOCKWISE_90);
 		seedReader.setBlock(center.west(width), chest, 2);
-		LockableLootTileEntity.setLootTable(seedReader, rng, center.west(width), LootTables.SIMPLE_DUNGEON);
+		RandomizableContainerBlockEntity.setLootTable(seedReader, rng, center.west(width), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 	
 	protected boolean canReplace(BlockState state) {

@@ -1,13 +1,13 @@
 package net.luis.nero.api.common.recipe;
 
 import net.luis.nero.api.common.recipe.item.ResultItemStack;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.core.NonNullList;
 
-public interface IModRecipe<C extends IInventory> extends IRecipe<C> {
+public interface IModRecipe<C extends Container> extends Recipe<C> {
 	
 	// TODO: finish 
 	

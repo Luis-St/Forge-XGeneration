@@ -9,14 +9,14 @@ import com.mojang.serialization.Codec;
 import net.luis.nero.common.world.gen.layer.DeepslateBiomeLayer;
 import net.luis.nero.common.world.gen.layer.ModLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryLookupCodec;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.RegistryLookupCodec;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 
-public class DeepslateBiomeProvider extends BiomeProvider {
+public class DeepslateBiomeProvider extends BiomeSource {
 
 	// TODO: custom tp engine for deepslate dimension
 
@@ -26,7 +26,7 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 	private final long seed;
 	private final Registry<Biome> biomeRegistry;
 	private final ModLayer noiseBiomeLayer;
-	private static final List<RegistryKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
+	private static final List<ResourceKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
 	
 	public DeepslateBiomeProvider(Registry<Biome> biomeRegistry) {
 		this(biomeRegistry, new Random().nextLong());
@@ -52,12 +52,12 @@ public class DeepslateBiomeProvider extends BiomeProvider {
 	}
 
 	@Override
-	public boolean canGenerateStructure(Structure<?> structure) {
+	public boolean canGenerateStructure(StructureFeature<?> structure) {
 		return false;
 	}
 
 	@Override
-	protected Codec<? extends BiomeProvider> codec() {
+	protected Codec<? extends BiomeSource> codec() {
 		return DeepslateBiomeProvider.CODEC;
 	}
 

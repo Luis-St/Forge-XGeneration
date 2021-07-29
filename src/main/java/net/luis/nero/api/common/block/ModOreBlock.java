@@ -1,12 +1,13 @@
 package net.luis.nero.api.common.block;
 
-import java.util.Random;
-
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.init.block.ModBlocks;
-import net.minecraft.block.OreBlock;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Config
 public class ModOreBlock extends OreBlock {
@@ -41,17 +42,19 @@ public class ModOreBlock extends OreBlock {
 	}
 	
 	@Override
-	protected int xpOnDrop(Random rng) {
-		if (this == ModBlocks.DEEPSLATE_COAL_ORE.get()) {
-			return MathHelper.nextInt(rng, DEEPSLATE_COAL_XP_MIN, DEEPSLATE_COAL_XP_MAX);
-		} else if (this == ModBlocks.DEEPSLATE_LAPIS_ORE.get()) {
-			return MathHelper.nextInt(rng, DEEPSLATE_LAPIS_XP_MIN, DEEPSLATE_LAPIS_XP_MAX);
-		} else if (this == ModBlocks.DEEPSLATE_DIAMOND_ORE.get()) {
-			return MathHelper.nextInt(rng, DEEPSLATE_DIAMOND_XP_MIN, DEEPSLATE_DIAMOND_XP_MAX);
-		} else if (this == ModBlocks.DEEPSLATE_EMERALD_ORE.get()) {
-			return MathHelper.nextInt(rng, DEEPSLATE_EMERALD_XP_MIN, DEEPSLATE_EMERALD_XP_MAX);
+	public int getExpDrop(BlockState state, LevelReader reader, BlockPos pos, int fortune, int silkTouch) {
+		if (silkTouch == 0) {
+			if (this == ModBlocks.DEEPSLATE_COAL_ORE.get()) {
+				return Mth.nextInt(RANDOM, DEEPSLATE_COAL_XP_MIN, DEEPSLATE_COAL_XP_MAX);
+			} else if (this == ModBlocks.DEEPSLATE_LAPIS_ORE.get()) {
+				return Mth.nextInt(RANDOM, DEEPSLATE_LAPIS_XP_MIN, DEEPSLATE_LAPIS_XP_MAX);
+			} else if (this == ModBlocks.DEEPSLATE_DIAMOND_ORE.get()) {
+				return Mth.nextInt(RANDOM, DEEPSLATE_DIAMOND_XP_MIN, DEEPSLATE_DIAMOND_XP_MAX);
+			} else if (this == ModBlocks.DEEPSLATE_EMERALD_ORE.get()) {
+				return Mth.nextInt(RANDOM, DEEPSLATE_EMERALD_XP_MIN, DEEPSLATE_EMERALD_XP_MAX);
+			}
 		}
-		return super.xpOnDrop(rng);
+		return 0;
 	}
 	
 }

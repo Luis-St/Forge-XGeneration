@@ -5,27 +5,27 @@ import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.entity.goal.SoulFireballAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.monster.BlazeEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 @Config
-public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
+public class SoulBlazeEntity extends Blaze implements ISoulFireEntity {
 	
 	@ConfigValue
 	private static Double SOUL_BLAZE_ATTACK_DAMAGE = 6.0;
@@ -34,18 +34,18 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	@ConfigValue
 	private static Double SOUL_BLAZE_FOLLOW_RANGE = 48.0;
 	
-	private static final DataParameter<Byte> DATA_FLAGS_ID = EntityDataManager.defineId(BlazeEntity.class, DataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(Blaze.class, EntityDataSerializers.BYTE);
 	
-	public SoulBlazeEntity(World world, int x, int y, int z) {
+	public SoulBlazeEntity(Level world, int x, int y, int z) {
 		this(world, (double) x, (double) y, (double) z);
 	}
 	
-	public SoulBlazeEntity(World world, double x, double y, double z) {
+	public SoulBlazeEntity(Level world, double x, double y, double z) {
 		this(ModEntityTypes.SOUL_BLAZE.get(), world);
 		this.setPos(x, y, z);
 	}
 	
-	public SoulBlazeEntity(EntityType<? extends BlazeEntity> entityType, World world) {
+	public SoulBlazeEntity(EntityType<? extends Blaze> entityType, Level world) {
 		super(entityType, world);
 	}
 	
@@ -68,11 +68,11 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(4, new SoulFireballAttackGoal(this));
 		this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0, 0.0F));
-		this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	}
 	
 	protected void defineSynchedData() {
@@ -83,8 +83,8 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	public boolean isCharged() {
 		return (this.entityData.get(DATA_FLAGS_ID) & 1) != 0;
 	}
-
-	public void setCharged(boolean charged) {
+	
+	public void setCharge(boolean charged) {
 		byte b = this.entityData.get(DATA_FLAGS_ID);
 		if (charged) {
 			b = (byte) (b | 1);
@@ -95,12 +95,12 @@ public class SoulBlazeEntity extends BlazeEntity implements ISoulFireEntity {
 	}
 	
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
-	public static AttributeModifierMap registerAttributes() {
-	      return MonsterEntity.createMonsterAttributes()
+	public static AttributeSupplier registerAttributes() {
+	      return Monster.createMonsterAttributes()
 	    		  .add(Attributes.ATTACK_DAMAGE, SOUL_BLAZE_ATTACK_DAMAGE)
 	    		  .add(Attributes.MOVEMENT_SPEED, SOUL_BLAZE_MOVEMENT_SPEED)
 	    		  .add(Attributes.FOLLOW_RANGE, SOUL_BLAZE_FOLLOW_RANGE).build();

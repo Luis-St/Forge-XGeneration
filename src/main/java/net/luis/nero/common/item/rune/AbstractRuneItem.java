@@ -1,4 +1,4 @@
-package net.luis.nero.common.item.rune;
+ package net.luis.nero.common.item.rune;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +9,15 @@ import net.luis.nero.api.common.item.IRuneType;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.init.util.ModDamageSources;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -34,7 +34,7 @@ public abstract class AbstractRuneItem extends Item {
 		return this.runeType;
 	}
 	
-	protected ItemStack getOrbItem(PlayerEntity player) {
+	protected ItemStack getOrbItem(Player player) {
 		IItemHandler itemHandler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElseThrow(NullPointerException::new);
 		List<ItemStack> orbItems = new ArrayList<ItemStack>();
 		for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -53,7 +53,7 @@ public abstract class AbstractRuneItem extends Item {
 		return orbItems.get(0);
 	}
 	
-	protected boolean hasBloodOrShouldDamage(PlayerEntity player, ItemStack orbStack, int bloodCost, RuneUseType useType) {
+	protected boolean hasBloodOrShouldDamage(Player player, ItemStack orbStack, int bloodCost, RuneUseType useType) {
 		IBloodOrbCapability bloodOrbHandler = CapabilityUtil.getBloodOrbCapability(orbStack);
 		if (bloodCost > 0) {
 			if (bloodOrbHandler.shouldDamage(this, useType)) {
@@ -66,22 +66,22 @@ public abstract class AbstractRuneItem extends Item {
 		return true;
 	}
 	
-	protected void sendMessage(PlayerEntity player, String message) {
-		if (player instanceof ServerPlayerEntity) {
-			player.sendMessage(new StringTextComponent(message), player.getUUID());
+	protected void sendMessage(Player player, String message) {
+		if (player instanceof ServerPlayer) {
+			player.sendMessage(new TextComponent(message), player.getUUID());
 		}
 	}
 	
-	protected ActionResult<ItemStack> success(PlayerEntity player, Hand hand) {
-		return ActionResult.success(player.getItemInHand(hand));
+	protected InteractionResultHolder<ItemStack> success(Player player, InteractionHand hand) {
+		return InteractionResultHolder.success(player.getItemInHand(hand));
 	}
 	
-	protected ActionResult<ItemStack> pass(PlayerEntity player, Hand hand) {
-		return ActionResult.pass(player.getItemInHand(hand));
+	protected InteractionResultHolder<ItemStack> pass(Player player, InteractionHand hand) {
+		return InteractionResultHolder.pass(player.getItemInHand(hand));
 	}
 	
 	@Override
-	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack orbStack = this.getOrbItem(player);
 		if (!orbStack.isEmpty()) {
 			if (this.hasBloodOrShouldDamage(player, orbStack, this.runeType.getUseCost(), RuneUseType.USE)) {
@@ -91,12 +91,12 @@ public abstract class AbstractRuneItem extends Item {
 		return super.use(world, player, hand);
 	}
 	
-	protected abstract ActionResult<ItemStack> useRune(World world, PlayerEntity player, Hand hand, ItemStack orbStack);
+	protected abstract InteractionResultHolder<ItemStack> useRune(Level world, Player player, InteractionHand hand, ItemStack orbStack);
 	
 	@Override
 	public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
-		if (attacker instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity) attacker;
+		if (attacker instanceof Player) {
+			Player player = (Player) attacker;
 			ItemStack orbStack = this.getOrbItem(player);
 			if (!orbStack.isEmpty()) {
 				if (this.hasBloodOrShouldDamage(player, orbStack, this.runeType.getHitCost(), RuneUseType.HIT)) {
@@ -107,6 +107,6 @@ public abstract class AbstractRuneItem extends Item {
 		return super.hurtEnemy(itemStack, attacker, target);
 	}
 	
-	protected abstract boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, PlayerEntity attacker, ItemStack orbStack);
-	
+	protected abstract boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, Player attacker, ItemStack orbStack);
+
 }

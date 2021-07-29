@@ -1,14 +1,14 @@
 package net.luis.nero.init.world.dimension;
 
 import net.luis.nero.Nero;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.Dimension;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.dimension.LevelStem;
 
 public class ModDimensions {
 	
-    public static final RegistryKey<Dimension> DEEPSLATE = RegistryKey.create(Registry.LEVEL_STEM_REGISTRY, new ResourceLocation(Nero.MOD_ID, "deepslate"));
-    public static final RegistryKey<Dimension> TEST = RegistryKey.create(Registry.LEVEL_STEM_REGISTRY, new ResourceLocation(Nero.MOD_ID, "test"));
+    public static final ResourceKey<LevelStem> DEEPSLATE = ResourceKey.create(Registry.LEVEL_STEM_REGISTRY, new ResourceLocation(Nero.MOD_ID, "deepslate"));
+    public static final ResourceKey<LevelStem> TEST = ResourceKey.create(Registry.LEVEL_STEM_REGISTRY, new ResourceLocation(Nero.MOD_ID, "test"));
 
 }

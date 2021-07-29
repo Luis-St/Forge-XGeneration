@@ -1,11 +1,11 @@
 package net.luis.nero.common.potion;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class ModEffect extends Effect {
+public class ModEffect extends MobEffect {
 
-	public ModEffect(EffectType effectType, int color) {
+	public ModEffect(MobEffectCategory effectType, int color) {
 		super(effectType, color);
 	}
 

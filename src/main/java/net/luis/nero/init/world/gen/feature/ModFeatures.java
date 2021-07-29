@@ -6,8 +6,8 @@ import net.luis.nero.common.world.gen.feature.ModDungeonsFeature;
 import net.luis.nero.common.world.gen.feature.ModLakesFeature;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.common.world.gen.feature.PortalFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

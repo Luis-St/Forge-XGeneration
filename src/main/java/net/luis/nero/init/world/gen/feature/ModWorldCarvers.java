@@ -5,9 +5,10 @@ import net.luis.nero.api.common.world.gen.carver.ModCanyonWorldCarver;
 import net.luis.nero.api.common.world.gen.carver.ModCaveWorldCarver;
 import net.luis.nero.common.world.gen.carver.canyon.HigherCanyon;
 import net.luis.nero.common.world.gen.carver.canyon.LargeCanyon;
-import net.minecraft.world.gen.carver.WorldCarver;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
+import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -15,13 +16,13 @@ public class ModWorldCarvers {
 	
 	public static final DeferredRegister<WorldCarver<?>> WORLD_CARVERS = DeferredRegister.create(ForgeRegistries.WORLD_CARVERS, Nero.MOD_ID);
 	
-	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CANYON = WORLD_CARVERS.register("canyon", ModCanyonWorldCarver::new);
-	public static final RegistryObject<WorldCarver<ProbabilityConfig>> CAVE = WORLD_CARVERS.register("cave", ModCaveWorldCarver::new);
+	public static final RegistryObject<WorldCarver<CanyonCarverConfiguration>> CANYON = WORLD_CARVERS.register("canyon", ModCanyonWorldCarver::new);
+	public static final RegistryObject<WorldCarver<CaveCarverConfiguration>> CAVE = WORLD_CARVERS.register("cave", ModCaveWorldCarver::new);
 	
 	// TODO: add more custom cave and canyons
 	
-	public static final RegistryObject<WorldCarver<ProbabilityConfig>> LARGE_CANYON = WORLD_CARVERS.register("large_canyon", LargeCanyon::new);
-	public static final RegistryObject<WorldCarver<ProbabilityConfig>> HIGHER_CANYON = WORLD_CARVERS.register("higher_canyon", HigherCanyon::new); 
+	public static final RegistryObject<WorldCarver<CanyonCarverConfiguration>> LARGE_CANYON = WORLD_CARVERS.register("large_canyon", LargeCanyon::new);
+	public static final RegistryObject<WorldCarver<CanyonCarverConfiguration>> HIGHER_CANYON = WORLD_CARVERS.register("higher_canyon", HigherCanyon::new); 
 	
 //	public static final RegistryObject<WorldCarver<ProbabilityConfig>> DEEP_LAVA_CAVE = WORLD_CARVERS.register("deep_lava_cave", DeepLavaCaveWorldCarver::new);
 //	public static final RegistryObject<WorldCarver<ProbabilityConfig>> FLAT_CAVE = WORLD_CARVERS.register("flat_cave", FlatCave::new);

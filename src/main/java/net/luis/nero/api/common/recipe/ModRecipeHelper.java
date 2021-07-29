@@ -1,9 +1,9 @@
 package net.luis.nero.api.common.recipe;
 
 import net.luis.nero.init.items.ModItems;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 // TODO: rename and move to other package may util
 public class ModRecipeHelper {

@@ -1,34 +1,43 @@
 package net.luis.nero.client.render.tileentity.model;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 public class BloodAltarModel extends Model {
 	
-	private final ModelRenderer blood;
+	private final ModelPart blood;
 
-	public BloodAltarModel() {
+	public BloodAltarModel(ModelPart modelPart) {
 		super(RenderType::entitySolid);
-		this.texWidth = 32;
-		this.texHeight = 32;
-		this.blood = new ModelRenderer(this);
-		this.blood.setPos(-8.0F, 6.0F, -8.0F);
-		this.blood.texOffs(0, 0).addBox(-4.0F, -11.0F, -4.0F, 8.0F, 0.0F, 8.0F, 0.0F, false);
+		this.blood = modelPart.getChild("blood");
 	}
 	
-	public void renderBlood(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float bloodHeigth) {
-		this.blood.y = MathHelper.clamp(bloodHeigth + 6, 6.0F, 9.75F);
+	public void renderBlood(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float bloodHeigth) {
+		this.blood.y = Mth.clamp(bloodHeigth + 6, 6.0F, 9.75F);
 		this.blood.render(matrixStack, buffer, packedLight, packedOverlay);
+	}
+	
+	public static LayerDefinition createLayerDefinition() {
+		MeshDefinition meshDefinition = new MeshDefinition();
+		PartDefinition partDefinition = meshDefinition.getRoot();
+		CubeListBuilder blood = CubeListBuilder.create().addBox(-4.0F, -11.0F, -4.0F, 8.0F, 0.0F, 8.0F).texOffs(0, 0);
+		partDefinition.addOrReplaceChild("blood", blood, PartPose.offset(-8.0F, 6.0F, -8.0F));
+		return LayerDefinition.create(meshDefinition, 32, 32);
 	}
 	
 	@Override
 	@Deprecated
-	public final void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public final void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		throw new UnsupportedOperationException();
 	}
 

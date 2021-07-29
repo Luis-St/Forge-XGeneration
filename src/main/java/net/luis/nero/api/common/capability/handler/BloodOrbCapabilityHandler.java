@@ -5,21 +5,21 @@ import net.luis.nero.api.common.capability.util.IItemCapability;
 import net.luis.nero.api.common.item.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.luis.nero.common.item.rune.AbstractRuneItem;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public class BloodOrbCapabilityHandler implements IBloodOrbCapability, IItemCapability {
 	
 	private int blood = 0;
 	
 	@Override
-	public CompoundNBT serializeNBT() {
-		CompoundNBT nbt = new CompoundNBT();
+	public CompoundTag serializeNBT() {
+		CompoundTag nbt = new CompoundTag();
 		nbt.putInt("blood", this.blood);
 		return nbt;
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT nbt) {
+	public void deserializeNBT(CompoundTag nbt) {
 		this.blood = nbt.getInt("blood");
 	}
 

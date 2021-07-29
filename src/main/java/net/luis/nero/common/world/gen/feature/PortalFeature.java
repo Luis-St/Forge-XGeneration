@@ -3,41 +3,41 @@ package net.luis.nero.common.world.gen.feature;
 import java.util.Random;
 
 import net.luis.nero.init.block.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 // TODO: tp block
 // TODO: find better solution
 
-public abstract class PortalFeature extends Feature<NoFeatureConfig> {
+public abstract class PortalFeature extends Feature<NoneFeatureConfiguration> {
 	
 	protected static final BlockState CAVE_AIR = Blocks.CAVE_AIR.defaultBlockState();
 	protected static final BlockState STONE = Blocks.STONE.defaultBlockState();
 	protected static final BlockState DEEPSLATE = ModBlocks.DEEPSLATE.get().defaultBlockState();
 	
 	public PortalFeature() {
-		super(NoFeatureConfig.CODEC);
+		super(NoneFeatureConfiguration.CODEC);
 	}
 	
 	@Override
-	public boolean place(ISeedReader seedReader, ChunkGenerator chunkGenerator, Random rng, BlockPos blockPos, NoFeatureConfig config) {
-		ChunkPos chunkPos = seedReader.getChunk(blockPos).getPos();
-		if (chunkPos.x % 5 == 0 && chunkPos.z % 5 == 0 && rng.nextInt(2) == 0) {
-			int xOffset = MathHelper.nextInt(new Random(), 2, 14);
-			int zOffset = MathHelper.nextInt(new Random(), 2, 14);
-			this.place(seedReader, chunkPos, rng, xOffset, 7, zOffset);
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		ChunkPos chunkPos = context.level().getChunk(context.origin()).getPos();
+		if (chunkPos.x % 5 == 0 && chunkPos.z % 5 == 0 && context.random().nextInt(2) == 0) {
+			int xOffset = Mth.nextInt(new Random(), 2, 14);
+			int zOffset = Mth.nextInt(new Random(), 2, 14);
+			this.place(context.level(), chunkPos, context.random(), xOffset, 7, zOffset);
 		}
 		return true;
 	}
 	
-	public void place(ISeedReader seedReader, ChunkPos chunkPos, Random rng, int posX, int posY, int posZ) {
+	public void place(WorldGenLevel seedReader, ChunkPos chunkPos, Random rng, int posX, int posY, int posZ) {
 		BlockPos pos = new BlockPos(chunkPos.getMinBlockX() + posX, posY, chunkPos.getMinBlockZ() + posZ);
 		for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++) {
 			for (int y = pos.getY() - 2; y <= pos.getY() + 2; y++) {

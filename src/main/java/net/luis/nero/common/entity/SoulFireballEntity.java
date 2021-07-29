@@ -3,79 +3,56 @@ package net.luis.nero.common.entity;
 import net.luis.nero.api.common.entity.ISoulFireEntity;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.init.items.ModItems;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.projectile.AbstractFireballEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public class SoulFireballEntity extends AbstractFireballEntity implements ISoulFireEntity {
+//TODO: fix
+public class SoulFireballEntity extends Fireball implements ISoulFireEntity {
 
-	public SoulFireballEntity(World world, LivingEntity shooter, double x, double y, double z) {
+	public SoulFireballEntity(Level world, LivingEntity shooter, double x, double y, double z) {
 		super(ModEntityTypes.SOUL_FIREBALL.get(), shooter, x, y, z, world);
 	}
 
-	public SoulFireballEntity(World world, double x, double y, double z, double xPower, double yPower, double zPower) {
+	public SoulFireballEntity(Level world, double x, double y, double z, double xPower, double yPower, double zPower) {
 		super(ModEntityTypes.SOUL_FIREBALL.get(), x, y, z, xPower, yPower, zPower, world);
 	}
 
-	public SoulFireballEntity(EntityType<? extends SoulFireballEntity> entityType, World world) {
+	public SoulFireballEntity(EntityType<? extends SoulFireballEntity> entityType, Level world) {
 		super(entityType, world);
 	}
 	
 	@Override
-	protected void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
-		super.onHitEntity(entityRayTraceResult);
+	protected void onHitEntity(EntityHitResult hitResult) {
+		super.onHitEntity(hitResult);
 		if (!this.level.isClientSide) {
-			Entity entity = entityRayTraceResult.getEntity();
-			if (!entity.fireImmune()) {
-				Entity owner = this.getOwner();
-				int i = entity.getRemainingFireTicks();
-				entity.setSecondsOnFire(5);
-				boolean flag = entity.hurt(DamageSource.fireball(this, owner), 5.0F);
-				if (!flag) {
-					entity.setRemainingFireTicks(i);
-				} else if (owner instanceof LivingEntity) {
-					this.doEnchantDamageEffects((LivingEntity) owner, entity);
-				}
+			Entity entity = hitResult.getEntity();
+			Entity entity1 = this.getOwner();
+			entity.hurt(DamageSource.fireball(this, entity1), 6.0F);
+			if (entity1 instanceof LivingEntity) {
+				this.doEnchantDamageEffects((LivingEntity) entity1, entity);
 			}
 
 		}
 	}
 	
 	@Override
-	protected void onHitBlock(BlockRayTraceResult blockRayTraceResult) {
-		super.onHitBlock(blockRayTraceResult);
+	protected void onHit(HitResult hitResult) {
+		super.onHit(hitResult);
 		if (!this.level.isClientSide) {
-			Entity entity = this.getOwner();
-			if (entity == null || !(entity instanceof MobEntity) || this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || 
-					ForgeEventFactory.getMobGriefingEvent(this.level, this.getEntity())) {
-				BlockPos pos = blockRayTraceResult.getBlockPos().relative(blockRayTraceResult.getDirection());
-				if (this.level.isEmptyBlock(pos)) {
-					this.level.setBlockAndUpdate(pos, AbstractFireBlock.getState(this.level, pos));
-				}
-			}
-
-		}
-	}
-	
-	@Override
-	protected void onHit(RayTraceResult rayTraceResult) {
-		super.onHit(rayTraceResult);
-		if (!this.level.isClientSide) {
-			this.remove();
+			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+			this.level.explode(null, this.getX(), this.getY(), this.getZ(), 1.0f, flag, flag ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE);
+			this.discard();
 		}
 
 	}
@@ -106,7 +83,7 @@ public class SoulFireballEntity extends AbstractFireballEntity implements ISoulF
 	}
 	
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

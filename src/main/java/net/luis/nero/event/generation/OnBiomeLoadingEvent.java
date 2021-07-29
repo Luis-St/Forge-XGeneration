@@ -1,5 +1,6 @@
 package net.luis.nero.event.generation;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
@@ -8,14 +9,16 @@ import net.luis.nero.common.world.gen.ConfiguredModStructures;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.OreFeature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.OreFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -32,7 +35,7 @@ public class OnBiomeLoadingEvent {
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 
 		ResourceLocation biomeName = event.getName();
-		Category category = event.getCategory();
+		BiomeCategory category = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		
 		if (biomeName.equals(ModBiomeKeys.DEEPSLATE.location())) {
@@ -43,16 +46,14 @@ public class OnBiomeLoadingEvent {
 			DefaultModFeatures.addDeepslateOres(generationBuilder);
 			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_MINESHAFT);
 			
-		} else if (category == Category.THEEND) {
+		} else if (category == BiomeCategory.THEEND) {
 			
-		} else if (category == Category.NETHER) {
+		} else if (category == BiomeCategory.NETHER) {
 			
 		} else { 
 			
 			DefaultModFeatures.addOreOverwrites(generationBuilder);
 			DefaultModFeatures.addFlatBedrock(generationBuilder);
-			// TODO: better solution possible
-//			generationBuilder.addFeature(stageStructures, () -> ConfiguredModFeatures.TO_DEEPSLATE_PORTAL);
 			
 		}
 		
@@ -61,33 +62,35 @@ public class OnBiomeLoadingEvent {
 	@SubscribeEvent
 	public static void biomeLoadingRemove(BiomeLoadingEvent event) {
 		
-		Category category = event.getCategory();
+		BiomeCategory category = event.getCategory();
 		BiomeGenerationSettingsBuilder genBuilder = event.getGeneration();
 		
-		if (category == Category.THEEND) {
+		if (category == BiomeCategory.THEEND) {
 			
-		} else if (category == Category.NETHER) {
+		} else if (category == BiomeCategory.NETHER) {
 			
 		} else { 
-			for (Decoration stage : GenerationStage.Decoration.values()) {
+			for (Decoration stage : GenerationStep.Decoration.values()) {
 				genBuilder.getFeatures(stage).removeIf((supplier) -> {
 					ConfiguredFeature<?, ?> configuredFeature = supplier.get();
 					for (ConfiguredFeature<?, ?> feature : configuredFeature.getFeatures().collect(Collectors.toList())) {
 						if (feature.feature instanceof OreFeature && !(feature.feature instanceof ModOreFeature)) {
-							OreFeatureConfig oreConfig = (OreFeatureConfig) feature.config;
-							if (oreConfig.state.getBlock() == Blocks.COAL_ORE) {
+							OreConfiguration oreConfig = (OreConfiguration) feature.config;
+							List<Block> oreConigBlocks = oreConfig.targetStates.stream().map(targetState -> targetState.state)
+									.map(BlockState::getBlock).collect(Collectors.toList());
+							if (oreConigBlocks.contains(Blocks.COAL_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.IRON_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.IRON_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.GOLD_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.GOLD_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.LAPIS_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.LAPIS_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.REDSTONE_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.REDSTONE_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.DIAMOND_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.DIAMOND_ORE)) {
 								return true;
-							} else if (oreConfig.state.getBlock() == Blocks.EMERALD_ORE) {
+							} else if (oreConigBlocks.contains(Blocks.EMERALD_ORE)) {
 								return true;
 							}
 						}

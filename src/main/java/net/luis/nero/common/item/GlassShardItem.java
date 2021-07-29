@@ -1,8 +1,8 @@
 package net.luis.nero.common.item;
 
 import net.luis.nero.init.util.ModItemGroups;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 
 public class GlassShardItem extends Item {
 	

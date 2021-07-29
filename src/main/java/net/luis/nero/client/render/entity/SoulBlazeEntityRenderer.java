@@ -1,23 +1,24 @@
 package net.luis.nero.client.render.entity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.client.render.ISoulFireEntityRenderer;
 import net.luis.nero.common.entity.SoulBlazeEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.model.BlazeModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.model.BlazeModel;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 
 public class SoulBlazeEntityRenderer extends MobRenderer<SoulBlazeEntity, BlazeModel<SoulBlazeEntity>> implements ISoulFireEntityRenderer<SoulBlazeEntity> {
-	
+
 	private static final ResourceLocation SOUL_BLAZE_LOCATION = new ResourceLocation(Nero.MOD_ID, "textures/entity/soul_blaze.png");
 
-	public SoulBlazeEntityRenderer(EntityRendererManager rendererManager) {
-		super(rendererManager, new BlazeModel<>(), 0.5F);
+	public SoulBlazeEntityRenderer(Context context) {
+		super(context, new BlazeModel<>(context.bakeLayer(ModelLayers.BLAZE)), 0.5F);
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class SoulBlazeEntityRenderer extends MobRenderer<SoulBlazeEntity, BlazeM
 	}
 	
 	@Override
-	public void render(SoulBlazeEntity soulBlaze, float entityYaw, float partialTicks, MatrixStack matrix, IRenderTypeBuffer renderBuffer, int packedLight) {
+	public void render(SoulBlazeEntity soulBlaze, float entityYaw, float partialTicks, PoseStack matrix, MultiBufferSource renderBuffer, int packedLight) {
 		super.render(soulBlaze, entityYaw, partialTicks, matrix, renderBuffer, packedLight);
 		if (soulBlaze.displaySoulFireAnimation()) {
 			this.renderSoulFire(soulBlaze, matrix, renderBuffer);

@@ -4,10 +4,9 @@ import java.util.EnumSet;
 
 import net.luis.nero.common.entity.SoulBlazeEntity;
 import net.luis.nero.common.entity.SoulFireballEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 public class SoulFireballAttackGoal extends Goal {
 
@@ -34,7 +33,7 @@ public class SoulFireballAttackGoal extends Goal {
 	
 	@Override
 	public void stop() {
-		this.blaze.setCharged(false);
+		this.blaze.setCharge(false);
 		this.lastSeen = 0;
 	}
 	
@@ -43,7 +42,7 @@ public class SoulFireballAttackGoal extends Goal {
 		--this.attackTime;
 		LivingEntity target = this.blaze.getTarget();
 		if (target != null) {
-			boolean canSee = this.blaze.getSensing().canSee(target);
+			boolean canSee = this.blaze.getSensing().hasLineOfSight(target);
 			if (canSee) {
 				this.lastSeen = 0;
 			} else {
@@ -67,16 +66,16 @@ public class SoulFireballAttackGoal extends Goal {
 					++this.attackStep;
 					if (this.attackStep == 1) {
 						this.attackTime = 60;
-						this.blaze.setCharged(true);
+//						this.blaze.setCharged(true);
 					} else if (this.attackStep <= 4) {
 						this.attackTime = 6;
 					} else {
 						this.attackTime = 100;
 						this.attackStep = 0;
-						this.blaze.setCharged(false);
+//						this.blaze.setCharged(false);
 					}
 					if (this.attackStep > 1) {
-						float distanceSqrt = MathHelper.sqrt(MathHelper.sqrt(distance)) * 0.5F;
+						float distanceSqrt = (float) (Math.sqrt(Math.sqrt(distance)) * 0.5F);
 						if (!this.blaze.isSilent()) {
 							this.blaze.level.levelEvent(null, 1018, this.blaze.blockPosition(), 0);
 						}

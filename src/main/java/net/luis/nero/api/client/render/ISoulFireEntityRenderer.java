@@ -1,25 +1,27 @@
 package net.luis.nero.api.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.RenderMaterial;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Vector3f;
 
 public interface ISoulFireEntityRenderer<T extends Entity> {
 	
-	public static final RenderMaterial SOUL_FIRE_0 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_0"));
-	public static final RenderMaterial SOUL_FIRE_1 = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_1"));
+	public static final Material SOUL_FIRE_0 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_0"));
+	public static final Material SOUL_FIRE_1 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_1"));
+	
+	// TODO: test 1.17 of SoulBlaze
 	
 	@SuppressWarnings("resource")
-	default void renderSoulFire(T entity, MatrixStack matrix, IRenderTypeBuffer renderBuffer) {
+	default void renderSoulFire(T entity, PoseStack matrix, MultiBufferSource renderBuffer) {
 		TextureAtlasSprite soulFireSprite0 = SOUL_FIRE_0.sprite();
 		TextureAtlasSprite soulFireSprite1 = SOUL_FIRE_1.sprite();
 		matrix.pushPose();
@@ -32,9 +34,9 @@ public interface ISoulFireEntityRenderer<T extends Entity> {
 		matrix.translate(0.0D, 0.0D, (double) (-0.3F + (float) ((int) entityHeight) * 0.02F));
 		float f5 = 0.0F;
 		int i = 0;
-		IVertexBuilder vertexBuilder = renderBuffer.getBuffer(Atlases.cutoutBlockSheet());
+		VertexConsumer vertexBuilder = renderBuffer.getBuffer(Sheets.cutoutBlockSheet());
 
-		for (MatrixStack.Entry matrixEntry = matrix.last(); entityHeight > 0.0F; ++i) {
+		for (PoseStack.Pose matrixEntry = matrix.last(); entityHeight > 0.0F; ++i) {
 			TextureAtlasSprite soulFireSprite = i % 2 == 0 ? soulFireSprite0 : soulFireSprite1;
 			float u0 = soulFireSprite.getU0();
 			float v0 = soulFireSprite.getV0();
@@ -58,7 +60,7 @@ public interface ISoulFireEntityRenderer<T extends Entity> {
 		matrix.popPose();
 	}
 	
-	static void soulFireVertex(MatrixStack.Entry matrixEntry, IVertexBuilder vertexBuilder, float x, float y, float z, float u, float v) {
+	static void soulFireVertex(PoseStack.Pose matrixEntry, VertexConsumer vertexBuilder, float x, float y, float z, float u, float v) {
 		vertexBuilder.vertex(matrixEntry.pose(), x, y, z).color(255, 255, 255, 255).uv(u, v).overlayCoords(0, 10)
 				.uv2(240).normal(matrixEntry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
 	}

@@ -3,14 +3,14 @@ package net.luis.nero.init.block.item;
 import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.util.ModItemGroups;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockItems {
-	//du könntest ein neues mdk probieren, und versuchen ob der fehler dann immer noch existiert
+	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Nero.MOD_ID);
 	
 	

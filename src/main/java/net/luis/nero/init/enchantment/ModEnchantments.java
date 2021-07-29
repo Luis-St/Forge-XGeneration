@@ -1,7 +1,7 @@
 package net.luis.nero.init.enchantment;
 
 import net.luis.nero.Nero;
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

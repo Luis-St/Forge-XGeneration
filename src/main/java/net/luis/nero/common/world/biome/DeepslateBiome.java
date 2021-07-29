@@ -2,24 +2,24 @@ package net.luis.nero.common.world.biome;
 
 import net.luis.nero.common.world.gen.ConfiguredModSurfaceBuilders;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
-import net.minecraft.world.biome.BiomeAmbience;
-import net.minecraft.world.biome.BiomeGenerationSettings;
-import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.biome.MoodSoundAmbience;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.Biome.Precipitation;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.biome.AmbientMoodSettings;
 
 public class DeepslateBiome implements IBiome {
 	
 	@Override
-	public Biome.RainType getRainType() {
-		return RainType.NONE;
+	public Biome.Precipitation getRainType() {
+		return Precipitation.NONE;
 	}
 	
 	@Override
-	public Category getCategory() {
-		return Category.NONE;
+	public BiomeCategory getCategory() {
+		return BiomeCategory.NONE;
 	}
 	
 	@Override
@@ -43,19 +43,19 @@ public class DeepslateBiome implements IBiome {
 	}
 	
 	@Override
-	public BiomeAmbience getBiomeAmbience() {
-		BiomeAmbience.Builder ambienceBuilder = new BiomeAmbience.Builder();
+	public BiomeSpecialEffects getBiomeAmbience() {
+		BiomeSpecialEffects.Builder ambienceBuilder = new BiomeSpecialEffects.Builder();
 		ambienceBuilder.waterColor(4159204);
 		ambienceBuilder.waterFogColor(329011);
 		ambienceBuilder.fogColor(12638463);
 		ambienceBuilder.skyColor(this.calculateSkyColor(0.8F));
-		ambienceBuilder.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS);
+		ambienceBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
 		return ambienceBuilder.build();
 	}
 
 	@Override
-	public MobSpawnInfo getMobSpawnSettings() {
-		MobSpawnInfo.Builder modBuilder = new MobSpawnInfo.Builder();
+	public MobSpawnSettings getMobSpawnSettings() {
+		MobSpawnSettings.Builder modBuilder = new MobSpawnSettings.Builder();
 		DefaultModFeatures.addCommonSpawns(modBuilder);
 		return modBuilder.build();
 	}

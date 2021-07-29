@@ -3,7 +3,7 @@ package net.luis.nero.common.world.gen.carver.canyon;
 import java.util.Random;
 
 import net.luis.nero.api.common.world.gen.carver.ModCanyonWorldCarver;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
+import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
 
 public class LargeCanyon extends ModCanyonWorldCarver {
 	
@@ -18,23 +18,24 @@ public class LargeCanyon extends ModCanyonWorldCarver {
 	}
 	
 	@Override
-	public int getCanyonLength(Random rng, int range) {
+	public int getCanyonLength(CanyonCarverConfiguration canyonConfig, Random rng, int range) {
 		return range - rng.nextInt(range / 8);
 	}
 
 	@Override
-	public double getCanyonWidth(Random rng, int canyonLength, int canyonMaxLength, float widthMultiplier) {
-		return super.getCanyonWidth(rng, canyonLength, canyonMaxLength, widthMultiplier) + rng.nextDouble();
+	public double getCanyonWidth(CanyonCarverConfiguration canyonConfig, Random rng, int length, int maxLength, float thickness) {
+		return super.getCanyonWidth(canyonConfig, rng, length, maxLength, thickness) + rng.nextDouble();
 	}
 	
 	@Override
-	public double getCanyonHeight(Random rng, double canyonWidth, double heightMultiplier) {
-		return super.getCanyonHeight(rng, canyonWidth - rng.nextDouble(), heightMultiplier);
+	public double getCanyonHeight(CanyonCarverConfiguration canyonConfig, Random rng, double width, double yScale) {
+		return super.getCanyonHeight(canyonConfig, rng, width - rng.nextDouble(), yScale);
 	}
 	
-	@Override
-	public boolean isStartChunk(Random rng, int chunkX, int chunkZ, ProbabilityConfig config) {
-		return super.isStartChunk(rng, chunkX, chunkZ, config) && rng.nextInt(4) == 0;
-	}
+	// TODO: add on compile
+/*	@Override
+	public boolean isStartChunk(CanyonCarverConfiguration config, Random rng) {
+		return super.isStartChunk(config, rng) && rng.nextInt(4) == 0;
+	}*/
 	
 }

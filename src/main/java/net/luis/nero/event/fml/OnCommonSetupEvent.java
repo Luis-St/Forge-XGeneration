@@ -1,10 +1,7 @@
 package net.luis.nero.event.fml;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.common.capability.CapabilityFactory;
-import net.luis.nero.api.common.capability.CapabilityStorage;
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.common.util.Reflections;
 import net.luis.nero.common.world.biome.DeepslateBiomeProvider;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeProvider;
@@ -12,12 +9,10 @@ import net.luis.nero.common.world.test.TestChunkGenerator;
 import net.luis.nero.core.NetworkHandler;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -43,11 +38,7 @@ public class OnCommonSetupEvent {
 	}
 	
 	protected static void registerCapability(FMLCommonSetupEvent event) {
-		registerCapability(IBloodOrbCapability.class);
-	}
-	
-	private static <T> void registerCapability(Class<T> clazz) {
-		CapabilityManager.INSTANCE.register(clazz, new CapabilityStorage<T>(), new CapabilityFactory<T>());
+		CapabilityManager.INSTANCE.register(IBloodOrbCapability.class);
 	}
 	
 	protected static void registerBiome(FMLCommonSetupEvent event) {
@@ -65,19 +56,20 @@ public class OnCommonSetupEvent {
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {
-		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureSeparationSettings(4, 1, 456734349), false);
+		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureFeatureConfiguration(4, 1, 456734349), false);
 	}
 	
-	private static <F extends Structure<?>> void registerStructure(F structure, StructureSeparationSettings settings, boolean transformLand) {
-		Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
-		Reflections.addDefaultStructure(structure, settings);
-		if (transformLand) {
-			Reflections.addNoiseStructure(structure);
-		}
-		WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(noiseSettings -> {
-			DimensionStructuresSettings dimensionSettings = noiseSettings.getValue().structureSettings();
-			Reflections.addStructureSetting(dimensionSettings, structure);
-		});
+	// TODO: fix
+	private static <F extends StructureFeature<?>> void registerStructure(F structure, StructureFeatureConfiguration settings, boolean transformLand) {
+//		StructureFeature.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
+//		Reflections.addDefaultStructure(structure, settings);
+//		if (transformLand) {
+//			Reflections.addNoiseStructure(structure);
+//		}
+//		BuiltinRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(noiseSettings -> {
+//			StructureSettings dimensionSettings = noiseSettings.getValue().structureSettings();
+//			Reflections.addStructureSetting(dimensionSettings, structure);
+//		});
 	}
 	
 }

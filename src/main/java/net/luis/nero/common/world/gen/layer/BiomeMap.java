@@ -6,9 +6,9 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
 
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.PerlinNoiseGenerator;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 public class BiomeMap {
 	
@@ -16,19 +16,19 @@ public class BiomeMap {
 	protected double xScale = 0.0035;
 	protected double zScale = 0.0035;
 	
-	protected final PerlinNoiseGenerator biomeNoiseGenerator;
+	protected final PerlinSimplexNoise biomeNoiseGenerator;
 	protected final Biome defaultBiome;
 	protected List<NoiseBiome> biomes = Lists.newArrayList();
 	
 	public BiomeMap(Biome defaultBiome, long seed) {
-		this(defaultBiome, new SharedSeedRandom(seed));
+		this(defaultBiome, new WorldgenRandom(seed));
 	}
 	
-	public BiomeMap(Biome defaultBiome, SharedSeedRandom seedRandom) {
-		this(defaultBiome, new PerlinNoiseGenerator(seedRandom, IntStream.rangeClosed(-3, 0)));
+	public BiomeMap(Biome defaultBiome, WorldgenRandom seedRandom) {
+		this(defaultBiome, new PerlinSimplexNoise(seedRandom, IntStream.rangeClosed(-3, 0)));
 	}
 	
-	public BiomeMap(Biome defaultBiome, PerlinNoiseGenerator biomeNoiseGenerator) {
+	public BiomeMap(Biome defaultBiome, PerlinSimplexNoise biomeNoiseGenerator) {
 		this.defaultBiome = defaultBiome;
 		this.biomeNoiseGenerator = biomeNoiseGenerator;
 	}

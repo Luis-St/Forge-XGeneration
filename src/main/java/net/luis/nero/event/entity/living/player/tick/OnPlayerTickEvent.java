@@ -3,11 +3,11 @@ package net.luis.nero.event.entity.living.player.tick;
 import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.potion.ModEffects;
-import net.minecraft.block.AirBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,9 +19,9 @@ public class OnPlayerTickEvent {
 	@SubscribeEvent
 	public static void playerTick(TickEvent.PlayerTickEvent event) {
 		if (event.phase == Phase.START) {
-			PlayerEntity player = event.player;
-			if (player.hasEffect(ModEffects.BRIDGE.get()) && player instanceof ServerPlayerEntity && !player.isShiftKeyDown()) {
-				World world = player.getCommandSenderWorld();
+			Player player = event.player;
+			if (player.hasEffect(ModEffects.BRIDGE.get()) && player instanceof ServerPlayer && !player.isShiftKeyDown()) {
+				Level world = player.getCommandSenderWorld();
 				BlockPos pos = new BlockPos(player.getX(), player.getY() - 1, player.getZ());
 				if (world.getBlockState(pos).getBlock() instanceof AirBlock) {
 					world.setBlock(pos, ModBlocks.BRIDGE_BLOCK.get().defaultBlockState(), 3);
