@@ -108,5 +108,5 @@ public abstract class AbstractRuneItem extends Item {
 	}
 	
 	protected abstract boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, PlayerEntity attacker, ItemStack orbStack);
-
+	
 }

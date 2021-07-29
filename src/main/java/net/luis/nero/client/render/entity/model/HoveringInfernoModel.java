@@ -18,7 +18,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	private static final Boolean RENDER_HOVERING_INFERNO_HELMET = true;
 	
 	private final ModelRenderer head;
-	private final ModelRenderer helmet;
+	private final ModelRenderer helmet; // TODO: fix helme rendering
 	private final ModelRenderer shieldNorth;
 	private final ModelRenderer shieldWest;
 	private final ModelRenderer shieldSouth;
@@ -35,7 +35,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 		
 		this.helmet = new ModelRenderer(this);
 		this.helmet.setPos(0.0F, 24.0F, 0.0F);
-		this.helmet.texOffs(16, 46).addBox(-4.0F, -30.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
+		this.helmet.texOffs(16, 46).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
 		
 		this.shieldNorth = new ModelRenderer(this);
 		this.shieldNorth.setPos(0.0F, 10.0F, 0.0F);
@@ -123,10 +123,6 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 		default: break;
 		}
 		throw new IllegalArgumentException("No shield for direction: " + direction);
-	}
-	
-	public ModelRenderer getHelmet() {
-		return this.helmet;
 	}
 	
 }

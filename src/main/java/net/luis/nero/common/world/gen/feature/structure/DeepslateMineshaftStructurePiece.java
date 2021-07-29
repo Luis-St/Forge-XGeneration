@@ -2,7 +2,6 @@ package net.luis.nero.common.world.gen.feature.structure;
 
 import java.util.Random;
 
-import net.luis.nero.Nero;
 import net.luis.nero.api.common.world.gen.feature.structure.ModStructurePiece;
 import net.luis.nero.init.world.gen.feature.structure.ModStructurePieceTypes;
 import net.minecraft.nbt.CompoundNBT;
@@ -17,15 +16,6 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 // random direction in ScatteredStructurePiece line 22
 public class DeepslateMineshaftStructurePiece extends /*ScatteredStructurePiece*/ModStructurePiece {
-	
-	/*
-[1.16.5][Bug?] Structure generation broken
-
-okay, a little explanation to make the whole problem clearer:
-I am currently trying to create a custom mineshaft that should generate in my custom dimension,
-it works as far, but if the structure goes beyond the size of a chunks, it no longer generates,
-I have tested a lot and can't find the problem. even simple structures (a room of air) does not generate.
-	 */
 	
 	protected final Random rng;
 	
@@ -43,13 +33,7 @@ I have tested a lot and can't find the problem. even simple structures (a room o
 	// TODO: better mineshaft gen -> less code/methods (use count)
 	public boolean postProcess(ISeedReader seedReader, StructureManager structureManager, ChunkGenerator chunkGenerator,
 			Random rng, MutableBoundingBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		Nero.LOGGER.debug("MutableBoundingBox: minX {}, minY {}, minZ {}, maxX {}, maxY {}, maxZ {} and spanX {}, spanY {}, spanZ {}", 
-				this.boundingBox.x0, this.boundingBox.y0, this.boundingBox.z0, this.boundingBox.x1, 
-				this.boundingBox.y1, this.boundingBox.z1, this.boundingBox.getXSpan(), this.boundingBox.getYSpan(), this.boundingBox.getZSpan());
-
-		this.generateAirBox(seedReader, boundingBox, 16, 16, 16, 32, 32, 32); // -> issu with generating
-
-		
+		this.generateAirBox(seedReader, boundingBox, this.getX(-8), this.getY(-8), this.getZ(-8), this.getX(8), this.getY(8), this.getZ(8)); // -> issu with generating
 //		this.updateBoundingBox(seedReader, boundingBox);
 		return true;
 	}

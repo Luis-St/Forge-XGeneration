@@ -50,7 +50,6 @@ public class Nero {
 	private static Nero nero;
 	
 	public Nero() {
-		
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		

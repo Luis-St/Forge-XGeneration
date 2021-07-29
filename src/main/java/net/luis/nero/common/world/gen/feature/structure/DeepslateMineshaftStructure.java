@@ -52,7 +52,7 @@ public class DeepslateMineshaftStructure extends Structure<NoFeatureConfig> {
 			DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
 			this.pieces.add(structurePiece);
 			this.calculateBoundingBox();
-//			this.moveInsideHeights(random, 128, 128);
+			this.moveInsideHeights(random, 128, 128);
 //			Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkX << 4) + 7, 128, (chunkZ << 4) + 7);
 		}
 		

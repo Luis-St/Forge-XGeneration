@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import net.luis.nero.api.config.Config;
 import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.client.render.entity.EntityRenderPos;
+import net.luis.nero.common.entity.goal.FireballRingAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -73,6 +74,7 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(4, new FireballRingAttackGoal(this));
 		this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
 		this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -109,6 +111,11 @@ public class HoveringInfernoEntity extends BlazeEntity {
 	@Override
 	public ItemStack getItemBySlot(EquipmentSlotType slotType) {
 		return slotType == EquipmentSlotType.HEAD ? new ItemStack(Items.NETHERITE_HELMET) : ItemStack.EMPTY;
+	}
+	
+	@Override
+	public boolean canAttack(LivingEntity livingEntity) {
+		return super.canAttack(livingEntity) && this.areShieldsActive();
 	}
 	
 	@Override
