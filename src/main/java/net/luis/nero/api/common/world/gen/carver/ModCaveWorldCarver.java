@@ -92,7 +92,7 @@ public class ModCaveWorldCarver extends ModWorldCarver<CaveCarverConfiguration> 
 			double posZ = (double) chunkPos.getBlockZ(rng.nextInt(16));
 			double horizontalMultiplier = (double) caveConfig.horizontalRadiusMultiplier.sample(rng);
 			double verticalMultiplier = (double) caveConfig.verticalRadiusMultiplier.sample(rng);
-			double floorLevel = (double) /*caveConfig.floorLevel.sample(p_159258_)*/0; // TODO: refelction handler -> in refections
+			double floorLevel = (double) caveConfig.floorLevel.sample(rng);
 			WorldCarver.CarveSkipChecker skipChecker = (carvingContext, xOffset, yOffset, zOffset, y) -> {
 				return this.shouldSkip(xOffset, yOffset, zOffset, floorLevel);
 			};

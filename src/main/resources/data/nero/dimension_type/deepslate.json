@@ -1,20 +1,18 @@
 {
-  "name": "Deepslate Dimension",
-  "ultrawarm": false,
-  "natural": true,
-  "coordinate_scale": 1,
-  "shrunk": false,
-  "has_skylight": true,
-  "has_ceiling": false,
+  "name": "Deepslate",
+  "logical_height": 384,
+  "infiniburn": "minecraft:infiniburn_overworld",
+  "effects": "minecraft:overworld",
   "ambient_light": 0.0,
-  "fixed_time": 0,
-  "piglin_safe": false,
-  "bed_works": true,
   "respawn_anchor_works": false,
   "has_raids": false,
-  "min_y": 0, # TODO: try set -64
-  "height": 256, # TODO: try set 320
-  "logical_height": 256,
-  "infiniburn": "minecraft:infiniburn_overworld",
-  "effects": "minecraft:overworld"
+  "min_y": -64,
+  "height": 384,
+  "natural": true,
+  "coordinate_scale": 1.0,
+  "piglin_safe": false,
+  "bed_works": true,
+  "has_skylight": true,
+  "has_ceiling": false,
+  "ultrawarm": false
 }

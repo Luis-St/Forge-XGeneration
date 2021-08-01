@@ -13,8 +13,8 @@ import net.luis.nero.config.ModCommonConfig;
 import net.luis.nero.config.ModServerConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
-import net.luis.nero.init.block.util.ModMenuTypes;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
+import net.luis.nero.init.block.util.ModMenuTypes;
 import net.luis.nero.init.enchantment.ModEnchantments;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.init.items.ModItems;
@@ -35,12 +35,12 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
-// TODO: new order of packages & classes (client, ...)
-// TODO: do all 1.17 adds -> replace mod deepslate with vanilla
 // TODO: if all done start with new stuff
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
+	// TODO: expands overworld hieht to 320
+	// TODO: expands nether to 256
 	// TODO: add drift sand -> spawn desert biome
 	// TODO: custom strong hold in deepslate -> without portal & god loot
 	// TODO: mineshaft structure 
@@ -48,7 +48,7 @@ public class Nero {
 	// TODO: debug register time for all entrys and events
 	// TODO: custom DimensionRenderInfo -> net.minecraft.client.world
 	
-	public static final Logger LOGGER = LogManager.getLogger("");
+	public static final Logger LOGGER = LogManager.getLogger(Nero.class.getSimpleName());
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
 	private static Nero nero;

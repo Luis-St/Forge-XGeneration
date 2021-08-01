@@ -1,8 +1,12 @@
 package net.luis.nero.event.fml;
 
+import java.util.ArrayList;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.util.Reflections;
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
 import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeSource;
@@ -53,25 +57,24 @@ public class OnCommonSetupEvent {
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "deepslate_biome_provider"), DeepslateBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "test_chunk_generator"), TestChunkGenerator.CODEC);
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biomes"), TestBiomeSource.CODEC);
-/*		Map<ResourceLocation, DimensionRenderInfo> renderInfos = new HashMap<>(); // TODO: try 
-		renderInfos.put(ModDimensionTypes.DEEPSLATE.location(), ModDimensionRenderInfo.DEEPSLATE);
-		Reflections.addDimensionRenderInfos(renderInfos);*/
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {
 		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureFeatureConfiguration(4, 1, 456734349), false);
 	}
 	
-	// TODO: fix
 	private static <F extends StructureFeature<?>> void registerStructure(F structure, StructureFeatureConfiguration structureConfig, boolean transformLand) {
 		StructureFeature.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
-		Reflections.addDefaultStructure(structure, structureConfig);
+		ImmutableMap<StructureFeature<?>, StructureFeatureConfiguration> defaultStructures = ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder().putAll(StructureSettings.DEFAULTS).put(structure, structureConfig).build();
+		StructureSettings.DEFAULTS = defaultStructures;
 		if (transformLand) {
-			Reflections.addNoiseStructure(structure);
+			ArrayList<StructureFeature<?>> noiseStructure = Lists.newArrayList(StructureFeature.NOISE_AFFECTING_FEATURES);
+			noiseStructure.add(structure);
+			StructureFeature.NOISE_AFFECTING_FEATURES = noiseStructure;
 		}
 		BuiltinRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(noiseSettings -> {
 			StructureSettings structureSettings = noiseSettings.getValue().structureSettings();
-			Reflections.addStructureSetting(structureSettings, structure);
+			structureSettings.structureConfig.putIfAbsent(structure, StructureSettings.DEFAULTS.get(structure));
 		});
 	}
 	

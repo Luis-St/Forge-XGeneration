@@ -19,8 +19,6 @@ public interface ISoulFireEntityRenderer<T extends Entity & ISoulFireEntity> {
 	public static final Material SOUL_FIRE_0 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_0"));
 	public static final Material SOUL_FIRE_1 = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation("block/soul_fire_1"));
 	
-	// TODO: test 1.17 of SoulBlaze
-	
 	@SuppressWarnings("resource")
 	default void renderSoulFire(T entity, PoseStack pose, MultiBufferSource bufferSource) {
 		TextureAtlasSprite soulFireSprite0 = SOUL_FIRE_0.sprite();

@@ -12,5 +12,5 @@ public class OnWorldTickEvent {
 	public static void worldLoad(TickEvent.WorldTickEvent event) {
 		
 	}
-	
+
 }

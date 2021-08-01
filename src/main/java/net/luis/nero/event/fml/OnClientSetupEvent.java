@@ -5,9 +5,12 @@ import net.luis.nero.client.render.blockentity.BloodAltarTileEntityRenderer;
 import net.luis.nero.client.render.entity.HoveringInfernoEntityRenderer;
 import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
+import net.luis.nero.client.world.ModDimensionSpecialEffects;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;
+import net.luis.nero.init.world.dimension.ModDimensionTypes;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -42,6 +45,10 @@ public class OnClientSetupEvent {
 	
 	protected static void registerBlockRenderType(FMLClientSetupEvent event) {
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.BRIDGE_BLOCK.get(), RenderType.translucent());
+	}
+	
+	protected static void registerUtil(FMLClientSetupEvent event) {
+		DimensionSpecialEffects.EFFECTS.put(ModDimensionTypes.DEEPSLATE.location(), ModDimensionSpecialEffects.DEEPSLATE);
 	}
 
 }
