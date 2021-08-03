@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.gen.feature;
 
-import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.block.Blocks;
@@ -94,7 +93,7 @@ public class ModLakesFeature extends Feature<BlockStateConfiguration> {
 												|| k3 < 15 && aboolean[(j2 * 16 + k3 + 1) * 8 + k4] || k3 > 0 && aboolean[(j2 * 16 + (k3 - 1)) * 8 + k4]
 												|| k4 < 7 && aboolean[(j2 * 16 + k3) * 8 + k4 + 1] || k4 > 0 && aboolean[(j2 * 16 + k3) * 8 + (k4 - 1)]);
 								if (flag1 && (k4 < 4 || context.random().nextInt(2) != 0) && context.level().getBlockState(pos.offset(j2, k4, k3)).getMaterial().isSolid()) {
-									context.level().setBlock(pos.offset(j2, k4, k3), ModBlocks.DEEPSLATE.get().defaultBlockState(), 2);
+									context.level().setBlock(pos.offset(j2, k4, k3), Blocks.DEEPSLATE.defaultBlockState(), 2);
 								}
 							}
 						}

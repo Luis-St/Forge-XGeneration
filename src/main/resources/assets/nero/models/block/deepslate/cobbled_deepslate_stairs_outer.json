@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "nero:block/cobbled_deepslate",
-    "top": "nero:block/cobbled_deepslate",
-    "side": "nero:block/cobbled_deepslate"
-  }
-}

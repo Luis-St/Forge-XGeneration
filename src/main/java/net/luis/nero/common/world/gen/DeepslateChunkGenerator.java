@@ -9,7 +9,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
-import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
@@ -31,6 +30,7 @@ import net.minecraft.world.level.levelgen.synth.SurfaceNoise;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
 	
+	// TODO: expands to -64 <-> 320
 	// TODO: get SETTINGS_CODEC from config and not form json
 	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
@@ -78,7 +78,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 			for (int y = 0; y < 256; y++) {
 				for (int z = 0; z < 16; z++) {
 					BlockPos pos = new BlockPos(x, y, z);
-					chunkAccess.setBlockState(pos, ModBlocks.DEEPSLATE.get().defaultBlockState(), false);
+					chunkAccess.setBlockState(pos, Blocks.DEEPSLATE.defaultBlockState(), false);
 					this.buildBedrock(chunkAccess, pos);
 					this.buildSurface(chunkAccess, genRegion.getBiome(pos), pos, z);
 				}
@@ -99,7 +99,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		int worldZ = chunkAccess.getPos().getMinBlockZ() + pos.getZ();
 		int y = chunkAccess.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
 		double noise = this.surfaceNoise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, pos.getX() * 0.0625) * 15;
-		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX,worldZ, y, noise, ModBlocks.DEEPSLATE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
+		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX,worldZ, y, noise, Blocks.DEEPSLATE.defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
 	}
 
 	@Override

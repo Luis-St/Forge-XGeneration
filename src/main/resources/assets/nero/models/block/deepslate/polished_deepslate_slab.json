@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "nero:block/polished_deepslate",
-    "top": "nero:block/polished_deepslate",
-    "side": "nero:block/polished_deepslate"
-  }
-}

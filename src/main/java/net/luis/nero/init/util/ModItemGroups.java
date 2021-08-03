@@ -12,7 +12,7 @@ public class ModItemGroups {
 	public static final CreativeModeTab BUILDING_BLOCKS = new CreativeModeTab(Nero.MOD_ID + "_building_blocks") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModBlockItems.DEEPSLATE.get());
+			return new ItemStack(ModBlockItems.DRIFT_SAND.get());
 		}
 	};
 	public static final CreativeModeTab DECORATIONS = new CreativeModeTab(Nero.MOD_ID + "_decorations") {

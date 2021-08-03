@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.gen.configured;
 
 import net.luis.nero.Nero;
-import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.world.gen.feature.ModFeatures;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -24,7 +23,7 @@ public class ConfiguredModFeatures {
 	// TODO: allow some modifications via config
 	// TODO: add airExposure -> float in OreConfiguration 0.0 = 0% airExposure, 1.0 = 100% airExposure
 	
-	private static final RuleTest DEEPSLATE = new BlockMatchTest(ModBlocks.DEEPSLATE.get());
+	private static final RuleTest DEEPSLATE = OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES;
 	private static final RuleTest STONE = new BlockMatchTest(Blocks.STONE);
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_COAL_ORE = register("deepslate_coal_ore",
@@ -118,17 +117,17 @@ public class ConfiguredModFeatures {
 	}
 
 	public static class States {
-		public static final BlockState DEEPSLATE_COAL_ORE = ModBlocks.DEEPSLATE_COAL_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_COPPER_ORE = ModBlocks.DEEPSLATE_COPPER_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_IRON_ORE = ModBlocks.DEEPSLATE_IRON_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_GOLD_ORE = ModBlocks.DEEPSLATE_GOLD_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_LAPIS_ORE = ModBlocks.DEEPSLATE_LAPIS_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_REDSTONE_ORE = ModBlocks.DEEPSLATE_REDSTONE_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_DIAMOND_ORE = ModBlocks.DEEPSLATE_DIAMOND_ORE.get().defaultBlockState();
-		public static final BlockState DEEPSLATE_EMERALD_ORE = ModBlocks.DEEPSLATE_EMERALD_ORE.get().defaultBlockState();
-		public static final BlockState TUFF_ORE = ModBlocks.TUFF.get().defaultBlockState();
+		public static final BlockState DEEPSLATE_COAL_ORE = Blocks.DEEPSLATE_COAL_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_COPPER_ORE = Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_IRON_ORE = Blocks.DEEPSLATE_IRON_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_GOLD_ORE = Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_LAPIS_ORE = Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_REDSTONE_ORE = Blocks.DEEPSLATE_REDSTONE_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_DIAMOND_ORE = Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState();
+		public static final BlockState DEEPSLATE_EMERALD_ORE = Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState();
+		public static final BlockState TUFF_ORE = Blocks.TUFF.defaultBlockState();
 		public static final BlockState COAL_ORE = Blocks.COAL_ORE.defaultBlockState();
-		public static final BlockState COPPER_ORE = ModBlocks.COPPER_ORE.get().defaultBlockState();
+		public static final BlockState COPPER_ORE = Blocks.COPPER_ORE.defaultBlockState();
 		public static final BlockState IRON_ORE = Blocks.IRON_ORE.defaultBlockState();
 		public static final BlockState GOLD_ORE = Blocks.GOLD_ORE.defaultBlockState();
 		public static final BlockState EMERALD_ORE = Blocks.EMERALD_ORE.defaultBlockState();

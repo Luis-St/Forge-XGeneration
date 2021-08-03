@@ -66,8 +66,6 @@ public class ModItems {
 			() -> new GlassShardItem(DyeColor.WHITE));
 	public static final RegistryObject<GlassShardItem> YELLOW_GLASS_SHARD = ITEMS.register("yellow_glass_shard", 
 			() -> new GlassShardItem(DyeColor.YELLOW));
-	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", 
-			() -> new Item(new Item.Properties().tab(ModItemGroups.MISC)));
 	public static final RegistryObject<Item> CRUSHED_COPPER_ORE = ITEMS.register("crushed_copper_ore", 
 			() -> new Item(new Item.Properties().tab(ModItemGroups.MISC)));
 	public static final RegistryObject<Item> CRUSHED_IRON_ORE = ITEMS.register("crushed_iron_ore", 

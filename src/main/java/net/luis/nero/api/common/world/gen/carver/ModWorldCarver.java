@@ -2,6 +2,7 @@
 
 import java.util.BitSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
@@ -9,12 +10,12 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 
-import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,11 +32,13 @@ public abstract class ModWorldCarver<C extends CarverConfiguration> extends Worl
 	
 	public ModWorldCarver(Codec<C> codec) {
 		super(codec);
-		this.replaceableBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.DEEPSLATE_COAL_ORE.get(),
-		ModBlocks.DEEPSLATE_COPPER_ORE.get(), ModBlocks.DEEPSLATE_IRON_ORE.get(),
-		ModBlocks.DEEPSLATE_GOLD_ORE.get(), ModBlocks.DEEPSLATE_LAPIS_ORE.get(),
-		ModBlocks.DEEPSLATE_REDSTONE_ORE.get(), ModBlocks.DEEPSLATE_DIAMOND_ORE.get(),
-		ModBlocks.DEEPSLATE_EMERALD_ORE.get());
+		this.replaceableBlocks = getReplaceableBlocks();
+	}
+	
+	public static Set<Block> getReplaceableBlocks() {
+		return ImmutableSet.of(Blocks.DEEPSLATE, Blocks.DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COPPER_ORE, 
+				Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_LAPIS_ORE,
+				Blocks.DEEPSLATE_REDSTONE_ORE,Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_EMERALD_ORE);
 	}
 
 	protected int getFluidFillHeight(int x, int y, int z) {

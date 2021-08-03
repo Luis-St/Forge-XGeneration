@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "nero:polished_deepslate"
-  },
-  "result": "nero:polished_deepslate_slab",
-  "count": 2
-}

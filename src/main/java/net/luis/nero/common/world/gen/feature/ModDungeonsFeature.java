@@ -3,9 +3,7 @@ package net.luis.nero.common.world.gen.feature;
 import java.util.Random;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
-import net.luis.nero.init.block.ModBlocks;
+import net.luis.nero.api.common.world.gen.carver.ModWorldCarver;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.WorldGenLevel;
@@ -26,12 +24,12 @@ public class ModDungeonsFeature extends Feature<NoneFeatureConfiguration> {
 	// allow player to change loot table and chest placement via config
 	
 	protected static final BlockState CAVE_AIR = Blocks.CAVE_AIR.defaultBlockState();
-	protected static final BlockState DEEPSLATE_BRICKS = ModBlocks.DEEPSLATE_BRICKS.get().defaultBlockState();
-	protected static final BlockState CRACKED_DEEPSLATE_BRICKS = ModBlocks.CRACKED_DEEPSLATE_BRICKS.get().defaultBlockState();
-	protected static final BlockState DEEPSLATE_TILES = ModBlocks.DEEPSLATE_TILES.get().defaultBlockState();
-	protected static final BlockState CRACKED_DEEPSLATE_TILES = ModBlocks.CRACKED_DEEPSLATE_TILES.get().defaultBlockState();
+	protected static final BlockState DEEPSLATE_BRICKS = Blocks.DEEPSLATE_BRICKS.defaultBlockState();
+	protected static final BlockState CRACKED_DEEPSLATE_BRICKS = Blocks.CRACKED_DEEPSLATE_BRICKS.defaultBlockState();
+	protected static final BlockState DEEPSLATE_TILES = Blocks.DEEPSLATE_TILES.defaultBlockState();
+	protected static final BlockState CRACKED_DEEPSLATE_TILES = Blocks.CRACKED_DEEPSLATE_TILES.defaultBlockState();
 	
-	private final Set<Block> replaceBlocks = ImmutableSet.of(ModBlocks.DEEPSLATE.get(), ModBlocks.TUFF.get());
+	private final Set<Block> replaceBlocks = ModWorldCarver.getReplaceableBlocks();
 	
 	public ModDungeonsFeature() {
 		super(NoneFeatureConfiguration.CODEC);

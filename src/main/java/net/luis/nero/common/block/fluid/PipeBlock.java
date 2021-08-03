@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import net.luis.nero.init.util.tags.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -21,6 +20,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
+	
+	// TODO: move model to TE -> dispatcher can set via config (count)
 	
 	public PipeBlock(Properties properties) {
 		super(0.25F, properties);
@@ -65,7 +66,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	}
 	
 	public static boolean isAllowedConnection(Block block) {
-		return BlockTags.getAllTags().getTag(ModBlockTags.FLUID_SYSTEM).contains(block);
+		return ModBlockTags.FLUID_SYSTEM.contains(block);
 	}
 	
 	@Override

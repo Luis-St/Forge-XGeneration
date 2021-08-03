@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "nero:deepslate"
+    "item": "minecraft:deepslate"
   },
   "result": "nero:deepslate_stairs",
   "count": 1
