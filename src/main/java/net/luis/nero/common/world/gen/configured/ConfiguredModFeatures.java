@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
@@ -128,13 +126,13 @@ public class ConfiguredModFeatures {
 			ModFeatures.ORE.get().configured(new OreConfiguration(DEEPSLATE, BlockStates.TUFF_ORE, 35))
 			.rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(512)).squared().count(16));
 
-	@NotTested
-	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAVE_LAKE = register("deepslate_lava_lake",
-			ModFeatures.LAKE.get().configured(new BlockStateConfiguration(BlockStates.LAVA)).rarity(40));
-	
-	@NotTested
-	public static final ConfiguredFeature<?, ?> DEEPSLATE_WATER_LAKE = register("deepslate_water_lake",
-			Feature.LAKE.configured(new BlockStateConfiguration(BlockStates.WATER)).rarity(40));
+//	@NotTested
+//	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAVE_LAKE = register("deepslate_lava_lake",
+//			ModFeatures.LAKE.get().configured(new BlockStateConfiguration(BlockStates.LAVA)).rarity(40));
+//	
+//	@NotTested
+//	public static final ConfiguredFeature<?, ?> DEEPSLATE_WATER_LAKE = register("deepslate_water_lake",
+//			Feature.LAKE.configured(new BlockStateConfiguration(BlockStates.WATER)).rarity(40));
 
 	@NotTested
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = register("deepslate_monster_room",

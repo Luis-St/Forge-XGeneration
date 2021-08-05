@@ -27,7 +27,6 @@ import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
-// TODO: more things to edit -> via get methods
 public abstract class ModWorldCarver<C extends CarverConfiguration> extends WorldCarver<C> {
 	
 	public ModWorldCarver(Codec<C> codec) {
@@ -168,3 +167,4 @@ public abstract class ModWorldCarver<C extends CarverConfiguration> extends Worl
 	}
 	
 }
+

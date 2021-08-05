@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
+import net.luis.nero.common.world.gen.configured.ConfiguredModWorldCarvers;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
@@ -39,20 +40,19 @@ public class OnBiomeLoadingEvent {
 		
 		if (biome.equals(ModBiomeKeys.DEEPSLATE.location())) {
 			
-			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
-			DefaultModFeatures.addDeepslateStructures(generationBuilder);
-			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
-			DefaultModFeatures.addDeepslateOres(generationBuilder);
+			generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.TEST_CANYON);
 			
+//			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
+//			DefaultModFeatures.addDeepslateStructures(generationBuilder);
+//			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
+//			DefaultModFeatures.addDeepslateOres(generationBuilder);
 		} else if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
 		} else { 
-			
 			DefaultModFeatures.addOreOverwrites(generationBuilder);
 			DefaultModFeatures.addFlatBedrock(generationBuilder);
-			
 		}
 		
 	}
