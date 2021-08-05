@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.config.Config;
-import net.luis.nero.common.world.gen.configured.ConfiguredModStructures;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
@@ -44,7 +43,6 @@ public class OnBiomeLoadingEvent {
 			DefaultModFeatures.addDeepslateStructures(generationBuilder);
 			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
 			DefaultModFeatures.addDeepslateOres(generationBuilder);
-			generationBuilder.addStructureStart(ConfiguredModStructures.DEEPSLATE_MINESHAFT);
 			
 		} else if (biomeCategory == BiomeCategory.THEEND) {
 			
@@ -69,7 +67,7 @@ public class OnBiomeLoadingEvent {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
-		} else { 
+		} else {
 			for (Decoration stage : GenerationStep.Decoration.values()) {
 				generationBuilder.getFeatures(stage).removeIf((supplier) -> {
 					for (ConfiguredFeature<?, ?> configuredFeature : supplier.get().getFeatures().collect(Collectors.toList())) {

@@ -24,7 +24,6 @@ public class ModLakesFeature extends Feature<BlockStateConfiguration> {
 		while (pos.getY() > 5 && context.level().isEmptyBlock(pos)) {
 			pos = pos.below();
 		}
-
 		if (pos.getY() <= 4) {
 			return false;
 		} else {

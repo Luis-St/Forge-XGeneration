@@ -26,7 +26,6 @@ import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
-import net.minecraft.world.level.levelgen.synth.SurfaceNoise;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
 	
@@ -34,13 +33,8 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	// TODO: get SETTINGS_CODEC from config and not form json
 	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
-			.group(Codec.INT.fieldOf("base_height").forGetter(Settings::getBaseHeight),
-					Codec.INT.fieldOf("min_height").forGetter(Settings::getMinHeight),
+			.group(Codec.INT.fieldOf("min_height").forGetter(Settings::getMinHeight),
 					Codec.INT.fieldOf("max_height").forGetter(Settings::getMaxHeight),
-					Codec.INT.fieldOf("sea_level").forGetter(Settings::getSeaLevel),
-					Codec.INT.fieldOf("water_ocean_level").forGetter(Settings::getWaterOceanLevel),
-					Codec.INT.fieldOf("lava_ocean_level").forGetter(Settings::getLavaOceanLevel),
-					Codec.INT.fieldOf("bedrock_top_layer").forGetter(Settings::getBedrockTopLayer),
 					Codec.INT.fieldOf("bedrock_top_layer_size").forGetter(Settings::getBedrockTopLayerSize))
 			.apply(instance, Settings::new));
 
@@ -50,15 +44,19 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 					SETTINGS_CODEC.fieldOf("settings").forGetter(DeepslateChunkGenerator::getDimensionSettings))
 			.apply(instance, DeepslateChunkGenerator::new));
 
-	private final Settings settings;
+	protected final Settings settings;
 	protected final WorldgenRandom worldRandom;
-	private final SurfaceNoise surfaceNoise;
-	private final long seed;
-
+	protected final PerlinNoise surfaceNoise;
+	protected final long seed;
+	
 	public DeepslateChunkGenerator(Registry<Biome> registry, Settings settings) {
+		this(registry, settings, new Random().nextLong());
+	}
+	
+	public DeepslateChunkGenerator(Registry<Biome> registry, Settings settings, long seed) {
 		super(new DeepslateBiomeSource(registry), new StructureSettings(false));
 		this.settings = settings;
-		this.seed = new Random().nextLong();
+		this.seed = seed;
 		this.worldRandom = new WorldgenRandom(this.seed);
 		this.surfaceNoise = new PerlinNoise(this.worldRandom, IntStream.rangeClosed(-3, 0));
 		this.worldRandom.consumeCount(2620);
@@ -74,22 +72,28 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 	
 	@Override
 	public void buildSurfaceAndBedrock(WorldGenRegion genRegion, ChunkAccess chunkAccess) {
+		int yMin = this.settings.minHeight;
+		int yMax = this.settings.maxHeight;
 		for (int x = 0; x < 16; x++) {
-			for (int y = 0; y < 256; y++) {
+			for (int y = yMin; y < yMax; y++) {
 				for (int z = 0; z < 16; z++) {
 					BlockPos pos = new BlockPos(x, y, z);
-					chunkAccess.setBlockState(pos, Blocks.DEEPSLATE.defaultBlockState(), false);
+					this.buildWorld(chunkAccess, pos);
 					this.buildBedrock(chunkAccess, pos);
 					this.buildSurface(chunkAccess, genRegion.getBiome(pos), pos, z);
 				}
 			}
 		}
 	}
-
+	
+	protected void buildWorld(ChunkAccess chunkAccess, BlockPos pos) {
+		chunkAccess.setBlockState(pos, Blocks.DEEPSLATE.defaultBlockState(), false);
+	}
+	
 	protected void buildBedrock(ChunkAccess chunkAccess, BlockPos pos) {
-		if (pos.getY() > this.getDimensionSettings().getBedrockTopLayer() - this.getDimensionSettings().getBedrockTopLayerSize() - 1) {
+		if (pos.getY() > this.settings.maxHeight - this.settings.bedrockTopLayerSize - 1) {
 			chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
-		} else if (pos.getY() <= this.worldRandom.nextInt(5)) {
+		} else if (pos.getY() <= this.worldRandom.nextInt(5) + this.settings.minHeight) {
 			chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
 		}
 	}
@@ -99,7 +103,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 		int worldZ = chunkAccess.getPos().getMinBlockZ() + pos.getZ();
 		int y = chunkAccess.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
 		double noise = this.surfaceNoise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, pos.getX() * 0.0625) * 15;
-		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX,worldZ, y, noise, Blocks.DEEPSLATE.defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
+		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX, worldZ, y, noise, Blocks.DEEPSLATE.defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, seed);
 	}
 
 	@Override
@@ -109,7 +113,7 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public ChunkGenerator withSeed(long seed) {
-		return new DeepslateChunkGenerator(this.getBiomeRegistry(), this.settings);
+		return new DeepslateChunkGenerator(this.getBiomeRegistry(), this.settings, seed);
 	}
 
 	@Override
@@ -119,12 +123,12 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public int getBaseHeight(int x, int z, Types types, LevelHeightAccessor levelAccessor) {
-		return this.getDimensionSettings().getBaseHeight();
+		return this.settings.maxHeight / 2;
 	}
 	
 	@Override
 	public int getSeaLevel() {
-		return this.getDimensionSettings().getSeaLevel();
+		return this.settings.maxHeight;
 	}
 
 	@Override
@@ -134,28 +138,14 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 	static class Settings {
 		
-		private final int baseHeight;
 		private final int minHeight;
 		private final int maxHeight;
-		private final int seaLevel;
-		private final int waterOceanLevel;
-		private final int lavaOceanLevel;
-		private final int bedrockTopLayer;
 		private final int bedrockTopLayerSize;
 		
-		public Settings(int baseHeight, int minHeight, int maxHeight, int seaLevel, int waterOceanLevel, int lavaOceanLevel, int bedrockTopLayer, int bedrockTopLayerSize) {
-			this.baseHeight = baseHeight;
+		public Settings(int minHeight, int maxHeight, int bedrockTopLayerSize) {
 			this.minHeight = minHeight;
 			this.maxHeight = maxHeight;
-			this.seaLevel = seaLevel;
-			this.waterOceanLevel = waterOceanLevel;
-			this.lavaOceanLevel = lavaOceanLevel;
-			this.bedrockTopLayer = bedrockTopLayer;
 			this.bedrockTopLayerSize = bedrockTopLayerSize;
-		}
-
-		public int getBaseHeight() {
-			return this.baseHeight;
 		}
 
 		public int getMinHeight() {
@@ -164,22 +154,6 @@ public class DeepslateChunkGenerator extends ChunkGenerator {
 
 		public int getMaxHeight() {
 			return this.maxHeight;
-		}
-
-		public int getSeaLevel() {
-			return this.seaLevel;
-		}
-
-		public int getWaterOceanLevel() {
-			return this.waterOceanLevel;
-		}
-		
-		public int getLavaOceanLevel() {
-			return this.lavaOceanLevel;
-		}
-
-		public int getBedrockTopLayer() {
-			return this.bedrockTopLayer;
 		}
 
 		public int getBedrockTopLayerSize() {

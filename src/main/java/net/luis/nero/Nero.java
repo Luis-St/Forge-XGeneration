@@ -25,8 +25,9 @@ import net.luis.nero.init.villager.ModPoiTypes;
 import net.luis.nero.init.villager.ModVillagerProfessions;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.luis.nero.init.world.gen.ModSurfaceBuilders;
+import net.luis.nero.init.world.gen.carver.ModWorldCarvers;
+import net.luis.nero.init.world.gen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.gen.feature.ModFeatures;
-import net.luis.nero.init.world.gen.feature.ModWorldCarvers;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -78,6 +79,7 @@ public class Nero {
 		ModEffects.EFFECTS.register(eventBus);
 		ModPotions.POTIONS.register(eventBus);
 		
+		ModFeatureDecorators.DECORATORS.register(eventBus);
 		ModFeatures.FEATURES.register(eventBus);
 		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);

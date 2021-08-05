@@ -36,22 +36,19 @@ public class DefaultModFeatures {
 	
 	// TODO: disable/enable feature via config -> list with features in config boolean list
 	public static void addDeepslateUndergroundVariety(BiomeGenerationSettings.Builder generationBuilder) {
-//		int stageOre = GenerationStep.Decoration.UNDERGROUND_ORES.ordinal();
-//		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.TUFF_ORE);
+		int stageOre = GenerationStep.Decoration.UNDERGROUND_ORES.ordinal();
+		generationBuilder.addFeature(stageOre, () -> ConfiguredModFeatures.TUFF_ORE);
 	}
 	
 	// TODO: disable/enable feature via config -> list with features in config boolean list
 	public static void addDeepslateStructures(BiomeGenerationSettings.Builder generationBuilder) {
 		int stageStructures = GenerationStep.Decoration.UNDERGROUND_ORES.ordinal();
-		int stageLake = GenerationStep.Decoration.UNDERGROUND_ORES.ordinal();
-		generationBuilder.addFeature(stageStructures, () -> ConfiguredModFeatures.DEEPSLATE_MONSTER_ROOM); 
-		generationBuilder.addFeature(stageLake, () -> ConfiguredModFeatures.DEEPSLATE_WATER_LAKE);
+		generationBuilder.addFeature(stageStructures, () -> ConfiguredModFeatures.DEEPSLATE_MONSTER_ROOM);
 	}
 
 	// TODO: disable/enable feature via config -> list with features in config boolean list
 	public static void addDeepslateCarvers(BiomeGenerationSettings.Builder generationBuilder) {
-//		generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.LARGE_CANYON);
-//		generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.HIGHER_CANYON);
+		
 	}
 	
 	// TODO: disable/enable feature via config -> list with features in config boolean list

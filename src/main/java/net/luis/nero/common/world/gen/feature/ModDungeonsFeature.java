@@ -3,7 +3,8 @@ package net.luis.nero.common.world.gen.feature;
 import java.util.Random;
 import java.util.Set;
 
-import net.luis.nero.api.common.world.gen.carver.ModWorldCarver;
+import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.WorldGenLevel;
@@ -29,7 +30,7 @@ public class ModDungeonsFeature extends Feature<NoneFeatureConfiguration> {
 	protected static final BlockState DEEPSLATE_TILES = Blocks.DEEPSLATE_TILES.defaultBlockState();
 	protected static final BlockState CRACKED_DEEPSLATE_TILES = Blocks.CRACKED_DEEPSLATE_TILES.defaultBlockState();
 	
-	private final Set<Block> replaceBlocks = ModWorldCarver.getReplaceableBlocks();
+	private final Set<Block> replaceBlocks = getReplaceableBlocks();
 	
 	public ModDungeonsFeature() {
 		super(NoneFeatureConfiguration.CODEC);
@@ -176,6 +177,12 @@ public class ModDungeonsFeature extends Feature<NoneFeatureConfiguration> {
 	
 	protected boolean canReplace(BlockState state) {
 		return this.replaceBlocks.contains(state.getBlock());
+	}
+	
+	public static Set<Block> getReplaceableBlocks() {
+		return ImmutableSet.of(Blocks.DEEPSLATE, Blocks.DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COPPER_ORE, 
+				Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_LAPIS_ORE,
+				Blocks.DEEPSLATE_REDSTONE_ORE,Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_EMERALD_ORE);
 	}
 
 }

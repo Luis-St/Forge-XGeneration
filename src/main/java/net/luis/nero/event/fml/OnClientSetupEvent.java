@@ -29,6 +29,7 @@ public class OnClientSetupEvent {
 		registerEntityRenderer(event);
 		registerTileEntityRenderer(event);
 		registerBlockRenderType(event);
+		registerUtil(event);
 	}
 	
 	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
