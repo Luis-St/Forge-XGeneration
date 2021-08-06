@@ -35,6 +35,11 @@ public class ConfiguredModWorldCarvers {
 					.verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F))
 			.build());
 	
+	public static final ConfiguredWorldCarver<CanyonCarverConfiguration> LARGE_CANYON = register("large_canyon",
+			ConfiguredCanyonBuilder.of(WorldCarver.CANYON).probability(0.008F).y(20, 490).yScale(3.0F).lavaLevel(10).disableAquifers()
+			.debugSettings().verticalRotation(-0.125F, 0.125F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of().distanceFactor(1.6F, 1.7F).thickness(0.0F, 6.0F, 2.0F)
+			.widthSmoothness(3).horizontalFactor(0.75F, 1.0F).verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F)).build());
+	
 	public static final ConfiguredWorldCarver<CanyonCarverConfiguration> TEST_CANYON =  register("canyon_test", 
 			ConfiguredCanyonBuilder.of(WorldCarver.CANYON).probability(0.02F).y(20, 67)
 			.yScale(3.0F) // height
@@ -42,18 +47,16 @@ public class ConfiguredModWorldCarvers {
 			.disableAquifers().debugSettings()
 			.verticalRotation(-0.125F, 0.125F) // move direction multiplier
 			.shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
-					.distanceFactor(0.75F, 1.0F) // length
+					.distanceFactor(1.6F, 1.7F) // length
 					.thickness(0.0F, 6.0F, 2.0F) // width
-					.widthSmoothness(10) // smoothness
+					.widthSmoothness(3) // smoothness
 					.horizontalFactor(0.75F, 1.0F) // width multiplier
 					.verticalDefaultFactor(1.0F) // height multiplier
-					.verticalCenterFactor(2.0F)) // height center multiplier
+					.verticalCenterFactor(0.0F)) // height center multiplier
 			.build());
 
-	private static <WC extends CarverConfiguration> ConfiguredWorldCarver<WC> register(String name,
-			ConfiguredWorldCarver<WC> configuredCarver) {
-		return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_CARVER, new ResourceLocation(Nero.MOD_ID, name),
-				configuredCarver);
+	private static <C extends CarverConfiguration> ConfiguredWorldCarver<C> register(String name,ConfiguredWorldCarver<C> configuredCarver) {
+		return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_CARVER, new ResourceLocation(Nero.MOD_ID, name), configuredCarver);
 	}
 
 }
