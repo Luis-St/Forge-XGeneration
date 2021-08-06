@@ -44,6 +44,6 @@ public class ModBlocks {
 					.harvestLevel(0).noDrops().instabreak().noOcclusion().sound(SoundType.GLASS)));
 	public static final RegistryObject<DriftSandBlock> DRIFT_SAND = BLOCKS.register("drift_sand", 
 			() -> new DriftSandBlock(14728571, Block.Properties.copy(Blocks.SAND).strength(0.6F).harvestTool(ToolType.SHOVEL)
-					.noOcclusion()));
+					.dynamicShape()));
 	
 }
