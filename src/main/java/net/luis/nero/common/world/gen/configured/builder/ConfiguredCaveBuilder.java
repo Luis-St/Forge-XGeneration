@@ -1,29 +1,31 @@
 package net.luis.nero.common.world.gen.configured.builder;
 
+import net.luis.nero.api.common.world.gen.carver.config.ModCaveCarverConfiguration;
 import net.luis.nero.api.util.Builder;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.UniformFloat;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
-import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 
-public class ConfiguredCaveBuilder<C extends CaveCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
+public class ConfiguredCaveBuilder<C extends ModCaveCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
 	
 	protected final WorldCarver<C> carver;
 	protected float probability;
 	protected HeightProvider y;
-	protected FloatProvider yScale;
-	protected VerticalAnchor lavaLevel;
+	protected FloatProvider yRoomScale;
+	protected FloatProvider yTunnelScale;
+	protected VerticalAnchor fluidLevel;
+	protected FluidState fluid;
 	protected boolean aquifersEnabled;
-	protected boolean debugMode = false;
-	protected CarverDebugSettings debugSettings;
+	protected int range;
+	protected int bound;
 	protected FloatProvider horizontalMultiplier;
 	protected FloatProvider verticalMultiplier;
 	protected FloatProvider floorLevel;
@@ -32,7 +34,7 @@ public class ConfiguredCaveBuilder<C extends CaveCarverConfiguration> implements
 		this.carver = carver;
 	}
 	
-	public static <C extends CaveCarverConfiguration> ConfiguredCaveBuilder<C> of(WorldCarver<C> carver) {
+	public static <C extends ModCaveCarverConfiguration> ConfiguredCaveBuilder<C> of(WorldCarver<C> carver) {
 		return new ConfiguredCaveBuilder<>(carver);
 	}
 	
@@ -51,23 +53,43 @@ public class ConfiguredCaveBuilder<C extends CaveCarverConfiguration> implements
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> yScale(float yScale) {
-		this.yScale = ConstantFloat.of(yScale);
+	public ConfiguredCaveBuilder<C> yRoomScale(float yRoomScale) {
+		this.yRoomScale = ConstantFloat.of(yRoomScale);
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> yScale(float minYScale, float maxYScale) {
-		this.yScale = UniformFloat.of(minYScale, maxYScale);
+	public ConfiguredCaveBuilder<C> yRoomScale(float minScale, float maxScale) {
+		this.yRoomScale = UniformFloat.of(minScale, maxScale);
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> lavaLevel(int lavaLevel) {
-		this.lavaLevel = VerticalAnchor.absolute(lavaLevel);
+	public ConfiguredCaveBuilder<C> yTunnelScale(float yTunnelScale) {
+		this.yTunnelScale = ConstantFloat.of(yTunnelScale);
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> lavaLevel() {
-		this.lavaLevel = VerticalAnchor.absolute(14);
+	public ConfiguredCaveBuilder<C> yTunnelScale(float minScale, float maxScale) {
+		this.yTunnelScale = UniformFloat.of(minScale, maxScale);
+		return this;
+	}
+	
+	public ConfiguredCaveBuilder<C> fluidLevel(int fluidLevel) {
+		this.fluidLevel = VerticalAnchor.absolute(fluidLevel);
+		return this;
+	}
+	
+	public ConfiguredCaveBuilder<C> fluidLevel() {
+		this.fluidLevel = VerticalAnchor.absolute(14);
+		return this;
+	}
+	
+	public ConfiguredCaveBuilder<C> fluid(FluidState fluid) {
+		this.fluid = fluid;
+		return this;
+	}
+	
+	public ConfiguredCaveBuilder<C> fluid(Fluid fluid) {
+		this.fluid = fluid.defaultFluidState();
 		return this;
 	}
 	
@@ -81,28 +103,13 @@ public class ConfiguredCaveBuilder<C extends CaveCarverConfiguration> implements
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> enableDebugMode() {
-		this.debugMode = true;
+	public ConfiguredCaveBuilder<C> range(int range) {
+		this.range = range;
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> disableDebugMode() {
-		this.debugMode = false;
-		return this;
-	}
-	
-	public ConfiguredCaveBuilder<C> debugSettings() {
-		this.debugSettings = CarverDebugSettings.DEFAULT;
-		return this;
-	}
-	
-	public ConfiguredCaveBuilder<C> debugSettings(BlockState air, BlockState block, BlockState fluid, BlockState barrier) {
-		this.debugSettings = CarverDebugSettings.of(this.debugMode, air, block, fluid, barrier);
-		return this;
-	}
-	
-	public ConfiguredCaveBuilder<C> debugSettings(boolean debugMode, BlockState air, BlockState block, BlockState fluid, BlockState barrier) {
-		this.debugSettings = CarverDebugSettings.of(debugMode, air, block, fluid, barrier);
+	public ConfiguredCaveBuilder<C> bound(int bound) {
+		this.bound = bound;
 		return this;
 	}
 	
@@ -134,7 +141,8 @@ public class ConfiguredCaveBuilder<C extends CaveCarverConfiguration> implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public ConfiguredWorldCarver<C> build() {
-		return this.carver.configured((C) new CaveCarverConfiguration(this.probability, this.y, this.yScale, this.lavaLevel, this.aquifersEnabled, this.debugSettings, this.verticalMultiplier, this.horizontalMultiplier, this.floorLevel));
+		return this.carver.configured((C) new ModCaveCarverConfiguration(this.probability, this.y, this.yRoomScale, this.yTunnelScale, this.fluidLevel, this.fluid, this.aquifersEnabled, this.range, this.bound, 
+				this.horizontalMultiplier, this.verticalMultiplier, this.floorLevel));
 	}
 	
 }

@@ -40,7 +40,7 @@ public class OnBiomeLoadingEvent {
 		
 		if (biome.equals(ModBiomeKeys.DEEPSLATE.location())) {
 			
-			generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.TEST_CANYON);
+			generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.CAVE);
 			
 //			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
 //			DefaultModFeatures.addDeepslateStructures(generationBuilder);

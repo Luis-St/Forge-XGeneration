@@ -10,6 +10,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 
+import net.luis.nero.api.common.world.gen.carver.config.ModCarverConfiguration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -21,13 +22,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Aquifer;
-import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarvingContext;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 
-public abstract class ModWorldCarver<C extends CarverConfiguration> extends WorldCarver<C> {
+public abstract class ModWorldCarver<C extends ModCarverConfiguration> extends WorldCarver<C> {
 	
 	public ModWorldCarver(Codec<C> codec) {
 		super(codec);
@@ -39,18 +37,10 @@ public abstract class ModWorldCarver<C extends CarverConfiguration> extends Worl
 				Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_LAPIS_ORE,
 				Blocks.DEEPSLATE_REDSTONE_ORE,Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_EMERALD_ORE);
 	}
-
-	protected int getFluidFillHeight(int x, int y, int z) {
-		return 14;
-	}
-	
-	protected FluidState getFluidFillState(int x, int y, int z) {
-		return Fluids.LAVA.defaultFluidState();
-	}
 	
 	@Override
-	public boolean isStartChunk(CarverConfiguration config, Random rng) {
-		return rng.nextFloat() <= config.probability;
+	public final int getRange() {
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override
@@ -136,8 +126,8 @@ public abstract class ModWorldCarver<C extends CarverConfiguration> extends Worl
 	}
 	
 	protected BlockState getCarveState(CarvingContext context, C config, BlockPos pos, Aquifer aquifer) {
-		if (pos.getY() <= this.getFluidFillHeight(pos.getX(), pos.getY(), pos.getZ())) {
-			return this.getFluidFillState(pos.getX(), pos.getY(), pos.getZ()).createLegacyBlock();
+		if (pos.getY() <= config.fluidLevel.resolveY(context)) {
+			return config.fluid.createLegacyBlock();
 		} else if (!config.aquifersEnabled) {
 			return this.isDebugEnabled(config) ? this.getDebugState(config, AIR) : AIR;
 		} else {

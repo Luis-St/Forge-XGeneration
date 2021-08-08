@@ -1,39 +1,39 @@
 package net.luis.nero.common.world.gen.configured.builder;
 
+import net.luis.nero.api.common.world.gen.carver.config.ModCanyonCarverConfiguration;
+import net.luis.nero.api.common.world.gen.carver.config.ModCanyonCarverConfiguration.ModCanyonShapeConfiguration;
 import net.luis.nero.api.util.Builder;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
-import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration.CanyonShapeConfiguration;
-import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 
-public class ConfiguredCanyonBuilder<C extends CanyonCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
+public class ConfiguredCanyonBuilder<C extends ModCanyonCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
 	
 	protected final WorldCarver<C> carver;
 	protected float probability;
 	protected HeightProvider y;
 	protected FloatProvider yScale;
-	protected VerticalAnchor lavaLevel;
+	protected VerticalAnchor fluidLevel;
+	protected FluidState fluid;
 	protected boolean aquifersEnabled;
-	protected boolean debugMode = false;
-	protected CarverDebugSettings debugSettings;
+	protected int range;
 	protected FloatProvider verticalRotation;
-	protected CanyonCarverConfiguration.CanyonShapeConfiguration shape;
+	protected ModCanyonShapeConfiguration shape;
 	
 	protected ConfiguredCanyonBuilder(WorldCarver<C> carver) {
 		this.carver = carver;
 	}
 	
-	public static <C extends CanyonCarverConfiguration> ConfiguredCanyonBuilder<C> of(WorldCarver<C> carver) {
+	public static <C extends ModCanyonCarverConfiguration> ConfiguredCanyonBuilder<C> of(WorldCarver<C> carver) {
 		return new ConfiguredCanyonBuilder<>(carver);
 	}
 	
@@ -62,13 +62,23 @@ public class ConfiguredCanyonBuilder<C extends CanyonCarverConfiguration> implem
 		return this;
 	}
 	
-	public ConfiguredCanyonBuilder<C> lavaLevel(int lavaLevel) {
-		this.lavaLevel = VerticalAnchor.absolute(lavaLevel);
+	public ConfiguredCanyonBuilder<C> fluidLevel(int fluidLevel) {
+		this.fluidLevel = VerticalAnchor.absolute(fluidLevel);
 		return this;
 	}
 	
-	public ConfiguredCanyonBuilder<C> lavaLevel() {
-		this.lavaLevel = VerticalAnchor.absolute(14);
+	public ConfiguredCanyonBuilder<C> fluidLevel() {
+		this.fluidLevel = VerticalAnchor.absolute(14);
+		return this;
+	}
+	
+	public ConfiguredCanyonBuilder<C> fluid(FluidState fluid) {
+		this.fluid = fluid;
+		return this;
+	}
+	
+	public ConfiguredCanyonBuilder<C> fluid(Fluid fluid) {
+		this.fluid = fluid.defaultFluidState();
 		return this;
 	}
 	
@@ -82,28 +92,8 @@ public class ConfiguredCanyonBuilder<C extends CanyonCarverConfiguration> implem
 		return this;
 	}
 	
-	public ConfiguredCanyonBuilder<C> enableDebugMode() {
-		this.debugMode = true;
-		return this;
-	}
-	
-	public ConfiguredCanyonBuilder<C> disableDebugMode() {
-		this.debugMode = false;
-		return this;
-	}
-	
-	public ConfiguredCanyonBuilder<C> debugSettings() {
-		this.debugSettings = CarverDebugSettings.DEFAULT;
-		return this;
-	}
-	
-	public ConfiguredCanyonBuilder<C> debugSettings(BlockState air, BlockState block, BlockState fluid, BlockState barrier) {
-		this.debugSettings = CarverDebugSettings.of(this.debugMode, air, block, fluid, barrier);
-		return this;
-	}
-	
-	public ConfiguredCanyonBuilder<C> debugSettings(boolean debugMode, BlockState air, BlockState block, BlockState fluid, BlockState barrier) {
-		this.debugSettings = CarverDebugSettings.of(debugMode, air, block, fluid, barrier);
+	public ConfiguredCanyonBuilder<C> range(int range) {
+		this.range = range;
 		return this;
 	}
 	
@@ -125,7 +115,7 @@ public class ConfiguredCanyonBuilder<C extends CanyonCarverConfiguration> implem
 	@Override
 	@SuppressWarnings("unchecked")
 	public ConfiguredWorldCarver<C> build() {
-		return this.carver.configured((C) new CanyonCarverConfiguration(this.probability, this.y, this.yScale, this.lavaLevel, this.aquifersEnabled, this.debugSettings, this.verticalRotation, this.shape));
+		return this.carver.configured((C) new ModCanyonCarverConfiguration(this.probability, this.y, this.yScale, this.fluidLevel, this.fluid, this.aquifersEnabled, this.range, this.verticalRotation, this.shape));
 	}
 	
 	public static class ShapeBuilder {
@@ -195,8 +185,8 @@ public class ConfiguredCanyonBuilder<C extends CanyonCarverConfiguration> implem
 			return this;
 		}
 		
-		protected CanyonShapeConfiguration build() {
-			return new CanyonCarverConfiguration.CanyonShapeConfiguration(this.distanceFactor, this.thickness, this.widthSmoothness, this.horizontalRadiusFactor, this.verticalRadiusDefaultFactor, this.verticalRadiusCenterFactor);
+		protected ModCanyonShapeConfiguration build() {
+			return new ModCanyonShapeConfiguration(this.distanceFactor, this.thickness, this.widthSmoothness, this.horizontalRadiusFactor, this.verticalRadiusDefaultFactor, this.verticalRadiusCenterFactor);
 		}
 		
 	}

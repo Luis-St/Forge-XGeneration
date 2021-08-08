@@ -2,49 +2,66 @@
 package net.luis.nero.common.world.gen.configured;
 
 import net.luis.nero.Nero;
+import net.luis.nero.api.common.world.gen.carver.config.ModCanyonCarverConfiguration;
+import net.luis.nero.api.common.world.gen.carver.config.ModCaveCarverConfiguration;
 import net.luis.nero.common.world.gen.configured.builder.ConfiguredCanyonBuilder;
 import net.luis.nero.common.world.gen.configured.builder.ConfiguredCaveBuilder;
+import net.luis.nero.init.world.gen.carver.ModWorldCarvers;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
-import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
-import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import net.minecraft.world.level.material.Fluids;
 
 public class ConfiguredModWorldCarvers {
 	
-	public static final ConfiguredWorldCarver<CaveCarverConfiguration> CAVE = register("cave",
-			ConfiguredCaveBuilder.of(WorldCarver.CAVE).probability(0.14285715F).y(0, 127).yScale(0.5F).lavaLevel(10)
-			.disableAquifers().debugSettings().horizontalMultiplier(1.0F).verticalMultiplier(1.0F).floorLevel(-0.7F).build());
+	public static final ConfiguredWorldCarver<ModCaveCarverConfiguration> CAVE = register("cave",
+			ConfiguredCaveBuilder.of(ModWorldCarvers.CAVE.get()).probability(0.14285715F).y(20, 127).range(4).bound(15)
+			.yRoomScale(0.5F).yTunnelScale(1.0F).fluidLevel(32).fluid(Fluids.LAVA).disableAquifers().horizontalMultiplier(1.0F)
+			.verticalMultiplier(1.0F).floorLevel(-0.7F).build());
 	
-	public static final ConfiguredWorldCarver<CaveCarverConfiguration> TEST_CAVE = register("test_cave",
-			ConfiguredCaveBuilder.of(WorldCarver.CAVE).probability(0.14285715F).y(64, 128)
-			.yScale(0.5F) // room height
-			.lavaLevel(10) // lava height
-			.disableAquifers().debugSettings()
+	public static final ConfiguredWorldCarver<ModCanyonCarverConfiguration> CANYON =  register("canyon", 
+			ConfiguredCanyonBuilder.of(ModWorldCarvers.CANYON.get()).probability(0.02F).y(20, 490).range(4).yScale(3.0F).fluidLevel(32)
+			.fluid(Fluids.LAVA).disableAquifers().verticalRotation(-0.125F, 0.125F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
+					.distanceFactor(0.75F, 1.0F).thickness(0.0F, 6.0F, 2.0F).widthSmoothness(3).horizontalFactor(0.75F, 1.0F)
+					.verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F))
+			.build());
+	
+	public static final ConfiguredWorldCarver<ModCanyonCarverConfiguration> LARGE_CANYON = register("large_canyon",
+			ConfiguredCanyonBuilder.of(ModWorldCarvers.CANYON.get()).probability(0.008F).y(20, 67).yScale(3.0F).fluidLevel(32)
+			.fluid(Fluids.LAVA).disableAquifers().verticalRotation(-0.125F, 0.125F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
+					.distanceFactor(1.6F, 1.7F).thickness(0.0F, 6.0F, 2.0F).widthSmoothness(3).horizontalFactor(0.75F, 1.0F)
+					.verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F))
+			.build());
+	
+	public static final ConfiguredWorldCarver<ModCanyonCarverConfiguration> HEIGHT_CANYON =  register("height_canyon", 
+			ConfiguredCanyonBuilder.of(ModWorldCarvers.CANYON.get()).probability(0.02F).y(40, 470).yScale(5.0F).fluidLevel(32)
+			.fluid(Fluids.LAVA).disableAquifers().verticalRotation(-0.35F, 0.35F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
+					.distanceFactor(0.75F, 0.85F).thickness(0.0F, 7.0F, 3.0F).widthSmoothness(6).horizontalFactor(1.0F, 1.25F)
+					.verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F))
+			.build());
+	
+	
+	
+	public static final ConfiguredWorldCarver<ModCaveCarverConfiguration> TEST_CAVE = register("test_cave",
+			ConfiguredCaveBuilder.of(ModWorldCarvers.CAVE.get()).probability(0.14285715F).y(64, 128).disableAquifers()
+			.range(4) // tunnel length
+			.bound(15) // cave gen length
+			.yRoomScale(0.5F) // room height
+			.yTunnelScale(1.0F) // tunnel height
+			.fluidLevel(10) // fluid height
+			.fluid(Fluids.LAVA) // filler fluid
 			.horizontalMultiplier(1.0F) // tunnel height
 			.verticalMultiplier(1.0F) // tunnel width
 			.floorLevel(-0.7F) // length of a cave
 			.build());
 	
-	public static final ConfiguredWorldCarver<CanyonCarverConfiguration> CANYON =  register("canyon", 
-			ConfiguredCanyonBuilder.of(WorldCarver.CANYON).probability(0.02F).y(20, 67).yScale(3.0F).lavaLevel(10)
-			.disableAquifers().debugSettings().verticalRotation(-0.125F, 0.125F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
-					.distanceFactor(0.75F, 1.0F).thickness(0.0F, 6.0F, 2.0F).widthSmoothness(3).horizontalFactor(0.75F, 1.0F)
-					.verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F))
-			.build());
-	
-	public static final ConfiguredWorldCarver<CanyonCarverConfiguration> LARGE_CANYON = register("large_canyon",
-			ConfiguredCanyonBuilder.of(WorldCarver.CANYON).probability(0.008F).y(20, 490).yScale(3.0F).lavaLevel(10).disableAquifers()
-			.debugSettings().verticalRotation(-0.125F, 0.125F).shape(ConfiguredCanyonBuilder.ShapeBuilder.of().distanceFactor(1.6F, 1.7F).thickness(0.0F, 6.0F, 2.0F)
-			.widthSmoothness(3).horizontalFactor(0.75F, 1.0F).verticalDefaultFactor(1.0F).verticalCenterFactor(0.0F)).build());
-	
-	public static final ConfiguredWorldCarver<CanyonCarverConfiguration> TEST_CANYON =  register("canyon_test", 
-			ConfiguredCanyonBuilder.of(WorldCarver.CANYON).probability(0.02F).y(20, 67)
+	public static final ConfiguredWorldCarver<ModCanyonCarverConfiguration> TEST_CANYON =  register("canyon_test", 
+			ConfiguredCanyonBuilder.of(ModWorldCarvers.CANYON.get()).probability(0.02F).y(20, 67).disableAquifers()
+			.range(4) // canyon length
 			.yScale(3.0F) // height
-			.lavaLevel(10)  // lava height
-			.disableAquifers().debugSettings()
+			.fluidLevel(10) // fluid height
+			.fluid(Fluids.LAVA) // filler fluid
 			.verticalRotation(-0.125F, 0.125F) // move direction multiplier
 			.shape(ConfiguredCanyonBuilder.ShapeBuilder.of()
 					.distanceFactor(1.6F, 1.7F) // length
