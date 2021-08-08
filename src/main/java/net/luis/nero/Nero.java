@@ -49,7 +49,7 @@ public class Nero {
 	// TODO: debug register time for all entrys and events
 	// TODO: custom DimensionRenderInfo -> net.minecraft.client.world
 	
-	public static final Logger LOGGER = LogManager.getLogger(Nero.class.getSimpleName());
+	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
 	private static Nero nero;
@@ -57,6 +57,7 @@ public class Nero {
 	private final ModEntityModelSet modModelSet;
 	
 	public Nero() {
+
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		

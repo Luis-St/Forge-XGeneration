@@ -14,10 +14,11 @@ public class OnFogColorsEvent {
 
 	@SubscribeEvent
 	public static void fogColors(EntityViewRenderEvent.FogColors event) {
-		Nero.LOGGER.debug("FogColors");
 		Camera camera = event.getInfo();
 		if (camera.getBlockAtCamera().getBlock() == ModBlocks.DRIFT_SAND.get()) {
-			Nero.LOGGER.debug("fogColors in DriftSand");
+			event.setRed(0.87843F);
+			event.setGreen(0.74117F);
+			event.setBlue(0.48235F);
 		}
 	}
 

@@ -19,7 +19,6 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// TODO: add fog
 public class DriftSandBlock extends SandBlock {
 
 	public DriftSandBlock(int dustColor, Properties properties) {
@@ -57,7 +56,7 @@ public class DriftSandBlock extends SandBlock {
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		if (entity instanceof LivingEntity || entity instanceof ItemEntity) {
-			entity.makeStuckInBlock(state, new Vec3(0.75, 0.01, 0.75));
+			entity.makeStuckInBlock(state, new Vec3(0.75, 0.05, 0.75));
 		}
 	}
 	

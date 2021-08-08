@@ -5,6 +5,7 @@ import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,10 +18,13 @@ public class OnHighlightBlockEvent {
 	@SuppressWarnings("resource")
 	public static void highlightBloc(DrawSelectionEvent.HighlightBlock event) {
 		LocalPlayer localPlayer = Minecraft.getInstance().player;
-		BlockPos pos = localPlayer.eyeBlockPosition();
-		if (Minecraft.getInstance().level.getBlockState(event.getTarget().getBlockPos()).getBlock() == ModBlocks.BRIDGE_BLOCK.get()) {
+		BlockPos targetPos = event.getTarget().getBlockPos();
+		BlockPos headPos = localPlayer.eyeBlockPosition();
+		if (Minecraft.getInstance().level.getBlockState(targetPos).getBlock() == ModBlocks.BRIDGE_BLOCK.get()) {
 			event.setCanceled(true);
-		} else if (Minecraft.getInstance().level.getBlockState(pos).getBlock() == ModBlocks.DRIFT_SAND.get()) {
+		} else if (Minecraft.getInstance().level.getBlockState(headPos).getBlock() == ModBlocks.DRIFT_SAND.get()) {
+			event.setCanceled(true);
+		} else if (Minecraft.getInstance().level.getBlockState(headPos).getBlock() == Blocks.POWDER_SNOW) {
 			event.setCanceled(true);
 		}
 	}
