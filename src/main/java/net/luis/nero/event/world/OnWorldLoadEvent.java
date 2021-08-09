@@ -13,7 +13,7 @@ public class OnWorldLoadEvent {
 	@SubscribeEvent
 	@SuppressWarnings("resource")
 	public static void worldLoad(WorldEvent.Load event) {
-		Nero.LOGGER.debug("gfdgjhfgsdjfgjsdgfdsjfgsdjsfdgjsdsgdgsd"); // no idea
+//		Nero.LOGGER.debug("gfdgjhfgsdjfgjsdgfdsjfgsdjsfdgjsdsgdgsd"); // no idea
 		if (event.getWorld() instanceof ServerLevel) {
 			ServerLevel serverLevel = (ServerLevel) event.getWorld();
 //			serverLevel.getChunkSource().generator.getSettings().structureConfig.putIfAbsent(StructureSettings.DEFAULTS.get(ModStructures.DEEPSLATE_MINESHAFT.get()), ModStructures.DEEPSLATE_MINESHAFT.get());

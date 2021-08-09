@@ -1,13 +1,12 @@
 package net.luis.nero.common.world.gen.layer;
 
-import net.luis.nero.Nero;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.data.worldgen.biome.Biomes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.newbiome.area.AreaFactory;
 import net.minecraft.world.level.newbiome.area.LazyArea;
 import net.minecraft.world.level.newbiome.layer.Layer;
@@ -33,7 +32,7 @@ public class ModLayer extends Layer {
 				if (SharedConstants.IS_RUNNING_IN_IDE) {
 					throw Util.pauseInIde(new IllegalStateException("Unknown biome id: " + i));
 				} else {
-					Nero.LOGGER.warn("Unknown biome id: ", i);
+//					Nero.LOGGER.warn("Unknown biome id: {}", i);
 					return registry.get(Biomes.byId(0));
 				}
 			} else {

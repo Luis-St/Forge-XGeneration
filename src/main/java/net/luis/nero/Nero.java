@@ -57,7 +57,9 @@ public class Nero {
 	private final ModEntityModelSet modModelSet;
 	
 	public Nero() {
-
+		LOGGER.debug("Nero-debug");
+		System.out.println("Nero-out");
+		System.err.println("Nero-err");
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		

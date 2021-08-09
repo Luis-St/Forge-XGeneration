@@ -91,10 +91,10 @@ public class ModCanyonWorldCarver extends ModWorldCarver<ModCanyonCarverConfigur
 		return widthFactors;
 	}
 
-	protected double updateVerticalRadius(ModCanyonCarverConfiguration config, Random rng, double p_159028_, float p_159029_, float p_159030_) {
+	protected double updateVerticalRadius(ModCanyonCarverConfiguration config, Random rng, double height, float p_159029_, float p_159030_) {
 		float f = 1.0F - Mth.abs(0.5F - p_159030_ / p_159029_) * 2.0F;
 		float f1 = config.shape.verticalDefaultFactor + config.shape.verticalCenterFactor * f;
-		return (double) f1 * p_159028_ * (double) Mth.randomBetween(rng, 0.75F, 1.0F);
+		return (double) f1 * height * (double) Mth.randomBetween(rng, 0.75F, 1.0F);
 	}
 
 	protected boolean shouldSkip(CarvingContext context, float[] widthFactors, double xOffset, double yOffset, double zOffset, int yIn) {

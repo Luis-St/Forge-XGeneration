@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.gen.feature.structure.start;
 
-import net.luis.nero.Nero;
 import net.luis.nero.common.world.gen.feature.structure.DeepslateMineshaftStructurePiece;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.ChunkPos;
@@ -24,7 +23,7 @@ public class DeepslateMineshaftStructureStart extends StructureStart<NoneFeature
 		DeepslateMineshaftStructurePiece structurePiece = new DeepslateMineshaftStructurePiece(random, (chunkPos.x << 4) + 7, 128, (chunkPos.z << 4) + 7);
 		this.pieces.add(structurePiece);
 		this.moveInsideHeights(random, 128, 128);
-		Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkPos.x << 4) + 7, 128, (chunkPos.z << 4) + 7);
+//		Nero.LOGGER.debug("Generate deepslate mineshaft structure at {}, {}, {}", (chunkPos.x << 4) + 7, 128, (chunkPos.z << 4) + 7);
 	}
 	
 }

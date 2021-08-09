@@ -50,11 +50,11 @@ public class ConfigUtil {
 				try {
 					configClasses.add(Class.forName(annotationData.memberName(), true, classLoader));
 				} catch (ClassNotFoundException e) {
-					Nero.LOGGER.warn("Can't find class {}", annotationData.memberName());
-					Nero.LOGGER.warn("Something went wrong when build the config ", e);
+//					Nero.LOGGER.warn("Can't find class {}", annotationData.memberName());
+//					Nero.LOGGER.warn("Something went wrong when build the config ", e);
 				}
 			} else {
-				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.annotationType());
+//				Nero.LOGGER.warn("The Annotation can't add to the Type {}", annotationData.annotationType());
 			}
 		}
 		return configClasses;
@@ -109,13 +109,11 @@ public class ConfigUtil {
 				configValue.getConfigField().set(null, configValue.getConfigValue().get());
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			} catch (IllegalAccessException e) {
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			}
 		}
 		for (ModConfigValue configValue : COMMON_VALUES) {
@@ -124,13 +122,11 @@ public class ConfigUtil {
 				configValue.getConfigField().set(null, configValue.getConfigValue().get());
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			} catch (IllegalAccessException e) {
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			}
 		}
 		for (ModConfigValue configValue : SERVER_VALUES) {
@@ -139,13 +135,11 @@ public class ConfigUtil {
 				configValue.getConfigField().set(null, configValue.getConfigValue().get());
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			} catch (IllegalAccessException e) {
-				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(),
-						configValue.getConfigValue().get());
-				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
+//				Nero.LOGGER.warn("Can't update the Field {}, in Class {}, to Value {}", configValue.getConfigField().getName(), configValue.getConigClass().getName(), configValue.getConfigValue().get());
+//				Nero.LOGGER.warn("Something went wrong when update the Config Fields ", e);
 			}
 		}
 	}
