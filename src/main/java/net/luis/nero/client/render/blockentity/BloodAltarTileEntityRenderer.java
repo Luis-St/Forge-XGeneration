@@ -29,7 +29,7 @@ public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAl
 	public void render(BloodAltarBlockEntity bloodAltarBlockEntity, float partialTicks, PoseStack pose, MultiBufferSource bufferSource, int light, int overlay) {
 		pose.pushPose();
 		pose.translate(1, 1, 1);
-		VertexConsumer vertexBuilder = TEXTURE_LOCATION.buffer(bufferSource, RenderType::entitySolid); // TODO: anim texture -> like wild blaze texture in outvoted
+		VertexConsumer vertexBuilder = TEXTURE_LOCATION.buffer(bufferSource, RenderType::entitySolid);
 		float bloodHeigth = Mth.lerp(partialTicks, bloodAltarBlockEntity.getPrevious(), bloodAltarBlockEntity.getCurrent());
 		this.altarModel.renderBlood(pose, vertexBuilder, light, overlay, bloodHeigth);
 		pose.popPose();

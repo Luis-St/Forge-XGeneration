@@ -18,8 +18,6 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 
 public class DeepslateBiomeSource extends BiomeSource {
 
-	// TODO: custom tp engine for deepslate dimension
-
 	public static final Codec<DeepslateBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
 			.xmap(DeepslateBiomeSource::new, DeepslateBiomeSource::getBiomeRegistry).codec();
 	

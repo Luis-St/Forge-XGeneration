@@ -35,7 +35,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-// TODO: EntitySpawnPlacementRegistry
 public class HoveringInfernoEntity extends Blaze {
 	
 	private static final EntityDataAccessor<Integer> DATA = SynchedEntityData.defineId(HoveringInfernoEntity.class, EntityDataSerializers.INT);

@@ -12,11 +12,15 @@ import net.luis.nero.common.world.gen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeSource;
 import net.luis.nero.common.world.test.TestChunkGenerator;
 import net.luis.nero.core.NetworkHandler;
+import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
@@ -36,8 +40,9 @@ public class OnCommonSetupEvent {
 		registerNetwork(event);
 		registerCapability(event);
 		registerBiome(event);
-		registerUtil(event);
+		registerEntitySpawnPlacements(event);
 		registerStructure(event);
+		registerUtil(event);
 	}
 	
 	protected static void registerNetwork(FMLCommonSetupEvent event) {
@@ -52,15 +57,20 @@ public class OnCommonSetupEvent {
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE, Type.MODIFIED);
 	}
 	
+	protected static void registerEntitySpawnPlacements(FMLCommonSetupEvent event) {
+		SpawnPlacements.register(ModEntityTypes.SOUL_BLAZE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,  Monster::checkAnyLightMonsterSpawnRules);
+		SpawnPlacements.register(ModEntityTypes.HOVERING_INFERNO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,  Monster::checkAnyLightMonsterSpawnRules);
+	}
+	
+	protected static void registerStructure(FMLCommonSetupEvent event) {
+		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureFeatureConfiguration(4, 1, 456734349), false);
+	}
+	
 	protected static void registerUtil(FMLCommonSetupEvent event) {
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "deepslate_biome_provider"), DeepslateBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "test_chunk_generator"), TestChunkGenerator.CODEC);
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biomes"), TestBiomeSource.CODEC);
-	}
-	
-	protected static void registerStructure(FMLCommonSetupEvent event) {
-		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureFeatureConfiguration(4, 1, 456734349), false);
 	}
 	
 	private static <F extends StructureFeature<?>> void registerStructure(F structure, StructureFeatureConfiguration structureConfig, boolean transformLand) {

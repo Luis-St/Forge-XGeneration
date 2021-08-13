@@ -11,7 +11,6 @@ public class RuneType implements IRuneType {
 	public static final RuneType LAVA = new RuneType(250, 250);
 	public static final RuneType DEATH = new RuneType(2500, 1500);
 	public static final RuneType HASTE = new RuneType(250, 250);
-	public static final RuneType VOID = new RuneType(750, 0); // TODO: ideas? or remove
 	public static final RuneType AIR = new RuneType(500, 0);
 	public static final RuneType ICE = new RuneType(0, 250);
 	public static final RuneType WARRIOR = new RuneType(500, 0);
