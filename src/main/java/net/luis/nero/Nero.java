@@ -6,11 +6,7 @@ import java.nio.file.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.luis.nero.api.config.ConfigUtil;
 import net.luis.nero.client.model.ModEntityModelSet;
-import net.luis.nero.config.ModClientConfig;
-import net.luis.nero.config.ModCommonConfig;
-import net.luis.nero.config.ModServerConfig;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
@@ -30,16 +26,14 @@ import net.luis.nero.init.world.gen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.gen.feature.ModFeatures;
 import net.luis.nero.init.world.gen.feature.structure.ModStructures;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
-// TODO: if all done start with new stuff
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
+	// TODO: custom config system
 	// TODO: expands overworld hieht to 320
 	// TODO: expands nether to 256
 	// TODO: add drift sand -> spawn desert biome
@@ -47,7 +41,6 @@ public class Nero {
 	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
 	// TODO: debug register time for all entrys and events
-	// TODO: custom DimensionRenderInfo -> net.minecraft.client.world
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
@@ -57,9 +50,9 @@ public class Nero {
 	private final ModEntityModelSet modModelSet;
 	
 	public Nero() {
-		LOGGER.debug("Nero-debug");
 		System.out.println("Nero-out");
 		System.err.println("Nero-err");
+		LOGGER.debug("Nero-logger");
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
@@ -79,7 +72,7 @@ public class Nero {
 		
 		ModEntityTypes.ENTITIES.register(eventBus);
 		
-		ModEffects.EFFECTS.register(eventBus);
+		ModEffects.MOB_EFFECTS.register(eventBus);
 		ModPotions.POTIONS.register(eventBus);
 		
 		ModFeatureDecorators.DECORATORS.register(eventBus);
@@ -89,8 +82,7 @@ public class Nero {
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
 		
-		this.buildConfig();
-		ConfigUtil.setConfigValues();
+//		this.buildConfig();
 		
 		this.modModelSet = new ModEntityModelSet();
 	}
@@ -105,9 +97,9 @@ public class Nero {
 	
 	protected void buildConfig() {
 		this.createConfigPath();
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
 	}
 	
 	private void createConfigPath() {

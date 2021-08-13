@@ -1,10 +1,6 @@
 package net.luis.nero.api.config;
 
-import java.lang.reflect.Field;
-
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-
-public class ModConfigValue {
+/*public class ModConfigValue {
 	
 	protected final Class<?> conigClass;
 	protected final Field configField;
@@ -28,4 +24,4 @@ public class ModConfigValue {
 		return this.configValue;
 	}
 
-}
+}*/

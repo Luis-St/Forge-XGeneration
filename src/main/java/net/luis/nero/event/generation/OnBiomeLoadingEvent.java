@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.config.Config;
 import net.luis.nero.common.world.gen.configured.ConfiguredModWorldCarvers;
 import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.gen.feature.ModOreFeature;
@@ -25,7 +24,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Config
 @EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnBiomeLoadingEvent {
 	

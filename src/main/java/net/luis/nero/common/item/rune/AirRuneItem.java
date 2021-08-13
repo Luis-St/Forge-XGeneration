@@ -1,8 +1,6 @@
 package net.luis.nero.common.item.rune;
 
 import net.luis.nero.api.common.item.AbstractRuneItem;
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -12,11 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-@Config
 public class AirRuneItem extends AbstractRuneItem {
-	
-	@ConfigValue
-	private static Double AIR_RUNE_Y_MOTION = 1.3; 
 	
 	public AirRuneItem(Properties properties) {
 		super(RuneType.AIR, properties);
@@ -25,7 +19,7 @@ public class AirRuneItem extends AbstractRuneItem {
 	@Override
 	protected InteractionResultHolder<ItemStack> useRune(Level level, Player player, InteractionHand hand, ItemStack orbStack) {
 		double xMotion = player.getViewVector(1.0F).x();
-		double yMotion = AIR_RUNE_Y_MOTION;
+		double yMotion = 1.3;
 		double zMotion = player.getViewVector(1.0F).z();
 		Vec3 vector = new Vec3(xMotion, yMotion, zMotion);
 		player.setDeltaMovement(vector);

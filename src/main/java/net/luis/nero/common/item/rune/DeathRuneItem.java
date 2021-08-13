@@ -3,8 +3,6 @@ package net.luis.nero.common.item.rune;
 import java.util.List;
 
 import net.luis.nero.api.common.item.AbstractRuneItem;
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.world.InteractionHand;
@@ -16,15 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
-@Config
 public class DeathRuneItem extends AbstractRuneItem {
-	
-	@ConfigValue
-	private static Integer DEATH_RUNE_ENTITY_AREA_X = 7;
-	@ConfigValue
-	private static Integer DEATH_RUNE_ENTITY_AREA_Y = 7;
-	@ConfigValue
-	private static Integer DEATH_RUNE_ENTITY_AREA_Z = 7;
 	
 	public DeathRuneItem(Properties properties) {
 		super(RuneType.DEATH, properties);
@@ -35,8 +25,7 @@ public class DeathRuneItem extends AbstractRuneItem {
 		double x = player.getX();
 		double y = player.getY();
 		double z = player.getZ();
-		AABB alignedBB = new AABB(x - DEATH_RUNE_ENTITY_AREA_X, y - DEATH_RUNE_ENTITY_AREA_Y, z - DEATH_RUNE_ENTITY_AREA_Z, 
-				x + DEATH_RUNE_ENTITY_AREA_X, y + DEATH_RUNE_ENTITY_AREA_Y, z + DEATH_RUNE_ENTITY_AREA_Z);
+		AABB alignedBB = new AABB(x - 7, y - 7, z - 7, x + 7, y + 7, z + 7);
 		List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, alignedBB, EntitySelector.NO_CREATIVE_OR_SPECTATOR);
 		livingEntities.removeIf(livingEntity -> livingEntity == player);
 		for (LivingEntity livingEntity : livingEntities) {

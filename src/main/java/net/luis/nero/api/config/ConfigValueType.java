@@ -1,6 +1,6 @@
 package net.luis.nero.api.config;
 
-public enum ConfigValueType {
+/*public enum ConfigValueType {
 	
 	BLOCK,
 	ITEM,
@@ -19,4 +19,4 @@ public enum ConfigValueType {
 	EVENT,
 	UTIL;
 	
-}
+}*/

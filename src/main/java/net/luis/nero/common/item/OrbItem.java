@@ -4,8 +4,6 @@ import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.capability.provider.BloodOrbCapabilityProvider;
 import net.luis.nero.api.common.capability.util.CapabilityUtil;
 import net.luis.nero.api.common.item.IOrbType;
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
@@ -20,11 +18,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-@Config
 public class OrbItem extends Item {
-	
-	@ConfigValue
-	public static Integer ORB_RGB_DURABILITY_BAR = 11796480;
 	
 	private final IOrbType orbType;
 	
@@ -53,7 +47,7 @@ public class OrbItem extends Item {
 	
 	@Override
 	public int getRGBDurabilityForDisplay(ItemStack stack) {
-		return ORB_RGB_DURABILITY_BAR;
+		return 11796480;
 	}
 	
 	@Override

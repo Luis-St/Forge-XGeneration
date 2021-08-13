@@ -1,25 +1,6 @@
 package net.luis.nero.api.config;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.objectweb.asm.Type;
-
-import com.google.common.collect.Lists;
-
-import net.luis.nero.Nero;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.forgespi.language.ModFileScanData;
-import net.minecraftforge.forgespi.language.ModFileScanData.AnnotationData;
-
-public class ConfigUtil {
+/*public class ConfigUtil {
 	
 	protected static final List<ModConfigValue> CLIENT_VALUES = new ArrayList<>();
 	protected static final List<ModConfigValue> COMMON_VALUES = new ArrayList<>();
@@ -144,4 +125,4 @@ public class ConfigUtil {
 		}
 	}
 	
-}
+}*/

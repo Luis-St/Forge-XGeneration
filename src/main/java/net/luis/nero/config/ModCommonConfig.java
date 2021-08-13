@@ -1,15 +1,6 @@
 package net.luis.nero.config;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
-import net.luis.nero.api.config.ConfigUtil;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
-
-public class ModCommonConfig {
-	
-	// TODO: add in range values
+/*public class ModCommonConfig {
 	
 	private static final String CONFIG_TYPE_NAME = "Common";
 	private static final ModConfig.Type CONFIG_TYPE = ModConfig.Type.COMMON;
@@ -44,4 +35,4 @@ public class ModCommonConfig {
 		return builder.build();
 	}
 
-}
+}*/

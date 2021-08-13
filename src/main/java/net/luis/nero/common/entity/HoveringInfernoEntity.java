@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.client.render.entity.EntityRenderPos;
 import net.luis.nero.common.entity.goal.FireballRingAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
@@ -38,17 +36,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 // TODO: EntitySpawnPlacementRegistry
-@Config
 public class HoveringInfernoEntity extends Blaze {
 	
 	private static final EntityDataAccessor<Integer> DATA = SynchedEntityData.defineId(HoveringInfernoEntity.class, EntityDataSerializers.INT);
-	
-	@ConfigValue private static Double HOVERING_INFERNO_ATTACK_DAMAGE = 10.0;
-	@ConfigValue private static Double HOVERING_INFERNO_MOVEMENT_SPEED = 0.3;
-	@ConfigValue private static Double HOVERING_INFERNO_FOLLOW_RANGE = 64.0;
-	@ConfigValue private static Double HOVERING_INFERNO_MAX_HEALTH = 40.0;
-	@ConfigValue private static Double HOVERING_INFERNO_KNOCKBACK_RESISTANCE = 0.5;
-	@ConfigValue private static Double HOVERING_INFERNO_DAMAGE_RESISTANCE = 0.25;
 	
 	public EntityRenderPos shieldNorth = new EntityRenderPos();
 	public EntityRenderPos shieldEast = new EntityRenderPos();
@@ -119,7 +109,7 @@ public class HoveringInfernoEntity extends Blaze {
 	
 	@Override
 	public boolean hurt(DamageSource damageSource, float amount) {
-		amount *= 1 - HOVERING_INFERNO_DAMAGE_RESISTANCE;
+		amount *= 1 - 0.25;
 		boolean useAxe = false;
 		if (damageSource.getEntity() instanceof LivingEntity) {
 			LivingEntity attacker = (LivingEntity) damageSource.getEntity();
@@ -221,12 +211,9 @@ public class HoveringInfernoEntity extends Blaze {
 	}
 	
 	public static AttributeSupplier registerAttributes() {
-	      return Monster.createMonsterAttributes()
-	    		  .add(Attributes.ATTACK_DAMAGE, HOVERING_INFERNO_ATTACK_DAMAGE)
-	    		  .add(Attributes.MOVEMENT_SPEED, HOVERING_INFERNO_MOVEMENT_SPEED)
-	    		  .add(Attributes.FOLLOW_RANGE, HOVERING_INFERNO_FOLLOW_RANGE)
-	    		  .add(Attributes.KNOCKBACK_RESISTANCE, HOVERING_INFERNO_KNOCKBACK_RESISTANCE)
-	    		  .add(Attributes.MAX_HEALTH, HOVERING_INFERNO_MAX_HEALTH).build();
+	      return Monster.createMonsterAttributes().add(Attributes.ATTACK_DAMAGE, 10.0)
+	    		  .add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.FOLLOW_RANGE, 64.0)
+	    		  .add(Attributes.KNOCKBACK_RESISTANCE, 0.5).add(Attributes.MAX_HEALTH, 40.0).build();
 	}
 	
 }

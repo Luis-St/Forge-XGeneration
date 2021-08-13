@@ -1,8 +1,6 @@
 package net.luis.nero.common.item.rune;
 
 import net.luis.nero.api.common.item.AbstractRuneItem;
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.enums.RuneType;
 import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.world.InteractionHand;
@@ -13,11 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-@Config
 public class IceRuneItem extends AbstractRuneItem {
-	
-	@ConfigValue
-	private static Integer ICE_RUNE_ICE_DURATION = 200;
 	
 	public IceRuneItem(Properties properties) {
 		super(RuneType.ICE, properties);
@@ -30,7 +24,7 @@ public class IceRuneItem extends AbstractRuneItem {
 
 	@Override
 	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, Player attacker, ItemStack orbStack) {
-		target.addEffect(new MobEffectInstance(ModEffects.ICE.get(), ICE_RUNE_ICE_DURATION, target instanceof Player ? 1 : 0, true, true, true));
+		target.addEffect(new MobEffectInstance(ModEffects.ICE.get(), 200, target instanceof Player ? 1 : 0, true, true, true));
 		return true;
 	}
 

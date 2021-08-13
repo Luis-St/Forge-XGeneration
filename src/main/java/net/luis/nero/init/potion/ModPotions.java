@@ -9,6 +9,6 @@ public class ModPotions {
 	
 	// TODO: add potions and thire recipes for mod Effects -> may config 
 	
-	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, Nero.MOD_ID);
+	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Nero.MOD_ID);
 
 }

@@ -1,13 +1,6 @@
 package net.luis.nero.config;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
-import net.luis.nero.api.config.ConfigUtil;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
-
-public class ModClientConfig {
+/*public class ModClientConfig {
 	
 	private static final String CONFIG_TYPE_NAME = "Client";
 	private static final ModConfig.Type CONFIG_TYPE = ModConfig.Type.CLIENT;
@@ -38,4 +31,4 @@ public class ModClientConfig {
 		return builder.build();
 	}
 	
-}
+}*/

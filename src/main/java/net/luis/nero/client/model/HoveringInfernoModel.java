@@ -3,8 +3,6 @@ package net.luis.nero.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.luis.nero.api.config.Config;
-import net.luis.nero.api.config.value.ConfigValue;
 import net.luis.nero.common.entity.HoveringInfernoEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,13 +12,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.core.Direction;
-import net.minecraftforge.fml.config.ModConfig.Type;
 
-@Config(type = Type.CLIENT)
 public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
-	
-	@ConfigValue
-	private static Boolean RENDER_HOVERING_INFERNO_HELMET = true;
 	
 	private final ModelPart head;
 	private final ModelPart helmet; // TODO: fix helme rendering
