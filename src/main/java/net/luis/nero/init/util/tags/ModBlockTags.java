@@ -8,8 +8,6 @@ import net.minecraft.world.level.block.Block;
 
 public class ModBlockTags {
 	
-	// TODO: more
-	
 	public static final Tag.Named<Block> FLUID_SYSTEM = BlockTags.createOptional(new ResourceLocation(Nero.MOD_ID, "fluid_system"));
 	
 }

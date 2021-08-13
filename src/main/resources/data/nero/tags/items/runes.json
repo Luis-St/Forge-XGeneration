@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "nero:rune",
+    "nero:water_rune",
+    "nero:bridge_rune",
+    "nero:wind_rune",
+    "nero:lava_rune",
+    "nero:death_rune",
+    "nero:haste_rune",
+    "nero:air_rune",
+    "nero:ice_rune",
+    "nero:warrior_rune",
+    "nero:mining_rune",
+    "nero:seer_rune",
+    "nero:elemental_rune",
+    "nero:harvest_rune"
+}
