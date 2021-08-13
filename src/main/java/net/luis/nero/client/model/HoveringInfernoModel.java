@@ -16,7 +16,7 @@ import net.minecraft.core.Direction;
 public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 	
 	private final ModelPart head;
-	private final ModelPart helmet; // TODO: fix helme rendering
+	private final ModelPart helmet;
 	private final ModelPart body;
 	private final ModelPart shieldNorth;
 	private final ModelPart shieldWest;
