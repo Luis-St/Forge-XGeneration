@@ -29,9 +29,6 @@ import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 
 public class DeepslateChunkGenerator extends ChunkGenerator {
 	
-	// TODO: expands to -64 <-> 320
-	// TODO: get SETTINGS_CODEC from config and not form json
-	
 	private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance -> instance
 			.group(Codec.INT.fieldOf("min_height").forGetter(Settings::getMinHeight),
 					Codec.INT.fieldOf("max_height").forGetter(Settings::getMaxHeight),

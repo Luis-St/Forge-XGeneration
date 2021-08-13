@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.gen.configured;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.util.annotation.NotTested;
 import net.luis.nero.common.world.gen.decorator.config.DepthAverageDecoratorConfiguration;
 import net.luis.nero.init.world.gen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.gen.feature.ModFeatures;
@@ -24,11 +23,9 @@ import net.minecraft.world.level.material.Fluids;
 public class ConfiguredModFeatures {
 	
 	// TODO: test rangeTriangle then remove DEPTH_AVERAGE
-	// TODO: fix lakes
 	
 	// TODO: allow some modifications via config
 	// TODO: add airExposure -> float in OreConfiguration 0.0 = 0% airExposure, 1.0 = 100% airExposure
-	// TODO: VerticalAnchor height in config
 	
 	private static final RuleTest DEEPSLATE = OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES;
 	private static final RuleTest STONE = OreConfiguration.Predicates.NATURAL_STONE;
@@ -126,15 +123,6 @@ public class ConfiguredModFeatures {
 			ModFeatures.ORE.get().configured(new OreConfiguration(DEEPSLATE, BlockStates.TUFF_ORE, 35))
 			.rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(512)).squared().count(16));
 
-//	@NotTested
-//	public static final ConfiguredFeature<?, ?> DEEPSLATE_LAVE_LAKE = register("deepslate_lava_lake",
-//			ModFeatures.LAKE.get().configured(new BlockStateConfiguration(BlockStates.LAVA)).rarity(40));
-//	
-//	@NotTested
-//	public static final ConfiguredFeature<?, ?> DEEPSLATE_WATER_LAKE = register("deepslate_water_lake",
-//			Feature.LAKE.configured(new BlockStateConfiguration(BlockStates.WATER)).rarity(40));
-
-	@NotTested
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = register("deepslate_monster_room",
 			ModFeatures.MONSTER_ROOM.get().configured(FeatureConfiguration.NONE)
 			.range(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.absolute(12), VerticalAnchor.absolute(500))))

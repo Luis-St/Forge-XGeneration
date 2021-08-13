@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -49,6 +50,8 @@ public class OnClientSetupEvent {
 	}
 	
 	protected static void registerUtil(FMLClientSetupEvent event) {
+		DimensionSpecialEffects.EFFECTS.defaultReturnValue(ModDimensionSpecialEffects.OVERWORLD);
+		DimensionSpecialEffects.EFFECTS.put(DimensionType.OVERWORLD_EFFECTS, ModDimensionSpecialEffects.OVERWORLD);
 		DimensionSpecialEffects.EFFECTS.put(ModDimensionTypes.DEEPSLATE.location(), ModDimensionSpecialEffects.DEEPSLATE);
 	}
 

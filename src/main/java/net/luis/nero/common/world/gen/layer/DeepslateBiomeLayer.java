@@ -10,9 +10,6 @@ import net.minecraft.world.level.newbiome.area.AreaFactory;
 import net.minecraft.world.level.newbiome.area.LazyArea;
 import net.minecraft.world.level.newbiome.layer.traits.AreaTransformer0;
 
-// TODO: find out how BetterEnd BiomeMap works -> and recreate
-// TODO: if finished: create/add more biomes
-
 public class DeepslateBiomeLayer {
 
 	public static <T extends Area, C extends BigContext<T>> AreaFactory<T> createBaseLayer(LongFunction<C> function) {

@@ -81,8 +81,6 @@ public class TestChunkGenerator extends ChunkGenerator {
 				int worldX = chunkpos.x * 16 + x; 
 				int worldZ = chunkpos.z * 16 + z; 
 				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0, 0) * 16;
-				// from -4 to 16
-//				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0035, worldZ * 0.0035, 0, 0) * 16; // TODO: use for biome map
 				for (int y = 1; y < 10 + noise; y++) {
 					chunkAccess.setBlockState(new BlockPos(x, 10 + noise, z), stone, false);
 				}

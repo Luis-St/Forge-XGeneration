@@ -9,7 +9,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-// TODO: allowd modify via config (y, replace type, etc)
 public class FlatBedrockFeature extends Feature<NoneFeatureConfiguration> {
 
 	public FlatBedrockFeature() {

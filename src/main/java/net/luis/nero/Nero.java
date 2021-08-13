@@ -34,8 +34,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 public class Nero {
 	
 	// TODO: custom config system
-	// TODO: expands overworld hieht to 320
-	// TODO: expands nether to 256
+	// TODO: expands nether gen to 256 and height to 320
 	// TODO: add drift sand -> spawn desert biome
 	// TODO: custom strong hold in deepslate -> without portal & god loot
 	// TODO: mineshaft structure 
