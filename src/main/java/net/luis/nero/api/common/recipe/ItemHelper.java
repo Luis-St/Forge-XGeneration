@@ -5,8 +5,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-// TODO: rename and move to other package may util
-public class ModRecipeHelper {
+public class ItemHelper {
 	
 	public static Item glassBlockFromColor(DyeColor color) {
 		switch (color) {

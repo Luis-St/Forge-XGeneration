@@ -3,9 +3,9 @@
   "values": [
     "nero:fluid_pipe",
     "nero:milestone",
-    "nero:deepslate_wall"
+    "nero:deepslate_wall",
     "nero:deepslate_stairs",    
     "nero:deepslate_slab",    
-    "nero:blood_altar"        
+    "nero:blood_altar"  
   ]
 }
