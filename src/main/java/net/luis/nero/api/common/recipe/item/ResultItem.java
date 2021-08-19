@@ -6,52 +6,56 @@ import net.luis.nero.api.util.Chance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class ResultItemStack {
+public class ResultItem {
 	
 	protected final Item item;
 	protected final int min;
 	protected final int max;
 	protected final Chance chance;
 	
-	public static final ResultItemStack EMPTY = new ResultItemStack(ItemStack.EMPTY, Chance.NULL);
+	public static final ResultItem EMPTY = new ResultItem(ItemStack.EMPTY, Chance.NULL);
 	
-	public ResultItemStack(Item item, int chance) {
+	public ResultItem(Item item, int chance) {
 		this(item, 1, chance);
 	}
 	
-	public ResultItemStack(Item item, int min, int max, int chance) {
+	public ResultItem(Item item, int min, int max, int chance) {
 		this(item, min, max, new Chance(chance));
 	}
 	
-	public ResultItemStack(Item item, int count, int chance) {
+	public ResultItem(Item item, int count, int chance) {
 		this(item, count, count, new Chance(chance));
 	}
 	
-	public ResultItemStack(ItemStack itemStack, int chance) {
+	public ResultItem(ItemStack itemStack, int chance) {
 		this(itemStack, new Chance(chance));
 	}
 	
-	public ResultItemStack(ItemStack itemStack, Chance chance) {
+	public ResultItem(ItemStack itemStack, Chance chance) {
 		this(itemStack.getItem(), itemStack.getCount(), itemStack.getCount(), chance);
 	}
 	
-	protected ResultItemStack(Item item, int min, int max, Chance chance) {
+	public ResultItem(Item item, int min, int max, Chance chance) {
 		this.item = item;
 		this.min = min;
 		this.max = max;
 		this.chance = chance;
 	}
 	
-	protected Chance getChance() {
-		return this.chance;
+	public Item getItem() {
+		return this.item;
 	}
 	
-	protected int getMin() {
+	public int getMin() {
 		return this.min;
 	}
 	
-	protected int getMax() {
+	public int getMax() {
 		return this.max;
+	}
+	
+	public Chance getChance() {
+		return this.chance;
 	}
 
 	public ItemStack getItemStack() {
@@ -63,7 +67,7 @@ public class ResultItemStack {
 		return this.chance.getChance();
 	}
 	
-	public boolean equals(ResultItemStack resultStack, boolean ignoreTags, boolean ignoreChance) {
+	public boolean equals(ResultItem resultStack, boolean ignoreTags, boolean ignoreChance) {
 		if (resultStack.getItemStack().getItem() == this.getItemStack().getItem()) {
 			if (resultStack.getItemStack().getCount() >= this.getItemStack().getCount() || ignoreTags) {
 				return resultStack.getChance().equals(this.getChance()) || ignoreChance;

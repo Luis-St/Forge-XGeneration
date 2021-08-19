@@ -42,5 +42,5 @@ public class BridgeBlock extends BaseEntityBlock {
 	public boolean skipRendering(BlockState blockState, BlockState neighborState, Direction direction) {
 		return neighborState.is(this) ? true : super.skipRendering(blockState, neighborState, direction);
 	}
-
+	
 }

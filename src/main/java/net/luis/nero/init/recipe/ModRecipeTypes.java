@@ -1,5 +1,10 @@
 package net.luis.nero.init.recipe;
 
-public class ModRecipeTypes {
+import net.luis.nero.common.recipe.MilestoneRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
+public class ModRecipeTypes {
+	
+	public static final RecipeType<MilestoneRecipe> MILESTONE = RecipeType.register("nero:milestone");
+	
 }
