@@ -48,8 +48,6 @@ public class OnBiomeLoadingEvent {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
-		} else if (biomeCategory == BiomeCategory.EXTREME_HILLS) {
-			// TODO: custom motains surface builder
 		} else { 
 			DefaultModFeatures.addOreOverwrites(generationBuilder);
 			DefaultModFeatures.addFlatBedrock(generationBuilder);

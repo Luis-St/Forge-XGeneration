@@ -7,38 +7,39 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
-import net.luis.nero.common.world.gen.layer.DeepslateBiomeLayer;
-import net.luis.nero.common.world.gen.layer.ModLayer;
+import net.luis.nero.common.world.gen.layer.ModLayers;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.newbiome.layer.Layer;
 
 public class TestBiomeSource extends BiomeSource {
 	
-	public static final Codec<DeepslateBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
-			.xmap(DeepslateBiomeSource::new, DeepslateBiomeSource::getBiomeRegistry).codec();
+	public static final Codec<TestBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
+			.xmap(TestBiomeSource::new, TestBiomeSource::getBiomeRegistry).codec();
 	
-	private final long seed;
-	private final Registry<Biome> registry;
-	private final ModLayer noiseBiomeLayer;
 	private static final List<ResourceKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
+	
+	protected final long seed;
+	protected final Registry<Biome> registry;
+	protected final Layer noiseBiomeLayer;
 	
 	public TestBiomeSource(Registry<Biome> registry) {
 		this(registry, new Random().nextLong());
 	}
 	
 	public TestBiomeSource(Registry<Biome> registry, long seed) {
-		super(getStartBiomes(registry));
+		super(getBiomes(registry));
 		this.seed = seed;
 		this.registry = registry;
-		this.noiseBiomeLayer = DeepslateBiomeLayer.createLayer(seed);
+		this.noiseBiomeLayer = ModLayers.getDefaultLayer(seed);
 	}
 
-	private static List<Biome> getStartBiomes(Registry<Biome> registry) {
+	protected static List<Biome> getBiomes(Registry<Biome> registry) {
 		return BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList());
 	}
 	

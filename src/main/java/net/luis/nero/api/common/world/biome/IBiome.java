@@ -11,19 +11,19 @@ public interface IBiome {
 	
 	default Biome createBiome() {
 		Biome.BiomeBuilder biomeBuilder = new Biome.BiomeBuilder();
-		biomeBuilder.precipitation(this.getRainType());
+		biomeBuilder.precipitation(this.getPrecipitation());
 		biomeBuilder.biomeCategory(this.getCategory());
 		biomeBuilder.depth(this.getDepth());
 		biomeBuilder.scale(this.getScale());
 		biomeBuilder.temperature(this.getTemperature());
 		biomeBuilder.downfall(this.getDownfall());
-		biomeBuilder.specialEffects(this.getBiomeAmbience());
+		biomeBuilder.specialEffects(this.getBiomeEffects());
 		biomeBuilder.mobSpawnSettings(this.getMobSpawnSettings());
 		biomeBuilder.generationSettings(this.getBiomeGenerationSettings());
 		return biomeBuilder.build();
 	}
 	
-	Biome.Precipitation getRainType();
+	Biome.Precipitation getPrecipitation();
 	
 	BiomeCategory getCategory();
 	
@@ -35,7 +35,7 @@ public interface IBiome {
 	
 	float getDownfall();
 	
-	BiomeSpecialEffects getBiomeAmbience();
+	BiomeSpecialEffects getBiomeEffects();
 	
 	default int calculateSkyColor(float f) {
 		float g = f / 3.0F;

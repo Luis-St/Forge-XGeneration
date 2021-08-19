@@ -1,5 +1,7 @@
 package net.luis.nero.common.world.gen.configured;
 
+import com.google.common.collect.ImmutableList;
+
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.gen.decorator.config.DepthAverageDecoratorConfiguration;
 import net.luis.nero.init.world.gen.decorator.ModFeatureDecorators;
@@ -7,13 +9,21 @@ import net.luis.nero.init.world.gen.feature.ModFeatures;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GeodeBlockSettings;
+import net.minecraft.world.level.levelgen.GeodeCrackSettings;
+import net.minecraft.world.level.levelgen.GeodeLayerSettings;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -128,6 +138,14 @@ public class ConfiguredModFeatures {
 			.range(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.absolute(12), VerticalAnchor.absolute(500))))
 			.squared().count(15));
 	
+	public static final ConfiguredFeature<?, ?> DEEPSLATE_AMETHYST_GEODE = register("deepslate_amethyst_geode", 
+			Feature.GEODE.configured(new GeodeConfiguration(new GeodeBlockSettings(new SimpleStateProvider(BlockStates.AIR), new SimpleStateProvider(BlockStates.AMETHYST_BLOCK), 
+			new SimpleStateProvider(BlockStates.BUDDING_AMETHYST), new SimpleStateProvider(BlockStates.CALCITE), new SimpleStateProvider(BlockStates.SMOOTH_BASALT),
+			ImmutableList.of(Blocks.SMALL_AMETHYST_BUD.defaultBlockState(), Blocks.MEDIUM_AMETHYST_BUD.defaultBlockState(), Blocks.LARGE_AMETHYST_BUD.defaultBlockState(), 
+			Blocks.AMETHYST_CLUSTER.defaultBlockState()), BlockTags.FEATURES_CANNOT_REPLACE.getName(), BlockTags.GEODE_INVALID_BLOCKS.getName()),
+			new GeodeLayerSettings(1.7D, 2.2D, 3.2D, 4.2D), new GeodeCrackSettings(0.95D, 2.0D, 2), 0.35D, 0.083D, true, UniformInt.of(4, 6), UniformInt.of(3, 4), UniformInt.of(1, 2), -16, 16, 0.05D, 1))
+			.rangeUniform(VerticalAnchor.absolute(12), VerticalAnchor.absolute(500)).squared().rarity(53));
+	
 	public static final ConfiguredFeature<?, ?> FLAT_BEDROCK = register("flat_bedrock", 
 			ModFeatures.FLAT_BEDROCK.get().configured(FeatureConfiguration.NONE).count(1).squared()
 			.range(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.absolute(5)))));
@@ -140,7 +158,8 @@ public class ConfiguredModFeatures {
 		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(Nero.MOD_ID, name), configuredFeature);
 	}
 
-	public static class BlockStates {
+	protected static class BlockStates {
+		public static final BlockState AIR = Blocks.AIR.defaultBlockState();
 		public static final BlockState DEEPSLATE_COAL_ORE = Blocks.DEEPSLATE_COAL_ORE.defaultBlockState();
 		public static final BlockState DEEPSLATE_COPPER_ORE = Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState();
 		public static final BlockState DEEPSLATE_IRON_ORE = Blocks.DEEPSLATE_IRON_ORE.defaultBlockState();
@@ -155,11 +174,15 @@ public class ConfiguredModFeatures {
 		public static final BlockState IRON_ORE = Blocks.IRON_ORE.defaultBlockState();
 		public static final BlockState GOLD_ORE = Blocks.GOLD_ORE.defaultBlockState();
 		public static final BlockState EMERALD_ORE = Blocks.EMERALD_ORE.defaultBlockState();
+		public static final BlockState AMETHYST_BLOCK = Blocks.AMETHYST_BLOCK.defaultBlockState();
+		public static final BlockState BUDDING_AMETHYST = Blocks.BUDDING_AMETHYST.defaultBlockState();
+		public static final BlockState CALCITE = Blocks.CALCITE.defaultBlockState();
+		public static final BlockState SMOOTH_BASALT = Blocks.SMOOTH_BASALT.defaultBlockState();
 		public static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
 		public static final BlockState WATER = Blocks.WATER.defaultBlockState();
 	}
 	
-	public static class FluidStates {
+	protected static class FluidStates {
 		public static final FluidState LAVA = Fluids.LAVA.defaultFluidState();
 		public static final FluidState WATER = Fluids.WATER.defaultFluidState();
 	}

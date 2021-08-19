@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
 import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.StructureFeatureManager;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
@@ -45,11 +45,11 @@ public class TestChunkGenerator extends ChunkGenerator {
 					SETTINGS_CODEC.fieldOf("settings").forGetter(TestChunkGenerator::getDimensionSettings))
 			.apply(instance, TestChunkGenerator::new));
 
-	private final Settings settings;
+	protected final Settings settings;
 	protected final WorldgenRandom worldRandom;
-	private final long seed;
-	private final PerlinSimplexNoise noise;
-
+	protected final long seed;
+	protected final PerlinSimplexNoise noise;
+	
 	public TestChunkGenerator(Registry<Biome> registry, Settings settings) {
 		super(new TestBiomeSource(registry), new StructureSettings(false));
 		this.settings = settings;
@@ -68,51 +68,39 @@ public class TestChunkGenerator extends ChunkGenerator {
 	
 	@Override
 	public void buildSurfaceAndBedrock(WorldGenRegion genRegion, ChunkAccess chunkAccess) {
-		BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
-		BlockState stone = Blocks.STONE.defaultBlockState();
-		ChunkPos chunkpos = chunkAccess.getPos();
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				chunkAccess.setBlockState(new BlockPos(x, 0, z), bedrock, false);
-			}
-		}
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				int worldX = chunkpos.x * 16 + x; 
-				int worldZ = chunkpos.z * 16 + z; 
-				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0, 0) * 16;
-				for (int y = 1; y < 10 + noise; y++) {
-					chunkAccess.setBlockState(new BlockPos(x, 10 + noise, z), stone, false);
-				}
-			}
-		}
-//		this.buildBedrock(chunk);
-//		this.buildSurface(chunk);
-	}
-	
-	protected void buildSurface(ChunkAccess chunkAccess) {
-		ChunkPos chunkPos = chunkAccess.getPos();
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				int worldX = chunkPos.x * 16 + x;
-				int worldZ = chunkPos.z * 16 + z;
-				int noise = (int) (65 + Math.sin(worldX / 20.0) * 10 + Math.cos(worldZ / 20.0) * 10);
-				for (int y = 0; y < noise; y++) {
-					chunkAccess.setBlockState(new BlockPos(x, z, y), Blocks.STONE.defaultBlockState(), false);
+				int worldX = chunkAccess.getPos().getMinBlockX() + x;
+				int worldZ = chunkAccess.getPos().getMinBlockZ() + z;
+				double noise = this.noise.getSurfaceNoiseValue(worldX * 0.0625, worldZ * 0.0625, 0.0625, x * 0.0625) * 15;
+				for (int y = 0; y <= 64; y++) {
+					BlockPos pos = new BlockPos(x, y, z);
+					this.buildWorld(chunkAccess, pos);
+					this.buildSurface(chunkAccess, this.biomeSource.getNoiseBiome(worldX, 0, worldZ), pos, noise);
+					this.buildBedrock(chunkAccess, pos);
 				}
 			}
 		}
 	}
 	
-	protected void buildBedrock(ChunkAccess chunkAccess) {
-		for (int x = 0; x < 16; x++) {
-			for (int y = 0; y < 128; y++) {
-				for (int z = 0; z < 16; z++) {
-					if (y <= this.worldRandom.nextInt(5)) {
-						chunkAccess.setBlockState(new BlockPos(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
-					}
-				}
-			}
+	protected void buildWorld(ChunkAccess chunkAccess, BlockPos pos) {
+		if (pos.getY() >= 60) {
+			chunkAccess.setBlockState(pos, Blocks.GRASS_BLOCK.defaultBlockState(), false);
+		} else {
+			chunkAccess.setBlockState(pos, Blocks.STONE.defaultBlockState(), false);
+		}
+	}
+	
+	protected void buildSurface(ChunkAccess chunkAccess, Biome biome, BlockPos pos, double noise) {
+		int worldX = chunkAccess.getPos().getMinBlockX() + pos.getX();
+		int worldZ = chunkAccess.getPos().getMinBlockZ() + pos.getZ();
+		int y = chunkAccess.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) + 1;
+		biome.buildSurfaceAt(this.worldRandom, chunkAccess, worldX, worldZ, y, noise, Blocks.DEEPSLATE.defaultBlockState(), Blocks.WATER.defaultBlockState(), this.getSeaLevel(), 0, this.seed);
+	}
+	
+	protected void buildBedrock(ChunkAccess chunkAccess, BlockPos pos) {
+		if (pos.getY() <= this.worldRandom.nextInt(5)) {
+			chunkAccess.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
 		}
 	}
 	
@@ -133,12 +121,12 @@ public class TestChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public int getBaseHeight(int x, int z, Types types, LevelHeightAccessor levelAccessor) {
-		return this.getDimensionSettings().getBaseHeight();
+		return 64;
 	}
 	
 	@Override
 	public int getSeaLevel() {
-		return this.getDimensionSettings().getSeaLevel();
+		return 40;
 	}
 
 	@Override
