@@ -1,12 +1,12 @@
 package net.luis.nero.init.world.biome;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.biome.DeepslateBiome;
-import net.luis.nero.common.world.biome.DeepslateLavaLakeBiome;
-import net.luis.nero.common.world.biome.DeepslateOceanBiome;
-import net.luis.nero.common.world.biome.cave.DeepdarkCaveBiome;
-import net.luis.nero.common.world.biome.cave.DripstoneCaveBiome;
-import net.luis.nero.common.world.biome.cave.LushCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
+import net.luis.nero.common.world.biome.deepslate.DeepslateLavaLakeBiome;
+import net.luis.nero.common.world.biome.deepslate.DeepslateOceanBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.DeepdarkCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.DripstoneCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.LushCaveBiome;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

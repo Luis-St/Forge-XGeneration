@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.gen.configured.ConfiguredModWorldCarvers;
-import net.luis.nero.common.world.gen.feature.DefaultModFeatures;
-import net.luis.nero.common.world.gen.feature.ModOreFeature;
+import net.luis.nero.common.world.levelgen.configured.ConfiguredModWorldCarvers;
+import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
+import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;

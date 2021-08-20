@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
-import net.luis.nero.common.world.gen.layer.ModLayers;
+import net.luis.nero.common.world.levelgen.layer.ModLayers;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
