@@ -16,5 +16,5 @@ public class GlassShardItem extends Item {
 	public DyeColor getColor() {
 		return color;
 	}
-
+	
 }
