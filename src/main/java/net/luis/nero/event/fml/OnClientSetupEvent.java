@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,6 +44,7 @@ public class OnClientSetupEvent {
 		EntityRenderers.register(ModEntityTypes.SOUL_BLAZE.get(), SoulBlazeEntityRenderer::new);
 		EntityRenderers.register(ModEntityTypes.SOUL_FIREBALL.get(), SoulFireballEntityRenderer::new);
 		EntityRenderers.register(ModEntityTypes.HOVERING_INFERNO.get(), HoveringInfernoEntityRenderer::new);
+		EntityRenderers.register(ModEntityTypes.VILLAGER.get(), VillagerRenderer::new);
 	}
 	
 	protected static void registerBlockRenderType(FMLClientSetupEvent event) {
