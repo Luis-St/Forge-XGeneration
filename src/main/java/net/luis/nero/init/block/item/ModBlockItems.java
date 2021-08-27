@@ -28,5 +28,9 @@ public class ModBlockItems {
 			() -> new BlockItem(ModBlocks.BLOOD_ALTAR.get(), new Item.Properties().tab(ModItemGroups.BLOOD_MACIC)));
 	public static final RegistryObject<BlockItem> DRIFT_SAND = ITEMS.register("drift_sand",
 			() -> new BlockItem(ModBlocks.DRIFT_SAND.get(), new Item.Properties().tab(ModItemGroups.BUILDING_BLOCKS)));
+	public static final RegistryObject<BlockItem> SCORCHED_SAND = ITEMS.register("scorched_sand",
+			() -> new BlockItem(ModBlocks.SCORCHED_SAND.get(), new Item.Properties().tab(ModItemGroups.BUILDING_BLOCKS)));
+	public static final RegistryObject<BlockItem> TERMITE_MOUND = ITEMS.register("termite_mound",
+			() -> new BlockItem(ModBlocks.TERMITE_MOUND.get(), new Item.Properties().tab(ModItemGroups.BUILDING_BLOCKS)));
 
 }

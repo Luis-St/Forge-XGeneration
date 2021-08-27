@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "nero:block/termite_mound_top",
+    "side": "nero:block/termite_mound_side"
+  }
+}

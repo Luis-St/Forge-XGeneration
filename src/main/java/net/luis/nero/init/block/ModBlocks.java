@@ -8,6 +8,8 @@ import net.luis.nero.common.block.magic.BloodAltarBlock;
 import net.luis.nero.common.block.mechanical.MilestoneBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
@@ -43,5 +45,9 @@ public class ModBlocks {
 					.noOcclusion().sound(SoundType.GLASS)));
 	public static final RegistryObject<DriftSandBlock> DRIFT_SAND = BLOCKS.register("drift_sand", 
 			() -> new DriftSandBlock(14728571, Block.Properties.copy(Blocks.SAND).strength(0.6F).dynamicShape()));
+	public static final RegistryObject<SandBlock> SCORCHED_SAND = BLOCKS.register("scorched_sand", 
+			() -> new SandBlock(0, Block.Properties.copy(Blocks.SAND)));
+	public static final RegistryObject<RotatedPillarBlock> TERMITE_MOUND = BLOCKS.register("termite_mound", 
+			() -> new RotatedPillarBlock(Block.Properties.copy(Blocks.OAK_LOG)));
 	
 }

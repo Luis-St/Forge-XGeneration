@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nero:block/termite_mound",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nero:block/termite_mound"
+    },
+    "axis=z": {
+      "model": "nero:block/termite_mound",
+      "x": 90
+    }
+  }
+}
