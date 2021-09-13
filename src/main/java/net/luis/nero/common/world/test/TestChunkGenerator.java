@@ -121,7 +121,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public int getBaseHeight(int x, int z, Types types, LevelHeightAccessor levelAccessor) {
-		return 64;
+		return 65;
 	}
 	
 	@Override

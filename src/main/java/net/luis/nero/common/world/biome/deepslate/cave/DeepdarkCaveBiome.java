@@ -14,29 +14,29 @@ public class DeepdarkCaveBiome extends DeepslateBiome {
 	
 //	@Override
 //	public BiomeSpecialEffects getBiomeEffects() {
-//		BiomeSpecialEffects.Builder ambienceBuilder = new BiomeSpecialEffects.Builder();
-//		ambienceBuilder.waterColor(4400);
-//		ambienceBuilder.waterFogColor(30);
-//		ambienceBuilder.fogColor(9800);
-//		ambienceBuilder.skyColor(this.calculateSkyColor(0.8F));
-//		ambienceBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
-//		ambienceBuilder.grassColorOverride(213328);
-//		ambienceBuilder.foliageColorOverride(5153);
-//		return ambienceBuilder.build();
+//		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
+//		specialEffectsBuilder.waterColor(4400);
+//		specialEffectsBuilder.waterFogColor(30);
+//		specialEffectsBuilder.fogColor(9800);
+//		specialEffectsBuilder.skyColor(this.calculateSkyColor(0.8F));
+//		specialEffectsBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
+//		specialEffectsBuilder.grassColorOverride(213328);
+//		specialEffectsBuilder.foliageColorOverride(5153);
+//		return specialEffectsBuilder.build();
 //	}
 	
 	@Override
 	@NotTested
 	public BiomeSpecialEffects getBiomeEffects() {
-		BiomeSpecialEffects.Builder ambienceBuilder = new BiomeSpecialEffects.Builder();
-		ambienceBuilder.waterColor(4159204);
-		ambienceBuilder.waterFogColor(329011);
-		ambienceBuilder.fogColor(12638463);
-		ambienceBuilder.skyColor(this.calculateSkyColor(0.8F));
-		ambienceBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
-		ambienceBuilder.grassColorOverride(0);
-		ambienceBuilder.foliageColorOverride(5877296);
-		return ambienceBuilder.build();
+		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
+		specialEffectsBuilder.waterColor(4159204);
+		specialEffectsBuilder.waterFogColor(329011);
+		specialEffectsBuilder.fogColor(12638463);
+		specialEffectsBuilder.skyColor(this.calculateSkyColor(0.8F));
+		specialEffectsBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
+		specialEffectsBuilder.grassColorOverride(0);
+		specialEffectsBuilder.foliageColorOverride(5877296);
+		return specialEffectsBuilder.build();
 	}
 
 

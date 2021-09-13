@@ -9,21 +9,21 @@ public class DeepslateOceanBiome extends DeepslateBiome {
 	
 	@Override
 	public BiomeSpecialEffects getBiomeEffects() {
-		BiomeSpecialEffects.Builder ambienceBuilder = new BiomeSpecialEffects.Builder();
-		ambienceBuilder.waterColor(4159204);
-		ambienceBuilder.waterFogColor(329011);
-		ambienceBuilder.fogColor(12638463);
-		ambienceBuilder.skyColor(this.calculateSkyColor(0.8F));
-		ambienceBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
-		ambienceBuilder.grassColorOverride(255);
-		ambienceBuilder.foliageColorOverride(5877296);
-		return ambienceBuilder.build();
+		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
+		specialEffectsBuilder.waterColor(4159204);
+		specialEffectsBuilder.waterFogColor(329011);
+		specialEffectsBuilder.fogColor(12638463);
+		specialEffectsBuilder.skyColor(this.calculateSkyColor(0.8F));
+		specialEffectsBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
+		specialEffectsBuilder.grassColorOverride(255);
+		specialEffectsBuilder.foliageColorOverride(5877296);
+		return specialEffectsBuilder.build();
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
 		MobSpawnSettings.Builder modBuilder = new MobSpawnSettings.Builder();
-		DefaultModFeatures.addCommonSpawns(modBuilder);
+		DefaultModFeatures.addCommonMonsterSpawns(modBuilder);
 		DefaultModFeatures.addWaterCaveSpawns(modBuilder);
 		return modBuilder.build();
 	}

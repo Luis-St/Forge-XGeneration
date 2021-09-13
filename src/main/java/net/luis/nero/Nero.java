@@ -35,7 +35,7 @@ public class Nero {
 	
 	// TODO: custom config system
 	// TODO: expands nether gen to 256 and height to 320
-	// TODO: add drift sand -> spawn desert biome & edit texture
+	// TODO: drift sand -> spawn desert biome & edit texture
 	// TODO: custom strong hold in deepslate -> without portal & god loot
 	// TODO: mineshaft structure 
 	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)

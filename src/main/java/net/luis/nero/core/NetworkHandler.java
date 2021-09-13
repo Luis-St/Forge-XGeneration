@@ -13,8 +13,7 @@ public class NetworkHandler {
 	public static SimpleChannel simpleChannel;
 
 	public static void init() {
-		NetworkRegistry.newSimpleChannel(new ResourceLocation(Nero.MOD_ID, "simple_chnanel"),
-				() -> version, version::equals, version::equals);
+		NetworkRegistry.newSimpleChannel(new ResourceLocation(Nero.MOD_ID, "simple_chnanel"), () -> version, version::equals, version::equals);
 	}
 
 }

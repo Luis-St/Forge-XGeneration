@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
-import net.luis.nero.common.world.levelgen.layer.TestBiomeLayer;
+import net.luis.nero.common.world.biome.layer.OverworldLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
@@ -36,7 +36,7 @@ public class TestBiomeSource extends BiomeSource {
 		super(getBiomes(registry));
 		this.seed = seed;
 		this.registry = registry;
-		this.noiseBiomeLayer = TestBiomeLayer.getDefaultLayer(seed);
+		this.noiseBiomeLayer = OverworldLayer.getDefaultLayer(seed);
 	}
 
 	protected static List<Biome> getBiomes(Registry<Biome> registry) {
