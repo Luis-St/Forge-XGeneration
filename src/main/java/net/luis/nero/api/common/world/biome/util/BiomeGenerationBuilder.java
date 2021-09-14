@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 
 import com.google.common.collect.Lists;
 
-import net.luis.nero.Nero;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
@@ -17,9 +16,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuild
 public class BiomeGenerationBuilder extends BiomeGenerationSettings.Builder {
 
 	@Override
-	@Deprecated
 	public BiomeGenerationBuilder surfaceBuilder(ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder) {
-		Nero.LOGGER.warn("A deprecated marked method was executed");
 		return this.surfaceBuilder(() -> configuredSurfaceBuilder);
 	}
 
@@ -30,9 +27,7 @@ public class BiomeGenerationBuilder extends BiomeGenerationSettings.Builder {
 	}
 	
 	@Override
-	@Deprecated
 	public BiomeGenerationBuilder addFeature(GenerationStep.Decoration decoration, ConfiguredFeature<?, ?> configuredFeature) {
-		Nero.LOGGER.warn("A deprecated marked method was executed");
 		return this.addFeature(decoration.ordinal(), () -> configuredFeature);
 	}
 

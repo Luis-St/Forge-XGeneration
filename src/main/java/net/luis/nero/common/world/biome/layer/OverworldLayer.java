@@ -7,7 +7,8 @@ import net.luis.nero.common.world.biome.layer.climate.rainfall.RainfallLayer;
 import net.luis.nero.common.world.biome.layer.climate.temperature.FixTemperatureLayer;
 import net.luis.nero.common.world.biome.layer.climate.temperature.HotIceLayer;
 import net.luis.nero.common.world.biome.layer.climate.temperature.TemperatureLayer;
-import net.luis.nero.init.world.biome.ModBiomes;
+import net.luis.nero.init.world.biome.ModBiomeKeys;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.newbiome.area.Area;
 import net.minecraft.world.level.newbiome.area.AreaFactory;
@@ -20,20 +21,20 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class OverworldLayer {
 	
-	public static final int ICY = getBiomeId(ModBiomes.ICY.get());
-	public static final int COLD = getBiomeId(ModBiomes.COLD.get());
-	public static final int MEDIUM = getBiomeId(ModBiomes.MEDIUM.get());
-	public static final int WARM = getBiomeId(ModBiomes.WARM.get());
-	public static final int HOT = getBiomeId(ModBiomes.HOT.get());
+	public static final int ICY = getBiomeId(ModBiomeKeys.ICY.location());
+	public static final int COLD = getBiomeId(ModBiomeKeys.COLD.location());
+	public static final int MEDIUM = getBiomeId(ModBiomeKeys.MEDIUM.location());
+	public static final int WARM = getBiomeId(ModBiomeKeys.WARM.location());
+	public static final int HOT = getBiomeId(ModBiomeKeys.HOT.location());
 	
-	public static final int DRIZZLE = getBiomeId(ModBiomes.DRIZZLE.get());
-	public static final int LIGHT = getBiomeId(ModBiomes.LIGHT.get());
-	public static final int MODERATE = getBiomeId(ModBiomes.MODERATE.get());
-	public static final int STRONG = getBiomeId(ModBiomes.STRONG.get());
-	public static final int MONSOON = getBiomeId(ModBiomes.MONSOON.get());
+	public static final int DRIZZLE = getBiomeId(ModBiomeKeys.DRIZZLE.location());
+	public static final int LIGHT = getBiomeId(ModBiomeKeys.LIGHT.location());
+	public static final int MODERATE = getBiomeId(ModBiomeKeys.MODERATE.location());
+	public static final int STRONG = getBiomeId(ModBiomeKeys.STRONG.location());
+	public static final int MONSOON = getBiomeId(ModBiomeKeys.MONSOON.location());
 	
-	public static int getBiomeId(Biome biome) {
-		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(biome);
+	public static int getBiomeId(ResourceLocation location) {
+		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);
 	}
 	
 	public static Layer getDefaultLayer(long seed) {

@@ -2,7 +2,8 @@ package net.luis.nero.common.world.levelgen.layer;
 
 import java.util.function.LongFunction;
 
-import net.luis.nero.init.world.biome.ModBiomes;
+import net.luis.nero.init.world.biome.ModBiomeKeys;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.newbiome.area.Area;
 import net.minecraft.world.level.newbiome.area.AreaFactory;
@@ -17,15 +18,15 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class DeepslateBiomeLayer {
 	
-	protected static final int DEEPSLATE = getBiomeId(ModBiomes.DEEPSLATE.get()); // y0-512
-	protected static final int DEEPSLATE_OCEAN = getBiomeId(ModBiomes.DEEPSLATE_OCEAN.get()); // y244-288
-	protected static final int DEEPSLATE_LAVA_LAKE = getBiomeId(ModBiomes.DEEPSLATE_LAVA_LAKE.get()); // y64-160
-	protected static final int LUSH_CAVES = getBiomeId(ModBiomes.LUSH_CAVES.get()); // y320-480
-	protected static final int DRIPSTONE_CAVE = getBiomeId(ModBiomes.DRIPSTONE_CAVE.get()); // y64-320
-	protected static final int DEEPDARK = getBiomeId(ModBiomes.DEEPDARK.get()); // y0-64
+	protected static final int DEEPSLATE = getBiomeId(ModBiomeKeys.DEEPSLATE.location()); // y0-512
+	protected static final int DEEPSLATE_OCEAN = getBiomeId(ModBiomeKeys.DEEPSLATE_OCEAN.location()); // y244-288
+	protected static final int DEEPSLATE_LAVA_LAKE = getBiomeId(ModBiomeKeys.DEEPSLATE_LAVA_LAKE.location()); // y64-160
+	protected static final int LUSH_CAVES = getBiomeId(ModBiomeKeys.LUSH_CAVES.location()); // y320-480
+	protected static final int DRIPSTONE_CAVE = getBiomeId(ModBiomeKeys.DRIPSTONE_CAVE.location()); // y64-320
+	protected static final int DEEPDARK = getBiomeId(ModBiomeKeys.DEEPDARK.location()); // y0-64
 	
-	public static int getBiomeId(Biome biome) {
-		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(biome);
+	public static int getBiomeId(ResourceLocation location) {
+		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);
 	}
 	
 	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getDefaultLayer(LongFunction<C> function) {

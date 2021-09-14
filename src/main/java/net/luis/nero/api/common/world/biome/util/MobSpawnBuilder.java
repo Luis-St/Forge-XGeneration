@@ -57,7 +57,7 @@ public class MobSpawnBuilder extends MobSpawnSettings.Builder {
 	@Override
 	@Deprecated
 	public MobSpawnBuilder setPlayerCanSpawn() {
-		Nero.LOGGER.warn("A deprecated marked method was executed");
+		Nero.LOGGER.warn("A deprecated marked method was executed: {}", "MobSpawnBuilder#setPlayerCanSpawn");
 		this.playerCanSpawn = true;
 		return this;
 	}

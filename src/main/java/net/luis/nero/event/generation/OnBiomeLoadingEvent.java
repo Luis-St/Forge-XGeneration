@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.levelgen.configured.ConfiguredModWorldCarvers;
+import net.luis.nero.api.common.world.biome.IBiome;
 import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
-import net.luis.nero.init.world.biome.ModBiomeKeys;
+import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Block;
@@ -29,22 +29,37 @@ public class OnBiomeLoadingEvent {
 	
 	// TODO: disable/enable feature via config
 	
+	// TODO: add to deepslate -> retrun in DefaultModFeatures a List
+//	DefaultModFeatures.addDeepslateCarvers(generationBuilder);
+//	DefaultModFeatures.addDeepslateStructures(generationBuilder);
+//	DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
+//	DefaultModFeatures.addDeepslateOres(generationBuilder);
+	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 
-		ResourceLocation biome = event.getName();
+		ResourceLocation biomeLocation = event.getName();
+		IBiome biome = ModBiomes.BIOMES.get(biomeLocation.getPath());
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		
-		if (biome.equals(ModBiomeKeys.DEEPSLATE.location())) {
-			
-			generationBuilder.addCarver(GenerationStep.Carving.AIR, ConfiguredModWorldCarvers.CAVE);
-			
-//			DefaultModFeatures.addDeepslateCarvers(generationBuilder);
-//			DefaultModFeatures.addDeepslateStructures(generationBuilder);
-//			DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
-//			DefaultModFeatures.addDeepslateOres(generationBuilder);
-		} else if (biomeCategory == BiomeCategory.THEEND) {
+		biome.getModSurfaceBuilder().ifPresent(surfaceBuilder -> {
+			generationBuilder.surfaceBuilder(surfaceBuilder);
+		});
+		
+		biome.getModFeatures().forEach((decoration, feature) -> {
+			generationBuilder.addFeature(decoration.ordinal(), feature);
+		});
+		
+		biome.getModWorldCarvers().forEach((carving, worldCarver) -> {
+			generationBuilder.addCarver(carving, worldCarver.get());
+		});
+		
+		biome.getModStructures().forEach(structure -> {
+			generationBuilder.addStructureStart(structure.get());
+		});
+		
+		if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			

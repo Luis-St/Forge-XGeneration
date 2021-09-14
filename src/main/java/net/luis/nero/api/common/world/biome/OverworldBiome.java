@@ -2,6 +2,7 @@ package net.luis.nero.api.common.world.biome;
 
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
 import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -9,8 +10,12 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public abstract class OverworldBiome extends ModBiome {
+	
+	protected OverworldBiome(BiomeEffects biomeEffects) {
+		super(biomeEffects);
+	}
 
-	public OverworldBiome(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
+	protected OverworldBiome(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
 		super(waterColor, waterFogColor, fogColor, grassColor, foliageColor);
 	}
 

@@ -1,8 +1,23 @@
 package net.luis.nero.api.common.world.biome;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.levelgen.GenerationStep.Carving;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public abstract class ModBiome implements IBiome {
 	
@@ -11,6 +26,10 @@ public abstract class ModBiome implements IBiome {
 	protected final int fogColor;
 	protected final int grassColor;
 	protected final int foliageColor;
+	
+	protected ModBiome(BiomeEffects biomeEffects) {
+		this(biomeEffects.getWaterColor(), biomeEffects.getWaterFogColor(), biomeEffects.getFogColor(), biomeEffects.getGrassColor(), biomeEffects.getFoliageColor());
+	}
 	
 	protected ModBiome(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
 		this.waterColor = waterColor == -1 ? 4159204 : waterColor;
@@ -56,6 +75,26 @@ public abstract class ModBiome implements IBiome {
 		specialEffectsBuilder.grassColorOverride(this.grassColor);
 		specialEffectsBuilder.foliageColorOverride(this.foliageColor);
 		return specialEffectsBuilder.build();
+	}
+
+	@Override
+	public Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder() {
+		return Optional.empty();
+	}
+
+	@Override
+	public Map<Decoration, Supplier<ConfiguredFeature<?, ?>>> getModFeatures() {
+		return Maps.newEnumMap(Decoration.class);
+	}
+
+	@Override
+	public Map<Carving, Supplier<ConfiguredWorldCarver<?>>> getModWorldCarvers() {
+		return Maps.newEnumMap(Carving.class);
+	}
+
+	@Override
+	public List<Supplier<ConfiguredStructureFeature<?, ?>>> getModStructures() {
+		return Lists.newArrayList();
 	}
 
 }

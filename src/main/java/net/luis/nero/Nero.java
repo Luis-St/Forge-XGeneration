@@ -76,7 +76,7 @@ public class Nero {
 		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);
-		ModBiomes.BIOMES.register(eventBus);
+		ModBiomes.BIOME_REGISTRY.register(eventBus);
 		
 //		this.buildConfig();
 		

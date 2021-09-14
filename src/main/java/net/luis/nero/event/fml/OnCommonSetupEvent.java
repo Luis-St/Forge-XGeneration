@@ -49,6 +49,7 @@ public class OnCommonSetupEvent {
 		NetworkHandler.init();
 	}
 	
+	@SuppressWarnings("removal") // TODO: use RegisterCapabilitiesEvent
 	protected static void registerCapability(FMLCommonSetupEvent event) {
 		CapabilityManager.INSTANCE.register(IBloodOrbCapability.class);
 	}
@@ -79,9 +80,9 @@ public class OnCommonSetupEvent {
 	
 	protected static void registerUtil(FMLCommonSetupEvent event) {
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
-		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "deepslate_biome_provider"), DeepslateBiomeSource.CODEC);
+		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "deepslate_biome_source"), DeepslateBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "test_chunk_generator"), TestChunkGenerator.CODEC);
-		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biomes"), TestBiomeSource.CODEC);
+		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biome_source"), TestBiomeSource.CODEC);
 	}
 	
 	private static <F extends StructureFeature<?>> void registerStructure(F structure, StructureFeatureConfiguration structureConfig, boolean transformLand) {

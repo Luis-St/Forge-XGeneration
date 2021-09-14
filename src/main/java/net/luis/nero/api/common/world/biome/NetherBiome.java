@@ -2,6 +2,7 @@ package net.luis.nero.api.common.world.biome;
 
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
@@ -11,8 +12,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public abstract class NetherBiome extends ModBiome {
 	
-	public NetherBiome(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
-		super(waterColor, waterFogColor, fogColor, grassColor, foliageColor);
+	protected NetherBiome() {
+		super(BiomeEffects.NETHER);
 	}
 
 	@Override
