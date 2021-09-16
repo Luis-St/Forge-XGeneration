@@ -60,9 +60,9 @@ public interface IBiome {
 	
 	Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder();
 	
-	Map<Decoration, Supplier<ConfiguredFeature<?, ?>>> getModFeatures();
+	Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> getModFeatures();
 	
-	Map<Carving, Supplier<ConfiguredWorldCarver<?>>> getModWorldCarvers();
+	Map<Carving, List<Supplier<ConfiguredWorldCarver<?>>>> getModWorldCarvers();
 	
 	List<Supplier<ConfiguredStructureFeature<?, ?>>> getModStructures();
 	

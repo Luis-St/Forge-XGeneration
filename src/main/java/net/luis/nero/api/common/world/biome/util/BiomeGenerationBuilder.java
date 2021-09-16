@@ -30,7 +30,11 @@ public class BiomeGenerationBuilder extends BiomeGenerationSettings.Builder {
 	public BiomeGenerationBuilder addFeature(GenerationStep.Decoration decoration, ConfiguredFeature<?, ?> configuredFeature) {
 		return this.addFeature(decoration.ordinal(), () -> configuredFeature);
 	}
-
+	
+	public BiomeGenerationBuilder addFeature(GenerationStep.Decoration decoration, Supplier<ConfiguredFeature<?, ?>> configuredFeatur) {
+		return this.addFeature(decoration.ordinal(), configuredFeatur);
+	}
+	
 	@Override
 	public BiomeGenerationBuilder addFeature(int decoration, Supplier<ConfiguredFeature<?, ?>> configuredFeature) {
 		this.addFeatureStepsUpTo(decoration);

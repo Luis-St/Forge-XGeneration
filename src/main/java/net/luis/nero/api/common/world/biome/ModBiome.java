@@ -6,8 +6,10 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
+import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
+import net.luis.nero.api.common.world.biome.util.BiomeUtil;
+import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
@@ -76,6 +78,16 @@ public abstract class ModBiome implements IBiome {
 		specialEffectsBuilder.foliageColorOverride(this.foliageColor);
 		return specialEffectsBuilder.build();
 	}
+	
+	protected abstract ConfiguredSurfaceBuilder<?> getSurfaceBuilder();
+	
+	protected void getMobSpawnOverwrite(MobSpawnBuilder modBuilder) {
+		
+	}
+	
+	protected void getBiomeGenerationOverwrite(BiomeGenerationBuilder generationBuilder) {
+		
+	}
 
 	@Override
 	public Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder() {
@@ -83,13 +95,13 @@ public abstract class ModBiome implements IBiome {
 	}
 
 	@Override
-	public Map<Decoration, Supplier<ConfiguredFeature<?, ?>>> getModFeatures() {
-		return Maps.newEnumMap(Decoration.class);
+	public Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> getModFeatures() {
+		return BiomeUtil.makeModFeaturesMap();
 	}
 
 	@Override
-	public Map<Carving, Supplier<ConfiguredWorldCarver<?>>> getModWorldCarvers() {
-		return Maps.newEnumMap(Carving.class);
+	public Map<Carving, List<Supplier<ConfiguredWorldCarver<?>>>> getModWorldCarvers() {
+		return BiomeUtil.makeModCarversMap();
 	}
 
 	@Override

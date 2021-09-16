@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
+// TODO: after current work finished sort world package
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
