@@ -1,28 +1,19 @@
 package net.luis.nero.common.world.biome.deepslate;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import net.luis.nero.api.common.world.biome.IBiome;
+import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
+import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
+import net.luis.nero.common.world.biome.features.DefaultVanillaBiomeSpawns;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
-import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep.Carving;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public class DeepslateBiome implements IBiome {
 	
@@ -71,36 +62,22 @@ public class DeepslateBiome implements IBiome {
 
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		MobSpawnSettings.Builder modBuilder = new MobSpawnSettings.Builder();
-		DefaultModFeatures.addCommonMonsterSpawns(modBuilder);
-		return modBuilder.build();
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.removeSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 100, 4, 4));
+		return mobBuilder.build();
 	}
 
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		BiomeGenerationSettings.Builder generationBuilder = new BiomeGenerationSettings.Builder();
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.DEEPSLATE);
 		return generationBuilder.build();
 	}
 
 	@Override
-	public Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder() {
-		return Optional.empty();
-	}
-
-	@Override
-	public Map<Decoration, Supplier<ConfiguredFeature<?, ?>>> getModFeatures() {
-		return Maps.newEnumMap(Decoration.class);
-	}
-
-	@Override
-	public Map<Carving, Supplier<ConfiguredWorldCarver<?>>> getModWorldCarvers() {
-		return Maps.newEnumMap(Carving.class);
-	}
-
-	@Override
-	public List<Supplier<ConfiguredStructureFeature<?, ?>>> getModStructures() {
-		return Lists.newArrayList();
+	public ModBiomeFeatures getModFeatures() {
+		return new ModBiomeFeatures();
 	}
 	
 }

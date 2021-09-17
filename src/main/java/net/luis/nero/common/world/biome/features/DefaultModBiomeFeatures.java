@@ -1,55 +1,50 @@
 package net.luis.nero.common.world.biome.features;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
-
+import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModFeatures;
-import net.minecraft.world.level.levelgen.GenerationStep.Carving;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 
 public class DefaultModBiomeFeatures {
 	
-	public static void addDeepslateOres(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_COAL_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_COPPER_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_IRON_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_GOLD_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_LAPIS_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_REDSTONE_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_EXTRA_REDSTONE_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_DIAMOND_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.DEEPSLATE_EMERALD_ORE);
+	public static void addDeepslateOres(ModBiomeFeatures modBiomeFeatures) {
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_COAL_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_COPPER_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_IRON_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_GOLD_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_LAPIS_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_REDSTONE_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_EXTRA_REDSTONE_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_DIAMOND_ORE);
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.DEEPSLATE_EMERALD_ORE);
 	}
 	
-	public static void addDeepslateUndergroundVariety(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.TUFF_ORE);
+	public static void addDeepslateUndergroundVariety(ModBiomeFeatures modBiomeFeatures) {
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.TUFF_ORE);
 	}
 	
-	public static void addDeepslateMonsterRoom(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.UNDERGROUND_STRUCTURES).add(() -> ConfiguredModFeatures.DEEPSLATE_MONSTER_ROOM);
+	public static void addDeepslateMonsterRoom(ModBiomeFeatures modBiomeFeatures) {
+		modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_STRUCTURES, () -> ConfiguredModFeatures.DEEPSLATE_MONSTER_ROOM);
 	}
 
-	public static void addDeepslateCarvers(Map<Carving, List<Supplier<ConfiguredWorldCarver<?>>>> modCarvers) {
+	public static void addDeepslateCarvers(ModBiomeFeatures modBiomeFeatures) {
 		
 	}
 	
-	public static void addAmethystGeode(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.LOCAL_MODIFICATIONS).add(() -> ConfiguredModFeatures.DEEPSLATE_AMETHYST_GEODE);
+	public static void addAmethystGeode(ModBiomeFeatures modBiomeFeatures) {
+		modBiomeFeatures.addModFeature(Decoration.LOCAL_MODIFICATIONS, () -> ConfiguredModFeatures.DEEPSLATE_AMETHYST_GEODE);
 	}
-	public static void addFlatBedrock(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.RAW_GENERATION).add(() -> ConfiguredModFeatures.FLAT_BEDROCK);
+	public static void addFlatBedrock(BiomeGenerationSettingsBuilder generationBuilder) {
+		generationBuilder.addFeature(Decoration.RAW_GENERATION.ordinal(), () -> ConfiguredModFeatures.FLAT_BEDROCK);
 	}
 	
-	public static void addOreOverwrites(Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> modFeatures) {
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.COAL_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.COPPER_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.COPPER_ORE_BLOBS);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.IRON_ORE);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.IRON_ORE_BLOBS);
-		modFeatures.get(Decoration.UNDERGROUND_ORES).add(() -> ConfiguredModFeatures.GOLD_ORE);
+	public static void addOreOverwrites(BiomeGenerationSettingsBuilder generationBuilder) {
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.COAL_ORE);
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.COPPER_ORE);
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.COPPER_ORE_BLOBS);
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.IRON_ORE);
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.IRON_ORE_BLOBS);
+		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.GOLD_ORE);
 	}
 	
 }

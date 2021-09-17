@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.biome.deepslate;
 
-import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
+import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.features.DefaultVanillaBiomeSpawns;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -22,10 +23,9 @@ public class DeepslateOceanBiome extends DeepslateBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		MobSpawnSettings.Builder modBuilder = new MobSpawnSettings.Builder();
-		DefaultModFeatures.addCommonMonsterSpawns(modBuilder);
-		DefaultModFeatures.addWaterCaveSpawns(modBuilder);
-		return modBuilder.build();
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		return mobBuilder.build();
 	}
 	
 }

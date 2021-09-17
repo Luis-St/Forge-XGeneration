@@ -1,8 +1,5 @@
 package net.luis.nero;
 
-import java.io.File;
-import java.nio.file.Path;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +25,6 @@ import net.luis.nero.init.world.levelgen.surfacebuilder.ModSurfaceBuilders;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
 
 // TODO: after current work finished sort world package
 @Mod(Nero.MOD_ID)
@@ -79,31 +75,11 @@ public class Nero {
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOME_REGISTRY.register(eventBus);
 		
-//		this.buildConfig();
-		
 		this.modModelSet = new ModEntityModelSet();
 	}
 	
 	public static Nero getInstance() {
 		return nero;
-	}
-	
-	public Path getConfigPath()  {
-		return new File(String.valueOf(FMLPaths.CONFIGDIR.get().resolve(Nero.MOD_ID))).toPath();
-	}
-	
-	protected void buildConfig() {
-		this.createConfigPath();
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfig.buildConfig(), this.getConfigPath().resolve("client-config.toml").toString());
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.buildConfig(), this.getConfigPath().resolve("common-config.toml").toString());
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfig.buildConfig(), this.getConfigPath().resolve("server-config.toml").toString());
-	}
-	
-	private void createConfigPath() {
-		File configDirectory = new File(this.getConfigPath().toString());
-		if (!configDirectory.exists()) {
-			configDirectory.mkdirs();
-		}
 	}
 	
 	public ModEntityModelSet getModModelSet() {

@@ -64,6 +64,13 @@ public class DefaultVanillaBiomeSpawns {
 		addCaveSpawns(mobBuilder);
 		addMonsterSpawns(mobBuilder, 19, 1, 100);
 	}
+	
+	public static void addSavannaSpawns(MobSpawnBuilder mobBuilder) {
+		addFarmAnimalSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.HORSE, 1, 2, 6));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.DONKEY, 1, 1, 1));
+		addCommonMonsterSpawns(mobBuilder);
+	}
 
 	public static void addMonsterSpawns(MobSpawnBuilder mobBuilder, int zombieSpawnWeight, int zombieVillagerSpawnWeight, int skeletonSpawnWeight) {
 		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SPIDER, 100, 4, 4));

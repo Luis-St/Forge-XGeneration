@@ -76,6 +76,7 @@ public class ConfiguredModFeatures {
 			ModFeatures.ORE.get().configured(new OreConfiguration(STONE, BlockStates.EMERALD_ORE, 8))
 			.rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(192)).squared().count(20));
 	
+	
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_COAL_ORE = register("deepslate_coal_ore",
 			ModFeatures.ORE.get().configured(new OreConfiguration(DEEPSLATE, BlockStates.DEEPSLATE_COAL_ORE, 15))
 			.range(triangle(384, 512, 512))

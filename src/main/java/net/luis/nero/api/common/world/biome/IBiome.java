@@ -1,22 +1,14 @@
 package net.luis.nero.api.common.world.biome;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Supplier;
 
+import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep.Carving;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public interface IBiome {
 	
@@ -58,12 +50,6 @@ public interface IBiome {
 	
 	BiomeGenerationSettings getBiomeGenerationSettings();
 	
-	Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder();
-	
-	Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> getModFeatures();
-	
-	Map<Carving, List<Supplier<ConfiguredWorldCarver<?>>>> getModWorldCarvers();
-	
-	List<Supplier<ConfiguredStructureFeature<?, ?>>> getModStructures();
+	ModBiomeFeatures getModFeatures();
 	
 }

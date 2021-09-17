@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.world.biome.IBiome;
-import net.luis.nero.common.world.levelgen.feature.DefaultModFeatures;
+import net.luis.nero.common.world.biome.features.DefaultModBiomeFeatures;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
@@ -43,29 +43,17 @@ public class OnBiomeLoadingEvent {
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		
-		biome.getModSurfaceBuilder().ifPresent(surfaceBuilder -> {
-			generationBuilder.surfaceBuilder(surfaceBuilder);
-		});
-		
-		biome.getModFeatures().forEach((decoration, feature) -> {
-			generationBuilder.addFeature(decoration.ordinal(), feature);
-		});
-		
-		biome.getModWorldCarvers().forEach((carving, worldCarver) -> {
-			generationBuilder.addCarver(carving, worldCarver.get());
-		});
-		
-		biome.getModStructures().forEach(structure -> {
-			generationBuilder.addStructureStart(structure.get());
-		});
+		if (biome != null) {
+			biome.getModFeatures().addAllFeatures(generationBuilder);
+		}
 		
 		if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
-		} else { 
-			DefaultModFeatures.addOreOverwrites(generationBuilder);
-			DefaultModFeatures.addFlatBedrock(generationBuilder);
+		} else {
+			DefaultModBiomeFeatures.addOreOverwrites(null);
+			DefaultModBiomeFeatures.addFlatBedrock(null);
 		}
 		
 	}

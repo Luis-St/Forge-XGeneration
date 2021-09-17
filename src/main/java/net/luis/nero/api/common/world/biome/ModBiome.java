@@ -1,24 +1,12 @@
 package net.luis.nero.api.common.world.biome;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import com.google.common.collect.Lists;
-
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.BiomeUtil;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
-import net.minecraft.world.level.levelgen.GenerationStep.Carving;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public abstract class ModBiome implements IBiome {
@@ -81,7 +69,7 @@ public abstract class ModBiome implements IBiome {
 	
 	protected abstract ConfiguredSurfaceBuilder<?> getSurfaceBuilder();
 	
-	protected void getMobSpawnOverwrite(MobSpawnBuilder modBuilder) {
+	protected void getMobSpawnOverwrite(MobSpawnBuilder mobBuilder) {
 		
 	}
 	
@@ -90,23 +78,8 @@ public abstract class ModBiome implements IBiome {
 	}
 
 	@Override
-	public Optional<Supplier<ConfiguredSurfaceBuilder<?>>> getModSurfaceBuilder() {
-		return Optional.empty();
-	}
-
-	@Override
-	public Map<Decoration, List<Supplier<ConfiguredFeature<?, ?>>>> getModFeatures() {
-		return BiomeUtil.makeModFeaturesMap();
-	}
-
-	@Override
-	public Map<Carving, List<Supplier<ConfiguredWorldCarver<?>>>> getModWorldCarvers() {
-		return BiomeUtil.makeModCarversMap();
-	}
-
-	@Override
-	public List<Supplier<ConfiguredStructureFeature<?, ?>>> getModStructures() {
-		return Lists.newArrayList();
+	public ModBiomeFeatures getModFeatures() {
+		return new ModBiomeFeatures();
 	}
 
 }

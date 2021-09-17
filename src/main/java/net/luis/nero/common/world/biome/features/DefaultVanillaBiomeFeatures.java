@@ -66,8 +66,8 @@ public class DefaultVanillaBiomeFeatures {
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.GLOW_LICHEN);
 		}
 	}
-	// TODO: rename
-	public static void addDripstone(BiomeGenerationBuilder generationBuilder) {
+	
+	public static void addDripstoneVegetation(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, Features.LARGE_DRIPSTONE_FEATURE);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.DRIPSTONE_CLUSTER_FEATURE);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SMALL_DRIPSTONE_FEATURE);

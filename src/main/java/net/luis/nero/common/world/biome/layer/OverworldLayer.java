@@ -43,9 +43,27 @@ public class OverworldLayer {
 		}));
 	}
 	
+	@SuppressWarnings("unused")
 	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getDefaultLayer(LongFunction<C> function) {
 		AreaFactory<T> temperatureFactory = getTemperatureLayer(function);
 		AreaFactory<T> rainfallFactory = getRainfallLayer(function);
+		return rainfallFactory;
+	}
+	
+	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getTemperatureLayer(LongFunction<C> function) {
+		AreaFactory<T> temperatureFactory = ClimateBaseLayer.TEMPERATURE.run(function.apply(10L));
+		temperatureFactory = TemperatureLayer.WARM.run(function.apply(20L), temperatureFactory);
+		temperatureFactory = TemperatureLayer.COLD.run(function.apply(30L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(40L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(50L), temperatureFactory);
+		temperatureFactory = HotIceLayer.INSTANCE.run(function.apply(60L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(70L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(80L), temperatureFactory);
+		temperatureFactory = FixTemperatureLayer.INSTANCE.run(function.apply(90L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(100L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(110L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(120L), temperatureFactory);
+		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(130L), temperatureFactory);
 		return temperatureFactory;
 	}
 	
@@ -71,23 +89,6 @@ public class OverworldLayer {
 		rainfallFactory = ZoomLayer.NORMAL.run(function.apply(262144L), rainfallFactory);
 		rainfallFactory = ZoomLayer.NORMAL.run(function.apply(524288L), rainfallFactory);
 		return rainfallFactory;
-	}
-	
-	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getTemperatureLayer(LongFunction<C> function) {
-		AreaFactory<T> temperatureFactory = ClimateBaseLayer.TEMPERATURE.run(function.apply(10L));
-		temperatureFactory = TemperatureLayer.WARM.run(function.apply(20L), temperatureFactory);
-		temperatureFactory = TemperatureLayer.COLD.run(function.apply(30L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(40L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(50L), temperatureFactory);
-		temperatureFactory = HotIceLayer.INSTANCE.run(function.apply(60L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(70L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(80L), temperatureFactory);
-		temperatureFactory = FixTemperatureLayer.INSTANCE.run(function.apply(90L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(100L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(110L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(120L), temperatureFactory);
-		temperatureFactory = ZoomLayer.NORMAL.run(function.apply(130L), temperatureFactory);
-		return temperatureFactory;
 	}
 	
 }
