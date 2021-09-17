@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.world.biome.DeepslateBiomeSource;
 import net.luis.nero.common.world.levelgen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeSource;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -38,7 +36,6 @@ public class OnCommonSetupEvent {
 	@SubscribeEvent
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		registerNetwork(event);
-		registerCapability(event);
 		registerBiome(event);
 		registerEntitySpawnPlacements(event);
 		registerStructure(event);
@@ -49,11 +46,6 @@ public class OnCommonSetupEvent {
 		NetworkHandler.init();
 	}
 	
-	@SuppressWarnings("removal") // TODO: use RegisterCapabilitiesEvent
-	protected static void registerCapability(FMLCommonSetupEvent event) {
-		CapabilityManager.INSTANCE.register(IBloodOrbCapability.class);
-	}
-	
 	protected static void registerBiome(FMLCommonSetupEvent event) {
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE, Type.MODIFIED);
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_OCEAN, Type.MODIFIED);
@@ -61,12 +53,6 @@ public class OnCommonSetupEvent {
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPDARK, Type.MODIFIED);
 		BiomeDictionary.addTypes(ModBiomeKeys.LUSH_CAVES, Type.MODIFIED);
 		BiomeDictionary.addTypes(ModBiomeKeys.DRIPSTONE_CAVE, Type.MODIFIED);
-		
-		BiomeDictionary.addTypes(ModBiomeKeys.ICY, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.COLD, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.MEDIUM, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.WARM, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.HOT, Type.MODIFIED);
 	}
 	
 	protected static void registerEntitySpawnPlacements(FMLCommonSetupEvent event) {
