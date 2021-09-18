@@ -1,10 +1,10 @@
-package net.luis.nero.common.world.biome.layer.climate.temperature;
+package net.luis.nero.common.world.levelgen.layer.climate.temperature;
 
-import net.luis.nero.common.world.biome.layer.OverworldLayer;
-import net.luis.nero.common.world.biome.layer.traits.CrossBiomeTransformer;
+import net.luis.nero.common.world.levelgen.layer.OverworldLayer;
+import net.luis.nero.common.world.levelgen.layer.traits.CrossTransformer;
 import net.minecraft.world.level.newbiome.context.BigContext;
 
-public enum FixTemperatureLayer implements CrossBiomeTransformer {
+public enum FixTemperatureLayer implements CrossTransformer {
 	INSTANCE;
 
 	@Override

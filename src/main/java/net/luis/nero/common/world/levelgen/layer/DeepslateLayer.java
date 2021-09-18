@@ -2,6 +2,7 @@ package net.luis.nero.common.world.levelgen.layer;
 
 import java.util.function.LongFunction;
 
+import net.luis.nero.common.world.levelgen.layer.traits.SimpleAreaTransformer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.newbiome.layer.traits.AreaTransformer0;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
-public class DeepslateBiomeLayer {
+public class DeepslateLayer {
 	
 	protected static final int DEEPSLATE = getBiomeId(ModBiomeKeys.DEEPSLATE.location()); // y0-512
 	protected static final int DEEPSLATE_OCEAN = getBiomeId(ModBiomeKeys.DEEPSLATE_OCEAN.location()); // y244-288
@@ -54,11 +55,11 @@ public class DeepslateBiomeLayer {
 		}
 	}
 	
-	protected enum CaveLayer implements AreaTransformer {
+	protected enum CaveLayer implements SimpleAreaTransformer {
 		INSTANCE;
 		
 		@Override
-		public int applyPixel(BigContext<?> context, Area area, int x, int y) {
+		public int apply(BigContext<?> context, Area area, int x, int z) {
 			int rng = context.nextRandom(30);
 			if (rng == 0) {
 				return DEEPSLATE_OCEAN;

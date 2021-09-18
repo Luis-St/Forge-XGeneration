@@ -8,7 +8,7 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class EndBiome extends ModBiome {
+public abstract class EndBiome extends ModBiome {
 	
 	public EndBiome() {
 		super(BiomeEffects.END);

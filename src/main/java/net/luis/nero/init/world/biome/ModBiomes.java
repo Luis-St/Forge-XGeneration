@@ -13,7 +13,7 @@ import net.luis.nero.common.world.biome.deepslate.DeepslateOceanBiome;
 import net.luis.nero.common.world.biome.deepslate.cave.DeepdarkCaveBiome;
 import net.luis.nero.common.world.biome.deepslate.cave.DripstoneCaveBiome;
 import net.luis.nero.common.world.biome.deepslate.cave.LushCaveBiome;
-import net.luis.nero.common.world.biome.overworld.TempBiome;
+import net.luis.nero.common.world.biome.vanilla.overworld.TempBiome;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

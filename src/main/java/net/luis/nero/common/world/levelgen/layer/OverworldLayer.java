@@ -1,12 +1,12 @@
-package net.luis.nero.common.world.biome.layer;
+package net.luis.nero.common.world.levelgen.layer;
 
 import java.util.function.LongFunction;
 
-import net.luis.nero.common.world.biome.layer.climate.ClimateBaseLayer;
-import net.luis.nero.common.world.biome.layer.climate.rainfall.RainfallLayer;
-import net.luis.nero.common.world.biome.layer.climate.temperature.FixTemperatureLayer;
-import net.luis.nero.common.world.biome.layer.climate.temperature.HotIceLayer;
-import net.luis.nero.common.world.biome.layer.climate.temperature.TemperatureLayer;
+import net.luis.nero.common.world.levelgen.layer.climate.ClimateBaseLayer;
+import net.luis.nero.common.world.levelgen.layer.climate.rainfall.RainfallLayer;
+import net.luis.nero.common.world.levelgen.layer.climate.temperature.FixTemperatureLayer;
+import net.luis.nero.common.world.levelgen.layer.climate.temperature.HotIceLayer;
+import net.luis.nero.common.world.levelgen.layer.climate.temperature.TemperatureLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;

@@ -8,7 +8,7 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class NetherBiome extends ModBiome {
+public abstract class NetherBiome extends ModBiome {
 	
 	public NetherBiome() {
 		super(BiomeEffects.NETHER);

@@ -30,12 +30,16 @@ public abstract class OverworldBiome extends ModBiome {
 		return this.temperature > 2.0F ? 0.0F : 1.0F;
 	}
 	
+	public abstract boolean isOcean();
+	
+	public abstract boolean isBeach();
+	
 	public abstract boolean isIsland();
 	
-	public abstract boolean hasForest();
+	public abstract boolean isMushroomIsland();
 	
 	public abstract boolean isHilly();
 	
-	public abstract int hillHeight();
+	public abstract boolean isMountain();
 	
 }

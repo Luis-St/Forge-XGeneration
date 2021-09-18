@@ -1,10 +1,10 @@
-package net.luis.nero.common.world.biome.layer.climate.temperature;
+package net.luis.nero.common.world.levelgen.layer.climate.temperature;
 
-import net.luis.nero.common.world.biome.layer.OverworldLayer;
-import net.luis.nero.common.world.biome.layer.traits.CastleBiomeTransformer;
+import net.luis.nero.common.world.levelgen.layer.OverworldLayer;
+import net.luis.nero.common.world.levelgen.layer.traits.SquareTransformer;
 import net.minecraft.world.level.newbiome.context.BigContext;
 
-public enum TemperatureLayer implements CastleBiomeTransformer {
+public enum TemperatureLayer implements SquareTransformer {
 	WARM {
 		@Override
 		public int apply(BigContext<?> context, int nBiomeId, int nEBiomeId, int eBiomeId, int sEBiomeId, int sBiomeId, int sWBiomeId, int wBiomeId, int nWBiomeId, int biomeId) {

@@ -3,7 +3,6 @@ package net.luis.nero;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.luis.nero.api.util.OptionalArgument;
 import net.luis.nero.client.model.ModEntityModelSet;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
@@ -26,6 +25,7 @@ import net.luis.nero.init.world.levelgen.surfacebuilder.ModSurfaceBuilders;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 // TODO: after current work finished sort world package
 @Mod(Nero.MOD_ID)
@@ -42,7 +42,7 @@ public class Nero {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
-	public static final boolean RUN_IN_IDE = OptionalArgument.of("--ide").isPresent();
+	public static final boolean RUN_IN_IDE = FMLEnvironment.production;
 	private static Nero nero;
 	
 	protected final ModEntityModelSet modModelSet; // TODO: use forge system
@@ -78,10 +78,6 @@ public class Nero {
 		ModBiomes.BIOME_REGISTRY.register(eventBus);
 		
 		this.modModelSet = new ModEntityModelSet();
-		
-		if (RUN_IN_IDE) {
-			LOGGER.debug("Nero is running in a IDE");
-		}
 	}
 	
 	public static Nero getInstance() {

@@ -3,7 +3,7 @@ package net.luis.nero.common.world.biome.deepslate;
 import net.luis.nero.api.common.world.biome.DeepslateBiome;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.features.DefaultVanillaBiomeSpawns;
+import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeSpawns;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;

@@ -1,10 +1,10 @@
-package net.luis.nero.common.world.biome.layer.traits;
+package net.luis.nero.common.world.levelgen.layer.traits;
 
 import net.minecraft.world.level.newbiome.area.Area;
 import net.minecraft.world.level.newbiome.context.BigContext;
 import net.minecraft.world.level.newbiome.layer.traits.DimensionOffset0Transformer;
 
-public interface CrossBiomeTransformer extends SimpleAreaTransformer, DimensionOffset0Transformer {
+public interface PlusTransformer extends SimpleAreaTransformer, DimensionOffset0Transformer {
 	
 	@Override
 	default int apply(BigContext<?> context, Area area, int x, int z) {

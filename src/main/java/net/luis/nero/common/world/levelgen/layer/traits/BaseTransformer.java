@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.biome.layer.traits;
+package net.luis.nero.common.world.levelgen.layer.traits;
 
 import net.minecraft.world.level.newbiome.area.Area;
 import net.minecraft.world.level.newbiome.area.AreaFactory;
