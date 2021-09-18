@@ -7,11 +7,10 @@ import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
-public abstract class NetherBiome extends ModBiome {
+public class NetherBiome extends ModBiome {
 	
-	protected NetherBiome() {
+	public NetherBiome() {
 		super(BiomeEffects.NETHER);
 	}
 
@@ -31,15 +30,10 @@ public abstract class NetherBiome extends ModBiome {
 	@Override
 	public final BiomeGenerationSettings getBiomeGenerationSettings() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		generationBuilder.surfaceBuilder(() -> this.getSurfaceBuilder());
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.NETHER);
 //		DefaultModFeatures.addNetherFeatures(generationBuilder);
 		this.getBiomeGenerationOverwrite(generationBuilder);
 		return generationBuilder.build();
-	}
-	
-	@Override
-	protected ConfiguredSurfaceBuilder<?> getSurfaceBuilder() {
-		return SurfaceBuilders.NETHER;
 	}
 	
 }

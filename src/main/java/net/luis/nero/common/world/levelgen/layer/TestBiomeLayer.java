@@ -16,6 +16,7 @@ import net.minecraft.world.level.newbiome.layer.traits.AreaTransformer0;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
+@Deprecated
 public class TestBiomeLayer {
 	
 	protected static final int DEEPSLATE = getBiomeId(ModBiomeKeys.DEEPSLATE.location()); // y0-512

@@ -52,8 +52,8 @@ public class OnBiomeLoadingEvent {
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
 		} else {
-			DefaultModBiomeFeatures.addOreOverwrites(null);
-			DefaultModBiomeFeatures.addFlatBedrock(null);
+			DefaultModBiomeFeatures.addFlatBedrock(generationBuilder);
+			DefaultModBiomeFeatures.addOreOverwrites(generationBuilder);
 		}
 		
 	}

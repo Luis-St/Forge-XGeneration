@@ -1,11 +1,16 @@
 package net.luis.nero.common.world.biome.deepslate.cave;
 
-import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
+import net.luis.nero.api.common.world.biome.DeepslateBiome;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 
 public class DripstoneCaveBiome extends DeepslateBiome {
 	
+	public DripstoneCaveBiome(BiomeEffects biomeEffects) {
+		super(biomeEffects);
+	}
+
 	@Override
 	public BiomeSpecialEffects getBiomeEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();

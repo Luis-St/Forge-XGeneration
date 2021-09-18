@@ -1,6 +1,8 @@
 package net.luis.nero.common.world.biome.deepslate;
 
+import net.luis.nero.api.common.world.biome.DeepslateBiome;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.features.DefaultVanillaBiomeSpawns;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -8,6 +10,10 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class DeepslateOceanBiome extends DeepslateBiome {
 	
+	public DeepslateOceanBiome(BiomeEffects biomeEffects) {
+		super(biomeEffects);
+	}
+
 	@Override
 	public BiomeSpecialEffects getBiomeEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();

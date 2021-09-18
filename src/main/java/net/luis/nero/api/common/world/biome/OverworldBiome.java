@@ -1,13 +1,7 @@
 package net.luis.nero.api.common.world.biome;
 
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.world.level.biome.Biome.Precipitation;
-import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public abstract class OverworldBiome extends ModBiome {
 	
@@ -36,26 +30,12 @@ public abstract class OverworldBiome extends ModBiome {
 		return this.temperature > 2.0F ? 0.0F : 1.0F;
 	}
 	
-	@Override
-	public final MobSpawnSettings getMobSpawnSettings() {
-		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
-//		DefaultModFeatures.addOverworldSpawns(mobBuilder);
-		this.getMobSpawnOverwrite(mobBuilder);
-		return mobBuilder.build();
-	}
+	public abstract boolean isIsland();
 	
-	@Override
-	public final BiomeGenerationSettings getBiomeGenerationSettings() {
-		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		generationBuilder.surfaceBuilder(() -> this.getSurfaceBuilder());
-//		DefaultModFeatures.addOverworldFeatures(generationBuilder);
-		this.getBiomeGenerationOverwrite(generationBuilder);
-		return generationBuilder.build();
-	}
+	public abstract boolean hasForest();
 	
-	@Override
-	protected ConfiguredSurfaceBuilder<?> getSurfaceBuilder() {
-		return SurfaceBuilders.GRASS;
-	}
+	public abstract boolean isHilly();
+	
+	public abstract int hillHeight();
 	
 }

@@ -5,8 +5,9 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import net.luis.nero.Nero;
+import net.luis.nero.api.common.world.biome.DeepslateBiome;
 import net.luis.nero.api.common.world.biome.IBiome;
-import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.deepslate.DeepslateLavaLakeBiome;
 import net.luis.nero.common.world.biome.deepslate.DeepslateOceanBiome;
 import net.luis.nero.common.world.biome.deepslate.cave.DeepdarkCaveBiome;
@@ -23,12 +24,12 @@ public class ModBiomes {
 	public static final Map<String, IBiome> BIOMES = Maps.newHashMap();
 	
 	
-	public static final DeepslateBiome DEEPSLATE = register("deepslate", new DeepslateBiome());
-	public static final DeepslateOceanBiome DEEPSLATE_OCEAN = register("deepslate_ocean", new DeepslateOceanBiome());
-	public static final DeepslateLavaLakeBiome DEEPSLATE_LAVA_LAKE = register("deepslate_lava_lake", new DeepslateLavaLakeBiome());
-	public static final DeepdarkCaveBiome DEEPDARK = register("deepdark", new DeepdarkCaveBiome());
-	public static final LushCaveBiome LUSH_CAVES = register("lush_caves", new LushCaveBiome());
-	public static final DripstoneCaveBiome DRIPSTONE_CAVE = register("dripstone_cave", new DripstoneCaveBiome());
+	public static final DeepslateBiome DEEPSLATE = register("deepslate", new DeepslateBiome(BiomeEffects.DEEPSLATE));
+	public static final DeepslateOceanBiome DEEPSLATE_OCEAN = register("deepslate_ocean", new DeepslateOceanBiome(BiomeEffects.DEEPSLATE_OCEAN));
+	public static final DeepslateLavaLakeBiome DEEPSLATE_LAVA_LAKE = register("deepslate_lava_lake", new DeepslateLavaLakeBiome(BiomeEffects.DEEPSLATE_LAVA_LAKE));
+	public static final DeepdarkCaveBiome DEEPDARK = register("deepdark", new DeepdarkCaveBiome(BiomeEffects.DEEPDARK));
+	public static final LushCaveBiome LUSH_CAVES = register("lush_caves", new LushCaveBiome(BiomeEffects.LUSH_CAVE));
+	public static final DripstoneCaveBiome DRIPSTONE_CAVE = register("dripstone_cave", new DripstoneCaveBiome(BiomeEffects.DRIPSTONE_CAVE));
 	
 	public static final TempBiome ICY = register("icy", new TempBiome(-1.0f, 9983));
 	public static final TempBiome COLD = register("cold", new TempBiome(0.0f, 65535));

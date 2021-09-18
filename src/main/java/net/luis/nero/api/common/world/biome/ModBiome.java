@@ -7,7 +7,6 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public abstract class ModBiome implements IBiome {
 	
@@ -67,8 +66,6 @@ public abstract class ModBiome implements IBiome {
 		return specialEffectsBuilder.build();
 	}
 	
-	protected abstract ConfiguredSurfaceBuilder<?> getSurfaceBuilder();
-	
 	protected void getMobSpawnOverwrite(MobSpawnBuilder mobBuilder) {
 		
 	}
@@ -81,5 +78,5 @@ public abstract class ModBiome implements IBiome {
 	public ModBiomeFeatures getModFeatures() {
 		return new ModBiomeFeatures();
 	}
-
+	
 }

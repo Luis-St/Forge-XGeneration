@@ -1,10 +1,16 @@
 package net.luis.nero.common.world.biome.deepslate;
 
+import net.luis.nero.api.common.world.biome.DeepslateBiome;
+import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 
 public class DeepslateLavaLakeBiome extends DeepslateBiome {
 	
+	public DeepslateLavaLakeBiome(BiomeEffects biomeEffects) {
+		super(biomeEffects);
+	}
+
 	@Override
 	public float getTemperature() {
 		return 2.0F;

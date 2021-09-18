@@ -3,6 +3,7 @@ package net.luis.nero;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.luis.nero.api.util.OptionalArgument;
 import net.luis.nero.client.model.ModEntityModelSet;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
@@ -41,9 +42,10 @@ public class Nero {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
 	public static final String MINECRAFT_ID = "minecraft";
+	public static final boolean RUN_IN_IDE = OptionalArgument.of("--ide").isPresent();
 	private static Nero nero;
 	
-	private final ModEntityModelSet modModelSet;
+	protected final ModEntityModelSet modModelSet; // TODO: use forge system
 	
 	public Nero() {
 		nero = this;
@@ -76,6 +78,10 @@ public class Nero {
 		ModBiomes.BIOME_REGISTRY.register(eventBus);
 		
 		this.modModelSet = new ModEntityModelSet();
+		
+		if (RUN_IN_IDE) {
+			LOGGER.debug("Nero is running in a IDE");
+		}
 	}
 	
 	public static Nero getInstance() {

@@ -7,11 +7,10 @@ import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 
-public abstract class EndBiome extends ModBiome {
+public class EndBiome extends ModBiome {
 	
-	protected EndBiome() {
+	public EndBiome() {
 		super(BiomeEffects.END);
 	}
 
@@ -31,15 +30,10 @@ public abstract class EndBiome extends ModBiome {
 	@Override
 	public final BiomeGenerationSettings getBiomeGenerationSettings() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		generationBuilder.surfaceBuilder(() -> this.getSurfaceBuilder());
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.END);
 //		DefaultModFeatures.addEndFeatures(generationBuilder);
 		this.getBiomeGenerationOverwrite(generationBuilder);
 		return generationBuilder.build();
-	}
-	
-	@Override
-	protected ConfiguredSurfaceBuilder<?> getSurfaceBuilder() {
-		return SurfaceBuilders.END;
 	}
 	
 }
