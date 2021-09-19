@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 
-//TODO: fix complet render system of milestone -> should remove and update
 public class MilestoneModel extends Model {
 	
 //	private final ModelPart milestone;

@@ -16,7 +16,6 @@ import net.minecraft.world.level.levelgen.Aquifer;
 import net.minecraft.world.level.levelgen.carver.CarvingContext;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 
-// Broken...
 public class ModCanyonWorldCarver extends ModWorldCarver<ModCanyonCarverConfiguration> {
 
 	public ModCanyonWorldCarver(Codec<ModCanyonCarverConfiguration> codec) {

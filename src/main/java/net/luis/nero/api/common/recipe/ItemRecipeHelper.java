@@ -5,7 +5,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class ItemHelper {
+public class ItemRecipeHelper {
 	
 	public static Item glassBlockFromColor(DyeColor color) {
 		switch (color) {

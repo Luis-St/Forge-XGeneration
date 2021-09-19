@@ -27,14 +27,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnBiomeLoadingEvent {
 	
-	// TODO: disable/enable feature via config
-	
-	// TODO: add to deepslate -> retrun in DefaultModFeatures a List
-//	DefaultModFeatures.addDeepslateCarvers(generationBuilder);
-//	DefaultModFeatures.addDeepslateStructures(generationBuilder);
-//	DefaultModFeatures.addDeepslateUndergroundVariety(generationBuilder);
-//	DefaultModFeatures.addDeepslateOres(generationBuilder);
-	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 

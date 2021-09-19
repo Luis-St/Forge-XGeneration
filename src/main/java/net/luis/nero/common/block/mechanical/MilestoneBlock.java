@@ -12,7 +12,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// TODO: update recipe
 public class MilestoneBlock extends Block {
 	
 	private static final VoxelShape SHAPE = Stream.of(Block.box(0, 0, 0, 16, 6, 16),

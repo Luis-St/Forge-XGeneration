@@ -27,17 +27,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-// TODO: after current work finished sort world package
 @Mod(Nero.MOD_ID)
 public class Nero {
-	
-	// TODO: custom config system
-	// TODO: expands nether gen to 256 and height to 320
-	// TODO: drift sand -> spawn desert biome & edit texture
-	// TODO: custom strong hold in deepslate -> without portal & god loot
-	// TODO: mineshaft structure 
-	// TODO: armor overwrite -> new mechanics (separate armor bar and armor protection) (LivingHurtEvent)
-	// TODO: debug register time for all entrys and events
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero";
@@ -45,7 +36,7 @@ public class Nero {
 	public static final boolean RUN_IN_IDE = FMLEnvironment.production;
 	private static Nero nero;
 	
-	protected final ModEntityModelSet modModelSet; // TODO: use forge system
+	protected final ModEntityModelSet modModelSet;
 	
 	public Nero() {
 		nero = this;

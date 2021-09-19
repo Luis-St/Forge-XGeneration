@@ -10,8 +10,6 @@ import net.minecraft.world.level.Level;
 
 public class IceEffect extends ModEffect {
 	
-	// TODO: 1.17 render ice hearts & overlay
-	
 	public IceEffect(MobEffectCategory effectType, int color) {
 		super(effectType, color);
 		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "acb7ea00-1235-40f3-a3b2-77a836fa3898", -0.25, AttributeModifier.Operation.MULTIPLY_TOTAL);	

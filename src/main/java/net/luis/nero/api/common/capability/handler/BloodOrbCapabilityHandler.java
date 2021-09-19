@@ -3,25 +3,13 @@ package net.luis.nero.api.common.capability.handler;
 import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.api.common.capability.util.IItemCapability;
 import net.luis.nero.api.common.item.AbstractRuneItem;
-import net.luis.nero.api.common.item.RuneUseType;
+import net.luis.nero.common.enums.RuneUseType;
 import net.luis.nero.common.item.OrbItem;
 import net.minecraft.nbt.CompoundTag;
 
 public class BloodOrbCapabilityHandler implements IBloodOrbCapability, IItemCapability {
 	
 	private int blood = 0;
-	
-	@Override
-	public CompoundTag serializeNBT() {
-		CompoundTag tag = new CompoundTag();
-		tag.putInt("blood", this.blood);
-		return tag;
-	}
-
-	@Override
-	public void deserializeNBT(CompoundTag tag) {
-		this.blood = tag.getInt("blood");
-	}
 
 	@Override
 	public int getBlood() {
@@ -97,6 +85,18 @@ public class BloodOrbCapabilityHandler implements IBloodOrbCapability, IItemCapa
 			throw new IllegalArgumentException("RuneUseType can't be null!");
 		}
 		}
+	}
+	
+	@Override
+	public CompoundTag serializeNBT() {
+		CompoundTag tag = new CompoundTag();
+		tag.putInt("blood", this.blood);
+		return tag;
+	}
+
+	@Override
+	public void deserializeNBT(CompoundTag tag) {
+		this.blood = tag.getInt("blood");
 	}
 
 }

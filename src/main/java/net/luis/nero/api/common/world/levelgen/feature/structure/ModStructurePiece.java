@@ -2,15 +2,13 @@ package net.luis.nero.api.common.world.levelgen.feature.structure;
 
 import java.util.Random;
 
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 
-// TODO: fix boundingBox in constructor
-// TODO: test move boundingBox xyz-, test move pos in get world pos + -> after fix Orientation bug
 public abstract class ModStructurePiece extends StructurePiece {
 
 	protected final int width;
@@ -22,8 +20,7 @@ public abstract class ModStructurePiece extends StructurePiece {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
-//		this.setOrientation(Direction.NORTH); // Don't work
-		this.setOrientation(Direction.Plane.HORIZONTAL.getRandomDirection(rng)); // Work
+		this.setOrientation(Direction.Plane.HORIZONTAL.getRandomDirection(rng));
 		if (this.getOrientation().getAxis() == Direction.Axis.Z) {
 			this.boundingBox = new BoundingBox(x, y, z, x + (width * 2) - 1, y + (height * 2) - 1, z + (depth * 2) - 1);
 		} else {

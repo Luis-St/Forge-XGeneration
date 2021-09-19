@@ -32,11 +32,6 @@ import net.minecraft.world.level.material.Fluids;
 
 public class ConfiguredModFeatures {
 	
-	// TODO: test rangeTriangle then remove DEPTH_AVERAGE
-	
-	// TODO: allow some modifications via config
-	// TODO: add airExposure -> float in OreConfiguration 0.0 = 0% airExposure, 1.0 = 100% airExposure
-	
 	private static final RuleTest DEEPSLATE = OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES;
 	private static final RuleTest STONE = OreConfiguration.Predicates.NATURAL_STONE;
 	

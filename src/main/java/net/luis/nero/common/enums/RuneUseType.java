@@ -1,4 +1,4 @@
-package net.luis.nero.api.common.item;
+package net.luis.nero.common.enums;
 
 public enum RuneUseType {
 	

@@ -68,8 +68,6 @@ public class ModItems {
 	public static final RegistryObject<SlateItem> INFUSED_SLATE = ITEMS.register("infused_slate", () -> new SlateItem(2, new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<SlateItem> DEMON_SLATE = ITEMS.register("demon_slate", () -> new SlateItem(3, new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<RuneItem> RUNE = ITEMS.register("rune", () -> new RuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
-	
-	// TODO: recipes \/
 	public static final RegistryObject<WaterRuneItem> WATER_RUNE = ITEMS.register("water_rune", () -> new WaterRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<BridgeRuneItem> BRIDGE_RUNE = ITEMS.register("bridge_rune", () -> new BridgeRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));
 	public static final RegistryObject<WindRuneItem> WIND_RUNE = ITEMS.register("wind_rune", () -> new WindRuneItem(new Item.Properties().tab(ModItemGroups.BLOOD_MACIC).stacksTo(1)));

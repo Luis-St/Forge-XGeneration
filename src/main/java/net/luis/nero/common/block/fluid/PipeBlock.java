@@ -21,8 +21,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PipeBlock extends net.minecraft.world.level.block.PipeBlock {
 	
-	// TODO: move model to TE -> dispatcher can set via config (count)
-	
 	public PipeBlock(Properties properties) {
 		super(0.25F, properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(DOWN, Boolean.valueOf(false)).setValue(UP, Boolean.valueOf(false))

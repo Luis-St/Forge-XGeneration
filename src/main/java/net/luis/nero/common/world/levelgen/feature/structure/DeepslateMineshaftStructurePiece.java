@@ -30,7 +30,6 @@ public class DeepslateMineshaftStructurePiece extends /*ScatteredStructurePiece*
 	}
 	
 	@Override
-	// TODO: better mineshaft gen -> less code/methods (use count)
 	public boolean postProcess(WorldGenLevel worldLevel, StructureFeatureManager structureManager, ChunkGenerator chunkGenerator, Random rng, BoundingBox boundingBox, 
 			ChunkPos chunkPos, BlockPos blockPos) {
 		this.generateAirBox(worldLevel, boundingBox, this.getX(-8), this.getY(-8), this.getZ(-8), this.getX(8), this.getY(8), this.getZ(8)); // -> issu with generating

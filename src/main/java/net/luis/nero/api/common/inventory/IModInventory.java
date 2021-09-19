@@ -3,7 +3,6 @@ package net.luis.nero.api.common.inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
-
 public interface IModInventory {
 	
 	ModItemStackHandler get();
