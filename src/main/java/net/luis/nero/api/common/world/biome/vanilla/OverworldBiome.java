@@ -1,5 +1,7 @@
-package net.luis.nero.api.common.world.biome;
+package net.luis.nero.api.common.world.biome.vanilla;
 
+import net.luis.nero.api.common.world.biome.ModBiome;
+import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 
@@ -30,6 +32,8 @@ public abstract class OverworldBiome extends ModBiome {
 		return this.temperature > 2.0F ? 0.0F : 1.0F;
 	}
 	
+	public abstract boolean isUnderground();
+	
 	public abstract boolean isOcean();
 	
 	public abstract boolean isBeach();
@@ -41,5 +45,20 @@ public abstract class OverworldBiome extends ModBiome {
 	public abstract boolean isHilly();
 	
 	public abstract boolean isMountain();
+
+	@Override
+	public double getBaseNoise() {
+		return 0;
+	}
+
+	@Override
+	public double getNoiseScale() {
+		return 0;
+	}
+
+	@Override
+	public INoiseType getNoiseType() {
+		return null;
+	}
 	
 }

@@ -37,14 +37,20 @@ public class OverworldLayer {
 		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);
 	}
 	
-	public static Layer getDefaultLayer(long seed) {
-		return new Layer(getDefaultLayer((seedModifier) -> {
+	public static Layer getSurfaceLayer(long seed) {
+		return new Layer(getSurfaceLayer((seedModifier) -> {
+			return new LazyAreaContext(25, seedModifier, seed);
+		}));
+	}
+	
+	public static Layer getUndergroundLayer(long seed) {
+		return new Layer(getSurfaceLayer((seedModifier) -> {
 			return new LazyAreaContext(25, seedModifier, seed);
 		}));
 	}
 	
 	@SuppressWarnings("unused")
-	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getDefaultLayer(LongFunction<C> function) {
+	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getSurfaceLayer(LongFunction<C> function) {
 		AreaFactory<T> temperatureFactory = getTemperatureLayer(function);
 		AreaFactory<T> rainfallFactory = getRainfallLayer(function);
 		return rainfallFactory;

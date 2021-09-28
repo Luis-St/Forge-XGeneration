@@ -3,16 +3,21 @@ package net.luis.nero.api.common.world.biome;
 import java.util.function.Supplier;
 
 import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
+import net.luis.nero.api.common.world.biome.vanilla.EndBiome;
+import net.luis.nero.api.common.world.biome.vanilla.NetherBiome;
+import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
+import net.luis.nero.api.common.world.levelgen.INoiseType;
+import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public interface IBiome {
 	
@@ -20,8 +25,8 @@ public interface IBiome {
 		Biome.BiomeBuilder biomeBuilder = new Biome.BiomeBuilder();
 		biomeBuilder.precipitation(biome.getPrecipitation());
 		biomeBuilder.biomeCategory(biome.getCategory());
-		biomeBuilder.depth(biome.getDepth());
-		biomeBuilder.scale(biome.getScale());
+		biomeBuilder.depth(0.0F);
+		biomeBuilder.scale(0.0F);
 		biomeBuilder.temperature(biome.getTemperature());
 		biomeBuilder.downfall(biome.getDownfall());
 		biomeBuilder.specialEffects(biome.getBiomeEffects());
@@ -50,9 +55,11 @@ public interface IBiome {
 	
 	BiomeCategory getCategory();
 	
-	float getDepth();
+	double getBaseNoise();
 	
-	float getScale();
+	double getNoiseScale();
+	
+	INoiseType getNoiseType();
 	
 	float getTemperature();
 	

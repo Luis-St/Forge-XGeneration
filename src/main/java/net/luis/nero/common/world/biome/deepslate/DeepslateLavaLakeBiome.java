@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.biome.deepslate;
 
-import net.luis.nero.api.common.world.biome.DeepslateBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;

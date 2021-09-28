@@ -36,7 +36,7 @@ public class TestBiomeSource extends BiomeSource {
 		super(getBiomes(registry));
 		this.seed = seed;
 		this.registry = registry;
-		this.noiseBiomeLayer = OverworldLayer.getDefaultLayer(seed);
+		this.noiseBiomeLayer = OverworldLayer.getSurfaceLayer(seed);
 	}
 
 	protected static List<Biome> getBiomes(Registry<Biome> registry) {

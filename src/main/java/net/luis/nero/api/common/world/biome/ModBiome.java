@@ -34,16 +34,6 @@ public abstract class ModBiome implements IBiome {
 	}
 
 	@Override
-	public float getDepth() {
-		return 0.0F;
-	}
-
-	@Override
-	public float getScale() {
-		return 0.0F;
-	}
-
-	@Override
 	public float getTemperature() {
 		return 0.0F;
 	}
