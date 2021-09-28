@@ -34,6 +34,7 @@ public class DefaultModBiomeFeatures {
 	public static void addAmethystGeode(ModBiomeFeatures modBiomeFeatures) {
 		modBiomeFeatures.addModFeature(Decoration.LOCAL_MODIFICATIONS, () -> ConfiguredModFeatures.DEEPSLATE_AMETHYST_GEODE);
 	}
+	
 	public static void addFlatBedrock(BiomeGenerationSettingsBuilder generationBuilder) {
 		generationBuilder.addFeature(Decoration.RAW_GENERATION.ordinal(), () -> ConfiguredModFeatures.FLAT_BEDROCK);
 	}

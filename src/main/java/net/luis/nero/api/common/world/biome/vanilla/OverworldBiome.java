@@ -8,10 +8,16 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 public abstract class OverworldBiome extends ModBiome {
 	
 	protected final float temperature;
+	protected final double baseNoise;
+	protected final double noiseScale;
+	protected final INoiseType noiseType;
 	
-	public OverworldBiome(BiomeEffects biomeEffects, float temperature) {
+	public OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType) {
 		super(biomeEffects == null ? BiomeEffects.OVERWORLD : biomeEffects);
 		this.temperature = temperature;
+		this.baseNoise = baseNoise;
+		this.noiseScale = noiseScale;
+		this.noiseType = noiseType;
 	}
 	
 	@Override
@@ -32,6 +38,21 @@ public abstract class OverworldBiome extends ModBiome {
 		return this.temperature > 2.0F ? 0.0F : 1.0F;
 	}
 	
+	@Override
+	public double getBaseNoise() {
+		return this.baseNoise;
+	}
+
+	@Override
+	public double getNoiseScale() {
+		return this.noiseScale;
+	}
+
+	@Override
+	public INoiseType getNoiseType() {
+		return this.noiseType;
+	}
+	
 	public abstract boolean isUnderground();
 	
 	public abstract boolean isOcean();
@@ -44,21 +65,13 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isHilly();
 	
+	public abstract boolean isCliffs();
+	
 	public abstract boolean isMountain();
-
-	@Override
-	public double getBaseNoise() {
-		return 0;
-	}
-
-	@Override
-	public double getNoiseScale() {
-		return 0;
-	}
-
-	@Override
-	public INoiseType getNoiseType() {
-		return null;
+	
+	public boolean isCliffsBeach() {
+		return this.isBeach() && this.isMountain();
 	}
 	
 }
+  

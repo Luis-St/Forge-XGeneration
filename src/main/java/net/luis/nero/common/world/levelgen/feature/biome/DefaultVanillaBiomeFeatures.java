@@ -12,6 +12,16 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT_MESA);
 		generationBuilder.addStructureStart(StructureFeatures.STRONGHOLD);
 	}
+	
+	public static void addRuinedPortal(BiomeGenerationBuilder generationBuilder, boolean mountain) {
+		generationBuilder.addStructureStart(mountain ? StructureFeatures.RUINED_PORTAL_MOUNTAIN : StructureFeatures.RUINED_PORTAL_STANDARD);
+	}
+	
+	public static void addBeachStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
+		generationBuilder.addStructureStart(StructureFeatures.BURIED_TREASURE);
+		generationBuilder.addStructureStart(StructureFeatures.SHIPWRECH_BEACHED);
+	}
 
 	public static void addDefaultStructures(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
@@ -52,7 +62,7 @@ public class DefaultVanillaBiomeFeatures {
 		addDefaultUndergroundVariety(generationBuilder, false);
 	}
 
-	public static void addDefaultUndergroundVariety(BiomeGenerationBuilder generationBuilder, boolean isCaveBiome) {
+	public static void addDefaultUndergroundVariety(BiomeGenerationBuilder generationBuilder, boolean cave) {
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_GRAVEL);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_GRANITE);
@@ -62,7 +72,7 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_DEEPSLATE);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.RARE_DRIPSTONE_CLUSTER_FEATURE);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.RARE_SMALL_DRIPSTONE_FEATURE);
-		if (!isCaveBiome) {
+		if (!cave) {
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.GLOW_LICHEN);
 		}
 	}

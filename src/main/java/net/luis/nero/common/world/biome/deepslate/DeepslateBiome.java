@@ -14,6 +14,7 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+// TODO: add Biomes (noise caves)
 public class DeepslateBiome extends ModBiome {
 
 	public DeepslateBiome(BiomeEffects biomeEffects) {

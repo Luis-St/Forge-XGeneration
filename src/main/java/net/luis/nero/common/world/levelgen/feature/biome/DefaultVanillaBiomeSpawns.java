@@ -13,6 +13,10 @@ public class DefaultVanillaBiomeSpawns {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.CHICKEN, 10, 4, 4));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 8, 4, 4));
 	}
+	
+	public static void addBeachSpawns(MobSpawnBuilder mobBuilder) {
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.TURTLE, 5, 2, 5));
+	}
 
 	public static void addCaveSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8));
