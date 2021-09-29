@@ -22,6 +22,17 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addStructureStart(StructureFeatures.BURIED_TREASURE);
 		generationBuilder.addStructureStart(StructureFeatures.SHIPWRECH_BEACHED);
 	}
+	
+	public static void addDesertStructures(BiomeGenerationBuilder generationBuilder, boolean hilly, boolean lakey) {
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_DESERT);
+		if (!hilly) {
+			generationBuilder.addStructureStart(StructureFeatures.DESERT_PYRAMID);
+			if (!lakey) {
+				generationBuilder.addStructureStart(StructureFeatures.VILLAGE_DESERT);
+				generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+			}
+		}
+	}
 
 	public static void addDefaultStructures(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
@@ -231,8 +242,8 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.FOREST_FLOWER_VEGETATION);
 	}
 
-	public static void addForestGrass(BiomeGenerationBuilder p_126709_) {
-		p_126709_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_FOREST);
+	public static void addForestGrass(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_FOREST);
 	}
 
 	public static void addSwampVegetation(BiomeGenerationBuilder generationBuilder) {

@@ -7,25 +7,25 @@ import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class BadlandsBiome extends OverworldBiome {
+public class DesertBiome extends OverworldBiome {
 	
-	protected final boolean plateau;
-	protected final boolean wooded;
+	protected final boolean hilly;
+	protected final boolean lakey;
 	
-	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean plateau, boolean wooded) {
-		super(biomeEffects, 2.0F, baseNoise, baseNoise, noiseType);
-		this.plateau = plateau;
-		this.wooded = wooded;
+	public DesertBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean hilly, boolean lakey) {
+		super(biomeEffects, 2.0F, baseNoise, noiseScale, noiseType);
+		this.hilly = hilly;
+		this.lakey = lakey;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getBadlandsSpawns().build();
+		return BiomeUtil.getDesertSpawns().build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getBadlandsFeatures(this.plateau, this.wooded).build();
+		return BiomeUtil.getDesertFeatures(this.hilly, this.lakey).build();
 	}
 	
 	@Override
@@ -55,12 +55,12 @@ public class BadlandsBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isHilly() {
-		return true;
+		return this.hilly;
 	}
 	
 	@Override
 	public boolean isMountain() {
-		return this.plateau;
+		return false;
 	}
 	
 }

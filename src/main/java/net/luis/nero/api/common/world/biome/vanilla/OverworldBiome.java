@@ -65,8 +65,6 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isHilly();
 	
-	public abstract boolean isCliffs();
-	
 	public abstract boolean isMountain();
 	
 	public boolean isCliffsBeach() {
