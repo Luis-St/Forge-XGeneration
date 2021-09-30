@@ -17,6 +17,12 @@ public class DefaultVanillaBiomeSpawns {
 	public static void addBeachSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.TURTLE, 5, 2, 5));
 	}
+	
+	public static void addTaigaSpawns(MobSpawnBuilder mobBuilder) {
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
+	}
 
 	public static void addCaveSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8));

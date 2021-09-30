@@ -33,6 +33,19 @@ public class DefaultVanillaBiomeFeatures {
 			}
 		}
 	}
+	
+	public static void addTagiaStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.VILLAGE_TAIGA);
+		generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+	}
+	
+	public static void addSnowyTagiaStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.IGLOO);
+	}
+	
+	public static void addDarkForestStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.WOODLAND_MANSION);
+	}
 
 	public static void addDefaultStructures(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
@@ -140,6 +153,14 @@ public class DefaultVanillaBiomeFeatures {
 
 	public static void addRareBerryBushes(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_BERRY_SPARSE);
+	}
+	
+	public static void addTaigaBerryBushes(BiomeGenerationBuilder generationBuilder, boolean snowy) {
+		if (snowy) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_BERRY_SPARSE);
+		} else {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_BERRY_DECORATED);
+		}
 	}
 
 	public static void addLightBambooVegetation(BiomeGenerationBuilder generationBuilder) {
