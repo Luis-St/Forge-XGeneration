@@ -8,38 +8,41 @@ import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public enum GiantTaigaBiomeType implements IBiomeType {
+public enum JungleBiomeType implements IBiomeType {
 	
-	GIANT_TREE_TAIGA(0.3F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), false),
-	GIANT_TREE_TAIGA_HILLS(0.3F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), true),	
-	GIANT_SPRUCE_TAIGA(0.25F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), false),
-	GIANT_SPRUCE_TAIGA_HILLS(0.25F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), true);
+	JUNGLE(0.0, 0.0, null, BiomeUtil.getJungleSpawns(false, false), BiomeUtil.getJungleFeatures(false, false, false), true, false),
+	JUNGLE_HILLS(0.0, 0.0, null, BiomeUtil.getJungleSpawns(true, false), BiomeUtil.getJungleFeatures(false, false, false), false, true),
+	MODIFIED_JUNGLE(0.0, 0.0, null, BiomeUtil.getJungleSpawns(false, true), BiomeUtil.getJungleFeatures(false, false, true), false, false),
+	JUNGLE_EDGE(0.0, 0.0, null, BiomeUtil.getJungleEdgeSpawns(), BiomeUtil.getJungleFeatures(false, true, false), false, false),
+	MODIFIED_JUNGLE_EDGE(0.0, 0.0, null, BiomeUtil.getJungleEdgeSpawns(), BiomeUtil.getJungleFeatures(false, true, true), false, true),
+	BAMBOO_JUNGLE(0.0, 0.0, null, BiomeUtil.getBambooJungleSpawns(false), BiomeUtil.getJungleFeatures(true, false, false), false, false),
+	BAMBOO_JUNGLE_HILLS(0.0, 0.0, null, BiomeUtil.getBambooJungleSpawns(true), BiomeUtil.getJungleFeatures(true, false, false), false, true);
 	
-	private final float temperature;
 	private final double baseNoise;
 	private final double noiseScale;
 	private final INoiseType noiseType;
 	private final MobSpawnSettings mobSettings;
 	private final BiomeGenerationSettings generationSettings;
+	private final boolean island;
 	private final boolean hilly;
 	
-	private GiantTaigaBiomeType(float temperature, double baseNoise, double noiseScale, INoiseType noiseType, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly) {
-		this(temperature, baseNoise, noiseScale, noiseType, mobBuilder.build(), generationBuilder.build(), hilly);
+	private JungleBiomeType(double baseNoise, double noiseScale, INoiseType noiseType, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly) {
+		this(baseNoise, noiseScale, noiseType, mobBuilder.build(), generationBuilder.build(), island, hilly);
 	}
 	
-	private GiantTaigaBiomeType(float temperature, double baseNoise, double noiseScale, INoiseType noiseType, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly) {
-		this.temperature = temperature;
+	private JungleBiomeType(double baseNoise, double noiseScale, INoiseType noiseType, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean island, boolean hilly) {
 		this.baseNoise = baseNoise;
 		this.noiseScale = noiseScale;
 		this.noiseType = noiseType;
 		this.mobSettings = mobSettings;
 		this.generationSettings = generationSettings;
+		this.island = island;
 		this.hilly = hilly;
 	}
 	
 	@Override
 	public float getTemperature() {
-		return this.temperature;
+		return 0.95F;
 	}
 	
 	@Override
@@ -74,7 +77,7 @@ public enum GiantTaigaBiomeType implements IBiomeType {
 	
 	@Override
 	public boolean isIsland() {
-		return false;
+		return this.island;
 	}
 	
 	@Override

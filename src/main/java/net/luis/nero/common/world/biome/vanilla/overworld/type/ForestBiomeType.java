@@ -83,6 +83,11 @@ public enum ForestBiomeType implements IBiomeType {
 	}
 	
 	@Override
+	public boolean isOcean() {
+		return false;
+	}
+	
+	@Override
 	public boolean isIsland() {
 		return this.island;
 	}

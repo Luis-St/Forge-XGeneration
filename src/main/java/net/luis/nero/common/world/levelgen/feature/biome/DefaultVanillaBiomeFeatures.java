@@ -17,6 +17,18 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addStructureStart(mountain ? StructureFeatures.RUINED_PORTAL_MOUNTAIN : StructureFeatures.RUINED_PORTAL_STANDARD);
 	}
 	
+	public static void addRuinedPortal(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+	}
+	
+	public static void addRuinedPortalMountain(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_MOUNTAIN);
+	}
+	
+	public static void addJungleRuinedPortal(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_JUNGLE);
+	}
+	
 	public static void addBeachStructures(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 		generationBuilder.addStructureStart(StructureFeatures.BURIED_TREASURE);
@@ -45,6 +57,10 @@ public class DefaultVanillaBiomeFeatures {
 	
 	public static void addDarkForestStructures(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addStructureStart(StructureFeatures.WOODLAND_MANSION);
+	}
+	
+	public static void addJungleStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.JUNGLE_TEMPLE);
 	}
 
 	public static void addDefaultStructures(BiomeGenerationBuilder generationBuilder) {

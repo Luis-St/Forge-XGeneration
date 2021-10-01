@@ -8,21 +8,21 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class ForestBiome extends OverworldBiome {
 	
-	protected final IBiomeType forestType;
+	protected final IBiomeType biomeType;
 	
-	public ForestBiome(BiomeEffects biomeEffects, IBiomeType forestType) {
-		super(biomeEffects, forestType.getTemperature(), forestType.getBaseNoise(), forestType.getNoiseScale(), forestType.getNoiseType());
-		this.forestType = forestType;
+	public ForestBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale(), biomeType.getNoiseType());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return this.forestType.getMobSpawnSettings();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return this.forestType.getBiomeGenerationSettings();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class ForestBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class ForestBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isIsland() {
-		return this.forestType.isIsland();
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
@@ -52,12 +52,12 @@ public class ForestBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isHilly() {
-		return this.forestType.isHilly();
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isMountain() {
-		return this.forestType.isMountain();
+		return this.biomeType.isMountain();
 	}
 	
 }

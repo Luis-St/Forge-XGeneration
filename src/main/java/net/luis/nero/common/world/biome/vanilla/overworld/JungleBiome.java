@@ -6,11 +6,11 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class GiantTreeForestBiome extends OverworldBiome {
+public class JungleBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;
 	
-	public GiantTreeForestBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+	public JungleBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
 		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale(), biomeType.getNoiseType());
 		this.biomeType = biomeType;
 	}
@@ -42,7 +42,7 @@ public class GiantTreeForestBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isIsland() {
-		return this.biomeType.isIsland();
+		return false;
 	}
 	
 	@Override

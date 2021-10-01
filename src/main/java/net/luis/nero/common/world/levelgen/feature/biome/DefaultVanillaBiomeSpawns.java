@@ -107,12 +107,31 @@ public class DefaultVanillaBiomeSpawns {
 		addCaveSpawns(mobBuilder);
 	}
 
-	public static void addJungleSpawns(MobSpawnBuilder mobBuilder) {
+	public static void addBaseJungleSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.CHICKEN, 10, 4, 4));
 		addFarmAnimalSpawns(mobBuilder);
 		addCommonMonsterSpawns(mobBuilder);
 	}
-
+	
+	public static void addJungleSpawns(MobSpawnBuilder mobBuilder, boolean hilly, boolean modified) {
+		addBaseJungleSpawns(mobBuilder);
+		if (modified) {
+			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PARROT, 10, 1, 1));
+			mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.OCELOT, 2, 1, 1));
+		} else {
+			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PARROT, hilly ? 10 : 40, 1, hilly ? 1 : 3));
+			mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.OCELOT, 2, 1, hilly ? 1 : 2));
+			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PANDA, 1, 1, 2));
+		}
+	}
+	
+	public static void addBambooJungleSpawns(MobSpawnBuilder mobBuilder, boolean hilly) {
+		addBaseJungleSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PARROT, hilly ? 10 : 40, 1, hilly ? 1 : 2));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PANDA, 80, 1, 2));
+		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.OCELOT, 2, 1, 1));
+	}
+	
 	public static void addEndSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 10, 4, 4));
 	}

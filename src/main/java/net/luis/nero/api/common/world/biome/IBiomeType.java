@@ -6,6 +6,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public interface IBiomeType {
 	
+	// Default: (0.0F, 0.0, 0.0, null, null, null, false, false, false)
+	
 	float getTemperature();
 	
 	double getBaseNoise();
@@ -17,6 +19,8 @@ public interface IBiomeType {
 	MobSpawnSettings getMobSpawnSettings();
 	
 	BiomeGenerationSettings getBiomeGenerationSettings();
+	
+	boolean isOcean();
 	
 	boolean isIsland();
 	
