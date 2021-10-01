@@ -10,9 +10,9 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
 import net.luis.nero.common.world.biome.deepslate.DeepslateLavaLakeBiome;
 import net.luis.nero.common.world.biome.deepslate.DeepslateOceanBiome;
-import net.luis.nero.common.world.biome.deepslate.cave.DeepdarkCaveBiome;
-import net.luis.nero.common.world.biome.deepslate.cave.DripstoneCaveBiome;
-import net.luis.nero.common.world.biome.deepslate.cave.LushCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.DeepslateDeepdarkCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.DeepslateDripstoneCaveBiome;
+import net.luis.nero.common.world.biome.deepslate.cave.DeepslateLushCaveBiome;
 import net.luis.nero.common.world.biome.vanilla.overworld.TempBiome;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,9 +27,9 @@ public class ModBiomes {
 	public static final DeepslateBiome DEEPSLATE = register("deepslate", new DeepslateBiome(BiomeEffects.DEEPSLATE));
 	public static final DeepslateOceanBiome DEEPSLATE_OCEAN = register("deepslate_ocean", new DeepslateOceanBiome(BiomeEffects.DEEPSLATE_OCEAN));
 	public static final DeepslateLavaLakeBiome DEEPSLATE_LAVA_LAKE = register("deepslate_lava_lake", new DeepslateLavaLakeBiome(BiomeEffects.DEEPSLATE_LAVA_LAKE));
-	public static final DeepdarkCaveBiome DEEPDARK = register("deepdark", new DeepdarkCaveBiome(BiomeEffects.DEEPDARK));
-	public static final LushCaveBiome LUSH_CAVES = register("lush_caves", new LushCaveBiome(BiomeEffects.LUSH_CAVE));
-	public static final DripstoneCaveBiome DRIPSTONE_CAVE = register("dripstone_cave", new DripstoneCaveBiome(BiomeEffects.DRIPSTONE_CAVE));
+	public static final DeepslateDeepdarkCaveBiome DEEPDARK = register("deepdark", new DeepslateDeepdarkCaveBiome(BiomeEffects.DEEPDARK));
+	public static final DeepslateLushCaveBiome LUSH_CAVES = register("lush_caves", new DeepslateLushCaveBiome(BiomeEffects.LUSH_CAVE));
+	public static final DeepslateDripstoneCaveBiome DRIPSTONE_CAVE = register("dripstone_cave", new DeepslateDripstoneCaveBiome(BiomeEffects.DRIPSTONE_CAVE));
 	
 	public static final TempBiome ICY = register("icy", new TempBiome(-1.0f, 9983));
 	public static final TempBiome COLD = register("cold", new TempBiome(0.0f, 65535));

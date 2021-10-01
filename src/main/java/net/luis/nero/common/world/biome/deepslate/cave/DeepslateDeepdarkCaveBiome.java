@@ -5,9 +5,9 @@ import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 
-public class DeepdarkCaveBiome extends DeepslateBiome {
+public class DeepslateDeepdarkCaveBiome extends DeepslateBiome {
 	
-	public DeepdarkCaveBiome(BiomeEffects biomeEffects) {
+	public DeepslateDeepdarkCaveBiome(BiomeEffects biomeEffects) {
 		super(biomeEffects);
 	}
 
