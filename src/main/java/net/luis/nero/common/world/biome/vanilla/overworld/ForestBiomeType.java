@@ -1,6 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.IForestBiomeType;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.api.common.world.levelgen.INoiseType;
@@ -8,7 +8,7 @@ import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public enum ForestBiomeType implements IForestBiomeType {
+public enum ForestBiomeType implements IBiomeType {
 	
 	SNOWY_TAIGA(-0.5F, 0.0, 0.0, null, BiomeUtil.getTaigaSpawns(true), BiomeUtil.getTaigaFeatures(false, false, false), true, false, false),
 	SNOWY_TAIGA_HILLS(-0.5F, 0.0, 0.0, null, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(true, false, false), true, true, false),

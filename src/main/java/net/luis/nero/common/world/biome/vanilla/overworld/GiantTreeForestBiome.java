@@ -1,6 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.IForestBiomeType;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -8,9 +8,9 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class GiantTreeForestBiome extends OverworldBiome {
 	
-	protected final IForestBiomeType forestType;
+	protected final IBiomeType forestType;
 	
-	public GiantTreeForestBiome(BiomeEffects biomeEffects, IForestBiomeType forestType) {
+	public GiantTreeForestBiome(BiomeEffects biomeEffects, IBiomeType forestType) {
 		super(biomeEffects, forestType.getTemperature(), forestType.getBaseNoise(), forestType.getNoiseScale(), forestType.getNoiseType());
 		this.forestType = forestType;
 	}
