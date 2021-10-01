@@ -23,6 +23,15 @@ public class DefaultVanillaBiomeSpawns {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 	}
+	
+	public static void addGiantTaigaMonsterSpawns(MobSpawnBuilder mobBuilder, boolean spruce) {
+		if (spruce) {
+			addCommonMonsterSpawns(mobBuilder);
+		} else {
+			addCaveSpawns(mobBuilder);
+			addMonsterSpawns(mobBuilder, 100, 25, 100);
+		}
+	}
 
 	public static void addCaveSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8));

@@ -4,7 +4,7 @@ import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public interface IForestType {
+public interface IForestBiomeType {
 	
 	float getTemperature();
 	

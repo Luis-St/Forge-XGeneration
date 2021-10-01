@@ -106,6 +106,14 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.DRIPSTONE_CLUSTER_FEATURE);
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SMALL_DRIPSTONE_FEATURE);
 	}
+	
+	public static void addDarkForestVegetation(BiomeGenerationBuilder generationBuilder, boolean hilly) {
+		if (hilly) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.DARK_FOREST_VEGETATION_RED);
+		} else {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.DARK_FOREST_VEGETATION_BROWN);
+		}
+	}
 
 	public static void addDefaultOres(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_COAL);
@@ -174,6 +182,14 @@ public class DefaultVanillaBiomeFeatures {
 
 	public static void addTaigaTrees(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TAIGA_VEGETATION);
+	}
+	
+	public static void addGiantTaigaTrees(BiomeGenerationBuilder generationBuilder, boolean spruce) {
+		if (spruce) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_GIANT_SPRUCE);
+		} else {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_GIANT);
+		}
 	}
 
 	public static void addWaterTrees(BiomeGenerationBuilder generationBuilder) {

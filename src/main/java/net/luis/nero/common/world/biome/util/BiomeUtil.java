@@ -267,11 +267,7 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDarkForestStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, false);
-		if (hilly) {
-			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.DARK_FOREST_VEGETATION_RED);
-		} else {
-			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.DARK_FOREST_VEGETATION_BROWN);
-		}
+		DefaultVanillaBiomeFeatures.addDarkForestVegetation(generationBuilder, hilly);
 		return generationBuilder;
 	}
 	
@@ -279,6 +275,41 @@ public class BiomeUtil {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
 		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getGiantTreeTaigaFeatures(boolean spruce) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GIANT_TREE_TAIGA);
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addMossyStoneBlock(generationBuilder);
+		DefaultVanillaBiomeFeatures.addFerns(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addGiantTaigaVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRareBerryBushes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, false);
+		DefaultVanillaBiomeFeatures.addGiantTaigaTrees(generationBuilder, spruce);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getGiantTreeTaigaSpawns(boolean spruce) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
+		DefaultVanillaBiomeSpawns.addGiantTaigaMonsterSpawns(mobBuilder, spruce);
 		return mobBuilder;
 	}
 	
