@@ -102,7 +102,7 @@ public class DefaultVanillaBiomeSpawns {
 		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.WITCH, 5, 1, 1));
 	}
 
-	public static void addMooshroomSpawns(MobSpawnBuilder mobBuilder) {
+	public static void addMushroomSpawns(MobSpawnBuilder mobBuilder) {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.MOOSHROOM, 8, 4, 8));
 		addCaveSpawns(mobBuilder);
 	}

@@ -165,8 +165,6 @@ public class BiomeUtil {
 		DefaultVanillaBiomeSpawns.addTaigaSpawns(mobBuilder);
 		if (canPlayerSpawn) {
 			mobBuilder.enablePlayerSpawn();
-		} else {
-			mobBuilder.disablePlayerSpawn();
 		}
 		return mobBuilder;
 	}
@@ -271,10 +269,13 @@ public class BiomeUtil {
 		return generationBuilder;
 	}
 	
-	public static MobSpawnBuilder getDarkForestSpawns() {
+	public static MobSpawnBuilder getDarkForestSpawns(boolean hilly) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
 		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		if (!hilly) {
+			mobBuilder.enablePlayerSpawn();
+		}
 		return mobBuilder;
 	}
 	
@@ -310,6 +311,9 @@ public class BiomeUtil {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 		DefaultVanillaBiomeSpawns.addGiantTaigaMonsterSpawns(mobBuilder, spruce);
+		if (!spruce) {
+			mobBuilder.enablePlayerSpawn();
+		}
 		return mobBuilder;
 	}
 	
@@ -352,6 +356,9 @@ public class BiomeUtil {
 	public static MobSpawnBuilder getJungleSpawns(boolean hilly, boolean modified) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addJungleSpawns(mobBuilder, hilly, modified);
+		if (!hilly && !modified) {
+			mobBuilder.enablePlayerSpawn();
+		}
 		return mobBuilder;
 	}
 	
@@ -364,6 +371,38 @@ public class BiomeUtil {
 	public static MobSpawnBuilder getBambooJungleSpawns(boolean hilly) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addBambooJungleSpawns(mobBuilder, hilly);
+		if (!hilly) {
+			mobBuilder.enablePlayerSpawn();
+		}
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getMushroomFieldsFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.MYCELIUM);
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addMushroomFieldVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getMushroomFieldsSpawns(boolean shore) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addMushroomSpawns(mobBuilder);
+		if (!shore) {
+			mobBuilder.enablePlayerSpawn();
+		}
 		return mobBuilder;
 	}
 	

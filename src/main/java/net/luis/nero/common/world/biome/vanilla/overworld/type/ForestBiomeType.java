@@ -23,8 +23,8 @@ public enum ForestBiomeType implements IBiomeType {
 	BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, null, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(false), true, true, false),
 	TALL_BIRCH_FOREST(0.6F, 0.0, 0.0, null, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, false, false),
 	TALL_BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, null, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, true, false),
-	DARK_FOREST(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(), BiomeUtil.getDarkForestFeatures(false), true, false, false),
-	DARK_FOREST_HILLS(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(), BiomeUtil.getDarkForestFeatures(true), true, true, false);
+	DARK_FOREST(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(false), BiomeUtil.getDarkForestFeatures(false), true, false, false),
+	DARK_FOREST_HILLS(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(true), BiomeUtil.getDarkForestFeatures(true), true, true, false);
 	
 	private final float temperature;
 	private final double baseNoise;
