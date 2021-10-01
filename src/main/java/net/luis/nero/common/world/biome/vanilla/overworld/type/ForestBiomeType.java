@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.biome.vanilla.overworld;
+package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
@@ -24,12 +24,7 @@ public enum ForestBiomeType implements IBiomeType {
 	TALL_BIRCH_FOREST(0.6F, 0.0, 0.0, null, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, false, false),
 	TALL_BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, null, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, true, false),
 	DARK_FOREST(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(), BiomeUtil.getDarkForestFeatures(false), true, false, false),
-	DARK_FOREST_HILLS(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(), BiomeUtil.getDarkForestFeatures(true), true, true, false),
-	
-	GIANT_TREE_TAIGA(0.3F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), false, false, false),
-	GIANT_TREE_TAIGA_HILLS(0.3F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), false, true, false),	
-	GIANT_SPRUCE_TAIGA(0.25F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), false, false, false),
-	GIANT_SPRUCE_TAIGA_HILLS(0.25F, 0.0, 0.0, null, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), false, true, false);
+	DARK_FOREST_HILLS(0.7F, 0.0, 0.0, null, BiomeUtil.getDarkForestSpawns(), BiomeUtil.getDarkForestFeatures(true), true, true, false);
 	
 	private final float temperature;
 	private final double baseNoise;
