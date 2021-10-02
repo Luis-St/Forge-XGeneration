@@ -10,6 +10,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
+import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 
 public class BiomeUtil {
 	
@@ -30,6 +32,15 @@ public class BiomeUtil {
 			return 0.05F;
 		}
 		return shore ? 0.2F : 0.8F;
+	}
+	
+	protected static ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> getMountainSurfaceBuilder(boolean edge, boolean wooded, boolean gravelly) {
+		if (edge || wooded) {
+			return SurfaceBuilders.GRASS;
+		} else if (gravelly) {
+			return SurfaceBuilders.GRAVELLY_MOUNTAIN;
+		}
+		return SurfaceBuilders.MOUNTAIN;
 	}
 	
 	public static BiomeGenerationBuilder getBadlandsFeatures(boolean plateau, boolean wooded) {
@@ -403,6 +414,41 @@ public class BiomeUtil {
 		if (!shore) {
 			mobBuilder.enablePlayerSpawn();
 		}
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getMountainFeatures(boolean edge, boolean wooded, boolean gravelly) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> getMountainSurfaceBuilder(edge, wooded, gravelly));
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortalMountain(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		DefaultVanillaBiomeFeatures.addExtraEmeralds(generationBuilder);
+		if (edge) {
+			DefaultVanillaBiomeFeatures.addMountainEdgeTrees(generationBuilder);
+		} else {
+			DefaultVanillaBiomeFeatures.addMountainTrees(generationBuilder);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getMountainSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.LLAMA, 5, 4, 6));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 10, 4, 6));
 		return mobBuilder;
 	}
 	
