@@ -76,6 +76,14 @@ public class DefaultVanillaBiomeFeatures {
 			generationBuilder.addStructureStart(StructureFeatures.OCEAN_MONUMENT);
 		}
 	}
+	
+	public static void addSwampStructures(BiomeGenerationBuilder generationBuilder, boolean hilly) {
+		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_SWAMP);
+		if (!hilly) {
+			generationBuilder.addStructureStart(StructureFeatures.SWAMP_HUT);
+		}
+	}
 
 	public static void addDefaultCarvers(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);

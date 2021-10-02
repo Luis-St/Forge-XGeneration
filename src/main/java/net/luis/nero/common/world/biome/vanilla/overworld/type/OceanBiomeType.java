@@ -10,17 +10,17 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum OceanBiomeType implements IBiomeType {
 	
-	WARM_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getWarmOceanSpawns(false), BiomeUtil.getWarmOceanFeatures(false)),
-	DEEP_WARM_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getWarmOceanSpawns(true), BiomeUtil.getWarmOceanFeatures(true)),
-	LUKEWARM_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getLukewarmOceanSpawns(false), BiomeUtil.getLukewarmOceanFeatures(false)),
-	DEEP_LUKEWARM_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getLukewarmOceanSpawns(true), BiomeUtil.getLukewarmOceanFeatures(true)),
-	OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getOceanSpawns(), BiomeUtil.getOceanFeatures(false)),
-	DEEP_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getOceanSpawns(), BiomeUtil.getOceanFeatures(true)),
-	COLD_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getColdOceanSpawns(), BiomeUtil.getColdOceanFeatures(false)),
-	DEEP_COLD_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getColdOceanSpawns(), BiomeUtil.getColdOceanFeatures(true)),
-	FROZEN_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(false)),
-	DEEP_FORZEN_OCEAN(0.0F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(true)),
-  /*LEGACY_FORZEN_OCEAN(0.0F, 0.0, 0.0, null, null, null)*/; // TODO: add surfaceBuilder & features
+	WARM_OCEAN(0.95F, 0.0, 0.0, null, BiomeUtil.getWarmOceanSpawns(false), BiomeUtil.getWarmOceanFeatures(false)),
+	DEEP_WARM_OCEAN(0.95F, 0.0, 0.0, null, BiomeUtil.getWarmOceanSpawns(true), BiomeUtil.getWarmOceanFeatures(true)),
+	LUKEWARM_OCEAN(0.75F, 0.0, 0.0, null, BiomeUtil.getLukewarmOceanSpawns(false), BiomeUtil.getLukewarmOceanFeatures(false)),
+	DEEP_LUKEWARM_OCEAN(0.75F, 0.0, 0.0, null, BiomeUtil.getLukewarmOceanSpawns(true), BiomeUtil.getLukewarmOceanFeatures(true)),
+	OCEAN(0.5F, 0.0, 0.0, null, BiomeUtil.getOceanSpawns(), BiomeUtil.getOceanFeatures(false)),
+	DEEP_OCEAN(0.5F, 0.0, 0.0, null, BiomeUtil.getOceanSpawns(), BiomeUtil.getOceanFeatures(true)),
+	COLD_OCEAN(0.06F, 0.0, 0.0, null, BiomeUtil.getColdOceanSpawns(), BiomeUtil.getColdOceanFeatures(false)),
+	DEEP_COLD_OCEAN(0.06F, 0.0, 0.0, null, BiomeUtil.getColdOceanSpawns(), BiomeUtil.getColdOceanFeatures(true)),
+	FROZEN_OCEAN(-0.5F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(false)),
+	DEEP_FORZEN_OCEAN(-0.5F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(true)),
+  /*LEGACY_FORZEN_OCEAN(-0.5F, 0.0, 0.0, null, null, null)*/; // TODO: add surfaceBuilder & features
 	
 	private final float temperature;
 	private final double baseNoise;

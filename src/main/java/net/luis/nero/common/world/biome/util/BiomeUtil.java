@@ -578,6 +578,7 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPlainGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPlainVegetation(generationBuilder);
@@ -602,6 +603,78 @@ public class BiomeUtil {
 		if (!flower) {
 			mobBuilder.enablePlayerSpawn();
 		}
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getSavannaFeatures(boolean plateau, boolean shattered) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> (shattered ? SurfaceBuilders.SHATTERED_SAVANNA : SurfaceBuilders.GRASS));
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, plateau);
+		if (!plateau && !shattered) {
+			generationBuilder.addStructureStart(StructureFeatures.VILLAGE_SAVANNA);
+			generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+		}
+		if (shattered) {
+			DefaultVanillaBiomeFeatures.addShatteredSavannaGrass(generationBuilder);
+			DefaultVanillaBiomeFeatures.addShatteredSavannaTrees(generationBuilder);
+			DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		} else {
+			DefaultVanillaBiomeFeatures.addWarmFlowers(generationBuilder);
+			DefaultVanillaBiomeFeatures.addSavannaTrees(generationBuilder);
+			DefaultVanillaBiomeFeatures.addSavannaGrass(generationBuilder);
+			DefaultVanillaBiomeFeatures.addSavannaExtraGrass(generationBuilder);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getSavannaSpawns(boolean plateau) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addSavannaSpawns(mobBuilder);
+		if (plateau) {
+			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.LLAMA, 8, 4, 4));
+		}
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getSwampFeatures(boolean hilly) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSwampVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSwampExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSwampClayDisk(generationBuilder);
+		DefaultVanillaBiomeFeatures.addFossilDecoration(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSwampStructures(generationBuilder, hilly);
+		if (!hilly) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SEAGRASS_SWAMP);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getSwampSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 1, 1, 1));
 		return mobBuilder;
 	}
 	
