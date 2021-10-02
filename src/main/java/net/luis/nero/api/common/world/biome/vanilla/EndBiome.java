@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public abstract class EndBiome extends ModBiome {
 	
-	public EndBiome() {
+	protected EndBiome() {
 		super(BiomeEffects.END);
 	}
 

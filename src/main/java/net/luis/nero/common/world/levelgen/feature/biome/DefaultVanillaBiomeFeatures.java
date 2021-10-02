@@ -68,9 +68,13 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addStructureStart(StructureFeatures.STRONGHOLD);
 	}
 
-	public static void addOceanStructures(BiomeGenerationBuilder generationBuilder) {
+	public static void addOceanStructures(BiomeGenerationBuilder generationBuilder, boolean deep, boolean warm) {
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 		generationBuilder.addStructureStart(StructureFeatures.SHIPWRECK);
+		generationBuilder.addStructureStart(warm ? StructureFeatures.OCEAN_RUIN_WARM : StructureFeatures.OCEAN_RUIN_COLD);
+		if (deep) {
+			generationBuilder.addStructureStart(StructureFeatures.OCEAN_MONUMENT);
+		}
 	}
 
 	public static void addDefaultCarvers(BiomeGenerationBuilder generationBuilder) {

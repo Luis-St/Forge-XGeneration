@@ -12,7 +12,7 @@ public abstract class OverworldBiome extends ModBiome {
 	protected final double noiseScale;
 	protected final INoiseType noiseType;
 	
-	public OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType) {
+	protected OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType) {
 		super(biomeEffects == null ? BiomeEffects.OVERWORLD : biomeEffects);
 		this.temperature = temperature;
 		this.baseNoise = baseNoise;
@@ -59,6 +59,10 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isBeach();
 	
+	public boolean isCliffsBeach() {
+		return this.isBeach() && this.isMountain();
+	}
+	
 	public abstract boolean isIsland();
 	
 	public abstract boolean isMushroomIsland();
@@ -66,10 +70,6 @@ public abstract class OverworldBiome extends ModBiome {
 	public abstract boolean isHilly();
 	
 	public abstract boolean isMountain();
-	
-	public boolean isCliffsBeach() {
-		return this.isBeach() && this.isMountain();
-	}
 	
 }
   

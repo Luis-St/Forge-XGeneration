@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public abstract class NetherBiome extends ModBiome {
 	
-	public NetherBiome() {
+	protected NetherBiome() {
 		super(BiomeEffects.NETHER);
 	}
 

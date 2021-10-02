@@ -5,6 +5,7 @@ import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeFeatures;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeSpawns;
 import net.minecraft.data.worldgen.Features;
+import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -449,6 +450,158 @@ public class BiomeUtil {
 		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.LLAMA, 5, 4, 6));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 10, 4, 6));
+		return mobBuilder;
+	}
+	
+	protected static BiomeGenerationBuilder baseOceanFeatures(ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> surfaceBuilder, boolean deep, boolean warm) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> surfaceBuilder);
+		DefaultVanillaBiomeFeatures.addOceanCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addWaterTrees(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addOceanStructures(generationBuilder, deep, warm);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getWarmOceanFeatures(boolean deep) {
+		BiomeGenerationBuilder generationBuilder = baseOceanFeatures(SurfaceBuilders.FULL_SAND, deep, true);
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.WARM_OCEAN_VEGETATION);
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SEAGRASS_WARM);
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SEA_PICKLE);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getWarmOceanSpawns(boolean deep) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addWarmOceanSpawns(mobBuilder, deep ? 5 : 10, deep ? 1 : 4);
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getLukewarmOceanFeatures(boolean deep) {
+		BiomeGenerationBuilder generationBuilder = baseOceanFeatures(SurfaceBuilders.OCEAN_SAND, deep, true);
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, deep ? Features.SEAGRASS_DEEP_WARM : Features.SEAGRASS_WARM);
+		DefaultVanillaBiomeFeatures.addLukeWarmKelp(generationBuilder);
+		if (deep) {
+			DefaultVanillaBiomeFeatures.addDefaultSeagrass(generationBuilder);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getLukewarmOceanSpawns(boolean deep) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addOceanSpawns(mobBuilder, deep ? 8 : 10, deep ? 4 : 2, deep ? 8 : 15);
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.PUFFERFISH, 5, 1, 3));
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.TROPICAL_FISH, 25, 8, 8));
+		mobBuilder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 2, 1, 2));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getOceanFeatures(boolean deep) {
+		BiomeGenerationBuilder generationBuilder = baseOceanFeatures(SurfaceBuilders.GRASS, deep, false);
+		DefaultVanillaBiomeFeatures.addDefaultSeagrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addColdOceanKelp(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getOceanSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addOceanSpawns(mobBuilder, 1, 4, 10);
+		mobBuilder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getColdOceanFeatures(boolean deep) {
+		BiomeGenerationBuilder generationBuilder = baseOceanFeatures(SurfaceBuilders.GRASS, deep, false);
+		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, deep ? Features.SEAGRASS_DEEP_COLD : Features.SEAGRASS_COLD);
+		DefaultVanillaBiomeFeatures.addDefaultSeagrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addColdOceanKelp(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getColdOceanSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addOceanSpawns(mobBuilder, 3, 4, 15);
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 15, 1, 5));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getFrozenOceanFeatures(boolean deep) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.FROZEN_OCEAN);
+		DefaultVanillaBiomeFeatures.addOceanStructures(generationBuilder, deep, false);
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_OCEAN);
+		DefaultVanillaBiomeFeatures.addOceanCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addIcebergs(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder, true);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addWaterTrees(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getFrozenOceanSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 1, 1, 4));
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 15, 1, 5));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.POLAR_BEAR, 1, 1, 2));
+		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.DROWNED, 5, 1, 1));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getPlainsFeatures(boolean flower) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPlainGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPlainVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		if (flower) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_SUNFLOWER);
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_SUGAR_CANE);
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_PUMPKIN);
+		} else {
+			generationBuilder.addStructureStart(StructureFeatures.VILLAGE_PLAINS);
+			generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+			DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getPlainsSpawns(boolean flower) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addPlainsSpawns(mobBuilder);
+		if (!flower) {
+			mobBuilder.enablePlayerSpawn();
+		}
 		return mobBuilder;
 	}
 	
