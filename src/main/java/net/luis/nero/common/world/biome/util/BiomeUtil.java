@@ -715,4 +715,69 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
+	protected static BiomeGenerationBuilder baseCaveFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.STONE);
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder, true);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPlainGrass(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getCaveSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getDripstoneCaveFeatures() {
+		BiomeGenerationBuilder generationBuilder = baseCaveFeatures();
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPlainVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDripstoneVegetation(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getLushCavesFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addLushCavesSpecialOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addLushCavesVegetation(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getDeepdarkOceanFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
+		DefaultVanillaBiomeFeatures.addOceanCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSeagrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addColdOceanKelp(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getDeepdarkOceanSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
+		mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GUARDIAN, 1, 1, 2));
+		return mobBuilder;
+	}
+	
 }
