@@ -35,7 +35,7 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	@Override
 	public float getDownfall() {
-		return this.temperature > 2.0F ? 0.0F : 1.0F;
+		return this.temperature >= 2.0F ? 0.0F : 1.0F;
 	}
 	
 	@Override

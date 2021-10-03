@@ -20,7 +20,7 @@ public enum OceanBiomeType implements IBiomeType {
 	DEEP_COLD_OCEAN(0.06F, 0.0, 0.0, null, BiomeUtil.getColdOceanSpawns(), BiomeUtil.getColdOceanFeatures(true)),
 	FROZEN_OCEAN(-0.5F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(false)),
 	DEEP_FORZEN_OCEAN(-0.5F, 0.0, 0.0, null, BiomeUtil.getFrozenOceanSpawns(), BiomeUtil.getFrozenOceanFeatures(true)),
-  /*LEGACY_FORZEN_OCEAN(-0.5F, 0.0, 0.0, null, null, null)*/; // TODO: add surfaceBuilder & features
+  /*LEGACY_FORZEN_OCEAN(-0.5F, 0.0, 0.0, null, null, null)*/;
 	
 	private final float temperature;
 	private final double baseNoise;

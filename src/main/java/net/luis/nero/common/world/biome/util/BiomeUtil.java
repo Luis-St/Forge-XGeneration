@@ -678,4 +678,41 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
+	public static BiomeGenerationBuilder getTundraFeatures(boolean iceSpikes, boolean mountain) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> (iceSpikes ? SurfaceBuilders.ICE_SPIKES : SurfaceBuilders.GRASS));
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSnowyTrees(generationBuilder);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, mountain);
+		if (!iceSpikes && !mountain) {
+			generationBuilder.addStructureStart(StructureFeatures.VILLAGE_SNOWY);
+			generationBuilder.addStructureStart(StructureFeatures.IGLOO);
+			generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+		} else if (iceSpikes) {
+			generationBuilder.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, Features.ICE_SPIKE);
+			generationBuilder.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, Features.ICE_PATCH);
+		}
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getTundraSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		mobBuilder.creatureGenerationProbability(0.07F);
+		DefaultVanillaBiomeSpawns.addSnowySpawns(mobBuilder);
+		return mobBuilder;
+	}
+	
 }
