@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -12,8 +11,8 @@ public class DesertBiome extends OverworldBiome {
 	protected final boolean hilly;
 	protected final boolean lakey;
 	
-	public DesertBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean hilly, boolean lakey) {
-		super(biomeEffects, 2.0F, baseNoise, noiseScale, noiseType);
+	public DesertBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean hilly, boolean lakey) {
+		super(biomeEffects, 2.0F, baseNoise, noiseScale);
 		this.hilly = hilly;
 		this.lakey = lakey;
 	}

@@ -11,7 +11,7 @@ public class JungleBiome extends OverworldBiome {
 	protected final IBiomeType biomeType;
 	
 	public JungleBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
-		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale(), biomeType.getNoiseType());
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale());
 		this.biomeType = biomeType;
 	}
 	

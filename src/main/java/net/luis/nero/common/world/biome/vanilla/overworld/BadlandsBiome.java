@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -12,8 +11,8 @@ public class BadlandsBiome extends OverworldBiome {
 	protected final boolean plateau;
 	protected final boolean wooded;
 	
-	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean plateau, boolean wooded) {
-		super(biomeEffects, 2.0F, baseNoise, baseNoise, noiseType);
+	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean plateau, boolean wooded) {
+		super(biomeEffects, 2.0F, baseNoise, baseNoise);
 		this.plateau = plateau;
 		this.wooded = wooded;
 	}

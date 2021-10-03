@@ -1,7 +1,6 @@
 package net.luis.nero.api.common.world.biome.vanilla;
 
 import net.luis.nero.api.common.world.biome.ModBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 
@@ -10,14 +9,12 @@ public abstract class OverworldBiome extends ModBiome {
 	protected final float temperature;
 	protected final double baseNoise;
 	protected final double noiseScale;
-	protected final INoiseType noiseType;
 	
-	protected OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType) {
+	protected OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale) {
 		super(biomeEffects == null ? BiomeEffects.OVERWORLD : biomeEffects);
 		this.temperature = temperature;
 		this.baseNoise = baseNoise;
 		this.noiseScale = noiseScale;
-		this.noiseType = noiseType;
 	}
 	
 	@Override
@@ -46,11 +43,6 @@ public abstract class OverworldBiome extends ModBiome {
 	@Override
 	public double getNoiseScale() {
 		return this.noiseScale;
-	}
-
-	@Override
-	public INoiseType getNoiseType() {
-		return this.noiseType;
 	}
 	
 	public abstract boolean isUnderground();

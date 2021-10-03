@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -12,8 +11,8 @@ public class SavannaBiome extends OverworldBiome {
 	protected final boolean plateau;
 	protected final boolean shattered;
 	
-	public SavannaBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType, boolean plateau, boolean shattered) {
-		super(biomeEffects, temperature, baseNoise, noiseScale, noiseType);
+	public SavannaBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean plateau, boolean shattered) {
+		super(biomeEffects, temperature, baseNoise, noiseScale);
 		this.plateau = plateau;
 		this.shattered = shattered;
 	}

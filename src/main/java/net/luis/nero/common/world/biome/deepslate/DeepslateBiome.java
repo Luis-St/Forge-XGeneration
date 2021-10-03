@@ -3,9 +3,7 @@ package net.luis.nero.common.world.biome.deepslate;
 import net.luis.nero.api.common.world.biome.ModBiome;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.enums.NoiseType;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeSpawns;
 import net.minecraft.world.entity.EntityType;
@@ -34,11 +32,6 @@ public class DeepslateBiome extends ModBiome {
 	@Override
 	public double getNoiseScale() {
 		return 0.0;
-	}
-
-	@Override
-	public INoiseType getNoiseType() {
-		return NoiseType.FLAT;
 	}
 	
 	@Override

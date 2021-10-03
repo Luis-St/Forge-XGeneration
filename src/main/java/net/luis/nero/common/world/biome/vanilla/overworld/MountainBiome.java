@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -13,8 +12,8 @@ public class MountainBiome extends OverworldBiome {
 	protected final boolean wooded;
 	protected final boolean gravelly;
 	
-	public MountainBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType, boolean edge, boolean wooded, boolean gravelly) {
-		super(biomeEffects, temperature, baseNoise, noiseScale, noiseType);
+	public MountainBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean edge, boolean wooded, boolean gravelly) {
+		super(biomeEffects, temperature, baseNoise, noiseScale);
 		this.edge = edge;
 		this.wooded = wooded;
 		this.gravelly = gravelly;

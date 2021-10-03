@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -12,8 +11,8 @@ public class BeachBiome extends OverworldBiome {
 	protected final boolean shore;
 	protected final boolean snowy;
 	
-	public BeachBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean shore, boolean snowy) {
-		super(biomeEffects, BiomeUtil.getBeachTemperature(shore, snowy), baseNoise, noiseScale, noiseType);
+	public BeachBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean shore, boolean snowy) {
+		super(biomeEffects, BiomeUtil.getBeachTemperature(shore, snowy), baseNoise, noiseScale);
 		this.shore = shore;
 		this.snowy = snowy;
 	}

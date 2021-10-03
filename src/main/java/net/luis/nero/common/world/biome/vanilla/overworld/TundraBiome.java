@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -12,8 +11,8 @@ public class TundraBiome extends OverworldBiome {
 	protected final boolean iceSpikes;
 	protected final boolean mountain;
 	
-	public TundraBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean iceSpikes, boolean mountain) {
-		super(biomeEffects, 0.0F, baseNoise, noiseScale, noiseType);
+	public TundraBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean iceSpikes, boolean mountain) {
+		super(biomeEffects, 0.0F, baseNoise, noiseScale);
 		this.iceSpikes = iceSpikes;
 		this.mountain = mountain;
 	}

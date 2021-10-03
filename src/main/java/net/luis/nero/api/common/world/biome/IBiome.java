@@ -6,7 +6,6 @@ import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.api.common.world.biome.vanilla.EndBiome;
 import net.luis.nero.api.common.world.biome.vanilla.NetherBiome;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
@@ -58,8 +57,6 @@ public interface IBiome {
 	double getBaseNoise();
 	
 	double getNoiseScale();
-	
-	INoiseType getNoiseType();
 	
 	float getTemperature();
 	

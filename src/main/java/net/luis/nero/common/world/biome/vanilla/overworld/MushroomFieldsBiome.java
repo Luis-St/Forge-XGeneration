@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -11,8 +10,8 @@ public class MushroomFieldsBiome extends OverworldBiome {
 	
 	protected final boolean shore;
 	
-	public MushroomFieldsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, INoiseType noiseType, boolean shore) {
-		super(biomeEffects, 0.9F, baseNoise, noiseScale, noiseType);
+	public MushroomFieldsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean shore) {
+		super(biomeEffects, 0.9F, baseNoise, noiseScale);
 		this.shore = shore;
 	}
 	

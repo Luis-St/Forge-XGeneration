@@ -1,7 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
-import net.luis.nero.api.common.world.levelgen.INoiseType;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -11,8 +10,8 @@ public class PlainsBiome extends OverworldBiome {
 	
 	protected final boolean flower;
 	
-	public PlainsBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, INoiseType noiseType, boolean flower) {
-		super(biomeEffects, temperature, baseNoise, noiseScale, noiseType);
+	public PlainsBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean flower) {
+		super(biomeEffects, temperature, baseNoise, noiseScale);
 		this.flower = flower;
 	}
 	
