@@ -9,6 +9,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 public class ModDimensionTypes {
 
 	public static final ResourceKey<DimensionType> DEEPSLATE = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(Nero.MOD_ID, "deepslate"));
+	public static final ResourceKey<DimensionType> OVERWORLD = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(Nero.MOD_ID, "overworld"));
 	public static final ResourceKey<DimensionType> TEST = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(Nero.MOD_ID, "test"));
 
 }

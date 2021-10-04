@@ -43,7 +43,7 @@ public class OnBiomeLoadingEvent {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
-		} else {
+		} else if (!biomeLocation.getNamespace().equals("nero")) {
 			DefaultModBiomeFeatures.addFlatBedrock(generationBuilder);
 			DefaultModBiomeFeatures.addOreOverwrites(generationBuilder);
 		}
