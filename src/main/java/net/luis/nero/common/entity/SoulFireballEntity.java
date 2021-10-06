@@ -50,7 +50,7 @@ public class SoulFireballEntity extends Fireball implements ISoulFireEntity {
 		super.onHit(hitResult);
 		if (!this.level.isClientSide) {
 			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-			this.level.explode(null, this.getX(), this.getY(), this.getZ(), 1.0f, flag, flag ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE);
+			this.level.explode(null, this.getX(), this.getY(), this.getZ(), 1.0F, flag, flag ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE);
 			this.discard();
 		}
 

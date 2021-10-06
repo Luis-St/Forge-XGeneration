@@ -9,13 +9,13 @@ public enum HotIceLayer implements SquareTransformer {
 
 	@Override
 	public int apply(BigContext<?> context, int nBiomeId, int nEBiomeId, int eBiomeId, int sEBiomeId, int sBiomeId, int sWBiomeId, int wBiomeId, int nWBiomeId, int biomeId) {
-		if (nBiomeId == OverworldLayer.WARM && eBiomeId == OverworldLayer.WARM && sBiomeId == OverworldLayer.WARM && wBiomeId == OverworldLayer.WARM) {
-			if (nEBiomeId == OverworldLayer.WARM && sEBiomeId == OverworldLayer.WARM && sWBiomeId == OverworldLayer.WARM && nWBiomeId == OverworldLayer.WARM) {
-				return OverworldLayer.HOT;
+		if (nBiomeId == OverworldLayer.CLIMATE_WARM && eBiomeId == OverworldLayer.CLIMATE_WARM && sBiomeId == OverworldLayer.CLIMATE_WARM && wBiomeId == OverworldLayer.CLIMATE_WARM) {
+			if (nEBiomeId == OverworldLayer.CLIMATE_WARM && sEBiomeId == OverworldLayer.CLIMATE_WARM && sWBiomeId == OverworldLayer.CLIMATE_WARM && nWBiomeId == OverworldLayer.CLIMATE_WARM) {
+				return OverworldLayer.CLIMATE_HOT;
 			}
-		} else if (nBiomeId == OverworldLayer.COLD && eBiomeId == OverworldLayer.COLD && sBiomeId == OverworldLayer.COLD && wBiomeId == OverworldLayer.COLD) {
-			if (nEBiomeId == OverworldLayer.COLD && sEBiomeId == OverworldLayer.COLD && sWBiomeId == OverworldLayer.COLD && nWBiomeId == OverworldLayer.COLD) {
-				return OverworldLayer.ICY;
+		} else if (nBiomeId == OverworldLayer.CLIMATE_COLD && eBiomeId == OverworldLayer.CLIMATE_COLD && sBiomeId == OverworldLayer.CLIMATE_COLD && wBiomeId == OverworldLayer.CLIMATE_COLD) {
+			if (nEBiomeId == OverworldLayer.CLIMATE_COLD && sEBiomeId == OverworldLayer.CLIMATE_COLD && sWBiomeId == OverworldLayer.CLIMATE_COLD && nWBiomeId == OverworldLayer.CLIMATE_COLD) {
+				return OverworldLayer.CLIMATE_ICY;
 			}
 		}
 		return biomeId;

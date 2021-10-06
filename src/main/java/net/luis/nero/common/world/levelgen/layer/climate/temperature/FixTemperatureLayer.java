@@ -9,16 +9,16 @@ public enum FixTemperatureLayer implements CrossTransformer {
 
 	@Override
 	public int apply(BigContext<?> context, int northBiomeId, int eastBiomeId, int southBiomeId, int westBiomeId, int biomeId) {
-		if (this.isAround(OverworldLayer.HOT, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
-			return OverworldLayer.HOT;
-		} else if (this.isAround(OverworldLayer.WARM, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
-			return OverworldLayer.WARM;
-		} else if (this.isAround(OverworldLayer.MEDIUM, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
-			return OverworldLayer.MEDIUM;
-		} else if (this.isAround(OverworldLayer.COLD, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
-			return OverworldLayer.COLD;
-		} else if (this.isAround(OverworldLayer.ICY, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
-			return OverworldLayer.ICY;
+		if (this.isAround(OverworldLayer.CLIMATE_HOT, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
+			return OverworldLayer.CLIMATE_HOT;
+		} else if (this.isAround(OverworldLayer.CLIMATE_WARM, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
+			return OverworldLayer.CLIMATE_WARM;
+		} else if (this.isAround(OverworldLayer.CLIMATE_MEDIUM, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
+			return OverworldLayer.CLIMATE_MEDIUM;
+		} else if (this.isAround(OverworldLayer.CLIMATE_COLD, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
+			return OverworldLayer.CLIMATE_COLD;
+		} else if (this.isAround(OverworldLayer.CLIMATE_ICY, northBiomeId, eastBiomeId, southBiomeId, westBiomeId)) {
+			return OverworldLayer.CLIMATE_ICY;
 		}
 		return biomeId;
 	}

@@ -8,11 +8,10 @@ public enum TemperatureLayer implements SquareTransformer {
 	WARM {
 		@Override
 		public int apply(BigContext<?> context, int nBiomeId, int nEBiomeId, int eBiomeId, int sEBiomeId, int sBiomeId, int sWBiomeId, int wBiomeId, int nWBiomeId, int biomeId) {
-			if (nBiomeId == OverworldLayer.MEDIUM && eBiomeId == OverworldLayer.MEDIUM && sBiomeId == OverworldLayer.MEDIUM && wBiomeId == OverworldLayer.MEDIUM) {
-				if (nEBiomeId == OverworldLayer.MEDIUM && sEBiomeId == OverworldLayer.MEDIUM && sWBiomeId == OverworldLayer.MEDIUM && nWBiomeId == OverworldLayer.MEDIUM) {
-					int rng = context.nextRandom(4);
-					if (rng == 0) {
-						return OverworldLayer.WARM;
+			if (nBiomeId == OverworldLayer.CLIMATE_MEDIUM && eBiomeId == OverworldLayer.CLIMATE_MEDIUM && sBiomeId == OverworldLayer.CLIMATE_MEDIUM && wBiomeId == OverworldLayer.CLIMATE_MEDIUM) {
+				if (nEBiomeId == OverworldLayer.CLIMATE_MEDIUM && sEBiomeId == OverworldLayer.CLIMATE_MEDIUM && sWBiomeId == OverworldLayer.CLIMATE_MEDIUM && nWBiomeId == OverworldLayer.CLIMATE_MEDIUM) {
+					if (context.nextRandom(4) == 0) {
+						return OverworldLayer.CLIMATE_WARM;
 					}
 				}
 			}
@@ -22,9 +21,9 @@ public enum TemperatureLayer implements SquareTransformer {
 	COLD {
 		@Override
 		public int apply(BigContext<?> context, int nBiomeId, int nEBiomeId, int eBiomeId, int sEBiomeId, int sBiomeId, int sWBiomeId, int wBiomeId, int nWBiomeId, int biomeId) {
-			if (nBiomeId == OverworldLayer.MEDIUM && eBiomeId == OverworldLayer.MEDIUM && sBiomeId == OverworldLayer.MEDIUM && wBiomeId == OverworldLayer.MEDIUM) {
-				if (nEBiomeId == OverworldLayer.MEDIUM && sEBiomeId == OverworldLayer.MEDIUM && sWBiomeId == OverworldLayer.MEDIUM && nWBiomeId == OverworldLayer.MEDIUM) {
-					return OverworldLayer.COLD;
+			if (nBiomeId == OverworldLayer.CLIMATE_MEDIUM && eBiomeId == OverworldLayer.CLIMATE_MEDIUM && sBiomeId == OverworldLayer.CLIMATE_MEDIUM && wBiomeId == OverworldLayer.CLIMATE_MEDIUM) {
+				if (nEBiomeId == OverworldLayer.CLIMATE_MEDIUM && sEBiomeId == OverworldLayer.CLIMATE_MEDIUM && sWBiomeId == OverworldLayer.CLIMATE_MEDIUM && nWBiomeId == OverworldLayer.CLIMATE_MEDIUM) {
+					return OverworldLayer.CLIMATE_COLD;
 				}
 			}
 			return biomeId;

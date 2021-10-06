@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.test;
 
-import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -11,7 +10,6 @@ import net.luis.nero.common.world.levelgen.layer.OverworldLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
@@ -22,8 +20,6 @@ public class TestBiomeSource extends BiomeSource {
 	public static final Codec<TestBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
 			.xmap(TestBiomeSource::new, TestBiomeSource::getBiomeRegistry).codec();
 	
-	private static final List<ResourceKey<Biome>> BIOMES = ModBiomeKeys.BIOMES;
-	
 	protected final long seed;
 	protected final Registry<Biome> registry;
 	protected final Layer noiseBiomeLayer;
@@ -33,14 +29,10 @@ public class TestBiomeSource extends BiomeSource {
 	}
 	
 	public TestBiomeSource(Registry<Biome> registry, long seed) {
-		super(getBiomes(registry));
+		super(ModBiomeKeys.BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList()));
 		this.seed = seed;
 		this.registry = registry;
 		this.noiseBiomeLayer = OverworldLayer.getSurfaceLayer(seed);
-	}
-
-	protected static List<Biome> getBiomes(Registry<Biome> registry) {
-		return BIOMES.stream().map(biome -> registry.get(biome.location())).collect(Collectors.toList());
 	}
 	
 	public long getSeed() {
@@ -62,8 +54,8 @@ public class TestBiomeSource extends BiomeSource {
 	}
 
 	@Override
-	public DeepslateBiomeSource withSeed(long seed) {
-		return new DeepslateBiomeSource(this.registry, seed);
+	public TestBiomeSource withSeed(long seed) {
+		return new TestBiomeSource(this.registry, seed);
 	}
 
 	@Override

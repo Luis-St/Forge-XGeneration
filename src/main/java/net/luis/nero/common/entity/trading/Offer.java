@@ -13,11 +13,11 @@ public class Offer extends MerchantOffer {
 	}
 	
 	public Offer(ItemStack firstPrice, ItemStack forSale, int maxUses, int xp) {
-		this(firstPrice, ItemStack.EMPTY, forSale, 0, maxUses, xp, forSale.getItem() instanceof TieredItem ? 0.2f : 0.05f, 0);
+		this(firstPrice, ItemStack.EMPTY, forSale, 0, maxUses, xp, forSale.getItem() instanceof TieredItem ? 0.2F : 0.05F, 0);
 	}
 	
 	public Offer(ItemStack firstPrice, ItemStack secondPrice, ItemStack forSale, int maxUses, int xp) {
-		this(firstPrice, secondPrice, forSale, 0, maxUses, xp, forSale.getItem() instanceof TieredItem ? 0.2f : 0.05f, 0);
+		this(firstPrice, secondPrice, forSale, 0, maxUses, xp, forSale.getItem() instanceof TieredItem ? 0.2F : 0.05F, 0);
 	}
 	
 	public Offer(ItemStack firstPrice, ItemStack forSale, int maxUses, int xp, float priceMultiplier) {

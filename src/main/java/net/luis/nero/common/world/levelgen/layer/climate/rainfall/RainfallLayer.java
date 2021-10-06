@@ -8,8 +8,8 @@ public enum RainfallLayer implements PlusTransformer {
 	LIGHT {
 		@Override
 		public int apply(BigContext<?> context, int temperatureNorth, int temperatureEast, int temperatureSouth, int temperatureWest, int temperature) {
-			if (temperatureNorth == OverworldLayer.DRIZZLE && temperatureEast == OverworldLayer.DRIZZLE && temperatureSouth == OverworldLayer.DRIZZLE && temperatureWest == OverworldLayer.DRIZZLE) {
-				return context.nextRandom(2) == 0 ? OverworldLayer.LIGHT : temperature;
+			if (temperatureNorth == OverworldLayer.CLIMATE_DRIZZLE && temperatureEast == OverworldLayer.CLIMATE_DRIZZLE && temperatureSouth == OverworldLayer.CLIMATE_DRIZZLE && temperatureWest == OverworldLayer.CLIMATE_DRIZZLE) {
+				return context.nextRandom(2) == 0 ? OverworldLayer.CLIMATE_LIGHT : temperature;
 			}
 			return temperature;
 		}
@@ -17,8 +17,8 @@ public enum RainfallLayer implements PlusTransformer {
 	MODERATE {
 		@Override
 		public int apply(BigContext<?> context, int temperatureNorth, int temperatureEast, int temperatureSouth, int temperatureWest, int temperature) {
-			if (temperatureNorth == OverworldLayer.LIGHT && temperatureEast == OverworldLayer.LIGHT && temperatureSouth == OverworldLayer.LIGHT && temperatureWest == OverworldLayer.LIGHT) {
-				return OverworldLayer.MODERATE;
+			if (temperatureNorth == OverworldLayer.CLIMATE_LIGHT && temperatureEast == OverworldLayer.CLIMATE_LIGHT && temperatureSouth == OverworldLayer.CLIMATE_LIGHT && temperatureWest == OverworldLayer.CLIMATE_LIGHT) {
+				return OverworldLayer.CLIMATE_MODERATE;
 			}
 			return temperature;
 		}
@@ -26,8 +26,8 @@ public enum RainfallLayer implements PlusTransformer {
 	STRONG {
 		@Override
 		public int apply(BigContext<?> context, int temperatureNorth, int temperatureEast, int temperatureSouth, int temperatureWest, int temperature) {
-			if (temperatureNorth == OverworldLayer.MODERATE && temperatureEast == OverworldLayer.MODERATE && temperatureSouth == OverworldLayer.MODERATE && temperatureWest == OverworldLayer.MODERATE) {
-				return context.nextRandom(2) == 0 ? OverworldLayer.STRONG : temperature;
+			if (temperatureNorth == OverworldLayer.CLIMATE_MODERATE && temperatureEast == OverworldLayer.CLIMATE_MODERATE && temperatureSouth == OverworldLayer.CLIMATE_MODERATE && temperatureWest == OverworldLayer.CLIMATE_MODERATE) {
+				return context.nextRandom(2) == 0 ? OverworldLayer.CLIMATE_STRONG : temperature;
 			}
 			return temperature;
 		}
@@ -35,8 +35,8 @@ public enum RainfallLayer implements PlusTransformer {
 	MONSOON {
 		@Override
 		public int apply(BigContext<?> context, int temperatureNorth, int temperatureEast, int temperatureSouth, int temperatureWest, int temperature) {
-			if (temperatureNorth == OverworldLayer.STRONG && temperatureEast == OverworldLayer.STRONG && temperatureSouth == OverworldLayer.STRONG && temperatureWest == OverworldLayer.STRONG) {
-				return context.nextRandom(5) == 0 ? OverworldLayer.MONSOON : temperature;
+			if (temperatureNorth == OverworldLayer.CLIMATE_STRONG && temperatureEast == OverworldLayer.CLIMATE_STRONG && temperatureSouth == OverworldLayer.CLIMATE_STRONG && temperatureWest == OverworldLayer.CLIMATE_STRONG) {
+				return context.nextRandom(5) == 0 ? OverworldLayer.CLIMATE_MONSOON : temperature;
 			}
 			return temperature;
 		}

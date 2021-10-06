@@ -72,7 +72,7 @@ public class HoveringInfernoModel extends EntityModel<HoveringInfernoEntity> {
 		this.shieldWest.render(pose, vertexConsumer, packedLight, packedOverlay);
 		pose.popPose();
 		pose.pushPose();
-		pose.scale(1.1f, 1.1f, 1.1f);
+		pose.scale(1.1F, 1.1F, 1.1F);
 		this.helmet.render(pose, vertexConsumer, packedLight, packedOverlay);
 		pose.popPose();
 	}

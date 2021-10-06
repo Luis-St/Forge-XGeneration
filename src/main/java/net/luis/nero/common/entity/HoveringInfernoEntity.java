@@ -141,26 +141,26 @@ public class HoveringInfernoEntity extends Blaze {
 		if (this.isClientSide()) {
 			this.shields.forEach(shield -> {
 				shield.yRotO = shield.yRot;
-				shield.yRot += 0.017453292;
+				shield.yRot += 0.017453292F;
 			});
 			if (this.areShieldsActive()) {
 				this.shields.forEach(shield -> {
-					if (shield.xRot == -0.27f || shield.xRot == -0.26f) {
-						shield.xRotO = -0.26f;
-						shield.xRot = -0.26f;
-					} else if (shield.xRot > -0.26f && 0.0f >= shield.xRot) {
+					if (shield.xRot == -0.27F || shield.xRot == -0.26F) {
+						shield.xRotO = -0.26F;
+						shield.xRot = -0.26F;
+					} else if (shield.xRot > -0.26F && 0.0F >= shield.xRot) {
 						shield.xRotO = shield.xRot;
-						shield.xRot = this.floorRot(shield.xRot, -0.01f);
+						shield.xRot = this.floorRot(shield.xRot, -0.01F);
 					}
 				});
 			} else {
 				this.shields.forEach(shield -> {
-					if (shield.xRot == 0.0f || shield.xRot == 0.1f) {
-						shield.xRotO = 0.0f;
-						shield.xRot = 0.0f;
-					} else if (shield.xRot >= -0.26f && 0.0f > shield.xRot) {
+					if (shield.xRot == 0.0F || shield.xRot == 0.1F) {
+						shield.xRotO = 0.0F;
+						shield.xRot = 0.0F;
+					} else if (shield.xRot >= -0.26f && 0.0F > shield.xRot) {
 						shield.xRotO = shield.xRot;
-						shield.xRot = this.floorRot(shield.xRot, 0.01f);
+						shield.xRot = this.floorRot(shield.xRot, 0.01F);
 					}
 				});
 			}
