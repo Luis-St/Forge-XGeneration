@@ -11,7 +11,7 @@ public class OldGrowthForestBiome extends OverworldBiome {
 	protected final IBiomeType biomeType;
 	
 	public OldGrowthForestBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
-		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale());
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
 		this.biomeType = biomeType;
 	}
 	
@@ -48,11 +48,6 @@ public class OldGrowthForestBiome extends OverworldBiome {
 	@Override
 	public boolean isMushroomIsland() {
 		return false;
-	}
-	
-	@Override
-	public boolean isHilly() {
-		return this.biomeType.isHilly();
 	}
 	
 	@Override

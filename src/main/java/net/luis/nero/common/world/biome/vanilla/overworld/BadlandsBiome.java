@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
@@ -11,8 +12,8 @@ public class BadlandsBiome extends OverworldBiome {
 	protected final boolean windswept;
 	protected final boolean wooded;
 	
-	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean windswept, boolean wooded) {
-		super(biomeEffects, 2.0F, baseNoise, baseNoise);
+	public BadlandsBiome(BiomeEffects biomeEffects, IBiomeNoise biomeNoise, boolean windswept, boolean wooded) {
+		super(biomeEffects, 2.0F, biomeNoise);
 		this.windswept = windswept;
 		this.wooded = wooded;
 	}
@@ -50,11 +51,6 @@ public class BadlandsBiome extends OverworldBiome {
 	@Override
 	public boolean isMushroomIsland() {
 		return false;
-	}
-	
-	@Override
-	public boolean isHilly() {
-		return true;
 	}
 	
 	@Override

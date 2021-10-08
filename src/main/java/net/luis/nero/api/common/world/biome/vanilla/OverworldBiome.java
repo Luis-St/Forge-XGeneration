@@ -1,20 +1,22 @@
 package net.luis.nero.api.common.world.biome.vanilla;
 
+import javax.annotation.Nullable;
+
 import net.luis.nero.api.common.world.biome.ModBiome;
+import net.luis.nero.api.common.world.biome.noise.HillyBiomeNoise;
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 
 public abstract class OverworldBiome extends ModBiome {
 	
 	protected final float temperature;
-	protected final double baseNoise;
-	protected final double noiseScale;
+	protected final IBiomeNoise biomeNoise;
 	
-	protected OverworldBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale) {
+	protected OverworldBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise) {
 		super(biomeEffects == null ? BiomeEffects.OVERWORLD : biomeEffects);
 		this.temperature = temperature;
-		this.baseNoise = baseNoise;
-		this.noiseScale = noiseScale;
+		this.biomeNoise = biomeNoise;
 	}
 	
 	@Override
@@ -36,13 +38,8 @@ public abstract class OverworldBiome extends ModBiome {
 	}
 	
 	@Override
-	public double getBaseNoise() {
-		return this.baseNoise;
-	}
-
-	@Override
-	public double getNoiseScale() {
-		return this.noiseScale;
+	public IBiomeNoise getBiomeNoise() {
+		return this.biomeNoise;
 	}
 	
 	public abstract boolean isUnderground();
@@ -59,7 +56,17 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isMushroomIsland();
 	
-	public abstract boolean isHilly();
+	public boolean canBeHilly() {
+		return this.biomeNoise instanceof HillyBiomeNoise;
+	}
+	
+	@Nullable
+	public HillyBiomeNoise getHillyNoise() {
+		if (this.canBeHilly()) {
+			return (HillyBiomeNoise) this.biomeNoise;
+		}
+		return null;
+	}
 	
 	public abstract boolean isWindswept();
 	

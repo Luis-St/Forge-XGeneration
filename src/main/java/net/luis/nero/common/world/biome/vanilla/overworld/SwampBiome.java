@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
@@ -10,8 +11,8 @@ public class SwampBiome extends OverworldBiome {
 	
 	protected final boolean hilly;
 	
-	public SwampBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean hilly) {
-		super(biomeEffects, temperature, baseNoise, noiseScale);
+	public SwampBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean hilly) {
+		super(biomeEffects, temperature, biomeNoise);
 		this.hilly = hilly;
 	}
 	
@@ -50,10 +51,10 @@ public class SwampBiome extends OverworldBiome {
 		return false;
 	}
 	
-	@Override
-	public boolean isHilly() {
-		return this.hilly;
-	}
+//	@Override
+//	public boolean isHilly() {
+//		return this.hilly;
+//	}
 	
 	@Override
 	public boolean isWindswept() {

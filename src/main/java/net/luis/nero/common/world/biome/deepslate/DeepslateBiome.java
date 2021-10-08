@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.biome.deepslate;
 
 import net.luis.nero.api.common.world.biome.ModBiome;
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.enums.BiomeEffects;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-// TODO: add Biomes (noise caves)
 public class DeepslateBiome extends ModBiome {
 
 	public DeepslateBiome(BiomeEffects biomeEffects) {
@@ -25,13 +25,18 @@ public class DeepslateBiome extends ModBiome {
 	}
 	
 	@Override
-	public double getBaseNoise() {
-		return 0.0;
+	public float getTemperature() {
+		return 0.5F;
 	}
 
 	@Override
-	public double getNoiseScale() {
-		return 0.0;
+	public float getDownfall() {
+		return 0.0F;
+	}
+	
+	@Override
+	public IBiomeNoise getBiomeNoise() {
+		return IBiomeNoise.NULL;
 	}
 	
 	@Override

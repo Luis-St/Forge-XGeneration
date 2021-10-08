@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
@@ -9,26 +10,24 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum OldGrowthForestBiomeType implements IBiomeType {
 	
-	OLD_GROWTH_PINE_TAIGA(0.3F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), false),
-	OLD_GROWTH_PINE_TAIGA_HILLS(0.3F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), true),	
-	OLD_GROWTH_SPRUCE_TAIGA(0.25F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), false),
-	OLD_GROWTH_SPRUCE_TAIGA_HILLS(0.25F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), true);
+	OLD_GROWTH_PINE_TAIGA(0.3F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), false),
+	OLD_GROWTH_PINE_TAIGA_HILLS(0.3F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), true),	
+	OLD_GROWTH_SPRUCE_TAIGA(0.25F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), false),
+	OLD_GROWTH_SPRUCE_TAIGA_HILLS(0.25F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), true);
 	
 	private final float temperature;
-	private final double baseNoise;
-	private final double noiseScale;
+	private final IBiomeNoise biomeNoise;
 	private final MobSpawnSettings mobSettings;
 	private final BiomeGenerationSettings generationSettings;
 	private final boolean hilly;
 	
-	private OldGrowthForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly) {
-		this(temperature, baseNoise, noiseScale, mobBuilder.build(), generationBuilder.build(), hilly);
+	private OldGrowthForestBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly) {
+		this(temperature, biomeNoise, mobBuilder.build(), generationBuilder.build(), hilly);
 	}
 	
-	private OldGrowthForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly) {
+	private OldGrowthForestBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly) {
 		this.temperature = temperature;
-		this.baseNoise = baseNoise;
-		this.noiseScale = noiseScale;
+		this.biomeNoise = biomeNoise;
 		this.mobSettings = mobSettings;
 		this.generationSettings = generationSettings;
 		this.hilly = hilly;
@@ -40,13 +39,8 @@ public enum OldGrowthForestBiomeType implements IBiomeType {
 	}
 	
 	@Override
-	public double getBaseNoise() {
-		return this.baseNoise;
-	}
-	
-	@Override
-	public double getNoiseScale() {
-		return this.noiseScale;
+	public IBiomeNoise getBiomeNoise() {
+		return this.biomeNoise;
 	}
 	
 	@Override

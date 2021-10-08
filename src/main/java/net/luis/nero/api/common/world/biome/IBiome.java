@@ -2,6 +2,7 @@ package net.luis.nero.api.common.world.biome;
 
 import java.util.function.Supplier;
 
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.api.common.world.biome.vanilla.EndBiome;
 import net.luis.nero.api.common.world.biome.vanilla.NetherBiome;
@@ -24,8 +25,8 @@ public interface IBiome {
 		Biome.BiomeBuilder biomeBuilder = new Biome.BiomeBuilder();
 		biomeBuilder.precipitation(biome.getPrecipitation());
 		biomeBuilder.biomeCategory(biome.getCategory());
-		biomeBuilder.depth(0.0F);
-		biomeBuilder.scale(0.0F);
+		biomeBuilder.depth((float) biome.getBiomeNoise().getBaseNoise());
+		biomeBuilder.scale((float) biome.getBiomeNoise().getNoiseScale());
 		biomeBuilder.temperature(biome.getTemperature());
 		biomeBuilder.downfall(biome.getDownfall());
 		biomeBuilder.specialEffects(biome.getBiomeEffects());
@@ -54,9 +55,7 @@ public interface IBiome {
 	
 	BiomeCategory getCategory();
 	
-	double getBaseNoise();
-	
-	double getNoiseScale();
+	IBiomeNoise getBiomeNoise();
 	
 	float getTemperature();
 	

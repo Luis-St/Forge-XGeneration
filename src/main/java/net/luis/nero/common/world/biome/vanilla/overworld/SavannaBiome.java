@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
@@ -11,8 +12,8 @@ public class SavannaBiome extends OverworldBiome {
 	protected final boolean plateau;
 	protected final boolean windswept;
 	
-	public SavannaBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean plateau, boolean windswept) {
-		super(biomeEffects, temperature, baseNoise, noiseScale);
+	public SavannaBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean plateau, boolean windswept) {
+		super(biomeEffects, temperature, biomeNoise);
 		this.plateau = plateau;
 		this.windswept = windswept;
 	}
@@ -52,10 +53,10 @@ public class SavannaBiome extends OverworldBiome {
 		return false;
 	}
 	
-	@Override
-	public boolean isHilly() {
-		return this.windswept;
-	}
+//	@Override
+//	public boolean isHilly() {
+//		return this.windswept;
+//	}
 	
 	@Override
 	public boolean isWindswept() {

@@ -1,5 +1,6 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
+import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.util.BiomeUtil;
@@ -12,8 +13,8 @@ public class WindsweptBiome extends OverworldBiome {
 	protected final boolean wooded;
 	protected final boolean gravelly;
 	
-	public WindsweptBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean edge, boolean wooded, boolean gravelly) {
-		super(biomeEffects, temperature, baseNoise, noiseScale);
+	public WindsweptBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean edge, boolean wooded, boolean gravelly) {
+		super(biomeEffects, temperature, biomeNoise);
 		this.edge = edge;
 		this.wooded = wooded;
 		this.gravelly = gravelly;
@@ -54,10 +55,10 @@ public class WindsweptBiome extends OverworldBiome {
 		return false;
 	}
 	
-	@Override
-	public boolean isHilly() {
-		return this.edge && !this.wooded;
-	}
+//	@Override
+//	public boolean isHilly() {
+//		return this.edge && !this.wooded;
+//	}
 	
 	@Override
 	public boolean isWindswept() {

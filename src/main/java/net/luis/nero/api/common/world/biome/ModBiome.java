@@ -34,16 +34,6 @@ public abstract class ModBiome implements IBiome {
 	}
 
 	@Override
-	public float getTemperature() {
-		return 0.0F;
-	}
-
-	@Override
-	public float getDownfall() {
-		return 0.0F;
-	}
-
-	@Override
 	public BiomeSpecialEffects getBiomeEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
 		specialEffectsBuilder.waterColor(this.waterColor);
