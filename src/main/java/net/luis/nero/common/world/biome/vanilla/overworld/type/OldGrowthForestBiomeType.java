@@ -7,12 +7,12 @@ import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public enum GiantTaigaBiomeType implements IBiomeType {
+public enum OldGrowthForestBiomeType implements IBiomeType {
 	
-	GIANT_TREE_TAIGA(0.3F, 0.0, 0.0, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), false),
-	GIANT_TREE_TAIGA_HILLS(0.3F, 0.0, 0.0, BiomeUtil.getGiantTreeTaigaSpawns(false), BiomeUtil.getGiantTreeTaigaFeatures(false), true),	
-	GIANT_SPRUCE_TAIGA(0.25F, 0.0, 0.0, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), false),
-	GIANT_SPRUCE_TAIGA_HILLS(0.25F, 0.0, 0.0, BiomeUtil.getGiantTreeTaigaSpawns(true), BiomeUtil.getGiantTreeTaigaFeatures(true), true);
+	OLD_GROWTH_PINE_TAIGA(0.3F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), false),
+	OLD_GROWTH_PINE_TAIGA_HILLS(0.3F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), true),	
+	OLD_GROWTH_SPRUCE_TAIGA(0.25F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), false),
+	OLD_GROWTH_SPRUCE_TAIGA_HILLS(0.25F, 0.0, 0.0, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), true);
 	
 	private final float temperature;
 	private final double baseNoise;
@@ -21,11 +21,11 @@ public enum GiantTaigaBiomeType implements IBiomeType {
 	private final BiomeGenerationSettings generationSettings;
 	private final boolean hilly;
 	
-	private GiantTaigaBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly) {
+	private OldGrowthForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly) {
 		this(temperature, baseNoise, noiseScale, mobBuilder.build(), generationBuilder.build(), hilly);
 	}
 	
-	private GiantTaigaBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly) {
+	private OldGrowthForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly) {
 		this.temperature = temperature;
 		this.baseNoise = baseNoise;
 		this.noiseScale = noiseScale;
@@ -75,7 +75,7 @@ public enum GiantTaigaBiomeType implements IBiomeType {
 	}
 
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return false;
 	}
 	

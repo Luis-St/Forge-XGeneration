@@ -21,6 +21,6 @@ public interface IBiomeType {
 	
 	boolean isHilly();
 	
-	boolean isMountain();
+	boolean isWindswept();
 	
 }

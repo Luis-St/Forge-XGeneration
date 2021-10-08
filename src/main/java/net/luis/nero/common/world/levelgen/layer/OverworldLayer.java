@@ -43,11 +43,11 @@ public class OverworldLayer {
 		}));
 	}
 	
-	public static Layer getUndergroundLayer(long seed) {
-		return new Layer(getSurfaceLayer((seedModifier) -> {
-			return new LazyAreaContext(25, seedModifier, seed);
-		}));
-	}
+//	public static Layer getUndergroundLayer(long seed) {
+//		return new Layer(getUndergroundLayer((seedModifier) -> {
+//			return new LazyAreaContext(25, seedModifier, seed);
+//		}));
+//	}
 	
 	@SuppressWarnings("unused")
 	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getSurfaceLayer(LongFunction<C> function) {

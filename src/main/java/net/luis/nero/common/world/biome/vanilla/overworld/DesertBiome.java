@@ -58,7 +58,7 @@ public class DesertBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return false;
 	}
 	

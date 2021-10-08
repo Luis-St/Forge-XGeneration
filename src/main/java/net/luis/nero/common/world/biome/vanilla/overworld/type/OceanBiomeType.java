@@ -80,7 +80,7 @@ public enum OceanBiomeType implements IBiomeType {
 	}
 
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return false;
 	}
 	

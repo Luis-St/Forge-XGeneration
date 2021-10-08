@@ -12,8 +12,8 @@ public enum JungleBiomeType implements IBiomeType {
 	JUNGLE(0.0, 0.0, BiomeUtil.getJungleSpawns(false, false), BiomeUtil.getJungleFeatures(false, false, false), true, false),
 	JUNGLE_HILLS(0.0, 0.0, BiomeUtil.getJungleSpawns(true, false), BiomeUtil.getJungleFeatures(false, false, false), false, true),
 	MODIFIED_JUNGLE(0.0, 0.0, BiomeUtil.getJungleSpawns(false, true), BiomeUtil.getJungleFeatures(false, false, true), false, false),
-	JUNGLE_EDGE(0.0, 0.0, BiomeUtil.getJungleEdgeSpawns(), BiomeUtil.getJungleFeatures(false, true, false), false, false),
-	MODIFIED_JUNGLE_EDGE(0.0, 0.0, BiomeUtil.getJungleEdgeSpawns(), BiomeUtil.getJungleFeatures(false, true, true), false, true),
+	SPARSE_JUNGLE(0.0, 0.0, BiomeUtil.getJungleSparseSpawns(), BiomeUtil.getJungleFeatures(false, true, false), false, false),
+	MODIFIED_SPARSE_JUNGLE(0.0, 0.0, BiomeUtil.getJungleSparseSpawns(), BiomeUtil.getJungleFeatures(false, true, true), false, true),
 	BAMBOO_JUNGLE(0.0, 0.0, BiomeUtil.getBambooJungleSpawns(false), BiomeUtil.getJungleFeatures(true, false, false), false, false),
 	BAMBOO_JUNGLE_HILLS(0.0, 0.0, BiomeUtil.getBambooJungleSpawns(true), BiomeUtil.getJungleFeatures(true, false, false), false, true);
 	
@@ -78,7 +78,7 @@ public enum JungleBiomeType implements IBiomeType {
 	}
 
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return false;
 	}
 	

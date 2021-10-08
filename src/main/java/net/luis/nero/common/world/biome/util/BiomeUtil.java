@@ -35,7 +35,7 @@ public class BiomeUtil {
 		return shore ? 0.2F : 0.8F;
 	}
 	
-	protected static ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> getMountainSurfaceBuilder(boolean edge, boolean wooded, boolean gravelly) {
+	protected static ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> getWindsweptSurfaceBuilder(boolean edge, boolean wooded, boolean gravelly) {
 		if (edge || wooded) {
 			return SurfaceBuilders.GRASS;
 		} else if (gravelly) {
@@ -44,10 +44,10 @@ public class BiomeUtil {
 		return SurfaceBuilders.MOUNTAIN;
 	}
 	
-	public static BiomeGenerationBuilder getBadlandsFeatures(boolean plateau, boolean wooded) {
+	public static BiomeGenerationBuilder getBadlandsFeatures(boolean windswept, boolean wooded) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		DefaultVanillaBiomeFeatures.addMesaStructures(generationBuilder);
-		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, plateau);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
@@ -141,7 +141,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getTaigaFeatures(boolean hilly, boolean snowy, boolean mountain) {
+	public static BiomeGenerationBuilder getTaigaFeatures(boolean hilly, boolean snowy, boolean windswept) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -160,11 +160,11 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, mountain);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept);
 		DefaultVanillaBiomeFeatures.addTaigaBerryBushes(generationBuilder, snowy);
-		if (!hilly && !snowy && !mountain) {
+		if (!hilly && !snowy && !windswept) {
 			DefaultVanillaBiomeFeatures.addTagiaStructures(generationBuilder);
-		} else if (!hilly && !mountain) {
+		} else if (!hilly && !windswept) {
 			DefaultVanillaBiomeFeatures.addSnowyTagiaStructures(generationBuilder);
 		}
 		return generationBuilder;
@@ -224,7 +224,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getBirchForestFeatures(boolean tall) {
+	public static BiomeGenerationBuilder getBirchForestFeatures(boolean oldGrowth) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -242,8 +242,8 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addForestGrass(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
 		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder);
-		if (tall) {
-			DefaultVanillaBiomeFeatures.addTallBirchTrees(generationBuilder);
+		if (oldGrowth) {
+			DefaultVanillaBiomeFeatures.addOldGrowthBirchTrees(generationBuilder);
 		} else {
 			DefaultVanillaBiomeFeatures.addBirchTrees(generationBuilder);
 		}
@@ -291,7 +291,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getGiantTreeTaigaFeatures(boolean spruce) {
+	public static BiomeGenerationBuilder getOldGrowthTaigaFeatures(boolean spruce) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GIANT_TREE_TAIGA);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -305,31 +305,31 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
-		DefaultVanillaBiomeFeatures.addGiantTaigaVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addOldGrowthTaigaVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		DefaultVanillaBiomeFeatures.addRareBerryBushes(generationBuilder);
 		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder);
-		DefaultVanillaBiomeFeatures.addGiantTaigaTrees(generationBuilder, spruce);
+		DefaultVanillaBiomeFeatures.addOldGrowthTaigaTrees(generationBuilder, spruce);
 		return generationBuilder;
 	}
 	
-	public static MobSpawnBuilder getGiantTreeTaigaSpawns(boolean spruce) {
+	public static MobSpawnBuilder getOldGrowthTaigaSpawns(boolean spruce) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
-		DefaultVanillaBiomeSpawns.addGiantTaigaMonsterSpawns(mobBuilder, spruce);
+		DefaultVanillaBiomeSpawns.addOldGrowthTaigaMonsterSpawns(mobBuilder, spruce);
 		if (!spruce) {
 			mobBuilder.enablePlayerSpawn();
 		}
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getJungleFeatures(boolean bamboo, boolean edge, boolean modified) {
+	public static BiomeGenerationBuilder getJungleFeatures(boolean bamboo, boolean sparse, boolean modified) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addJungleRuinedPortal(generationBuilder);
@@ -347,17 +347,17 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		if (!edge && !modified) {
+		if (!sparse && !modified) {
 			DefaultVanillaBiomeFeatures.addJungleStructures(generationBuilder);
 		}
 		if (bamboo) {
 			DefaultVanillaBiomeFeatures.addBambooVegetation(generationBuilder);
 		} else {
-			if (!edge && !modified) {
+			if (!sparse && !modified) {
 				DefaultVanillaBiomeFeatures.addLightBambooVegetation(generationBuilder);
 			}
-			if (edge) {
-				DefaultVanillaBiomeFeatures.addJungleEdgeTrees(generationBuilder);
+			if (sparse) {
+				DefaultVanillaBiomeFeatures.addJungleSparseTrees(generationBuilder);
 			} else {
 				DefaultVanillaBiomeFeatures.addJungleTrees(generationBuilder);
 			}
@@ -374,7 +374,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static MobSpawnBuilder getJungleEdgeSpawns() {
+	public static MobSpawnBuilder getJungleSparseSpawns() {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addBaseJungleSpawns(mobBuilder);
 		return mobBuilder;
@@ -418,9 +418,9 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getMountainFeatures(boolean edge, boolean wooded, boolean gravelly) {
+	public static BiomeGenerationBuilder getWindsweptFeatures(boolean edge, boolean wooded, boolean gravelly) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		generationBuilder.surfaceBuilder(() -> getMountainSurfaceBuilder(edge, wooded, gravelly));
+		generationBuilder.surfaceBuilder(() -> getWindsweptSurfaceBuilder(edge, wooded, gravelly));
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addRuinedPortalMountain(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -437,14 +437,14 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		DefaultVanillaBiomeFeatures.addExtraEmeralds(generationBuilder);
 		if (edge) {
-			DefaultVanillaBiomeFeatures.addMountainEdgeTrees(generationBuilder);
+			DefaultVanillaBiomeFeatures.addWindsweptEdgeTrees(generationBuilder);
 		} else {
-			DefaultVanillaBiomeFeatures.addMountainTrees(generationBuilder);
+			DefaultVanillaBiomeFeatures.addWindsweptTrees(generationBuilder);
 		}
 		return generationBuilder;
 	}
 	
-	public static MobSpawnBuilder getMountainSpawns() {
+	public static MobSpawnBuilder getWindsweptSpawns() {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
 		DefaultVanillaBiomeSpawns.addFarmAnimalSpawns(mobBuilder);
@@ -606,7 +606,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getSavannaFeatures(boolean plateau, boolean shattered) {
+	public static BiomeGenerationBuilder getSavannaFeatures(boolean windswept, boolean shattered) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> (shattered ? SurfaceBuilders.SHATTERED_SAVANNA : SurfaceBuilders.GRASS));
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -621,8 +621,8 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
-		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, plateau);
-		if (!plateau && !shattered) {
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept);
+		if (!windswept && !shattered) {
 			generationBuilder.addStructureStart(StructureFeatures.VILLAGE_SAVANNA);
 			generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
 		}
@@ -639,10 +639,10 @@ public class BiomeUtil {
 		return generationBuilder;
 	}
 	
-	public static MobSpawnBuilder getSavannaSpawns(boolean plateau) {
+	public static MobSpawnBuilder getSavannaSpawns(boolean windswept) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addSavannaSpawns(mobBuilder);
-		if (plateau) {
+		if (windswept) {
 			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.LLAMA, 8, 4, 4));
 		}
 		return mobBuilder;
@@ -678,7 +678,7 @@ public class BiomeUtil {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getTundraFeatures(boolean iceSpikes, boolean mountain) {
+	public static BiomeGenerationBuilder getTundraFeatures(boolean iceSpikes, boolean windswept) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> (iceSpikes ? SurfaceBuilders.ICE_SPIKES : SurfaceBuilders.GRASS));
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -696,8 +696,8 @@ public class BiomeUtil {
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSnowyTrees(generationBuilder);
-		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, mountain);
-		if (!iceSpikes && !mountain) {
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept);
+		if (!iceSpikes && !windswept) {
 			generationBuilder.addStructureStart(StructureFeatures.VILLAGE_SNOWY);
 			generationBuilder.addStructureStart(StructureFeatures.IGLOO);
 			generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);

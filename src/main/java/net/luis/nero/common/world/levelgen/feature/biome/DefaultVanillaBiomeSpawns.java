@@ -24,7 +24,7 @@ public class DefaultVanillaBiomeSpawns {
 		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 	}
 	
-	public static void addGiantTaigaMonsterSpawns(MobSpawnBuilder mobBuilder, boolean spruce) {
+	public static void addOldGrowthTaigaMonsterSpawns(MobSpawnBuilder mobBuilder, boolean spruce) {
 		if (spruce) {
 			addCommonMonsterSpawns(mobBuilder);
 		} else {

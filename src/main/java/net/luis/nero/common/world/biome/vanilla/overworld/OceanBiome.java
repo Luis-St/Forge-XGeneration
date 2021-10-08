@@ -56,8 +56,8 @@ public class OceanBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
-		return this.biomeType.isMountain();
+	public boolean isWindswept() {
+		return this.biomeType.isWindswept();
 	}
 	
 }

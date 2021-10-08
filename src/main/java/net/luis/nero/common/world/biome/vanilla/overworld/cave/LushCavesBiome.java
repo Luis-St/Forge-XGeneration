@@ -53,7 +53,7 @@ public class LushCavesBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return false;
 	}
 	

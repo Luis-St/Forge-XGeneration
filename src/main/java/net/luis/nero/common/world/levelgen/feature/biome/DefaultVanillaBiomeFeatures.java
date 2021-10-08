@@ -13,8 +13,8 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addStructureStart(StructureFeatures.STRONGHOLD);
 	}
 	
-	public static void addRuinedPortal(BiomeGenerationBuilder generationBuilder, boolean mountain) {
-		generationBuilder.addStructureStart(mountain ? StructureFeatures.RUINED_PORTAL_MOUNTAIN : StructureFeatures.RUINED_PORTAL_STANDARD);
+	public static void addRuinedPortal(BiomeGenerationBuilder generationBuilder, boolean windswept) {
+		generationBuilder.addStructureStart(windswept ? StructureFeatures.RUINED_PORTAL_MOUNTAIN : StructureFeatures.RUINED_PORTAL_STANDARD);
 	}
 	
 	public static void addRuinedPortal(BiomeGenerationBuilder generationBuilder) {
@@ -212,7 +212,7 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TAIGA_VEGETATION);
 	}
 	
-	public static void addGiantTaigaTrees(BiomeGenerationBuilder generationBuilder, boolean spruce) {
+	public static void addOldGrowthTaigaTrees(BiomeGenerationBuilder generationBuilder, boolean spruce) {
 		if (spruce) {
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_GIANT_SPRUCE);
 		} else {
@@ -232,7 +232,7 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.BIRCH_OTHER);
 	}
 
-	public static void addTallBirchTrees(BiomeGenerationBuilder generationBuilder) {
+	public static void addOldGrowthBirchTrees(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.BIRCH_TALL);
 	}
 
@@ -258,11 +258,11 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Features.ORE_CLAY);
 	}
 
-	public static void addMountainTrees(BiomeGenerationBuilder generationBuilder) {
+	public static void addWindsweptTrees(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_MOUNTAIN);
 	}
 
-	public static void addMountainEdgeTrees(BiomeGenerationBuilder generationBuilder) {
+	public static void addWindsweptEdgeTrees(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_MOUNTAIN_EDGE);
 	}
 
@@ -270,7 +270,7 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_JUNGLE);
 	}
 
-	public static void addJungleEdgeTrees(BiomeGenerationBuilder generationBuilder) {
+	public static void addJungleSparseTrees(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.TREES_JUNGLE_EDGE);
 	}
 
@@ -337,7 +337,7 @@ public class DefaultVanillaBiomeFeatures {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_DEAD_BUSH_2);
 	}
 
-	public static void addGiantTaigaVegetation(BiomeGenerationBuilder generationBuilder) {
+	public static void addOldGrowthTaigaVegetation(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_TAIGA);
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_DEAD_BUSH);
 		generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.BROWN_MUSHROOM_GIANT);

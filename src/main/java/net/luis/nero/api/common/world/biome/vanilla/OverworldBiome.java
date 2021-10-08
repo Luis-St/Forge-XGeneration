@@ -52,7 +52,7 @@ public abstract class OverworldBiome extends ModBiome {
 	public abstract boolean isBeach();
 	
 	public boolean isCliffsBeach() {
-		return this.isBeach() && this.isMountain();
+		return this.isBeach() && this.isWindswept();
 	}
 	
 	public abstract boolean isIsland();
@@ -61,7 +61,7 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isHilly();
 	
-	public abstract boolean isMountain();
+	public abstract boolean isWindswept();
 	
 }
   

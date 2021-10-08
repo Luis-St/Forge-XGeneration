@@ -9,12 +9,12 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 public class TundraBiome extends OverworldBiome {
 	
 	protected final boolean iceSpikes;
-	protected final boolean mountain;
+	protected final boolean windswept;
 	
-	public TundraBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean iceSpikes, boolean mountain) {
+	public TundraBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean iceSpikes, boolean windswept) {
 		super(biomeEffects, 0.0F, baseNoise, noiseScale);
 		this.iceSpikes = iceSpikes;
-		this.mountain = mountain;
+		this.windswept = windswept;
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class TundraBiome extends OverworldBiome {
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getTundraFeatures(this.iceSpikes, this.mountain).build();
+		return BiomeUtil.getTundraFeatures(this.iceSpikes, this.windswept).build();
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class TundraBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isBeach() {
-		return !this.iceSpikes && !this.mountain;
+		return !this.iceSpikes && !this.windswept;
 	}
 	
 	@Override
@@ -58,8 +58,8 @@ public class TundraBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
-		return this.mountain;
+	public boolean isWindswept() {
+		return this.windswept;
 	}
 	
 }

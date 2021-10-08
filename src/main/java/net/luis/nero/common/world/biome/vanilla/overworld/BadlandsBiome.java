@@ -8,12 +8,12 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class BadlandsBiome extends OverworldBiome {
 	
-	protected final boolean plateau;
+	protected final boolean windswept;
 	protected final boolean wooded;
 	
-	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean plateau, boolean wooded) {
+	public BadlandsBiome(BiomeEffects biomeEffects, double baseNoise, double noiseScale, boolean windswept, boolean wooded) {
 		super(biomeEffects, 2.0F, baseNoise, baseNoise);
-		this.plateau = plateau;
+		this.windswept = windswept;
 		this.wooded = wooded;
 	}
 	
@@ -24,7 +24,7 @@ public class BadlandsBiome extends OverworldBiome {
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getBadlandsFeatures(this.plateau, this.wooded).build();
+		return BiomeUtil.getBadlandsFeatures(this.windswept, this.wooded).build();
 	}
 	
 	@Override
@@ -58,8 +58,8 @@ public class BadlandsBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
-		return this.plateau;
+	public boolean isWindswept() {
+		return this.windswept;
 	}
 	
 }

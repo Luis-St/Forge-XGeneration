@@ -6,13 +6,13 @@ import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class MountainBiome extends OverworldBiome {
+public class WindsweptBiome extends OverworldBiome {
 	
 	protected final boolean edge;
 	protected final boolean wooded;
 	protected final boolean gravelly;
 	
-	public MountainBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean edge, boolean wooded, boolean gravelly) {
+	public WindsweptBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean edge, boolean wooded, boolean gravelly) {
 		super(biomeEffects, temperature, baseNoise, noiseScale);
 		this.edge = edge;
 		this.wooded = wooded;
@@ -21,12 +21,12 @@ public class MountainBiome extends OverworldBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getMountainSpawns().build();
+		return BiomeUtil.getWindsweptSpawns().build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getMountainFeatures(this.edge, this.wooded, this.gravelly).build();
+		return BiomeUtil.getWindsweptFeatures(this.edge, this.wooded, this.gravelly).build();
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class MountainBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return true;
 	}
 	

@@ -11,17 +11,17 @@ public enum ForestBiomeType implements IBiomeType {
 	
 	SNOWY_TAIGA(-0.5F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(true), BiomeUtil.getTaigaFeatures(false, false, false), true, false, false),
 	SNOWY_TAIGA_HILLS(-0.5F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(true, false, false), true, true, false),
-	SNOWY_TAIGA_MOUNTAINS(-0.5F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, false, true), false, false, true),
+	WINDSWEPT_SNOWY_TAIGA(-0.5F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, false, true), false, false, true),
 	TAIGA(0.25F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(true), BiomeUtil.getTaigaFeatures(false, true, false), true, false, false),
 	TAIGA_HILLS(0.25F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(true, true, false), true, true, false),
-	TAIGA_MOUNTAINS(0.25F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, true, true), true, false, true),
+	WINDSWEPT_TAIGA(0.25F, 0.0, 0.0, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, true, true), true, false, true),
 	FOREST(0.7F, 0.0, 0.0, BiomeUtil.getForestSpawns(false), BiomeUtil.getForestFeatures(false), true, false, false),
-	WOODEN_HILLS(0.7F, 0.0, 0.0, BiomeUtil.getForestSpawns(false), BiomeUtil.getForestFeatures(false), true, true, false),
+	WINDSWEPT_FOREST(0.7F, 0.0, 0.0, BiomeUtil.getForestSpawns(false), BiomeUtil.getForestFeatures(false), true, true, false),
 	FLOWER_FOREST(0.7F, 0.0, 0.0, BiomeUtil.getForestSpawns(true), BiomeUtil.getForestFeatures(true), true, false, false),
 	BIRCH_FOREST(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(false), true, false, false),
 	BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(false), true, true, false),
-	TALL_BIRCH_FOREST(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, false, false),
-	TALL_BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, true, false),
+	OLD_GROWTH_BIRCH_FOREST(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, false, false),
+	OLD_GROWTH_BIRCH_FOREST_HILLS(0.6F, 0.0, 0.0, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, true, false),
 	DARK_FOREST(0.7F, 0.0, 0.0, BiomeUtil.getDarkForestSpawns(false), BiomeUtil.getDarkForestFeatures(false), true, false, false),
 	DARK_FOREST_HILLS(0.7F, 0.0, 0.0, BiomeUtil.getDarkForestSpawns(true), BiomeUtil.getDarkForestFeatures(true), true, true, false);
 	
@@ -32,13 +32,13 @@ public enum ForestBiomeType implements IBiomeType {
 	private final BiomeGenerationSettings generationSettings;
 	private final boolean island;
 	private final boolean hilly;
-	private final boolean mountain;
+	private final boolean windswept;
 	
-	private ForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly, boolean mountain) {
-		this(temperature, baseNoise, noiseScale, mobBuilder.build(), generationBuilder.build(), island, hilly, mountain);
+	private ForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly, boolean windswept) {
+		this(temperature, baseNoise, noiseScale, mobBuilder.build(), generationBuilder.build(), island, hilly, windswept);
 	}
 	
-	private ForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean island, boolean hilly, boolean mountain) {
+	private ForestBiomeType(float temperature, double baseNoise, double noiseScale, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean island, boolean hilly, boolean windswept) {
 		this.temperature = temperature;
 		this.baseNoise = baseNoise;
 		this.noiseScale = noiseScale;
@@ -46,7 +46,7 @@ public enum ForestBiomeType implements IBiomeType {
 		this.generationSettings = generationSettings;
 		this.island = island;
 		this.hilly = hilly;
-		this.mountain = mountain;
+		this.windswept = windswept;
 	}
 	
 	@Override
@@ -90,8 +90,8 @@ public enum ForestBiomeType implements IBiomeType {
 	}
 
 	@Override
-	public boolean isMountain() {
-		return this.mountain;
+	public boolean isWindswept() {
+		return this.windswept;
 	}
 	
 }

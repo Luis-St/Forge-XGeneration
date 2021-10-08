@@ -58,7 +58,7 @@ public class BeachBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isMountain() {
+	public boolean isWindswept() {
 		return this.shore;
 	}
 	
