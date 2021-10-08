@@ -1,28 +1,28 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class PlainsBiome extends OverworldBiome {
 	
-	protected final boolean flower;
+	protected final IBiomeType biomeType;
 	
-	public PlainsBiome(BiomeEffects biomeEffects, float temperature, double baseNoise, double noiseScale, boolean flower) {
-		super(biomeEffects, temperature, baseNoise, noiseScale);
-		this.flower = flower;
+	public PlainsBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBaseNoise(), biomeType.getNoiseScale());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getPlainsSpawns(this.flower).build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getPlainsFeatures(this.flower).build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class PlainsBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class PlainsBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isIsland() {
-		return true;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
@@ -52,12 +52,12 @@ public class PlainsBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return false;
+		return this.biomeType.isWindswept();
 	}
 	
 }
