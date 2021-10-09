@@ -1,29 +1,28 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class RiverBiome extends OverworldBiome {
+public class PeakBiome extends OverworldBiome {
 	
-	protected final boolean frozen;
+	protected final IBiomeType biomeType;
 	
-	public RiverBiome(BiomeEffects biomeEffects, IBiomeNoise biomeNoise, boolean frozen) {
-		super(biomeEffects, frozen ? 0.0F : 0.5F, biomeNoise);
-		this.frozen = frozen;
+	public PeakBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getRiverSpawns(this.frozen).build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getRiverFeatures(this.frozen).build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
@@ -33,7 +32,7 @@ public class RiverBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
@@ -43,7 +42,7 @@ public class RiverBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isIsland() {
-		return false;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
@@ -53,12 +52,12 @@ public class RiverBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return false;
+		return this.biomeType.isWindswept();
 	}
 	
 }

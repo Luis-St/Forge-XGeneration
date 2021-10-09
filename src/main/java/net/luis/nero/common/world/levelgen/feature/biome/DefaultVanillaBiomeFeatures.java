@@ -84,6 +84,20 @@ public class DefaultVanillaBiomeFeatures {
 			generationBuilder.addStructureStart(StructureFeatures.SWAMP_HUT);
 		}
 	}
+	
+	public static void addMeadowStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+		generationBuilder.addStructureStart(StructureFeatures.VILLAGE_PLAINS);
+	}
+	
+	public static void addSnowySlopesStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+		generationBuilder.addStructureStart(StructureFeatures.IGLOO);
+	}
+	
+	public static void addPeakStructures(BiomeGenerationBuilder generationBuilder) {
+		generationBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+	}
 
 	public static void addDefaultCarvers(BiomeGenerationBuilder generationBuilder) {
 		generationBuilder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);

@@ -717,7 +717,7 @@ public class BiomeSettings {
 	
 	public static BiomeGenerationBuilder getRiverFeatures(boolean frozen) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		generationBuilder.surfaceBuilder(SurfaceBuilders.GRASS);
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
 		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -746,6 +746,169 @@ public class BiomeSettings {
 		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 5, 1, 5));
 		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
 		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.DROWNED, frozen ? 1 : 100, 1, 1));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getMeadowFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addMeadowStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add Tree Feature & Flower Feature
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getMeadowSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SHEEP, 2, 2, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.DONKEY, 1, 1, 2));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 2, 2, 6));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getGroveFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSnowyTrees(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add SurfaceBuilder & PowderSnow Feature
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getGroveSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SHEEP, 12, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PIG, 10, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.CHICKEN, 10, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 8, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getSnowySlopesFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSnowySlopesStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add SurfaceBuilder & PowderSnow Feature
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getSnowySlopesSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 5, 1, 3));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getJaggedPeaksFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add SurfaceBuilder
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getJaggedPeaksSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 5, 1, 3));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getFrozenPeaksFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add SurfaceBuilder
+		return generationBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getStonyPeaksFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		// TODO: add SurfaceBuilder
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getPeaksSpawns(boolean goats) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		if (goats) {
+			mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 5, 1, 3));
+		}
 		return mobBuilder;
 	}
 	

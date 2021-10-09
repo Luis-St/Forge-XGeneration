@@ -29,16 +29,13 @@ public class OnBiomeLoadingEvent {
 	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
-
 		ResourceLocation biomeLocation = event.getName();
 		IBiome biome = ModBiomes.BIOMES.get(biomeLocation.getPath());
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
-		
 		if (biome != null) {
 			biome.getModFeatures().addAllFeatures(generationBuilder);
 		}
-		
 		if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
@@ -47,15 +44,12 @@ public class OnBiomeLoadingEvent {
 			DefaultModBiomeFeatures.addFlatBedrock(generationBuilder);
 			DefaultModBiomeFeatures.addOreOverwrites(generationBuilder);
 		}
-		
 	}
 	
 	@SubscribeEvent
 	public static void biomeLoadingRemove(BiomeLoadingEvent event) {
-		
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
-		
 		if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
@@ -89,7 +83,17 @@ public class OnBiomeLoadingEvent {
 				});
 			}
 		}
-		
+		removeAllSettings(generationBuilder);
+	}
+	
+	protected static void removeAllSettings(BiomeGenerationSettingsBuilder generationBuilder) {
+		for (GenerationStep.Decoration decoration : GenerationStep.Decoration.values()) {
+			generationBuilder.getFeatures(decoration).removeIf(t -> true);
+		}
+		for (GenerationStep.Carving carving : GenerationStep.Carving.values()) {
+			generationBuilder.getCarvers(carving).removeIf(t -> true);
+		}
+		generationBuilder.getStructures().removeIf(t -> true);
 	}
 
 }
