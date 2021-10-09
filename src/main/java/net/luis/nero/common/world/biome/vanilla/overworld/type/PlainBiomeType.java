@@ -4,17 +4,17 @@ import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum PlainBiomeType implements IBiomeType {
 	
-	PLAINS(0.0F, IBiomeNoise.NULL, BiomeUtil.getPlainsSpawns(false), BiomeUtil.getPlainsFeatures(false), true, false, false),
-	FLOWER_PLAINS(0.0F, IBiomeNoise.NULL, BiomeUtil.getPlainsSpawns(true), BiomeUtil.getPlainsFeatures(true), true, false, false),
-	SNOWY_PLAINS(0.0F, IBiomeNoise.NULL, BiomeUtil.getTundraSpawns(), BiomeUtil.getTundraFeatures(false, false), true, false, false),
-	ICE_SPIKES_PLAINS(0.0F, IBiomeNoise.NULL, BiomeUtil.getTundraSpawns(), BiomeUtil.getTundraFeatures(true, false), false, true, false),
-	WINDSWEPT_PLAINS(0.0F, IBiomeNoise.NULL, BiomeUtil.getTundraSpawns(), BiomeUtil.getTundraFeatures(false, true), false, false, true);
+	PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
+	FLOWER_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), true, false, false),
+	SNOWY_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), true, false, false),
+	ICE_SPIKES_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), false, true, false),
+	WINDSWEPT_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, false, true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

@@ -51,6 +51,11 @@ public class ForestBiome extends OverworldBiome {
 	}
 	
 	@Override
+	public boolean isHilly() {
+		return this.biomeType.isHilly();
+	}
+	
+	@Override
 	public boolean isWindswept() {
 		return this.biomeType.isWindswept();
 	}

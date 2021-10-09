@@ -3,7 +3,7 @@ package net.luis.nero.common.world.biome.vanilla.overworld;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
@@ -20,12 +20,12 @@ public class SavannaBiome extends OverworldBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getSavannaSpawns(this.plateau).build();
+		return BiomeSettings.getSavannaSpawns(this.plateau).build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getSavannaFeatures(this.plateau, this.windswept).build();
+		return BiomeSettings.getSavannaFeatures(this.plateau, this.windswept).build();
 	}
 	
 	@Override
@@ -53,10 +53,10 @@ public class SavannaBiome extends OverworldBiome {
 		return false;
 	}
 	
-//	@Override
-//	public boolean isHilly() {
-//		return this.windswept;
-//	}
+	@Override
+	public boolean isHilly() {
+		return this.windswept;
+	}
 	
 	@Override
 	public boolean isWindswept() {

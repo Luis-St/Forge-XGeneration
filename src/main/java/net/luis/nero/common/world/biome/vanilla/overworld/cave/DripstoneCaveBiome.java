@@ -3,7 +3,7 @@ package net.luis.nero.common.world.biome.vanilla.overworld.cave;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
@@ -15,12 +15,12 @@ public class DripstoneCaveBiome extends OverworldBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getCaveSpawns().build();
+		return BiomeSettings.getCaveSpawns().build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getDripstoneCaveFeatures().build();
+		return BiomeSettings.getDripstoneCaveFeatures().build();
 	}
 	
 	@Override
@@ -45,6 +45,11 @@ public class DripstoneCaveBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isMushroomIsland() {
+		return false;
+	}
+	
+	@Override
+	public boolean isHilly() {
 		return false;
 	}
 	

@@ -4,16 +4,16 @@ import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum OldGrowthForestBiomeType implements IBiomeType {
 	
-	OLD_GROWTH_PINE_TAIGA(0.3F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), false),
-	OLD_GROWTH_PINE_TAIGA_HILLS(0.3F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(false), BiomeUtil.getOldGrowthTaigaFeatures(false), true),	
-	OLD_GROWTH_SPRUCE_TAIGA(0.25F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), false),
-	OLD_GROWTH_SPRUCE_TAIGA_HILLS(0.25F, IBiomeNoise.NULL, BiomeUtil.getOldGrowthTaigaSpawns(true), BiomeUtil.getOldGrowthTaigaFeatures(true), true);
+	OLD_GROWTH_PINE_TAIGA(0.3F, IBiomeNoise.NULL, BiomeSettings.getOldGrowthTaigaSpawns(false), BiomeSettings.getOldGrowthTaigaFeatures(false), false),
+	OLD_GROWTH_PINE_TAIGA_HILLS(0.3F, IBiomeNoise.NULL, BiomeSettings.getOldGrowthTaigaSpawns(false), BiomeSettings.getOldGrowthTaigaFeatures(false), true),	
+	OLD_GROWTH_SPRUCE_TAIGA(0.25F, IBiomeNoise.NULL, BiomeSettings.getOldGrowthTaigaSpawns(true), BiomeSettings.getOldGrowthTaigaFeatures(true), false),
+	OLD_GROWTH_SPRUCE_TAIGA_HILLS(0.25F, IBiomeNoise.NULL, BiomeSettings.getOldGrowthTaigaSpawns(true), BiomeSettings.getOldGrowthTaigaFeatures(true), true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

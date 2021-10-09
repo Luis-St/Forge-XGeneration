@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 
-public class BiomeUtil {
+public class BiomeSettings {
 	
 	protected static BiomeGenerationBuilder getFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();

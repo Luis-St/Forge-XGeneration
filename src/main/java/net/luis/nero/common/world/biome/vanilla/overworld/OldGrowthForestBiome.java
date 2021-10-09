@@ -51,6 +51,11 @@ public class OldGrowthForestBiome extends OverworldBiome {
 	}
 	
 	@Override
+	public boolean isHilly() {
+		return false;
+	}
+	
+	@Override
 	public boolean isWindswept() {
 		return this.biomeType.isWindswept();
 	}

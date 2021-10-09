@@ -3,7 +3,7 @@ package net.luis.nero.common.world.biome.vanilla.overworld;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
@@ -18,12 +18,12 @@ public class MushroomFieldsBiome extends OverworldBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getMushroomFieldsSpawns(this.shore).build();
+		return BiomeSettings.getMushroomFieldsSpawns(this.shore).build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getMushroomFieldsFeatures().build();
+		return BiomeSettings.getMushroomFieldsFeatures().build();
 	}
 	
 	@Override
@@ -49,6 +49,11 @@ public class MushroomFieldsBiome extends OverworldBiome {
 	@Override
 	public boolean isMushroomIsland() {
 		return true;
+	}
+	
+	@Override
+	public boolean isHilly() {
+		return false;
 	}
 	
 	@Override

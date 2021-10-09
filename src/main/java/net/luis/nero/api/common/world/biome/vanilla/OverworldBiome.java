@@ -1,9 +1,6 @@
 package net.luis.nero.api.common.world.biome.vanilla;
 
-import javax.annotation.Nullable;
-
 import net.luis.nero.api.common.world.biome.ModBiome;
-import net.luis.nero.api.common.world.biome.noise.HillyBiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.Biome.Precipitation;
@@ -56,17 +53,7 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	public abstract boolean isMushroomIsland();
 	
-	public boolean canBeHilly() {
-		return this.biomeNoise instanceof HillyBiomeNoise;
-	}
-	
-	@Nullable
-	public HillyBiomeNoise getHillyNoise() {
-		if (this.canBeHilly()) {
-			return (HillyBiomeNoise) this.biomeNoise;
-		}
-		return null;
-	}
+	public abstract boolean isHilly();
 	
 	public abstract boolean isWindswept();
 	

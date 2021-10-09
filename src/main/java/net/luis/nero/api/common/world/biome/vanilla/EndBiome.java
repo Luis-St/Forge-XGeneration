@@ -21,17 +21,15 @@ public abstract class EndBiome extends ModBiome {
 	}
 
 	@Override
-	public final MobSpawnSettings getMobSpawnSettings() {
+	public MobSpawnSettings getMobSpawnSettings() {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
-		this.getMobSpawnOverwrite(mobBuilder);
 		return mobBuilder.build();
 	}
 
 	@Override
-	public final BiomeGenerationSettings getBiomeGenerationSettings() {
+	public BiomeGenerationSettings getBiomeGenerationSettings() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.END);
-		this.getBiomeGenerationOverwrite(generationBuilder);
 		return generationBuilder.build();
 	}
 	

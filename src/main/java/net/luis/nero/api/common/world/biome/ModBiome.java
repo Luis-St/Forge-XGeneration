@@ -1,7 +1,5 @@
 package net.luis.nero.api.common.world.biome;
 
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
@@ -44,14 +42,6 @@ public abstract class ModBiome implements IBiome {
 		specialEffectsBuilder.grassColorOverride(this.grassColor);
 		specialEffectsBuilder.foliageColorOverride(this.foliageColor);
 		return specialEffectsBuilder.build();
-	}
-	
-	protected void getMobSpawnOverwrite(MobSpawnBuilder mobBuilder) {
-		
-	}
-	
-	protected void getBiomeGenerationOverwrite(BiomeGenerationBuilder generationBuilder) {
-		
 	}
 
 	@Override

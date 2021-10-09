@@ -4,27 +4,27 @@ import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum ForestBiomeType implements IBiomeType {
 	
-	SNOWY_TAIGA(-0.5F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(true), BiomeUtil.getTaigaFeatures(false, false, false), true, false, false),
-	SNOWY_TAIGA_HILLS(-0.5F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(true, false, false), true, true, false),
-	WINDSWEPT_SNOWY_TAIGA(-0.5F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, false, true), false, false, true),
-	TAIGA(0.25F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(true), BiomeUtil.getTaigaFeatures(false, true, false), true, false, false),
-	TAIGA_HILLS(0.25F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(true, true, false), true, true, false),
-	WINDSWEPT_TAIGA(0.25F, IBiomeNoise.NULL, BiomeUtil.getTaigaSpawns(false), BiomeUtil.getTaigaFeatures(false, true, true), true, false, true),
-	FOREST(0.7F, IBiomeNoise.NULL, BiomeUtil.getForestSpawns(false), BiomeUtil.getForestFeatures(false), true, false, false),
-	WINDSWEPT_FOREST(0.7F, IBiomeNoise.NULL, BiomeUtil.getForestSpawns(false), BiomeUtil.getForestFeatures(false), true, true, false),
-	FLOWER_FOREST(0.7F, IBiomeNoise.NULL, BiomeUtil.getForestSpawns(true), BiomeUtil.getForestFeatures(true), true, false, false),
-	BIRCH_FOREST(0.6F, IBiomeNoise.NULL, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(false), true, false, false),
-	BIRCH_FOREST_HILLS(0.6F, IBiomeNoise.NULL, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(false), true, true, false),
-	OLD_GROWTH_BIRCH_FOREST(0.6F, IBiomeNoise.NULL, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, false, false),
-	OLD_GROWTH_BIRCH_FOREST_HILLS(0.6F, IBiomeNoise.NULL, BiomeUtil.getBirchForestSpawns(), BiomeUtil.getBirchForestFeatures(true), false, true, false),
-	DARK_FOREST(0.7F, IBiomeNoise.NULL, BiomeUtil.getDarkForestSpawns(false), BiomeUtil.getDarkForestFeatures(false), true, false, false),
-	DARK_FOREST_HILLS(0.7F, IBiomeNoise.NULL, BiomeUtil.getDarkForestSpawns(true), BiomeUtil.getDarkForestFeatures(true), true, true, false);
+	SNOWY_TAIGA(-0.5F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(true), BiomeSettings.getTaigaFeatures(false, false, false), true, false, false),
+	SNOWY_TAIGA_HILLS(-0.5F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(false), BiomeSettings.getTaigaFeatures(true, false, false), true, true, false),
+	WINDSWEPT_SNOWY_TAIGA(-0.5F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(false), BiomeSettings.getTaigaFeatures(false, false, true), false, false, true),
+	TAIGA(0.25F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(true), BiomeSettings.getTaigaFeatures(false, true, false), true, false, false),
+	TAIGA_HILLS(0.25F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(false), BiomeSettings.getTaigaFeatures(true, true, false), true, true, false),
+	WINDSWEPT_TAIGA(0.25F, IBiomeNoise.NULL, BiomeSettings.getTaigaSpawns(false), BiomeSettings.getTaigaFeatures(false, true, true), true, false, true),
+	FOREST(0.7F, IBiomeNoise.NULL, BiomeSettings.getForestSpawns(false), BiomeSettings.getForestFeatures(false), true, false, false),
+	WINDSWEPT_FOREST(0.7F, IBiomeNoise.NULL, BiomeSettings.getForestSpawns(false), BiomeSettings.getForestFeatures(false), true, true, false),
+	FLOWER_FOREST(0.7F, IBiomeNoise.NULL, BiomeSettings.getForestSpawns(true), BiomeSettings.getForestFeatures(true), true, false, false),
+	BIRCH_FOREST(0.6F, IBiomeNoise.NULL, BiomeSettings.getBirchForestSpawns(), BiomeSettings.getBirchForestFeatures(false), true, false, false),
+	BIRCH_FOREST_HILLS(0.6F, IBiomeNoise.NULL, BiomeSettings.getBirchForestSpawns(), BiomeSettings.getBirchForestFeatures(false), true, true, false),
+	OLD_GROWTH_BIRCH_FOREST(0.6F, IBiomeNoise.NULL, BiomeSettings.getBirchForestSpawns(), BiomeSettings.getBirchForestFeatures(true), false, false, false),
+	OLD_GROWTH_BIRCH_FOREST_HILLS(0.6F, IBiomeNoise.NULL, BiomeSettings.getBirchForestSpawns(), BiomeSettings.getBirchForestFeatures(true), false, true, false),
+	DARK_FOREST(0.7F, IBiomeNoise.NULL, BiomeSettings.getDarkForestSpawns(false), BiomeSettings.getDarkForestFeatures(false), true, false, false),
+	DARK_FOREST_HILLS(0.7F, IBiomeNoise.NULL, BiomeSettings.getDarkForestSpawns(true), BiomeSettings.getDarkForestFeatures(true), true, true, false);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

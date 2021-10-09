@@ -3,7 +3,7 @@ package net.luis.nero.common.world.biome.vanilla.overworld;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeUtil;
+import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
@@ -20,12 +20,12 @@ public class DesertBiome extends OverworldBiome {
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeUtil.getDesertSpawns().build();
+		return BiomeSettings.getDesertSpawns().build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeUtil.getDesertFeatures(this.hilly, this.lakey).build();
+		return BiomeSettings.getDesertFeatures(this.hilly, this.lakey).build();
 	}
 	
 	@Override
@@ -53,10 +53,10 @@ public class DesertBiome extends OverworldBiome {
 		return false;
 	}
 	
-//	@Override
-//	public boolean isHilly() {
-//		return this.hilly;
-//	}
+	@Override
+	public boolean isHilly() {
+		return this.hilly;
+	}
 	
 	@Override
 	public boolean isWindswept() {
