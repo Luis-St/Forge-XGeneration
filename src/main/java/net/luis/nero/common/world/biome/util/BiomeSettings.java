@@ -715,6 +715,40 @@ public class BiomeSettings {
 		return mobBuilder;
 	}
 	
+	public static BiomeGenerationBuilder getRiverFeatures(boolean frozen) {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(SurfaceBuilders.GRASS);
+		generationBuilder.addStructureStart(StructureFeatures.MINESHAFT);
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addWaterTrees(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		if (!frozen) {
+			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SEAGRASS_RIVER);
+		}
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getRiverSpawns(boolean frozen) {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		mobBuilder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 2, 1, 4));
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 5, 1, 5));
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.DROWNED, frozen ? 1 : 100, 1, 1));
+		return mobBuilder;
+	}
+	
 	protected static BiomeGenerationBuilder baseCaveFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.STONE);
