@@ -52,9 +52,9 @@ public class OnCommonSetupEvent {
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE, Type.MODIFIED);
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_OCEAN, Type.MODIFIED);
 		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_LAVA_LAKE, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPDARK, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.LUSH_CAVES, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DRIPSTONE_CAVE, Type.MODIFIED);
+		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_DEEPDARK, Type.MODIFIED);
+		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_LUSH_CAVES, Type.MODIFIED);
+		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_DRIPSTONE_CAVE, Type.MODIFIED);
 	}
 	
 	protected static void registerEntitySpawnPlacements(FMLCommonSetupEvent event) {

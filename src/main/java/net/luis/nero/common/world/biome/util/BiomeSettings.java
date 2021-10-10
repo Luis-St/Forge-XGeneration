@@ -18,13 +18,11 @@ public class BiomeSettings {
 	
 	protected static BiomeGenerationBuilder getFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
-		
 		return generationBuilder;
 	}
 	
 	protected static MobSpawnBuilder getSpawns() {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
-		
 		return mobBuilder;
 	}
 	
@@ -44,10 +42,10 @@ public class BiomeSettings {
 		return SurfaceBuilders.MOUNTAIN;
 	}
 	
-	public static BiomeGenerationBuilder getBadlandsFeatures(boolean windswept, boolean wooded) {
+	public static BiomeGenerationBuilder getBadlandsFeatures(boolean windswept, boolean wooded, boolean eroded) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		DefaultVanillaBiomeFeatures.addMesaStructures(generationBuilder);
-		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept);
+		DefaultVanillaBiomeFeatures.addRuinedPortal(generationBuilder, windswept || eroded);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
@@ -63,6 +61,8 @@ public class BiomeSettings {
 		if (wooded) {
 			generationBuilder.surfaceBuilder(() -> SurfaceBuilders.WOODED_BADLANDS);
 			DefaultVanillaBiomeFeatures.addBadlandsTrees(generationBuilder);
+		} else if (eroded) {
+			generationBuilder.surfaceBuilder(() -> SurfaceBuilders.ERODED_BADLANDS);
 		} else {
 			generationBuilder.surfaceBuilder(() -> SurfaceBuilders.BADLANDS);
 		}

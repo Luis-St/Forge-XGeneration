@@ -22,9 +22,9 @@ public class DeepslateLayer {
 	protected static final int DEEPSLATE = getBiomeId(ModBiomeKeys.DEEPSLATE.location()); // y0-512
 	protected static final int DEEPSLATE_OCEAN = getBiomeId(ModBiomeKeys.DEEPSLATE_OCEAN.location()); // y244-288
 	protected static final int DEEPSLATE_LAVA_LAKE = getBiomeId(ModBiomeKeys.DEEPSLATE_LAVA_LAKE.location()); // y64-160
-	protected static final int LUSH_CAVES = getBiomeId(ModBiomeKeys.LUSH_CAVES.location()); // y320-480
-	protected static final int DRIPSTONE_CAVE = getBiomeId(ModBiomeKeys.DRIPSTONE_CAVE.location()); // y64-320
-	protected static final int DEEPDARK = getBiomeId(ModBiomeKeys.DEEPDARK.location()); // y0-64
+	protected static final int LUSH_CAVES = getBiomeId(ModBiomeKeys.DEEPSLATE_LUSH_CAVES.location()); // y320-480
+	protected static final int DRIPSTONE_CAVE = getBiomeId(ModBiomeKeys.DEEPSLATE_DRIPSTONE_CAVE.location()); // y64-320
+	protected static final int DEEPDARK = getBiomeId(ModBiomeKeys.DEEPSLATE_DEEPDARK.location()); // y0-64
 	
 	public static int getBiomeId(ResourceLocation location) {
 		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);

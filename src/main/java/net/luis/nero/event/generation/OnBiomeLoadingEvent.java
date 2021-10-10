@@ -82,8 +82,9 @@ public class OnBiomeLoadingEvent {
 					return false;
 				});
 			}
-		}
-		removeAllSettings(generationBuilder);
+		}	
+//		removeAllSettings(generationBuilder);
+//		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.PEAKS);
 	}
 	
 	protected static void removeAllSettings(BiomeGenerationSettingsBuilder generationBuilder) {
