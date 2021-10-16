@@ -568,7 +568,37 @@ public class BiomeSettings {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getPlainsFeatures(boolean flower) {
+	public static BiomeGenerationBuilder getLegacyFrozenOceanFeatures() {
+		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.FROZEN_OCEAN);
+		DefaultVanillaBiomeFeatures.addOceanStructures(generationBuilder, false, false);
+		generationBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_OCEAN);
+		DefaultVanillaBiomeFeatures.addOceanCarvers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder, true);
+		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
+		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
+		return generationBuilder;
+	}
+	
+	public static MobSpawnBuilder getLegacyFrozenOceanSpawns() {
+		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
+		DefaultVanillaBiomeSpawns.addCommonMonsterSpawns(mobBuilder);
+		mobBuilder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 1, 1, 4));
+		mobBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 15, 1, 5));
+		mobBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.POLAR_BEAR, 1, 1, 2));
+		mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.DROWNED, 5, 1, 1));
+		return mobBuilder;
+	}
+	
+	public static BiomeGenerationBuilder getPlainsFeatures(boolean sunflower) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
@@ -585,7 +615,7 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		if (flower) {
+		if (sunflower) {
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_SUNFLOWER);
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_SUGAR_CANE);
 			generationBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_PUMPKIN);
@@ -597,10 +627,10 @@ public class BiomeSettings {
 		return generationBuilder;
 	}
 	
-	public static MobSpawnBuilder getPlainsSpawns(boolean flower) {
+	public static MobSpawnBuilder getPlainsSpawns(boolean sunflower) {
 		MobSpawnBuilder mobBuilder = new MobSpawnBuilder();
 		DefaultVanillaBiomeSpawns.addPlainsSpawns(mobBuilder);
-		if (!flower) {
+		if (!sunflower) {
 			mobBuilder.enablePlayerSpawn();
 		}
 		return mobBuilder;
@@ -650,6 +680,7 @@ public class BiomeSettings {
 	
 	public static BiomeGenerationBuilder getSwampFeatures(boolean hilly) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.SWAMP);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
@@ -779,7 +810,7 @@ public class BiomeSettings {
 		return mobBuilder;
 	}
 	
-	public static BiomeGenerationBuilder getGroveFeatures() {
+	public static BiomeGenerationBuilder getGroveFeatures(boolean snowy) {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
@@ -793,9 +824,14 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
-		DefaultVanillaBiomeFeatures.addSnowyTrees(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add SurfaceBuilder & PowderSnow Feature
+		if (snowy) {
+			generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
+			DefaultVanillaBiomeFeatures.addSnowyTrees(generationBuilder);
+		} else {
+			generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
+			DefaultVanillaBiomeFeatures.addTaigaTrees(generationBuilder);
+		}
 		return generationBuilder;
 	}
 	
@@ -814,6 +850,7 @@ public class BiomeSettings {
 	
 	public static BiomeGenerationBuilder getSnowySlopesFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSnowySlopesStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -827,7 +864,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add SurfaceBuilder & PowderSnow Feature
 		return generationBuilder;
 	}
 	
@@ -841,6 +877,7 @@ public class BiomeSettings {
 	
 	public static BiomeGenerationBuilder getJaggedPeaksFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -854,7 +891,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add SurfaceBuilder
 		return generationBuilder;
 	}
 	
@@ -867,6 +903,7 @@ public class BiomeSettings {
 	
 	public static BiomeGenerationBuilder getFrozenPeaksFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.GRASS);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -880,12 +917,12 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add SurfaceBuilder
 		return generationBuilder;
 	}
 	
 	public static BiomeGenerationBuilder getStonyPeaksFeatures() {
 		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		generationBuilder.surfaceBuilder(SurfaceBuilders.STONE);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addPeakStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
@@ -899,7 +936,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add SurfaceBuilder
 		return generationBuilder;
 	}
 	
@@ -945,7 +981,7 @@ public class BiomeSettings {
 	}
 	
 	public static BiomeGenerationBuilder getLushCavesFeatures() {
-		BiomeGenerationBuilder generationBuilder = new BiomeGenerationBuilder();
+		BiomeGenerationBuilder generationBuilder = baseCaveFeatures();
 		DefaultVanillaBiomeFeatures.addLushCavesSpecialOres(generationBuilder);
 		DefaultVanillaBiomeFeatures.addLushCavesVegetation(generationBuilder);
 		return generationBuilder;

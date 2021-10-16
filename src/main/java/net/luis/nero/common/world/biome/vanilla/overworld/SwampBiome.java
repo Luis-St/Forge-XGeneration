@@ -11,8 +11,8 @@ public class SwampBiome extends OverworldBiome {
 	
 	protected final boolean hilly;
 	
-	public SwampBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean hilly) {
-		super(biomeEffects, temperature, biomeNoise);
+	public SwampBiome(BiomeEffects biomeEffects, IBiomeNoise biomeNoise, boolean hilly) {
+		super(biomeEffects, 0.8F, biomeNoise);
 		this.hilly = hilly;
 	}
 	

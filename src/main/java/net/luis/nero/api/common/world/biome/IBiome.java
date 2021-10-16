@@ -28,7 +28,7 @@ public interface IBiome {
 		biomeBuilder.scale((float) biome.getBiomeNoise().getNoiseScale());
 		biomeBuilder.temperature(biome.getTemperature());
 		biomeBuilder.downfall(biome.getDownfall());
-		biomeBuilder.specialEffects(biome.getBiomeEffects());
+		biomeBuilder.specialEffects(biome.getBiomeSpecialEffects());
 		biomeBuilder.mobSpawnSettings(biome.getMobSpawnSettings());
 		biomeBuilder.generationSettings(biome.getBiomeGenerationSettings());
 		return biomeBuilder::build;
@@ -60,7 +60,7 @@ public interface IBiome {
 	
 	float getDownfall();
 	
-	BiomeSpecialEffects getBiomeEffects();
+	BiomeSpecialEffects getBiomeSpecialEffects();
 	
 	default int calculateSkyColor(float f) {
 		float g = f / 3.0F;

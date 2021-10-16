@@ -6,11 +6,11 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class OldGrowthForestBiome extends OverworldBiome {
+public class OldGrowthBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;
 	
-	public OldGrowthForestBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+	public OldGrowthBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
 		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
 		this.biomeType = biomeType;
 	}

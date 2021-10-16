@@ -9,23 +9,23 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class SavannaBiome extends OverworldBiome {
 	
-	protected final boolean plateau;
 	protected final boolean windswept;
+	protected final boolean shattered;
 	
-	public SavannaBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean plateau, boolean windswept) {
+	public SavannaBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean windswept, boolean shattered) {
 		super(biomeEffects, temperature, biomeNoise);
-		this.plateau = plateau;
 		this.windswept = windswept;
+		this.shattered = shattered;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getSavannaSpawns(this.plateau).build();
+		return BiomeSettings.getSavannaSpawns(this.windswept).build();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getSavannaFeatures(this.plateau, this.windswept).build();
+		return BiomeSettings.getSavannaFeatures(this.windswept, this.shattered).build();
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class SavannaBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isIsland() {
-		return !this.plateau;
+		return !this.windswept && !this.shattered;
 	}
 	
 	@Override
@@ -55,12 +55,12 @@ public class SavannaBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isHilly() {
-		return this.windswept;
+		return this.shattered;
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return this.plateau || this.windswept;
+		return this.windswept || this.shattered;
 	}
 	
 }

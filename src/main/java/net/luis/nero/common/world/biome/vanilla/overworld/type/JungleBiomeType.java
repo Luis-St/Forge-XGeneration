@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
+import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
@@ -10,13 +11,13 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum JungleBiomeType implements IBiomeType {
 	
-	JUNGLE(IBiomeNoise.NULL, BiomeSettings.getJungleSpawns(false, false), BiomeSettings.getJungleFeatures(false, false, false), true, false),
-	JUNGLE_HILLS(IBiomeNoise.NULL, BiomeSettings.getJungleSpawns(true, false), BiomeSettings.getJungleFeatures(false, false, false), false, true),
-	MODIFIED_JUNGLE(IBiomeNoise.NULL, BiomeSettings.getJungleSpawns(false, true), BiomeSettings.getJungleFeatures(false, false, true), false, false),
-	SPARSE_JUNGLE(IBiomeNoise.NULL, BiomeSettings.getJungleSparseSpawns(), BiomeSettings.getJungleFeatures(false, true, false), false, false),
-	MODIFIED_SPARSE_JUNGLE(IBiomeNoise.NULL, BiomeSettings.getJungleSparseSpawns(), BiomeSettings.getJungleFeatures(false, true, true), false, true),
-	BAMBOO_JUNGLE(IBiomeNoise.NULL, BiomeSettings.getBambooJungleSpawns(false), BiomeSettings.getJungleFeatures(true, false, false), false, false),
-	BAMBOO_JUNGLE_HILLS(IBiomeNoise.NULL, BiomeSettings.getBambooJungleSpawns(true), BiomeSettings.getJungleFeatures(true, false, false), false, true);
+	JUNGLE(BiomeNoise.of(0.1, 0.2), BiomeSettings.getJungleSpawns(false, false), BiomeSettings.getJungleFeatures(false, false, false), true, false),
+	JUNGLE_HILLS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getJungleSpawns(true, false), BiomeSettings.getJungleFeatures(false, false, false), false, true),
+	MODIFIED_JUNGLE(BiomeNoise.of(0.2, 0.4), BiomeSettings.getJungleSpawns(false, true), BiomeSettings.getJungleFeatures(false, false, true), false, false),
+	SPARSE_JUNGLE(BiomeNoise.of(0.1, 0.2), BiomeSettings.getJungleSparseSpawns(), BiomeSettings.getJungleFeatures(false, true, false), false, false),
+	MODIFIED_SPARSE_JUNGLE(BiomeNoise.of(0.2, 0.4), BiomeSettings.getJungleSparseSpawns(), BiomeSettings.getJungleFeatures(false, true, true), false, true),
+	BAMBOO_JUNGLE(BiomeNoise.of(0.1, 0.2), BiomeSettings.getBambooJungleSpawns(false), BiomeSettings.getJungleFeatures(true, false, false), false, false),
+	BAMBOO_JUNGLE_HILLS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getBambooJungleSpawns(true), BiomeSettings.getJungleFeatures(true, false, false), false, true);
 	
 	private final IBiomeNoise biomeNoise;
 	private final MobSpawnSettings mobSettings;

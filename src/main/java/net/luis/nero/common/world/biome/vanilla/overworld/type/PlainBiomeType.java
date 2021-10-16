@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
+import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
@@ -10,11 +11,12 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum PlainBiomeType implements IBiomeType {
 	
-	PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
-	FLOWER_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), true, false, false),
-	SNOWY_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), true, false, false),
-	ICE_SPIKES_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), false, true, false),
-	WINDSWEPT_PLAINS(0.0F, IBiomeNoise.NULL, BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, false, true);
+	PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
+	HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
+	SUNFLOWER_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), true, false, false),
+	SNOWY_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), true, false, false),
+	ICE_SPIKES_PLAINS(0.0F, BiomeNoise.of(0.425, 0.45000002), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), false, true, false),
+	SNOWY_HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, false, true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;
