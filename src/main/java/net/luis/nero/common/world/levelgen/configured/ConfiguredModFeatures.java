@@ -25,7 +25,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
-import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -131,8 +131,7 @@ public class ConfiguredModFeatures {
 
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_MONSTER_ROOM = register("deepslate_monster_room",
 			ModFeatures.MONSTER_ROOM.get().configured(FeatureConfiguration.NONE)
-			.range(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.absolute(12), VerticalAnchor.absolute(500))))
-			.squared().count(15));
+			.rangeUniform(VerticalAnchor.absolute(12), VerticalAnchor.absolute(500)).squared().count(15));
 	
 	public static final ConfiguredFeature<?, ?> DEEPSLATE_AMETHYST_GEODE = register("deepslate_amethyst_geode", 
 			Feature.GEODE.configured(new GeodeConfiguration(new GeodeBlockSettings(new SimpleStateProvider(BlockStates.AIR), new SimpleStateProvider(BlockStates.AMETHYST_BLOCK), 
@@ -144,7 +143,11 @@ public class ConfiguredModFeatures {
 	
 	public static final ConfiguredFeature<?, ?> FLAT_BEDROCK = register("flat_bedrock", 
 			ModFeatures.FLAT_BEDROCK.get().configured(FeatureConfiguration.NONE).count(1).squared()
-			.range(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.absolute(5)))));
+			.rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(5)));
+	
+	public static final ConfiguredFeature<?, ?> POWDER_SNOW = register("powder_snow", 
+			Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.SNOW_BLOCK), Blocks.POWDER_SNOW.defaultBlockState(), 16))
+			.rangeUniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128)).count(1));
 
 	protected static RangeDecoratorConfiguration triangle(int min, int max, int plateau) {
 		return new RangeDecoratorConfiguration(TrapezoidHeight.of(VerticalAnchor.absolute(min), VerticalAnchor.absolute(max), plateau));

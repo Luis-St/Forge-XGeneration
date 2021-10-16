@@ -11,12 +11,15 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderConfigur
 
 public class ConfiguredModSurfaceBuilders {
 	
-	
+	protected static final SurfaceBuilderBaseConfiguration NULL_CONFIG = new SurfaceBuilderBaseConfiguration(Blocks.AIR.defaultBlockState(), Blocks.AIR.defaultBlockState(), Blocks.AIR.defaultBlockState());
 	protected static final SurfaceBuilderBaseConfiguration DEEPSLATE_CONFIG = new SurfaceBuilderBaseConfiguration(Blocks.DEEPSLATE.defaultBlockState(), Blocks.DEEPSLATE.defaultBlockState(), Blocks.DEEPSLATE.defaultBlockState());
-	protected static final SurfaceBuilderBaseConfiguration PEAKS_CONFIG = new SurfaceBuilderBaseConfiguration(Blocks.GRASS_BLOCK.defaultBlockState(), Blocks.DIRT.defaultBlockState(), Blocks.GRAVEL.defaultBlockState());
 	
 	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> DEEPSLATE = register("deepslate", ModSurfaceBuilders.DEEPSLATE.get().configured(DEEPSLATE_CONFIG));
-//	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> PEAKS = register("deepslate", ModSurfaceBuilders.PEAKS.get().configured(PEAKS_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> LEGACY_FORZEN_OCEAN = register("legacy_frozen_ocean", ModSurfaceBuilders.LEGACY_FORZEN_OCEAN.get().configured(NULL_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> SNOWY_GROVE = register("snowy_grove", ModSurfaceBuilders.SNOWY_GROVE.get().configured(NULL_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> SNOWY_SLOPES = register("snowy_slopes", ModSurfaceBuilders.SNOWY_SLOPES.get().configured(NULL_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> JAGGED_PEAKS = register("jagged_peaks", ModSurfaceBuilders.JAGGED_PEAKS.get().configured(NULL_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> FROZEN_PEAKS = register("frozen_peaks", ModSurfaceBuilders.FROZEN_PEAKS.get().configured(NULL_CONFIG));
 	
 	private static <SC extends SurfaceBuilderConfiguration> ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> surfaceBuilder) {
 		return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_SURFACE_BUILDER, new ResourceLocation(Nero.MOD_ID, name), surfaceBuilder);

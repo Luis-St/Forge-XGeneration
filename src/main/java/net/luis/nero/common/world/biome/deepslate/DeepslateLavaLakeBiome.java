@@ -16,7 +16,7 @@ public class DeepslateLavaLakeBiome extends DeepslateBiome {
 	}
 	
 	@Override
-	public BiomeSpecialEffects getBiomeEffects() {
+	public BiomeSpecialEffects getBiomeSpecialEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
 		specialEffectsBuilder.waterColor(4010530);
 		specialEffectsBuilder.waterFogColor(1053449);

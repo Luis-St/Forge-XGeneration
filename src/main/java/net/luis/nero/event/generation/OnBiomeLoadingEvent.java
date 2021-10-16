@@ -60,8 +60,7 @@ public class OnBiomeLoadingEvent {
 					for (ConfiguredFeature<?, ?> configuredFeature : supplier.get().getFeatures().collect(Collectors.toList())) {
 						if (configuredFeature.feature instanceof OreFeature && !(configuredFeature.feature instanceof ModOreFeature)) {
 							OreConfiguration oreConfig = (OreConfiguration) configuredFeature.config;
-							List<Block> oreConigBlocks = oreConfig.targetStates.stream().map(targetState -> targetState.state)
-									.map(BlockState::getBlock).collect(Collectors.toList());
+							List<Block> oreConigBlocks = oreConfig.targetStates.stream().map(targetState -> targetState.state).map(BlockState::getBlock).collect(Collectors.toList());
 							if (oreConigBlocks.contains(Blocks.COAL_ORE)) {
 								return true;
 							} else if (oreConigBlocks.contains(Blocks.IRON_ORE)) {
@@ -84,7 +83,7 @@ public class OnBiomeLoadingEvent {
 			}
 		}	
 //		removeAllSettings(generationBuilder);
-//		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.PEAKS);
+//		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.FROZEN_PEAKS);
 	}
 	
 	protected static void removeAllSettings(BiomeGenerationSettingsBuilder generationBuilder) {

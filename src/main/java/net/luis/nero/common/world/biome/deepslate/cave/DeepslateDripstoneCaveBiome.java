@@ -12,7 +12,7 @@ public class DeepslateDripstoneCaveBiome extends DeepslateBiome {
 	}
 
 	@Override
-	public BiomeSpecialEffects getBiomeEffects() {
+	public BiomeSpecialEffects getBiomeSpecialEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
 		specialEffectsBuilder.waterColor(4159204);
 		specialEffectsBuilder.waterFogColor(329011);
