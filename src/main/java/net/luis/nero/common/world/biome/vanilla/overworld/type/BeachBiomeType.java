@@ -9,34 +9,27 @@ import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public enum PlainBiomeType implements IBiomeType {
+public enum BeachBiomeType implements IBiomeType {
 	
-	PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
-	HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
-	SUNFLOWER_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), true, false, false),
-	SNOWY_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), true, false, false),
-	ICE_SPIKES_PLAINS(0.0F, BiomeNoise.of(0.425, 0.45000002), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), false, true, false),
-	SNOWY_HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, false, true);
+	BEACH(0.8F, BiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(true), BiomeSettings.getBeachFeatures(false), false),
+	SNOWY_BEACH(0.05F, BiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(false), false),
+	STONY_SHORE(0.2F, BiomeNoise.of(0.1, 0.8), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(true), true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;
 	private final MobSpawnSettings mobSettings;
 	private final BiomeGenerationSettings generationSettings;
-	private final boolean island;
-	private final boolean hilly;
 	private final boolean windswept;
 	
-	private PlainBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly, boolean windswept) {
-		this(temperature, biomeNoise, mobBuilder.build(), generationBuilder.build(), island, hilly, windswept);
+	private BeachBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean windswept) {
+		this(temperature, biomeNoise, mobBuilder.build(), generationBuilder.build(), windswept);
 	}
 	
-	private PlainBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean island, boolean hilly, boolean windswept) {
+	private BeachBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean windswept) {
 		this.temperature = temperature;
 		this.biomeNoise = biomeNoise;
 		this.mobSettings = mobSettings;
 		this.generationSettings = generationSettings;
-		this.island = island;
-		this.hilly = hilly;
 		this.windswept = windswept;
 	}
 	
@@ -72,12 +65,12 @@ public enum PlainBiomeType implements IBiomeType {
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isIsland() {
-		return this.island;
+		return true;
 	}
 	
 	@Override
@@ -87,7 +80,7 @@ public enum PlainBiomeType implements IBiomeType {
 	
 	@Override
 	public boolean isHilly() {
-		return this.hilly;
+		return false;
 	}
 
 	@Override

@@ -1,66 +1,63 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class SavannaBiome extends OverworldBiome {
 	
-	protected final boolean windswept;
-	protected final boolean shattered;
+	protected final IBiomeType biomeType;
 	
-	public SavannaBiome(BiomeEffects biomeEffects, float temperature, IBiomeNoise biomeNoise, boolean windswept, boolean shattered) {
-		super(biomeEffects, temperature, biomeNoise);
-		this.windswept = windswept;
-		this.shattered = shattered;
+	public SavannaBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getSavannaSpawns(this.windswept).build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getSavannaFeatures(this.windswept, this.shattered).build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
 	public boolean isUnderground() {
-		return false;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
 	public boolean isIsland() {
-		return !this.windswept && !this.shattered;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override
 	public boolean isHilly() {
-		return this.shattered;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return this.windswept || this.shattered;
+		return this.biomeType.isWindswept();
 	}
 	
 }

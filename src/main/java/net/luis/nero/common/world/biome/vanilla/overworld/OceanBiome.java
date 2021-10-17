@@ -39,7 +39,7 @@ public class OceanBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isUnderground() {
-		return false;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public class OceanBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class OceanBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override

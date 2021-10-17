@@ -1,61 +1,63 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.cave;
 
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class LushCavesBiome extends OverworldBiome {
 	
-	public LushCavesBiome(BiomeEffects biomeEffects, float temperature) {
-		super(biomeEffects, temperature, IBiomeNoise.NULL);
+	protected final IBiomeType biomeType;
+	
+	public LushCavesBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getCaveSpawns().build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getLushCavesFeatures().build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
 	public boolean isUnderground() {
-		return true;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
 	public boolean isIsland() {
-		return false;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return false;
+		return this.biomeType.isWindswept();
 	}
 	
 }

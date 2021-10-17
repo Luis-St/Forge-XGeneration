@@ -26,13 +26,6 @@ public class BiomeSettings {
 		return mobBuilder;
 	}
 	
-	public static float getBeachTemperature(boolean shore, boolean snowy) {
-		if (snowy) {
-			return 0.05F;
-		}
-		return shore ? 0.2F : 0.8F;
-	}
-	
 	protected static ConfiguredSurfaceBuilder<SurfaceBuilderBaseConfiguration> getWindsweptSurfaceBuilder(boolean edge, boolean wooded, boolean gravelly) {
 		if (edge || wooded) {
 			return SurfaceBuilders.GRASS;

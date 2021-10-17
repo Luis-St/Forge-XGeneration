@@ -1,66 +1,63 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class BeachBiome extends OverworldBiome {
 	
-	protected final boolean shore;
-	protected final boolean snowy;
+	protected final IBiomeType biomeType;
 	
-	public BeachBiome(BiomeEffects biomeEffects, IBiomeNoise biomeNoise, boolean shore, boolean snowy) {
-		super(biomeEffects, BiomeSettings.getBeachTemperature(shore, snowy), biomeNoise);
-		this.shore = shore;
-		this.snowy = snowy;
+	public BeachBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getBeachSpawns(!this.snowy && !this.shore).build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getBeachFeatures(this.shore).build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
 	public boolean isUnderground() {
-		return false;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
 	public boolean isOcean() {
-		return false;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
 	public boolean isBeach() {
-		return true;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
 	public boolean isIsland() {
-		return false;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return this.shore;
+		return this.biomeType.isWindswept();
 	}
 	
 }

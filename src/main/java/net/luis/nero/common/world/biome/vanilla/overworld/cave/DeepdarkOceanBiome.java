@@ -1,61 +1,63 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.cave;
 
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
-import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public class DeepdarkOceanBiome extends OverworldBiome {
 	
-	public DeepdarkOceanBiome(BiomeEffects biomeEffects, float temperature) {
-		super(biomeEffects, temperature, IBiomeNoise.NULL);
+	protected final IBiomeType biomeType;
+	
+	public DeepdarkOceanBiome(BiomeEffects biomeEffects, IBiomeType biomeType) {
+		super(biomeEffects, biomeType.getTemperature(), biomeType.getBiomeNoise());
+		this.biomeType = biomeType;
 	}
 	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
-		return BiomeSettings.getDeepdarkOceanSpawns().build();
+		return this.biomeType.getMobSpawnSettings();
 	}
 	
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
-		return BiomeSettings.getDeepdarkOceanFeatures().build();
+		return this.biomeType.getBiomeGenerationSettings();
 	}
 	
 	@Override
 	public boolean isUnderground() {
-		return true;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
 	public boolean isOcean() {
-		return true;
+		return this.biomeType.isOcean();
 	}
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
 	public boolean isIsland() {
-		return false;
+		return this.biomeType.isIsland();
 	}
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
 	public boolean isWindswept() {
-		return false;
+		return this.biomeType.isWindswept();
 	}
 	
 }

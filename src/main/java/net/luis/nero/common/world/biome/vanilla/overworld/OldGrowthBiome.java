@@ -27,7 +27,7 @@ public class OldGrowthBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isUnderground() {
-		return false;
+		return this.biomeType.isUnderground();
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class OldGrowthBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isBeach() {
-		return false;
+		return this.biomeType.isBeach();
 	}
 	
 	@Override
@@ -47,12 +47,12 @@ public class OldGrowthBiome extends OverworldBiome {
 	
 	@Override
 	public boolean isMushroomIsland() {
-		return false;
+		return this.biomeType.isMushroomIsland();
 	}
 	
 	@Override
 	public boolean isHilly() {
-		return false;
+		return this.biomeType.isHilly();
 	}
 	
 	@Override
