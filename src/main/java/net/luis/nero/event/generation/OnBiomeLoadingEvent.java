@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.world.biome.IBiome;
-import net.luis.nero.common.world.levelgen.configured.ConfiguredModFeatures;
-import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultModBiomeFeatures;
 import net.luis.nero.init.world.biome.ModBiomes;
@@ -84,9 +82,8 @@ public class OnBiomeLoadingEvent {
 				});
 			}
 		}	
-		removeAllSettings(generationBuilder);
-		generationBuilder.surfaceBuilder(() -> ConfiguredModSurfaceBuilders.SNOWY_SLOPES);
-		generationBuilder.addFeature(Decoration.UNDERGROUND_ORES.ordinal(), () -> ConfiguredModFeatures.POWDER_SNOW);
+//		removeAllSettings(generationBuilder);
+//		generationBuilder.addFeature(Decoration.VEGETAL_DECORATION.ordinal(), () -> ConfiguredModFeatures.MEADOW_FLOWERS);
 	}
 	
 	protected static void removeAllSettings(BiomeGenerationSettingsBuilder generationBuilder) {

@@ -60,12 +60,27 @@ public enum OceanBiomeType implements IBiomeType {
 	}
 	
 	@Override
+	public boolean isUnderground() {
+		return false;
+	}
+	
+	@Override
 	public boolean isOcean() {
 		return true;
 	}
 	
 	@Override
+	public boolean isBeach() {
+		return false;
+	}
+	
+	@Override
 	public boolean isIsland() {
+		return false;
+	}
+	
+	@Override
+	public boolean isMushroomIsland() {
 		return false;
 	}
 	

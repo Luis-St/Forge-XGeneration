@@ -54,13 +54,28 @@ public enum BadlandsBiomeType implements IBiomeType {
 	}
 	
 	@Override
+	public boolean isUnderground() {
+		return false;
+	}
+	
+	@Override
 	public boolean isOcean() {
+		return false;
+	}
+	
+	@Override
+	public boolean isBeach() {
 		return false;
 	}
 	
 	@Override
 	public boolean isIsland() {
 		return this.island;
+	}
+	
+	@Override
+	public boolean isMushroomIsland() {
+		return false;
 	}
 	
 	@Override

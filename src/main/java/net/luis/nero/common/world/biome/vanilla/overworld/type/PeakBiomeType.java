@@ -58,12 +58,27 @@ public enum PeakBiomeType implements IBiomeType {
 	}
 	
 	@Override
+	public boolean isUnderground() {
+		return false;
+	}
+	
+	@Override
 	public boolean isOcean() {
 		return false;
 	}
 	
 	@Override
+	public boolean isBeach() {
+		return false;
+	}
+	
+	@Override
 	public boolean isIsland() {
+		return false;
+	}
+	
+	@Override
+	public boolean isMushroomIsland() {
 		return false;
 	}
 	

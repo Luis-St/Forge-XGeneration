@@ -14,12 +14,18 @@ public interface IBiomeType {
 	
 	BiomeGenerationSettings getBiomeGenerationSettings();
 	
-	boolean isOcean();
+	public boolean isUnderground();
 	
-	boolean isIsland();
+	public boolean isOcean();
 	
-	boolean isHilly();
+	public boolean isBeach();
 	
-	boolean isWindswept();
+	public boolean isIsland();
+	
+	public boolean isMushroomIsland();
+	
+	public boolean isHilly();
+	
+	public boolean isWindswept();
 	
 }
