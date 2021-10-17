@@ -797,7 +797,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultExtraVegetation(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
-		// TODO: add Tree Feature & Flower Feature
 		return generationBuilder;
 	}
 	

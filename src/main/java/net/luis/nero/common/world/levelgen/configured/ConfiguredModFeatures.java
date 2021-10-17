@@ -1,6 +1,7 @@
 package net.luis.nero.common.world.levelgen.configured;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.levelgen.decorator.config.DepthAverageDecoratorConfiguration;
@@ -8,23 +9,39 @@ import net.luis.nero.init.world.levelgen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.levelgen.feature.ModFeatures;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.Features;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GeodeBlockSettings;
 import net.minecraft.world.level.levelgen.GeodeCrackSettings;
 import net.minecraft.world.level.levelgen.GeodeLayerSettings;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.HeightmapConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.material.FluidState;
@@ -146,8 +163,23 @@ public class ConfiguredModFeatures {
 			.rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(5)));
 	
 	public static final ConfiguredFeature<?, ?> POWDER_SNOW = register("powder_snow", 
-			Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.SNOW_BLOCK), Blocks.POWDER_SNOW.defaultBlockState(), 16))
-			.rangeUniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128)).count(1));
+			Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.SNOW_BLOCK), Blocks.POWDER_SNOW.defaultBlockState(), 40))
+			.rangeUniform(VerticalAnchor.absolute(60), VerticalAnchor.absolute(120)).count(1));
+	
+	protected static final ConfiguredFeature<?, ?> MEADOW_BIRCH = register("meadow_birch", Feature.TREE.configured(
+			new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(BlockStates.BIRCH_LOG), new StraightTrunkPlacer(7, 2, 0), 
+			new SimpleStateProvider(BlockStates.BIRCH_LEAVES), new SimpleStateProvider(BlockStates.BIRCH_SAPLING),
+			new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().decorators(Lists.newArrayList(new BeehiveDecorator(1.0F))).build()));
+	
+	public static final ConfiguredFeature<?, ?> MEADOW_BIRCH_TREE = register("meadow_birch_tree",
+			Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(Lists.newArrayList(), MEADOW_BIRCH))
+			.decorated(Features.Decorators.HEIGHTMAP_WITH_TREE_THRESHOLD_SQUARED).rarity(90));
+	
+	public static final ConfiguredFeature<?, ?> MEADOW_FLOWERS = register("meadow_birch_tree", Feature.FLOWER.configured(
+			new RandomPatchConfiguration.GrassConfigurationBuilder(new WeightedStateProvider(
+			new SimpleWeightedRandomList.Builder<BlockState>().add(BlockStates.CORNFLOWER, 2).add(BlockStates.ALLIUM, 2).add(BlockStates.OXEYE_DAISY, 4)), 
+			SimpleBlockPlacer.INSTANCE).tries(64).build()).decorated(FeatureDecorator.SPREAD_32_ABOVE.configured(NoneDecoratorConfiguration.INSTANCE))
+			.decorated(FeatureDecorator.HEIGHTMAP.configured(new HeightmapConfiguration(Heightmap.Types.MOTION_BLOCKING)).squared()).count(4));
 
 	protected static RangeDecoratorConfiguration triangle(int min, int max, int plateau) {
 		return new RangeDecoratorConfiguration(TrapezoidHeight.of(VerticalAnchor.absolute(min), VerticalAnchor.absolute(max), plateau));
@@ -179,6 +211,15 @@ public class ConfiguredModFeatures {
 		public static final BlockState SMOOTH_BASALT = Blocks.SMOOTH_BASALT.defaultBlockState();
 		public static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
 		public static final BlockState WATER = Blocks.WATER.defaultBlockState();
+		public static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.defaultBlockState();
+		public static final BlockState BIRCH_LEAVES = Blocks.BIRCH_LEAVES.defaultBlockState();
+		public static final BlockState BIRCH_SAPLING = Blocks.BIRCH_SAPLING.defaultBlockState();
+		public static final BlockState DANDELION = Blocks.DANDELION.defaultBlockState();
+		public static final BlockState CORNFLOWER = Blocks.CORNFLOWER.defaultBlockState();
+		public static final BlockState POPPY = Blocks.POPPY.defaultBlockState();
+		public static final BlockState ALLIUM = Blocks.ALLIUM.defaultBlockState();
+		public static final BlockState OXEYE_DAISY = Blocks.OXEYE_DAISY.defaultBlockState();
+		public static final BlockState AZURE_BLUET = Blocks.AZURE_BLUET.defaultBlockState();
 	}
 	
 	protected static class FluidStates {

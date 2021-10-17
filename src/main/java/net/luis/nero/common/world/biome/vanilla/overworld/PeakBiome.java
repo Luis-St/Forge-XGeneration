@@ -33,7 +33,10 @@ public class PeakBiome extends OverworldBiome {
 	@Override
 	public ModBiomeFeatures getModFeatures() {
 		ModBiomeFeatures modBiomeFeatures = super.getModFeatures();
-		if (this.biomeType == PeakBiomeType.SNOWY_GROVE) {
+		if (this.biomeType == PeakBiomeType.MEADOW) {
+			modBiomeFeatures.addModFeature(Decoration.VEGETAL_DECORATION, () -> ConfiguredModFeatures.MEADOW_BIRCH_TREE);
+			modBiomeFeatures.addModFeature(Decoration.VEGETAL_DECORATION, () -> ConfiguredModFeatures.MEADOW_FLOWERS);
+		} else if (this.biomeType == PeakBiomeType.SNOWY_GROVE) {
 			modBiomeFeatures.setModSurfaceBuilder(() -> ConfiguredModSurfaceBuilders.SNOWY_GROVE);
 			modBiomeFeatures.addModFeature(Decoration.UNDERGROUND_ORES, () -> ConfiguredModFeatures.POWDER_SNOW);
 		} else if (this.biomeType == PeakBiomeType.SNOWY_SLOPES) {
