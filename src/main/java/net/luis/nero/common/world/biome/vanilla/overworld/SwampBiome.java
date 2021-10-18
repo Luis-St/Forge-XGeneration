@@ -6,7 +6,6 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-@Deprecated(forRemoval = true)
 public class SwampBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;
