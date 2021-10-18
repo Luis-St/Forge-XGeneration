@@ -69,11 +69,6 @@ public enum BeachBiomeType implements IBiomeType {
 	}
 	
 	@Override
-	public boolean isIsland() {
-		return true;
-	}
-	
-	@Override
 	public boolean isMushroomIsland() {
 		return false;
 	}

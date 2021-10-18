@@ -10,26 +10,24 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum BadlandsBiomeType implements IBiomeType {
 	
-	BADLANDS(BiomeNoise.of(0.1, 0.2), BiomeSettings.getBadlandsFeatures(false, false, false), true, false),
-	WINDSWEPT_BADLANDS(BiomeNoise.of(1.5, 0.025), BiomeSettings.getBadlandsFeatures(true, false, false), false, true),
-	ERODED_BADLANDS(BiomeNoise.of(0.1, 0.2), BiomeSettings.getBadlandsFeatures(true, false, true), false, false),
-	MODIFIED_WINDSWEPT_BADLANDS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getBadlandsFeatures(true, false, false), false, true),
-	WOODED_WINDSWEPT_BADLANDS(BiomeNoise.of(1.5, 0.025), BiomeSettings.getBadlandsFeatures(true, true, false), false, true),
-	MODIFIED_WOODED_WINDSWEPT_BADLANDS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getBadlandsFeatures(true, true, false), false, true);
+	BADLANDS(BiomeNoise.of(0.1, 0.2), BiomeSettings.getBadlandsFeatures(false, false, false), false),
+	WINDSWEPT_BADLANDS(BiomeNoise.of(1.5, 0.025), BiomeSettings.getBadlandsFeatures(true, false, false), true),
+	ERODED_BADLANDS(BiomeNoise.of(0.1, 0.2), BiomeSettings.getBadlandsFeatures(true, false, true), false),
+	MODIFIED_WINDSWEPT_BADLANDS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getBadlandsFeatures(true, false, false), true),
+	WOODED_WINDSWEPT_BADLANDS(BiomeNoise.of(1.5, 0.025), BiomeSettings.getBadlandsFeatures(true, true, false), true),
+	MODIFIED_WOODED_WINDSWEPT_BADLANDS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getBadlandsFeatures(true, true, false), true);
 	
 	private final IBiomeNoise biomeNoise;
 	private final BiomeGenerationSettings generationSettings;
-	private final boolean island;
 	private final boolean windswept;
 	
-	private BadlandsBiomeType(IBiomeNoise biomeNoise, BiomeGenerationBuilder generationBuilder, boolean island, boolean windswept) {
-		this(biomeNoise, generationBuilder.build(), island, windswept);
+	private BadlandsBiomeType(IBiomeNoise biomeNoise, BiomeGenerationBuilder generationBuilder, boolean windswept) {
+		this(biomeNoise, generationBuilder.build(), windswept);
 	}
 	
-	private BadlandsBiomeType(IBiomeNoise biomeNoise, BiomeGenerationSettings generationSettings, boolean island, boolean windswept) {
+	private BadlandsBiomeType(IBiomeNoise biomeNoise, BiomeGenerationSettings generationSettings, boolean windswept) {
 		this.biomeNoise = biomeNoise;
 		this.generationSettings = generationSettings;
-		this.island = island;
 		this.windswept = windswept;
 	}
 	
@@ -66,11 +64,6 @@ public enum BadlandsBiomeType implements IBiomeType {
 	@Override
 	public boolean isBeach() {
 		return false;
-	}
-	
-	@Override
-	public boolean isIsland() {
-		return this.island;
 	}
 	
 	@Override

@@ -64,11 +64,6 @@ public enum CaveBiomeType implements IBiomeType {
 	}
 	
 	@Override
-	public boolean isIsland() {
-		return false;
-	}
-	
-	@Override
 	public boolean isMushroomIsland() {
 		return false;
 	}

@@ -41,11 +41,6 @@ public class LushCavesBiome extends OverworldBiome {
 	}
 	
 	@Override
-	public boolean isIsland() {
-		return this.biomeType.isIsland();
-	}
-	
-	@Override
 	public boolean isMushroomIsland() {
 		return this.biomeType.isMushroomIsland();
 	}

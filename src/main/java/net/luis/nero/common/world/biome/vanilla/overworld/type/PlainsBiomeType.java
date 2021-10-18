@@ -11,31 +11,29 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum PlainsBiomeType implements IBiomeType {
 	
-	PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
-	HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), true, false, false),
-	SUNFLOWER_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), true, false, false),
-	SNOWY_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), true, false, false),
-	ICE_SPIKES_PLAINS(0.0F, BiomeNoise.of(0.425, 0.45000002), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), false, true, false),
-	SNOWY_HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, false, true);
+	PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
+	HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
+	SUNFLOWER_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), false, false),
+	SNOWY_PLAINS(0.0F, BiomeNoise.of(0.125, 0.05), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), false, false),
+	ICE_SPIKES_PLAINS(0.0F, BiomeNoise.of(0.425, 0.45000002), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), true, false),
+	SNOWY_HILLY_PLAINS(0.0F, BiomeNoise.of(0.25, 0.1), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, true), false, true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;
 	private final MobSpawnSettings mobSettings;
 	private final BiomeGenerationSettings generationSettings;
-	private final boolean island;
 	private final boolean hilly;
 	private final boolean windswept;
 	
-	private PlainsBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly, boolean windswept) {
-		this(temperature, biomeNoise, mobBuilder.build(), generationBuilder.build(), island, hilly, windswept);
+	private PlainsBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnBuilder mobBuilder, BiomeGenerationBuilder generationBuilder, boolean hilly, boolean windswept) {
+		this(temperature, biomeNoise, mobBuilder.build(), generationBuilder.build(), hilly, windswept);
 	}
 	
-	private PlainsBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean island, boolean hilly, boolean windswept) {
+	private PlainsBiomeType(float temperature, IBiomeNoise biomeNoise, MobSpawnSettings mobSettings, BiomeGenerationSettings generationSettings, boolean hilly, boolean windswept) {
 		this.temperature = temperature;
 		this.biomeNoise = biomeNoise;
 		this.mobSettings = mobSettings;
 		this.generationSettings = generationSettings;
-		this.island = island;
 		this.hilly = hilly;
 		this.windswept = windswept;
 	}
@@ -73,11 +71,6 @@ public enum PlainsBiomeType implements IBiomeType {
 	@Override
 	public boolean isBeach() {
 		return false;
-	}
-	
-	@Override
-	public boolean isIsland() {
-		return this.island;
 	}
 	
 	@Override

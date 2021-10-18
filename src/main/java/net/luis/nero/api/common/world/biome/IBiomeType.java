@@ -20,8 +20,6 @@ public interface IBiomeType {
 	
 	public boolean isBeach();
 	
-	public boolean isIsland();
-	
 	public boolean isMushroomIsland();
 	
 	public boolean isHilly();

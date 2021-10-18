@@ -10,23 +10,21 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum DesertBiomeType implements IBiomeType {
 	
-	DESERT(BiomeNoise.of(0.125, 0.05), BiomeSettings.getDesertFeatures(false, false), true, false),
-	DESERT_HILLS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getDesertFeatures(true, false), false, true),
-	DESERT_LAKES(BiomeNoise.of(0.225, 0.25), BiomeSettings.getDesertFeatures(false, true), false, false);
+	DESERT(BiomeNoise.of(0.125, 0.05), BiomeSettings.getDesertFeatures(false, false), false),
+	DESERT_HILLS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getDesertFeatures(true, false), true),
+	DESERT_LAKES(BiomeNoise.of(0.225, 0.25), BiomeSettings.getDesertFeatures(false, true), false);
 	
 	private final IBiomeNoise biomeNoise;
 	private final BiomeGenerationSettings generationSettings;
-	private final boolean island;
 	private final boolean hilly;
 	
-	private DesertBiomeType(IBiomeNoise biomeNoise, BiomeGenerationBuilder generationBuilder, boolean island, boolean hilly) {
-		this(biomeNoise, generationBuilder.build(), island, hilly);
+	private DesertBiomeType(IBiomeNoise biomeNoise, BiomeGenerationBuilder generationBuilder,  boolean hilly) {
+		this(biomeNoise, generationBuilder.build(), hilly);
 	}
 	
-	private DesertBiomeType(IBiomeNoise biomeNoise, BiomeGenerationSettings generationSettings, boolean island, boolean hilly) {
+	private DesertBiomeType(IBiomeNoise biomeNoise, BiomeGenerationSettings generationSettings, boolean hilly) {
 		this.biomeNoise = biomeNoise;
 		this.generationSettings = generationSettings;
-		this.island = island;
 		this.hilly = hilly;
 	}
 	
@@ -63,11 +61,6 @@ public enum DesertBiomeType implements IBiomeType {
 	@Override
 	public boolean isBeach() {
 		return false;
-	}
-	
-	@Override
-	public boolean isIsland() {
-		return this.island;
 	}
 	
 	@Override
