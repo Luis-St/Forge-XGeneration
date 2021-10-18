@@ -57,8 +57,6 @@ public abstract class OverworldBiome extends ModBiome {
 		return this.isBeach() && this.isWindswept();
 	}
 	
-	public abstract boolean isIsland(); // TODO: remove
-	
 	public abstract boolean isMushroomIsland();
 	
 	public abstract boolean isHilly();
