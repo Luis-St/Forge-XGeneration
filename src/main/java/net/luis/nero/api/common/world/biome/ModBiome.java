@@ -1,49 +1,50 @@
 package net.luis.nero.api.common.world.biome;
 
+import java.util.Optional;
+
 import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.BiomeSpecialEffects.GrassColorModifier;
 
 public abstract class ModBiome implements IBiome {
 	
-	protected final int waterColor;
-	protected final int waterFogColor;
-	protected final int fogColor;
-	protected final int grassColor;
-	protected final int foliageColor;
+	protected final BiomeEffects biomeEffects;
 	
 	protected ModBiome(BiomeEffects biomeEffects) {
-		this(biomeEffects.getWaterColor(), biomeEffects.getWaterFogColor(), biomeEffects.getFogColor(), biomeEffects.getGrassColor(), biomeEffects.getFoliageColor());
+		this.biomeEffects = biomeEffects;
 	}
 	
-	protected ModBiome(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
-		this.waterColor = waterColor == -1 ? 4159204 : waterColor;
-		this.waterFogColor = waterFogColor == -1 ? 329011 : waterFogColor;
-		this.fogColor = fogColor == -1 ? 12638463 : fogColor;
-		this.grassColor = grassColor == -1 ? 9551193 : grassColor;
-		this.foliageColor = foliageColor == -1 ? 7842607 : foliageColor;
+	public BiomeEffects getBiomeEffects() {
+		return this.biomeEffects;
 	}
-
+	
 	@Override
 	public BiomeCategory getCategory() {
 		return BiomeCategory.NONE;
 	}
-
+	
 	@Override
-	public BiomeSpecialEffects getBiomeEffects() {
+	public BiomeSpecialEffects getBiomeSpecialEffects() {
 		BiomeSpecialEffects.Builder specialEffectsBuilder = new BiomeSpecialEffects.Builder();
-		specialEffectsBuilder.waterColor(this.waterColor);
-		specialEffectsBuilder.waterFogColor(this.waterFogColor);
-		specialEffectsBuilder.fogColor(this.fogColor);
+		specialEffectsBuilder.waterColor(this.biomeEffects.getWaterColor());
+		specialEffectsBuilder.waterFogColor(this.biomeEffects.getWaterFogColor());
+		specialEffectsBuilder.fogColor(this.biomeEffects.getFogColor());
 		specialEffectsBuilder.skyColor(this.calculateSkyColor(0.8F));
 		specialEffectsBuilder.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
-		specialEffectsBuilder.grassColorOverride(this.grassColor);
-		specialEffectsBuilder.foliageColorOverride(this.foliageColor);
+		specialEffectsBuilder.grassColorOverride(this.biomeEffects.getGrassColor());
+		specialEffectsBuilder.foliageColorOverride(this.biomeEffects.getFoliageColor());
+		Optional<GrassColorModifier> grassModifier = this.getGrassColorModifier();
+		specialEffectsBuilder.grassColorModifier(grassModifier.isPresent() ? grassModifier.get() : GrassColorModifier.NONE);
 		return specialEffectsBuilder.build();
 	}
-
+	
+	protected Optional<GrassColorModifier> getGrassColorModifier() {
+		return Optional.empty();
+	}
+	
 	@Override
 	public ModBiomeFeatures getModFeatures() {
 		return new ModBiomeFeatures();
