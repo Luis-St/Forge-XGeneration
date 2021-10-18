@@ -16,6 +16,11 @@ public class DripstoneCaveBiome extends OverworldBiome {
 	}
 	
 	@Override
+	public IBiomeType getBiomeType() {
+		return this.biomeType;
+	}
+	
+	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
 		return this.biomeType.getMobSpawnSettings();
 	}

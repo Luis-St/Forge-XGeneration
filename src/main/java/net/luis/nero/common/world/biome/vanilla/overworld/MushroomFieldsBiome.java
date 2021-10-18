@@ -15,6 +15,7 @@ public class MushroomFieldsBiome extends OverworldBiome {
 		this.biomeType = biomeType;
 	}
 	
+	@Override
 	public IBiomeType getBiomeType() {
 		return this.biomeType;
 	}

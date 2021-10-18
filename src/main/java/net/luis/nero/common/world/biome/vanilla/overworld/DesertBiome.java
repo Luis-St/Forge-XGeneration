@@ -15,6 +15,7 @@ public class DesertBiome extends OverworldBiome {
 		this.biomeType = biomeType;
 	}
 	
+	@Override
 	public IBiomeType getBiomeType() {
 		return this.biomeType;
 	}

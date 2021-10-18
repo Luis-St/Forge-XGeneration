@@ -15,6 +15,7 @@ public class BadlandsBiome extends OverworldBiome {
 		this.biomeType = biomeType;
 	}
 	
+	@Override
 	public IBiomeType getBiomeType() {
 		return this.biomeType;
 	}

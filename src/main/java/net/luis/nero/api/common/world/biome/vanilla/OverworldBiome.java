@@ -21,6 +21,8 @@ public abstract class OverworldBiome extends ModBiome {
 		this.biomeNoise = biomeNoise;
 	}
 	
+	public abstract IBiomeType getBiomeType();
+	
 	@Override
 	public Precipitation getPrecipitation() {
 		if (this.temperature >= 2.0F) {
