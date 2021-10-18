@@ -2,9 +2,11 @@ package net.luis.nero.api.common.world.biome.vanilla;
 
 import java.util.Optional;
 
+import net.luis.nero.api.common.world.biome.IBiomeType;
 import net.luis.nero.api.common.world.biome.ModBiome;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.enums.BiomeEffects;
+import net.luis.nero.common.world.biome.util.BiomeUtil;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeSpecialEffects.GrassColorModifier;
 
@@ -34,7 +36,7 @@ public abstract class OverworldBiome extends ModBiome {
 	
 	@Override
 	public float getDownfall() {
-		return this.temperature >= 2.0F ? 0.0F : 1.0F;
+		return BiomeUtil.getDownfall(this);
 	}
 	
 	@Override
@@ -62,6 +64,8 @@ public abstract class OverworldBiome extends ModBiome {
 	public abstract boolean isHilly();
 	
 	public abstract boolean isWindswept();
+	
+	public abstract boolean isBiomeType(IBiomeType biomeType);
 	
 }
   

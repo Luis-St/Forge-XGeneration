@@ -55,4 +55,9 @@ public class DripstoneCaveBiome extends OverworldBiome {
 		return this.biomeType.isWindswept();
 	}
 	
+	@Override
+	public boolean isBiomeType(IBiomeType biomeType) {
+		return this.biomeType == biomeType;
+	}
+	
 }

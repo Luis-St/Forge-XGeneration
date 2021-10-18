@@ -53,9 +53,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBiomes {
 	
 	public static final DeferredRegister<Biome> BIOME_REGISTRY = DeferredRegister.create(ForgeRegistries.BIOMES, Nero.MOD_ID);
-//	public static final List<RegistryObject<Biome>> REGISTRY_BIOME = Lists.newArrayList();
-//	public static final Map<String, IBiome> STRING_TO_BIOME = Maps.newHashMap();
-//	public static final Map<RegistryObject<Biome>, IBiome> BIOME_TO_BIOME = Maps.newHashMap();
 	public static final Map<String, IBiome> BIOMES = Maps.newHashMap();
 	
 	

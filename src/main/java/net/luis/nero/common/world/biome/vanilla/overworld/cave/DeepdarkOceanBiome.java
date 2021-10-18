@@ -54,5 +54,10 @@ public class DeepdarkOceanBiome extends OverworldBiome {
 	public boolean isWindswept() {
 		return this.biomeType.isWindswept();
 	}
+
+	@Override
+	public boolean isBiomeType(IBiomeType biomeType) {
+		return this.biomeType == biomeType;
+	}
 	
 }

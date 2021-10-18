@@ -21,7 +21,7 @@ public enum OceanBiomeType implements IBiomeType {
 	DEEP_COLD_OCEAN(0.06F, BiomeNoise.of(-1.8, 0.1), BiomeSettings.getColdOceanSpawns(), BiomeSettings.getColdOceanFeatures(true)),
 	FROZEN_OCEAN(-0.5F, BiomeNoise.of(-1.0, 0.1), BiomeSettings.getFrozenOceanSpawns(), BiomeSettings.getFrozenOceanFeatures(false)),
 	DEEP_FROZEN_OCEAN(-0.5F, BiomeNoise.of(-1.8, 0.1), BiomeSettings.getFrozenOceanSpawns(), BiomeSettings.getFrozenOceanFeatures(true)),
-	LEGACY_FORZEN_OCEAN(-0.5F, BiomeNoise.of(-1.2, 0.1), BiomeSettings.getLegacyFrozenOceanSpawns(), BiomeSettings.getLegacyFrozenOceanFeatures());
+	LEGACY_FORZEN_OCEAN(-0.5F, BiomeNoise.of(-1.0, 0.1), BiomeSettings.getLegacyFrozenOceanSpawns(), BiomeSettings.getLegacyFrozenOceanFeatures());
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

@@ -20,6 +20,10 @@ public class PeakBiome extends OverworldBiome {
 		this.biomeType = biomeType;
 	}
 	
+	public IBiomeType getBiomeType() {
+		return this.biomeType;
+	}
+	
 	@Override
 	public MobSpawnSettings getMobSpawnSettings() {
 		return this.biomeType.getMobSpawnSettings();
@@ -79,6 +83,11 @@ public class PeakBiome extends OverworldBiome {
 	@Override
 	public boolean isWindswept() {
 		return this.biomeType.isWindswept();
+	}
+	
+	@Override
+	public boolean isBiomeType(IBiomeType biomeType) {
+		return this.biomeType == biomeType;
 	}
 	
 }
