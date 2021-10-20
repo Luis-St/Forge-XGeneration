@@ -1,8 +1,8 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -10,9 +10,9 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum DesertBiomeType implements IBiomeType {
 	
-	DESERT(BiomeNoise.of(0.125, 0.05), BiomeSettings.getDesertFeatures(false, false), false),
-	DESERT_HILLS(BiomeNoise.of(0.45, 0.3), BiomeSettings.getDesertFeatures(true, false), true),
-	DESERT_LAKES(BiomeNoise.of(0.225, 0.25), BiomeSettings.getDesertFeatures(false, true), false);
+	DESERT(OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getDesertFeatures(false, false), false),
+	DESERT_HILLS(OverworldBiomeNoise.of(0.45, 0.3), BiomeSettings.getDesertFeatures(true, false), true),
+	DESERT_LAKES(OverworldBiomeNoise.of(0.225, 0.25), BiomeSettings.getDesertFeatures(false, true), false);
 	
 	private final IBiomeNoise biomeNoise;
 	private final BiomeGenerationSettings generationSettings;

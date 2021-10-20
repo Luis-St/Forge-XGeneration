@@ -9,6 +9,7 @@ import net.luis.nero.api.common.world.biome.vanilla.NetherBiome;
 import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
 import net.luis.nero.init.world.biome.ModBiomes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
@@ -74,12 +75,24 @@ public interface IBiome {
 	
 	ModBiomeFeatures getModFeatures();
 	
-	public static IBiome byId(int id) {
-		return ModBiomes.BIOMES.get(((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getValue(id).getRegistryName().getPath());
+	private static ForgeRegistry<Biome> getForgeRegistry() {
+		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES);
+	}
+	
+	default Biome vanilla() {
+		return ModBiomes.REGISTRY_BIOMES.get(this).get();
+	}
+	
+	default int id() {
+		return getForgeRegistry().getID(this.vanilla());
+	}
+	
+	default ResourceLocation location() {
+		return this.vanilla().getRegistryName();
 	}
 	
 	public static IBiome byVanilla(Biome biome) {
-		return ModBiomes.BIOMES.get(biome.getRegistryName().getPath());
+		return ModBiomes.BIOME_IDS.get(biome.getRegistryName().getPath());
 	}
 	
 }

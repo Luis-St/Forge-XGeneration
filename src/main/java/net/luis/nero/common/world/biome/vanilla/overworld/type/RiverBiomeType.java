@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
+import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
@@ -35,7 +35,7 @@ public enum RiverBiomeType implements IBiomeType {
 	
 	@Override
 	public IBiomeNoise getBiomeNoise() {
-		return BiomeNoise.of(-0.5, 0.0);
+		return OverworldBiomeNoise.of(-0.5, 0.0);
 	}
 	
 	@Override

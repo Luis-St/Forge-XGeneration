@@ -7,7 +7,7 @@ import net.luis.nero.common.world.levelgen.layer.climate.rainfall.RainfallLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.FixTemperatureLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.HotIceLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.TemperatureLayer;
-import net.luis.nero.init.world.biome.ModBiomeKeys;
+import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.newbiome.area.Area;
@@ -21,17 +21,17 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class OverworldLayer {
 	
-	public static final int CLIMATE_ICY = getBiomeId(ModBiomeKeys.CLIMATE_ICY.location());
-	public static final int CLIMATE_COLD = getBiomeId(ModBiomeKeys.CLIMATE_COLD.location());
-	public static final int CLIMATE_MEDIUM = getBiomeId(ModBiomeKeys.CLIMATE_MEDIUM.location());
-	public static final int CLIMATE_WARM = getBiomeId(ModBiomeKeys.CLIMATE_WARM.location());
-	public static final int CLIMATE_HOT = getBiomeId(ModBiomeKeys.CLIMATE_HOT.location());
+	public static final int CLIMATE_ICY = ModBiomes.CLIMATE_ICY.id();
+	public static final int CLIMATE_COLD = ModBiomes.CLIMATE_COLD.id();
+	public static final int CLIMATE_MEDIUM = ModBiomes.CLIMATE_MEDIUM.id();
+	public static final int CLIMATE_WARM = ModBiomes.CLIMATE_WARM.id();
+	public static final int CLIMATE_HOT = ModBiomes.CLIMATE_HOT.id();
 	
-	public static final int CLIMATE_DRIZZLE = getBiomeId(ModBiomeKeys.CLIMATE_DRIZZLE.location());
-	public static final int CLIMATE_LIGHT = getBiomeId(ModBiomeKeys.CLIMATE_LIGHT.location());
-	public static final int CLIMATE_MODERATE = getBiomeId(ModBiomeKeys.CLIMATE_MODERATE.location());
-	public static final int CLIMATE_STRONG = getBiomeId(ModBiomeKeys.CLIMATE_STRONG.location());
-	public static final int CLIMATE_MONSOON = getBiomeId(ModBiomeKeys.CLIMATE_MONSOON.location());
+	public static final int CLIMATE_DRIZZLE = ModBiomes.CLIMATE_DRIZZLE.id();
+	public static final int CLIMATE_LIGHT = ModBiomes.CLIMATE_LIGHT.id();
+	public static final int CLIMATE_MODERATE = ModBiomes.CLIMATE_MODERATE.id();
+	public static final int CLIMATE_STRONG = ModBiomes.CLIMATE_STRONG.id();
+	public static final int CLIMATE_MONSOON = ModBiomes.CLIMATE_MONSOON.id();
 	
 	public static int getBiomeId(ResourceLocation location) {
 		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);
@@ -42,12 +42,6 @@ public class OverworldLayer {
 			return new LazyAreaContext(25, seedModifier, seed);
 		}));
 	}
-	
-//	public static Layer getUndergroundLayer(long seed) {
-//		return new Layer(getUndergroundLayer((seedModifier) -> {
-//			return new LazyAreaContext(25, seedModifier, seed);
-//		}));
-//	}
 	
 	@SuppressWarnings("unused")
 	protected static <T extends Area, C extends BigContext<T>> AreaFactory<T> getSurfaceLayer(LongFunction<C> function) {

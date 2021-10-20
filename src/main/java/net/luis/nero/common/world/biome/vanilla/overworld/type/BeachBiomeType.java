@@ -1,8 +1,8 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
+import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
@@ -11,9 +11,9 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum BeachBiomeType implements IBiomeType {
 	
-	BEACH(0.8F, BiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(true), BiomeSettings.getBeachFeatures(false), false),
-	SNOWY_BEACH(0.05F, BiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(false), false),
-	STONY_SHORE(0.2F, BiomeNoise.of(0.1, 0.8), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(true), true);
+	BEACH(0.8F, OverworldBiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(true), BiomeSettings.getBeachFeatures(false), false),
+	SNOWY_BEACH(0.05F, OverworldBiomeNoise.of(0.0F, 0.025), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(false), false),
+	STONY_SHORE(0.2F, OverworldBiomeNoise.of(0.1, 0.8), BiomeSettings.getBeachSpawns(false), BiomeSettings.getBeachFeatures(true), true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

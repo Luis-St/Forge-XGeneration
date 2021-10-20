@@ -30,7 +30,7 @@ public class OnBiomeLoadingEvent {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 		ResourceLocation biomeLocation = event.getName();
-		IBiome biome = ModBiomes.BIOMES.get(biomeLocation.getPath());
+		IBiome biome = ModBiomes.BIOME_IDS.get(biomeLocation.getPath());
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		if (biome != null) {

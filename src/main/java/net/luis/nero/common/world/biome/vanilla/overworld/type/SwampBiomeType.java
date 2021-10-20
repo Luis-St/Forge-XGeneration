@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
 import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
+import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
 import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
@@ -10,8 +10,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum SwampBiomeType implements IBiomeType {
 	
-	SWAMP(BiomeNoise.of(-0.2, 0.1), BiomeSettings.getSwampFeatures(false), false),
-	SWAMP_HILLS(BiomeNoise.of(-0.1, 0.3), BiomeSettings.getSwampFeatures(true), true);
+	SWAMP(OverworldBiomeNoise.of(-0.2, 0.1), BiomeSettings.getSwampFeatures(false), false),
+	SWAMP_HILLS(OverworldBiomeNoise.of(-0.1, 0.3), BiomeSettings.getSwampFeatures(true), true);
 	
 	private final IBiomeNoise biomeNoise;
 	private final BiomeGenerationSettings generationSettings;

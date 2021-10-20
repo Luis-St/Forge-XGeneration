@@ -1,8 +1,10 @@
 package net.luis.nero.init.world.biome;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import net.luis.nero.Nero;
 import net.luis.nero.api.common.world.biome.IBiome;
@@ -47,14 +49,18 @@ import net.luis.nero.common.world.biome.vanilla.overworld.type.SavannaBiomeType;
 import net.luis.nero.common.world.biome.vanilla.overworld.type.SwampBiomeType;
 import net.luis.nero.common.world.biome.vanilla.overworld.type.WindsweptBiomeType;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBiomes {
 	
-	public static final DeferredRegister<Biome> BIOME_REGISTRY = DeferredRegister.create(ForgeRegistries.BIOMES, Nero.MOD_ID);
-	public static final Map<String, IBiome> BIOMES = Maps.newHashMap();
+	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Nero.MOD_ID);
+	public static final Map<IBiome, RegistryObject<Biome>> REGISTRY_BIOMES = Maps.newHashMap();
+	public static final Map<String, IBiome> BIOME_IDS = Maps.newHashMap();
 	
+	public static final Set<IBiome> MAIN_BIOMES = Sets.newHashSet(ModBiomes.BADLANDS, ModBiomes.DESERT, ModBiomes.SAVANNA, ModBiomes.JUNGLE, ModBiomes.FOREST, ModBiomes.BIRCH_FOREST, ModBiomes.DARK_FOREST,
+			ModBiomes.SWAMP, ModBiomes.PLAINS, ModBiomes.SNOWY_PLAINS, ModBiomes.OCEAN, ModBiomes.MUSHROOM_FIELDS, ModBiomes.WINDSWEPT_HILLS, ModBiomes.BEACH, ModBiomes.TAIGA, ModBiomes.RIVER);
 	
 	public static final DeepslateBiome DEEPSLATE = register("deepslate", new DeepslateBiome(BiomeEffects.DEEPSLATE));
 	public static final DeepslateOceanBiome DEEPSLATE_OCEAN = register("deepslate_ocean", new DeepslateOceanBiome(BiomeEffects.DEEPSLATE_OCEAN));
@@ -175,8 +181,8 @@ public class ModBiomes {
 	public static final DeepdarkOceanBiome DEEPDARK_OCEAN = register("deepdark_ocean", new DeepdarkOceanBiome(BiomeEffects.DEEPDARK_OCEAN, CaveBiomeType.DEEPDARK_OCEAN));
 	
 	protected static <T extends IBiome> T register(String name, T biome) {
-		BIOME_REGISTRY.register(name, IBiome.createBiome(biome));
-		BIOMES.put(name, biome);
+		REGISTRY_BIOMES.put(biome, BIOMES.register(name, IBiome.createBiome(biome)));
+		BIOME_IDS.put(name, biome);
 		return biome;
 	}
 	
