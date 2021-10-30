@@ -13,7 +13,7 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
 	public static final DimensionSpecialEffects DEEPSLATE = new ModDimensionSpecialEffects(Float.NaN, true, SkyType.NONE, true, false, (vec, worldTime) -> {
 		return vec;
 	}, FOGGY_FALSE);
-	public static final DimensionSpecialEffects OVERWORLD = new ModDimensionSpecialEffects(196.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false, (vec, worldTime) -> {
+	public static final DimensionSpecialEffects OVERWORLD = new ModDimensionSpecialEffects(450.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false, (vec, worldTime) -> {
 		return vec.multiply((double) (worldTime * 0.94F + 0.06F), (double) (worldTime * 0.94F + 0.06F), (double) (worldTime * 0.91F + 0.09F));
 	}, FOGGY_FALSE);
 	

@@ -35,10 +35,6 @@ public class Nero {
 	public static final String MINECRAFT_ID = "minecraft";
 	public static final boolean RUN_IN_IDE = FMLEnvironment.production;
 	
-	public static final int WORLD_Y_MIN = 0;
-	public static final int WORLD_Y_MAX = 512;
-	public static final double WORLD_NOISE_SCALE = 0.0625;
-	
 	private static Nero nero;
 	
 	protected final ModEntityModelSet modModelSet;

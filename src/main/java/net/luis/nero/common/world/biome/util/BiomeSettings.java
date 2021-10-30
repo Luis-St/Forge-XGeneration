@@ -455,7 +455,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultOres(generationBuilder);
-		DefaultVanillaBiomeFeatures.addDefaultSoftDisks(generationBuilder);
 		DefaultVanillaBiomeFeatures.addWaterTrees(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultFlowers(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultGrass(generationBuilder);
@@ -463,7 +462,6 @@ public class BiomeSettings {
 		DefaultVanillaBiomeFeatures.addDefaultSprings(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultMushrooms(generationBuilder);
 		DefaultVanillaBiomeFeatures.addOceanStructures(generationBuilder, deep, warm);
-		DefaultVanillaBiomeFeatures.addSurfaceFreezing(generationBuilder);
 		return generationBuilder;
 	}
 	

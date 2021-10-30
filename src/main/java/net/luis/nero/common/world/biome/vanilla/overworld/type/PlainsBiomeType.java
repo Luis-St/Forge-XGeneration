@@ -11,8 +11,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum PlainsBiomeType implements IBiomeType {
 	
-	PLAINS(0.0F, OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
-	HILLY_PLAINS(0.0F, OverworldBiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
+	PLAINS(0.8F, OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
+	HILLY_PLAINS(0.8F, OverworldBiomeNoise.of(0.25, 0.1), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),
 	SUNFLOWER_PLAINS(0.0F, OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getPlainsSpawns(true), BiomeSettings.getPlainsFeatures(true), false, false),
 	SNOWY_PLAINS(0.0F, OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(false, false), false, false),
 	ICE_SPIKES_PLAINS(0.0F, OverworldBiomeNoise.of(0.425, 0.45000002), BiomeSettings.getTundraSpawns(), BiomeSettings.getTundraFeatures(true, false), true, false),
