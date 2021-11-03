@@ -16,6 +16,7 @@ import net.luis.nero.init.potion.ModPotions;
 import net.luis.nero.init.recipe.ModRecipeSerializer;
 import net.luis.nero.init.villager.ModPoiTypes;
 import net.luis.nero.init.villager.ModVillagerProfessions;
+import net.luis.nero.init.world.ModWorldTypes;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.luis.nero.init.world.levelgen.carver.ModWorldCarvers;
 import net.luis.nero.init.world.levelgen.decorator.ModFeatureDecorators;
@@ -68,6 +69,7 @@ public class Nero {
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
+		ModWorldTypes.WORLD_TYPES.register(eventBus);
 		
 		this.modModelSet = new ModEntityModelSet();
 	}

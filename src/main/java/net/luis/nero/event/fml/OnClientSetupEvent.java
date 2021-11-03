@@ -9,14 +9,19 @@ import net.luis.nero.client.world.ModDimensionSpecialEffects;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.luis.nero.init.entity.ModEntityTypes;
+import net.luis.nero.init.world.ModWorldTypes;
 import net.luis.nero.init.world.dimension.ModDimensionTypes;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.VillagerRenderer;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ForgeWorldTypeScreens;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -31,6 +36,7 @@ public class OnClientSetupEvent {
 		registerTileEntityRenderer(event);
 		registerBlockRenderType(event);
 		registerUtil(event);
+		registerWorldTypes(event);
 	}
 	
 	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
@@ -54,6 +60,18 @@ public class OnClientSetupEvent {
 		DimensionSpecialEffects.EFFECTS.defaultReturnValue(ModDimensionSpecialEffects.OVERWORLD);
 		DimensionSpecialEffects.EFFECTS.put(ModDimensionTypes.OVERWORLD.location(), ModDimensionSpecialEffects.OVERWORLD);
 		DimensionSpecialEffects.EFFECTS.put(ModDimensionTypes.DEEPSLATE.location(), ModDimensionSpecialEffects.DEEPSLATE);
+	}
+	
+	protected static void registerWorldTypes(FMLClientSetupEvent event) {
+		ForgeWorldTypeScreens.registerFactory(ModWorldTypes.NERO_OVWERWORLD.get(), (worldScreen, worldGenSettings) -> new Screen(ModWorldTypes.NERO_OVWERWORLD.get().getDisplayName()) {
+			@Override
+			protected void init() {
+				super.init();
+				this.addRenderableWidget(new Button(0, 0, 120, 20, new TextComponent("close"), action -> {
+					this.getMinecraft().setScreen(worldScreen);
+				}));
+			};
+		});
 	}
 
 }

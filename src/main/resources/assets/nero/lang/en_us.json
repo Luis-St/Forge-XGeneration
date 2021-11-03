@@ -1,4 +1,5 @@
 {	
+  "generator.nero.nero_overworld": "Nero",
   "entity.nero.hovering_inferno": "Hovering Inferno",
   "entity.nero.soul_blaze": "Soul Blaze",
   "entity.nero.soul_fireball": "Soul Fireball",
@@ -23,8 +24,7 @@
   "effect.nero.harvest_fatigue": "Harvest Fatigue",
   "effect.nero.ice": "Ice",
   "effect.nero.harvest": "Harvest",
-	
-  #use EntityDamageSouses
+  
   "death.attack.nero_ice": "%1$s is frozen to death",
   "death.attack.nero_ice.player": "%1$s is frozen to death whilst fighting %2$s",
   "death.attack.nero_death_rune": "%1$s killed with the Death Rune",
