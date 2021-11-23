@@ -1,23 +1,23 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.noise.BiomeNoise;
+import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum PeakBiomeType implements IBiomeType {
 	
-	MEADOW(0.0F, OverworldBiomeNoise.of(1.25, 0.25), BiomeSettings.getMeadowSpawns(), BiomeSettings.getMeadowFeatures(), false),
-	GROVE(0.5F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getGroveSpawns(), BiomeSettings.getGroveFeatures(false), false),
-	SNOWY_GROVE(0.0F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getGroveSpawns(), BiomeSettings.getGroveFeatures(true), false),
-	SNOWY_SLOPES(0.0F, OverworldBiomeNoise.of(2.0, 0.5), BiomeSettings.getSnowySlopesSpawns(), BiomeSettings.getSnowySlopesFeatures(), false),
-	JAGGED_PEAKS(0.0F, OverworldBiomeNoise.of(2.25, 2.0), BiomeSettings.getJaggedPeaksSpawns(), BiomeSettings.getJaggedPeaksFeatures(), false),
-	FROZEN_PEAKS(0.0F, OverworldBiomeNoise.of(2.25, 0.25), BiomeSettings.getPeaksSpawns(true), BiomeSettings.getFrozenPeaksFeatures(), false),
-	STONY_PEAKS(0.0F, OverworldBiomeNoise.of(2.0, 0.6), BiomeSettings.getPeaksSpawns(false), BiomeSettings.getStonyPeaksFeatures(), false);
+	MEADOW(0.0F, BiomeNoise.of(396, 1.25), BiomeSettings.getMeadowSpawns(), BiomeSettings.getMeadowFeatures(), false),
+	GROVE(0.5F, BiomeNoise.of(378, 1.5), BiomeSettings.getGroveSpawns(), BiomeSettings.getGroveFeatures(false), false),
+	SNOWY_GROVE(0.0F, BiomeNoise.of(378, 1.5), BiomeSettings.getGroveSpawns(), BiomeSettings.getGroveFeatures(true), false),
+	SNOWY_SLOPES(0.0F, BiomeNoise.of(454, 1.5), BiomeSettings.getSnowySlopesSpawns(), BiomeSettings.getSnowySlopesFeatures(), false),
+	JAGGED_PEAKS(0.0F, BiomeNoise.of(472, 2.0), BiomeSettings.getJaggedPeaksSpawns(), BiomeSettings.getJaggedPeaksFeatures(), false),
+	FROZEN_PEAKS(0.0F, BiomeNoise.of(472, 1.25), BiomeSettings.getPeaksSpawns(true), BiomeSettings.getFrozenPeaksFeatures(), false),
+	STONY_PEAKS(0.0F, BiomeNoise.of(454, 1.6), BiomeSettings.getPeaksSpawns(false), BiomeSettings.getStonyPeaksFeatures(), false);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

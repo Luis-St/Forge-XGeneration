@@ -1,10 +1,9 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.BiomeNoise;
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -12,8 +11,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 public enum CaveBiomeType implements IBiomeType {
 	
 	DRIPSTONE_CAVE(0.4F, IBiomeNoise.NULL, BiomeSettings.getCaveSpawns(), BiomeSettings.getDripstoneCaveFeatures()),
-	LUSH_CAVES(0.8F, IBiomeNoise.NULL, BiomeSettings.getCaveSpawns(), BiomeSettings.getLushCavesFeatures()),
-	DEEPDARK_OCEAN(0.4F, BiomeNoise.of(-3.0, 0.1), BiomeSettings.getDeepdarkOceanSpawns(), BiomeSettings.getDeepdarkOceanFeatures());
+	LUSH_CAVES(0.8F, IBiomeNoise.NULL, BiomeSettings.getCaveSpawns(), BiomeSettings.getLushCavesFeatures());
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

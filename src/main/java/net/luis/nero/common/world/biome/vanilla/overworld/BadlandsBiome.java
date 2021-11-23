@@ -1,8 +1,9 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.ModBiomeFeatures;
+import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
@@ -28,6 +29,13 @@ public class BadlandsBiome extends OverworldBiome {
 	@Override
 	public BiomeGenerationSettings getBiomeGenerationSettings() {
 		return this.biomeType.getBiomeGenerationSettings();
+	}
+	
+	@Override
+	public ModBiomeFeatures getModFeatures() {
+		ModBiomeFeatures modBiomeFeatures = super.getModFeatures();
+		modBiomeFeatures.setModSurfaceBuilder(() -> ConfiguredModSurfaceBuilders.BADLANDS);
+		return modBiomeFeatures;
 	}
 	
 	@Override

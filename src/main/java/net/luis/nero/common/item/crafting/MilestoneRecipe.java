@@ -1,4 +1,4 @@
-package net.luis.nero.common.recipe;
+package net.luis.nero.common.item.crafting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import net.luis.nero.common.inventory.ModItemStackHandler;
-import net.luis.nero.common.item.crafting.ResultItem;
 import net.luis.nero.common.util.Chance;
 import net.luis.nero.common.util.exception.NetworkReadingException;
 import net.luis.nero.init.block.item.ModBlockItems;

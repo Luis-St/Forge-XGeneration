@@ -1,21 +1,21 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.noise.BiomeNoise;
+import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum WindsweptBiomeType implements IBiomeType {
 	
-	WINDSWEPT_HILLS(0.2F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getWindsweptFeatures(false, false, false), false),
-	WINDSWEPT_EDGE_HILLS(0.2F, OverworldBiomeNoise.of(0.8, 0.3), BiomeSettings.getWindsweptFeatures(true, false, false), true),
-	WINDSWEPT_GRAVELLY_HILLS(0.2F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getWindsweptFeatures(false, false, true), false),
-	MODIFIED_WINDSWEPT_GRAVELLY_HILLS(0.2F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getWindsweptFeatures(false, false, true), false),
-	WOODED_WINDSWEPT_HILLS(0.2F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getWindsweptFeatures(false, true, false), false),
-	SNOWY_WINDSWEPT_HILLS(-0.5F, OverworldBiomeNoise.of(1.0, 0.5), BiomeSettings.getWindsweptFeatures(false, false, false), false);
+	WINDSWEPT_HILLS(0.2F, BiomeNoise.of(378, 1.5), BiomeSettings.getWindsweptFeatures(false, false, false), false),
+	WINDSWEPT_EDGE_HILLS(0.2F, BiomeNoise.of(378, 1.3), BiomeSettings.getWindsweptFeatures(true, false, false), true),
+	WINDSWEPT_GRAVELLY_HILLS(0.2F, BiomeNoise.of(378, 01.5), BiomeSettings.getWindsweptFeatures(false, false, true), false),
+	MODIFIED_WINDSWEPT_GRAVELLY_HILLS(0.2F, BiomeNoise.of(378, 1.5), BiomeSettings.getWindsweptFeatures(false, false, true), false),
+	WOODED_WINDSWEPT_HILLS(0.2F, BiomeNoise.of(378, 1.5), BiomeSettings.getWindsweptFeatures(false, true, false), false),
+	SNOWY_WINDSWEPT_HILLS(-0.5F, BiomeNoise.of(378, 1.5), BiomeSettings.getWindsweptFeatures(false, false, false), false);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;

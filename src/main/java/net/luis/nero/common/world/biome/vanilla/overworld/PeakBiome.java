@@ -1,9 +1,8 @@
 package net.luis.nero.common.world.biome.vanilla.overworld;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.util.ModBiomeFeatures;
-import net.luis.nero.api.common.world.biome.vanilla.OverworldBiome;
 import net.luis.nero.common.enums.BiomeEffects;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.ModBiomeFeatures;
 import net.luis.nero.common.world.biome.vanilla.overworld.type.PeakBiomeType;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModFeatures;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;

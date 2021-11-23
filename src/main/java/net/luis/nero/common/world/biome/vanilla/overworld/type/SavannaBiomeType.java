@@ -1,20 +1,20 @@
 package net.luis.nero.common.world.biome.vanilla.overworld.type;
 
-import net.luis.nero.api.common.world.biome.IBiomeType;
-import net.luis.nero.api.common.world.biome.noise.OverworldBiomeNoise;
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.IBiomeType;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.noise.BiomeNoise;
+import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.util.BiomeSettings;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
 public enum SavannaBiomeType implements IBiomeType {
 	
-	SAVANNA(1.2F, OverworldBiomeNoise.of(0.125, 0.05), BiomeSettings.getSavannaSpawns(false), BiomeSettings.getSavannaFeatures(false, false), false, false),
-	WINDSWEPT_SAVANNA(1.0F, OverworldBiomeNoise.of(1.5, 0.025), BiomeSettings.getSavannaSpawns(true), BiomeSettings.getSavannaFeatures(true, false), false, true),
-	SHATTERED_SAVANNA(1.1F, OverworldBiomeNoise.of(0.3625, 1.225), BiomeSettings.getSavannaSpawns(false), BiomeSettings.getSavannaFeatures(true, true), true, true),
-	SHATTERED_WINDSWEPT_SAVANNA(1.0F, OverworldBiomeNoise.of(1.05, 1.2125001), BiomeSettings.getSavannaSpawns(true), BiomeSettings.getSavannaFeatures(true, true), true, true);
+	SAVANNA(1.2F, BiomeNoise.of(312, 1.05), BiomeSettings.getSavannaSpawns(false), BiomeSettings.getSavannaFeatures(false, false), false, false),
+	WINDSWEPT_SAVANNA(1.0F, BiomeNoise.of(416, 1.025), BiomeSettings.getSavannaSpawns(true), BiomeSettings.getSavannaFeatures(true, false), false, true),
+	SHATTERED_SAVANNA(1.1F, BiomeNoise.of(330, 1.225), BiomeSettings.getSavannaSpawns(false), BiomeSettings.getSavannaFeatures(true, true), true, true),
+	SHATTERED_WINDSWEPT_SAVANNA(1.0F, BiomeNoise.of(382, 1.2125001), BiomeSettings.getSavannaSpawns(true), BiomeSettings.getSavannaFeatures(true, true), true, true);
 	
 	private final float temperature;
 	private final IBiomeNoise biomeNoise;
