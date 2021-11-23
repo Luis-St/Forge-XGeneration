@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.common.world.biome.IBiome;
+import net.luis.nero.common.world.biome.IBiome;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultModBiomeFeatures;
 import net.luis.nero.init.world.biome.ModBiomes;
@@ -30,7 +30,7 @@ public class OnBiomeLoadingEvent {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 		ResourceLocation biomeLocation = event.getName();
-		IBiome biome = ModBiomes.BIOME_IDS.get(biomeLocation.getPath());
+		IBiome biome = ModBiomes.BIOME_IDS.get(biomeLocation);
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
 		if (biome != null) {

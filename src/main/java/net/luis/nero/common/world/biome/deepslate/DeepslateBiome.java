@@ -1,10 +1,10 @@
 package net.luis.nero.common.world.biome.deepslate;
 
-import net.luis.nero.api.common.world.biome.ModBiome;
-import net.luis.nero.api.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
 import net.luis.nero.common.enums.BiomeEffects;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.ModBiome;
+import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeSpawns;
 import net.minecraft.world.entity.EntityType;

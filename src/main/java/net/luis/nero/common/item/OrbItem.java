@@ -1,9 +1,8 @@
 package net.luis.nero.common.item;
 
-import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
-import net.luis.nero.api.common.capability.provider.BloodOrbCapabilityProvider;
-import net.luis.nero.api.common.capability.util.CapabilityUtil;
-import net.luis.nero.api.common.item.IOrbType;
+import net.luis.nero.common.capability.CapabilityUtil;
+import net.luis.nero.common.capability.orb.BloodOrbCapabilityProvider;
+import net.luis.nero.common.capability.orb.IBloodOrbCapability;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;

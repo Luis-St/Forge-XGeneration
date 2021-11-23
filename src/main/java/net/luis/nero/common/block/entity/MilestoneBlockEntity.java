@@ -1,6 +1,5 @@
 package net.luis.nero.common.block.entity;
 
-import net.luis.nero.api.common.block.entity.IAnimatedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;

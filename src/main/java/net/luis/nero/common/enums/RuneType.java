@@ -1,6 +1,6 @@
 package net.luis.nero.common.enums;
 
-import net.luis.nero.api.common.item.IRuneType;
+import net.luis.nero.common.item.IRuneType;
 
 public class RuneType implements IRuneType {
 	

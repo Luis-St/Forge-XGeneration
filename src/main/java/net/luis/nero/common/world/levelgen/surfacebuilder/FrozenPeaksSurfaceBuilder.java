@@ -3,7 +3,6 @@ package net.luis.nero.common.world.levelgen.surfacebuilder;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import net.luis.nero.api.common.world.levelgen.surfacebuilder.ModSurfaceBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
+@SuppressWarnings("deprecation")
 public class FrozenPeaksSurfaceBuilder extends ModSurfaceBuilder {
 	
 	protected PerlinSimplexNoise iceNoise;

@@ -1,6 +1,7 @@
 package net.luis.nero.init.world.levelgen.surfacebuilder;
 
 import net.luis.nero.Nero;
+import net.luis.nero.common.world.levelgen.newsurfacebuilder.BadlandsOverworldSurfaceBuilder;
 import net.luis.nero.common.world.levelgen.surfacebuilder.DeepslateSurfaceBuilder;
 import net.luis.nero.common.world.levelgen.surfacebuilder.FrozenPeaksSurfaceBuilder;
 import net.luis.nero.common.world.levelgen.surfacebuilder.JaggedPeaksSurfaceBuilder;
@@ -22,5 +23,7 @@ public class ModSurfaceBuilders {
 	public static final RegistryObject<SnowySlopesSurfaceBuilder> SNOWY_SLOPES = SURFACE_BUILDERS.register("snowy_slopes", SnowySlopesSurfaceBuilder::new);
 	public static final RegistryObject<JaggedPeaksSurfaceBuilder> JAGGED_PEAKS = SURFACE_BUILDERS.register("jagged_peaks", JaggedPeaksSurfaceBuilder::new);
 	public static final RegistryObject<FrozenPeaksSurfaceBuilder> FROZEN_PEAKS = SURFACE_BUILDERS.register("frozen_peaks", FrozenPeaksSurfaceBuilder::new);
+	
+	public static final RegistryObject<BadlandsOverworldSurfaceBuilder> BADLANDS = SURFACE_BUILDERS.register("overworld_badlands", BadlandsOverworldSurfaceBuilder::new);
 	
 }

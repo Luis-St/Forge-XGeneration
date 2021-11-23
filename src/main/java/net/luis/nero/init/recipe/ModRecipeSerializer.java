@@ -1,7 +1,7 @@
 package net.luis.nero.init.recipe;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.recipe.MilestoneRecipe;
+import net.luis.nero.common.item.crafting.MilestoneRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

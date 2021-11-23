@@ -1,6 +1,6 @@
 package net.luis.nero.common.world.levelgen.feature.biome;
 
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;

@@ -1,6 +1,6 @@
 package net.luis.nero.common.world.levelgen.feature.biome;
 
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.Features;
 import net.minecraft.data.worldgen.StructureFeatures;

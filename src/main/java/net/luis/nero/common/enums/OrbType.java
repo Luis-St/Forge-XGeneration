@@ -1,6 +1,6 @@
 package net.luis.nero.common.enums;
 
-import net.luis.nero.api.common.item.IOrbType;
+import net.luis.nero.common.item.IOrbType;
 
 public class OrbType implements IOrbType {
 	

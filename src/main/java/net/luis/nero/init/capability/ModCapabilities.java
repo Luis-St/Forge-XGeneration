@@ -1,6 +1,6 @@
 package net.luis.nero.init.capability;
 
-import net.luis.nero.api.common.capability.interfaces.IBloodOrbCapability;
+import net.luis.nero.common.capability.orb.IBloodOrbCapability;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class ModCapabilities {

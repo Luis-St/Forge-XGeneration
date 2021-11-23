@@ -1,8 +1,8 @@
 package net.luis.nero.init.potion;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.common.potion.ModEffect;
 import net.luis.nero.common.potion.IceEffect;
+import net.luis.nero.common.potion.ModEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.fmllegacy.RegistryObject;

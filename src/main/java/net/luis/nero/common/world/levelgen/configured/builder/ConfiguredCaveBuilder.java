@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.levelgen.configured.builder;
 
-import net.luis.nero.api.common.world.levelgen.carver.config.ModCaveCarverConfiguration;
-import net.luis.nero.api.util.Builder;
+import net.luis.nero.common.util.Builder;
+import net.luis.nero.common.world.levelgen.carver.config.ModCaveCarverConfiguration;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.UniformFloat;

@@ -2,7 +2,6 @@ package net.luis.nero.common.world.levelgen.feature.structure;
 
 import java.util.Random;
 
-import net.luis.nero.api.common.world.levelgen.feature.structure.ModStructurePiece;
 import net.luis.nero.init.world.levelgen.feature.structure.ModStructurePieceTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

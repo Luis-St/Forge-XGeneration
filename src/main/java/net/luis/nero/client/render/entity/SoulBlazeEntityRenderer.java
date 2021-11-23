@@ -1,8 +1,8 @@
 package net.luis.nero.client.render.entity;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.client.render.ISoulFireEntityRenderer;
-import net.luis.nero.api.client.render.SoulFireModRenderer;
+import net.luis.nero.client.render.ISoulFireEntityRenderer;
+import net.luis.nero.client.render.SoulFireModRenderer;
 import net.luis.nero.common.entity.SoulBlazeEntity;
 import net.minecraft.client.model.BlazeModel;
 import net.minecraft.client.model.geom.ModelLayers;

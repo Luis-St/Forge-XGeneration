@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.biome.util;
 
-import net.luis.nero.api.common.world.biome.util.BiomeGenerationBuilder;
-import net.luis.nero.api.common.world.biome.util.MobSpawnBuilder;
+import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
+import net.luis.nero.common.world.biome.MobSpawnBuilder;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeFeatures;
 import net.luis.nero.common.world.levelgen.feature.biome.DefaultVanillaBiomeSpawns;
 import net.minecraft.data.worldgen.Features;
@@ -108,7 +108,6 @@ public class BiomeSettings {
 		generationBuilder.surfaceBuilder(() -> SurfaceBuilders.DESERT);
 		DefaultVanillaBiomeFeatures.addDefaultStructures(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultCarvers(generationBuilder);
-		DefaultVanillaBiomeFeatures.addDefaultLakes(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultAmethystGeode(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultMonsterRoom(generationBuilder);
 		DefaultVanillaBiomeFeatures.addDefaultUndergroundVariety(generationBuilder);

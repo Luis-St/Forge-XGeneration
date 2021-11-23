@@ -1,6 +1,5 @@
 package net.luis.nero.common.potion;
 
-import net.luis.nero.api.common.potion.ModEffect;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;

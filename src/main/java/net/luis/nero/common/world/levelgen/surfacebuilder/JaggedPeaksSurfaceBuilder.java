@@ -2,7 +2,6 @@ package net.luis.nero.common.world.levelgen.surfacebuilder;
 
 import java.util.Random;
 
-import net.luis.nero.api.common.world.levelgen.surfacebuilder.ModSurfaceBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +10,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 
+@SuppressWarnings("deprecation")
 public class JaggedPeaksSurfaceBuilder extends ModSurfaceBuilder {
 	
 	public JaggedPeaksSurfaceBuilder() {

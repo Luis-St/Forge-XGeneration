@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.google.common.annotations.VisibleForTesting;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.util.annotation.NotTested;
+import net.luis.nero.common.util.annotation.NotTested;
 import net.luis.nero.init.potion.ModEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;

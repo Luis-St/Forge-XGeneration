@@ -1,4 +1,4 @@
-package net.luis.nero.core;
+package net.luis.nero.network;
 
 import net.luis.nero.Nero;
 import net.minecraft.resources.ResourceLocation;

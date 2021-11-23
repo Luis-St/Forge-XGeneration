@@ -2,8 +2,8 @@
 package net.luis.nero.common.world.levelgen.configured;
 
 import net.luis.nero.Nero;
-import net.luis.nero.api.common.world.levelgen.carver.config.ModCanyonCarverConfiguration;
-import net.luis.nero.api.common.world.levelgen.carver.config.ModCaveCarverConfiguration;
+import net.luis.nero.common.world.levelgen.carver.config.ModCanyonCarverConfiguration;
+import net.luis.nero.common.world.levelgen.carver.config.ModCaveCarverConfiguration;
 import net.luis.nero.common.world.levelgen.configured.builder.ConfiguredCanyonBuilder;
 import net.luis.nero.common.world.levelgen.configured.builder.ConfiguredCaveBuilder;
 import net.luis.nero.init.world.levelgen.carver.ModWorldCarvers;

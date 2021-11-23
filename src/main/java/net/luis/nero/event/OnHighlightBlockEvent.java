@@ -16,7 +16,7 @@ public class OnHighlightBlockEvent {
 	
 	@SubscribeEvent
 	@SuppressWarnings("resource")
-	public static void highlightBloc(DrawSelectionEvent.HighlightBlock event) {
+	public static void highlightBlock(DrawSelectionEvent.HighlightBlock event) {
 		LocalPlayer localPlayer = Minecraft.getInstance().player;
 		BlockPos targetPos = event.getTarget().getBlockPos();
 		BlockPos headPos = localPlayer.eyeBlockPosition();

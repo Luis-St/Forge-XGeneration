@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.luis.nero.common.world.biome.DeepslateBiomeSource;
+import net.luis.nero.common.world.biome.source.DeepslateBiomeSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;

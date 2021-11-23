@@ -1,6 +1,5 @@
 package net.luis.nero.common.entity;
 
-import net.luis.nero.api.common.entity.ISoulFireEntity;
 import net.luis.nero.common.entity.goal.SoulFireballAttackGoal;
 import net.luis.nero.init.entity.ModEntityTypes;
 import net.minecraft.network.protocol.Packet;

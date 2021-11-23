@@ -1,7 +1,5 @@
 package net.luis.nero.common.block.entity;
 
-import net.luis.nero.api.common.block.entity.IAnimatedBlockEntity;
-import net.luis.nero.api.common.block.entity.IEnergyBlockEntity;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
