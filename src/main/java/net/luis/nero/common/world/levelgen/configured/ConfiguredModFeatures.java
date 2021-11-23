@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.levelgen.decorator.config.DepthAverageDecoratorConfiguration;
+import net.luis.nero.common.world.levelgen.feature.decorator.config.DepthAverageDecoratorConfiguration;
 import net.luis.nero.init.world.levelgen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.levelgen.feature.ModFeatures;
 import net.minecraft.core.Registry;

@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.biome.IBiome;
-import net.luis.nero.common.world.biome.vanilla.overworld.OverworldBiome;
+import net.luis.nero.common.world.biome.biomes.vanilla.overworld.OverworldBiome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 

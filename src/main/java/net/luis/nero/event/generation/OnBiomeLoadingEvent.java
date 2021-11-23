@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.biome.IBiome;
+import net.luis.nero.common.world.biome.feature.DefaultModBiomeFeatures;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
-import net.luis.nero.common.world.levelgen.feature.biome.DefaultModBiomeFeatures;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;

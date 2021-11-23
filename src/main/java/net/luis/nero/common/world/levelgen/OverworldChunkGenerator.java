@@ -10,9 +10,9 @@ import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.util.annotation.NotTested;
 import net.luis.nero.common.world.biome.IBiome;
+import net.luis.nero.common.world.biome.biomes.vanilla.overworld.OverworldBiome;
 import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.source.OverworldBiomeSource;
-import net.luis.nero.common.world.biome.vanilla.overworld.OverworldBiome;
 import net.luis.nero.common.world.levelgen.newsurfacebuilder.OverworldSurfaceBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;

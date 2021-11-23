@@ -2,11 +2,11 @@ package net.luis.nero.common.world.biome;
 
 import java.util.function.Supplier;
 
-import net.luis.nero.common.world.biome.deepslate.DeepslateBiome;
+import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateBiome;
+import net.luis.nero.common.world.biome.biomes.vanilla.end.EndBiome;
+import net.luis.nero.common.world.biome.biomes.vanilla.nether.NetherBiome;
+import net.luis.nero.common.world.biome.biomes.vanilla.overworld.OverworldBiome;
 import net.luis.nero.common.world.biome.noise.IBiomeNoise;
-import net.luis.nero.common.world.biome.vanilla.end.EndBiome;
-import net.luis.nero.common.world.biome.vanilla.nether.NetherBiome;
-import net.luis.nero.common.world.biome.vanilla.overworld.OverworldBiome;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;

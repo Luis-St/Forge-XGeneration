@@ -1,8 +1,8 @@
 package net.luis.nero.init.world.levelgen.decorator;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.levelgen.decorator.DepthAverageDecorator;
-import net.luis.nero.common.world.levelgen.decorator.config.DepthAverageDecoratorConfiguration;
+import net.luis.nero.common.world.levelgen.feature.decorator.DepthAverageDecorator;
+import net.luis.nero.common.world.levelgen.feature.decorator.config.DepthAverageDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
