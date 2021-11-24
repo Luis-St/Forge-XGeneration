@@ -14,13 +14,6 @@ public class ModBiomeKeys {
 	
 	public static final List<ResourceKey<Biome>> BIOMES = Lists.newArrayList();
 	
-	public static final ResourceKey<Biome> DEEPSLATE = register("deepslate");
-	public static final ResourceKey<Biome> DEEPSLATE_OCEAN = register("deepslate_ocean");
-	public static final ResourceKey<Biome> DEEPSLATE_LAVA_LAKE = register("deepslate_lava_lake");
-	public static final ResourceKey<Biome> DEEPSLATE_DEEPDARK = register("deepslate_deepdark");
-	public static final ResourceKey<Biome> DEEPSLATE_LUSH_CAVES = register("deepslate_lush_caves");
-	public static final ResourceKey<Biome> DEEPSLATE_DRIPSTONE_CAVE = register("deepslate_dripstone_cave");
-	
 	public static final ResourceKey<Biome> CLIMATE_ICY = register("climate_icy");
 	public static final ResourceKey<Biome> CLIMATE_COLD = register("climate_cold");
 	public static final ResourceKey<Biome> CLIMATE_MEDIUM = register("climate_medium");

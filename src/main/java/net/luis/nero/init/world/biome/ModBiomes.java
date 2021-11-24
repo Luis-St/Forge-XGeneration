@@ -10,12 +10,6 @@ import net.luis.nero.Nero;
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.util.annotation.NotTested;
 import net.luis.nero.common.world.biome.IBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateDeepdarkCaveBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateDripstoneCaveBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateLavaLakeBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateLushCaveBiome;
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateOceanBiome;
 import net.luis.nero.common.world.biome.biomes.type.BadlandsBiomeType;
 import net.luis.nero.common.world.biome.biomes.type.BeachBiomeType;
 import net.luis.nero.common.world.biome.biomes.type.CaveBiomeType;
@@ -63,13 +57,6 @@ public class ModBiomes {
 	
 	public static final Set<IBiome> MAIN_BIOMES = Sets.newHashSet(ModBiomes.BADLANDS, ModBiomes.DESERT, ModBiomes.SAVANNA, ModBiomes.JUNGLE, ModBiomes.FOREST, ModBiomes.BIRCH_FOREST, ModBiomes.DARK_FOREST,
 			ModBiomes.SWAMP, ModBiomes.PLAINS, ModBiomes.SNOWY_PLAINS, ModBiomes.OCEAN, ModBiomes.MUSHROOM_FIELDS, ModBiomes.WINDSWEPT_HILLS, ModBiomes.BEACH, ModBiomes.TAIGA, ModBiomes.RIVER);
-	
-	public static final DeepslateBiome DEEPSLATE = register("deepslate", new DeepslateBiome(BiomeEffects.DEEPSLATE));
-	public static final DeepslateOceanBiome DEEPSLATE_OCEAN = register("deepslate_ocean", new DeepslateOceanBiome(BiomeEffects.DEEPSLATE_OCEAN));
-	public static final DeepslateLavaLakeBiome DEEPSLATE_LAVA_LAKE = register("deepslate_lava_lake", new DeepslateLavaLakeBiome(BiomeEffects.DEEPSLATE_LAVA_LAKE));
-	public static final DeepslateDeepdarkCaveBiome DEEPSLATE_DEEPDARK = register("deepslate_deepdark", new DeepslateDeepdarkCaveBiome(BiomeEffects.DEEPSLATE_DEEPDARK));
-	public static final DeepslateLushCaveBiome DEEPSLATE_LUSH_CAVES = register("deepslate_lush_caves", new DeepslateLushCaveBiome(BiomeEffects.DEEPSLATE_LUSH_CAVES));
-	public static final DeepslateDripstoneCaveBiome DEEPSLATE_DRIPSTONE_CAVE = register("deepslate_dripstone_cave", new DeepslateDripstoneCaveBiome(BiomeEffects.DEEPSLATE_DRIPSTONE_CAVE));
 	
 	public static final TempBiome CLIMATE_ICY = register("climate_icy", new TempBiome(BiomeEffects.CLIMATE_ICY));
 	public static final TempBiome CLIMATE_COLD = register("climate_cold", new TempBiome(BiomeEffects.CLIMATE_COLD));

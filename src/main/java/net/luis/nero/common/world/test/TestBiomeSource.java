@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import com.mojang.serialization.Codec;
 
-import net.luis.nero.common.world.biome.source.DeepslateBiomeSource;
 import net.luis.nero.common.world.levelgen.layer.OverworldLayer;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.core.Registry;
@@ -50,7 +49,7 @@ public class TestBiomeSource extends BiomeSource {
 
 	@Override
 	protected Codec<? extends BiomeSource> codec() {
-		return DeepslateBiomeSource.CODEC;
+		return TestBiomeSource.CODEC;
 	}
 
 	@Override

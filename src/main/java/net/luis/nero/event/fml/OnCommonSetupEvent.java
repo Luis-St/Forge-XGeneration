@@ -6,15 +6,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.biome.source.DeepslateBiomeSource;
 import net.luis.nero.common.world.biome.source.OverworldBiomeSource;
-import net.luis.nero.common.world.levelgen.DeepslateChunkGenerator;
 import net.luis.nero.common.world.levelgen.OverworldChunkGenerator;
 import net.luis.nero.common.world.test.TestBiomeSource;
 import net.luis.nero.common.world.test.TestChunkGenerator;
 import net.luis.nero.init.entity.ModEntityTypes;
-import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.luis.nero.init.world.levelgen.feature.structure.ModStructures;
 import net.luis.nero.network.NetworkHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -25,8 +21,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -49,12 +43,7 @@ public class OnCommonSetupEvent {
 	}
 	
 	protected static void registerBiome(FMLCommonSetupEvent event) {
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_OCEAN, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_LAVA_LAKE, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_DEEPDARK, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_LUSH_CAVES, Type.MODIFIED);
-		BiomeDictionary.addTypes(ModBiomeKeys.DEEPSLATE_DRIPSTONE_CAVE, Type.MODIFIED);
+		
 	}
 	
 	protected static void registerEntitySpawnPlacements(FMLCommonSetupEvent event) {
@@ -63,18 +52,17 @@ public class OnCommonSetupEvent {
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {
-		registerStructure(ModStructures.DEEPSLATE_MINESHAFT.get(), new StructureFeatureConfiguration(4, 1, 456734349), false);
+		
 	}
 	
 	protected static void registerUtil(FMLCommonSetupEvent event) {
-		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "deepslate_chunk_generator"), DeepslateChunkGenerator.CODEC);
-		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "deepslate_biome_source"), DeepslateBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "overworld_chunk_generator"), OverworldChunkGenerator.CODEC);
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "overworld_biome_source"), OverworldBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Nero.MOD_ID, "test_chunk_generator"), TestChunkGenerator.CODEC);
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Nero.MOD_ID, "test_biome_source"), TestBiomeSource.CODEC);
 	}
 	
+	@SuppressWarnings("unused")
 	private static <F extends StructureFeature<?>> void registerStructure(F structure, StructureFeatureConfiguration structureConfig, boolean transformLand) {
 		StructureFeature.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 		ImmutableMap<StructureFeature<?>, StructureFeatureConfiguration> defaultStructures = ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder().putAll(StructureSettings.DEFAULTS).put(structure, structureConfig).build();

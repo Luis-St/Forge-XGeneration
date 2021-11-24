@@ -2,7 +2,6 @@ package net.luis.nero.common.world.biome;
 
 import java.util.function.Supplier;
 
-import net.luis.nero.common.world.biome.biomes.deepslate.DeepslateBiome;
 import net.luis.nero.common.world.biome.biomes.vanilla.end.EndBiome;
 import net.luis.nero.common.world.biome.biomes.vanilla.nether.NetherBiome;
 import net.luis.nero.common.world.biome.biomes.vanilla.overworld.OverworldBiome;
@@ -44,10 +43,6 @@ public interface IBiome {
 	
 	default boolean isEnd() {
 		return this instanceof EndBiome;
-	}
-	
-	default boolean isDeepslate() {
-		return this instanceof DeepslateBiome;
 	}
 	
 	Biome.Precipitation getPrecipitation();

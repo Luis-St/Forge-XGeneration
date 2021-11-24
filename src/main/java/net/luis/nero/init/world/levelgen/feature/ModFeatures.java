@@ -1,7 +1,6 @@
 package net.luis.nero.init.world.levelgen.feature;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.levelgen.feature.FlatBedrockFeature;
 import net.luis.nero.common.world.levelgen.feature.ModDungeonsFeature;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -15,7 +14,6 @@ public class ModFeatures {
 	
 	public static final RegistryObject<ModDungeonsFeature> MONSTER_ROOM = FEATURES.register("monster_room", ModDungeonsFeature::new);
 	public static final RegistryObject<ModOreFeature> ORE = FEATURES.register("ore", ModOreFeature::new);
-	public static final RegistryObject<FlatBedrockFeature> FLAT_BEDROCK = FEATURES.register("flat_bedrock", FlatBedrockFeature::new);
 	
 }
 
