@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.levelgen.configured;
+package net.luis.nero.common.world.levelgen.feature.structure;
 
 import net.luis.nero.Nero;
 import net.minecraft.data.BuiltinRegistries;

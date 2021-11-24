@@ -4,7 +4,7 @@ import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.IBiomeType;
 import net.luis.nero.common.world.biome.ModBiomeFeatures;
 import net.luis.nero.common.world.biome.biomes.type.OceanBiomeType;
-import net.luis.nero.common.world.levelgen.configured.ConfiguredModSurfaceBuilders;
+import net.luis.nero.common.world.levelgen.surfacebuilder.ConfiguredModSurfaceBuilders;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 

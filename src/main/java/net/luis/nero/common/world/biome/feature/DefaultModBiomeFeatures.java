@@ -1,7 +1,7 @@
 package net.luis.nero.common.world.biome.feature;
 
 import net.luis.nero.common.world.biome.ModBiomeFeatures;
-import net.luis.nero.common.world.levelgen.configured.ConfiguredModFeatures;
+import net.luis.nero.common.world.levelgen.feature.ConfiguredModFeatures;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 

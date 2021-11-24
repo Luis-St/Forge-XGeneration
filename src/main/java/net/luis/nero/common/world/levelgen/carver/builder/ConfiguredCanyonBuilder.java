@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.levelgen.configured.builder;
+package net.luis.nero.common.world.levelgen.carver.builder;
 
 import net.luis.nero.common.util.Builder;
 import net.luis.nero.common.world.levelgen.carver.config.ModCanyonCarverConfiguration;

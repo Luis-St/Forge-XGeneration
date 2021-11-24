@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.levelgen.configured;
+package net.luis.nero.common.world.levelgen.feature;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

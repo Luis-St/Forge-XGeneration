@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.levelgen.configured;
+package net.luis.nero.common.world.levelgen.surfacebuilder;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.levelgen.newsurfacebuilder.OverworldSurfaceBuilderConfiguration;
