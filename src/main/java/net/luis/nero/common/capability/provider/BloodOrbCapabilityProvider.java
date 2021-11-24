@@ -1,5 +1,6 @@
-package net.luis.nero.common.capability.orb;
+package net.luis.nero.common.capability.provider;
 
+import net.luis.nero.common.capability.handler.BloodOrbCapabilityHandler;
 import net.luis.nero.init.capability.ModCapabilities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.Direction;

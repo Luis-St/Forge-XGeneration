@@ -1,4 +1,4 @@
-package net.luis.nero.common.capability.orb;
+package net.luis.nero.common.capability.interfaces;
 
 import net.luis.nero.common.capability.CapabilitySerializableNBT;
 import net.luis.nero.common.enums.RuneUseType;

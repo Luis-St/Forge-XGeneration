@@ -1,7 +1,7 @@
 package net.luis.nero.event.capability;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.capability.orb.IBloodOrbCapability;
+import net.luis.nero.common.capability.interfaces.IBloodOrbCapability;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

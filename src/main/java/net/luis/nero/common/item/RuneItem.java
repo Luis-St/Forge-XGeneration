@@ -1,7 +1,7 @@
 package net.luis.nero.common.item;
 
 import net.luis.nero.common.capability.CapabilityUtil;
-import net.luis.nero.common.capability.orb.IBloodOrbCapability;
+import net.luis.nero.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.enums.RuneType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

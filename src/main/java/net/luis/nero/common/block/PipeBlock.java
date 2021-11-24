@@ -1,4 +1,4 @@
-package net.luis.nero.common.block.fluid;
+package net.luis.nero.common.block;
 
 import java.util.List;
 import java.util.stream.Collectors;

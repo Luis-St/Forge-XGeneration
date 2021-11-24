@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.luis.nero.common.capability.CapabilityUtil;
-import net.luis.nero.common.capability.orb.IBloodOrbCapability;
+import net.luis.nero.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.common.enums.RuneUseType;
 import net.luis.nero.init.util.ModDamageSources;
 import net.minecraft.network.chat.TextComponent;

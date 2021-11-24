@@ -1,4 +1,4 @@
-package net.luis.nero.common.block.mechanical;
+package net.luis.nero.common.block;
 
 import java.util.stream.Stream;
 

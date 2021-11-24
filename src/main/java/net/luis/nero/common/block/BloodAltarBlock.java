@@ -1,4 +1,4 @@
-package net.luis.nero.common.block.magic;
+package net.luis.nero.common.block;
 
 import net.luis.nero.common.block.entity.BloodAltarBlockEntity;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;

@@ -1,11 +1,11 @@
 package net.luis.nero.init.block;
 
 import net.luis.nero.Nero;
+import net.luis.nero.common.block.BloodAltarBlock;
 import net.luis.nero.common.block.BridgeBlock;
 import net.luis.nero.common.block.DriftSandBlock;
-import net.luis.nero.common.block.fluid.PipeBlock;
-import net.luis.nero.common.block.magic.BloodAltarBlock;
-import net.luis.nero.common.block.mechanical.MilestoneBlock;
+import net.luis.nero.common.block.MilestoneBlock;
+import net.luis.nero.common.block.PipeBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;

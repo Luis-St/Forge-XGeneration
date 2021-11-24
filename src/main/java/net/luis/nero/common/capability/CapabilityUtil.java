@@ -1,6 +1,6 @@
 package net.luis.nero.common.capability;
 
-import net.luis.nero.common.capability.orb.IBloodOrbCapability;
+import net.luis.nero.common.capability.interfaces.IBloodOrbCapability;
 import net.luis.nero.init.capability.ModCapabilities;
 import net.minecraft.world.item.ItemStack;
 
