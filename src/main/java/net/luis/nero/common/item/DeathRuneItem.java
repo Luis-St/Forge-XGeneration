@@ -29,7 +29,7 @@ public class DeathRuneItem extends AbstractRuneItem {
 		livingEntities.removeIf(livingEntity -> livingEntity == player);
 		for (LivingEntity livingEntity : livingEntities) {
 			float damage = livingEntity instanceof Player ? livingEntity.getHealth() / 4 : Float.MAX_VALUE;
-			livingEntity.hurt(ModDamageSources.DEATH_RUNE, damage);
+			livingEntity.hurt(ModDamageSources.getDeathRune(player), damage);
 		}
 		return this.success(player, hand);
 	}
@@ -37,7 +37,7 @@ public class DeathRuneItem extends AbstractRuneItem {
 	@Override
 	protected boolean hurtEnemyWithRune(ItemStack itemStack, LivingEntity target, Player attacker, ItemStack orbStack) {
 		float damage = target instanceof Player ? target.getHealth() / 4 : Float.MAX_VALUE;
-		target.hurt(ModDamageSources.DEATH_RUNE, damage);
+		target.hurt(ModDamageSources.getDeathRune(attacker), damage);
 		return true;
 	}
 
