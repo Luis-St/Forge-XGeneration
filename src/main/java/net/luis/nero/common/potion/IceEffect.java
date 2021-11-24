@@ -1,13 +1,14 @@
 package net.luis.nero.common.potion;
 
 import net.luis.nero.init.util.ModDamageSources;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 
-public class IceEffect extends ModEffect {
+public class IceEffect extends MobEffect {
 	
 	public IceEffect(MobEffectCategory effectType, int color) {
 		super(effectType, color);
