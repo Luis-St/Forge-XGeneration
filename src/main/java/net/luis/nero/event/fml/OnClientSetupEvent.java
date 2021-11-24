@@ -1,7 +1,7 @@
 package net.luis.nero.event.fml;
 
 import net.luis.nero.Nero;
-import net.luis.nero.client.render.blockentity.BloodAltarTileEntityRenderer;
+import net.luis.nero.client.render.blockentity.BloodAltarBlockEntityRenderer;
 import net.luis.nero.client.render.entity.HoveringInfernoEntityRenderer;
 import net.luis.nero.client.render.entity.SoulBlazeEntityRenderer;
 import net.luis.nero.client.render.entity.SoulFireballEntityRenderer;
@@ -42,7 +42,7 @@ public class OnClientSetupEvent {
 	protected static void registerTileEntityRenderer(FMLClientSetupEvent event) {
 //		BlockEntityRenderers.register(ModTileEntityTypes.MILESTONE.get(), MilestoneTileEntityRenderer::new);
 		
-		BlockEntityRenderers.register(ModBlockEntityTypes.BLOOD_ALTAR.get(), BloodAltarTileEntityRenderer::new);
+		BlockEntityRenderers.register(ModBlockEntityTypes.BLOOD_ALTAR.get(), BloodAltarBlockEntityRenderer::new);
 	}
 	
 	protected static void registerEntityRenderer(FMLClientSetupEvent event) {

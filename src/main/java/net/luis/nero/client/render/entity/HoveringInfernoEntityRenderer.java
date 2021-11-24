@@ -14,7 +14,7 @@ public class HoveringInfernoEntityRenderer extends MobRenderer<HoveringInfernoEn
 	private static final ResourceLocation HOVERING_INFERNO_LOCATION = new ResourceLocation(Nero.MOD_ID, "textures/entity/hovering_inferno.png");
 	
 	public HoveringInfernoEntityRenderer(Context context) {
-		super(context, new HoveringInfernoModel(Nero.getInstance().getModModelSet().bakeLayer(ModModelLayers.HOVERING_INFERNO)), 0.6F);
+		super(context, new HoveringInfernoModel(context.bakeLayer(ModModelLayers.HOVERING_INFERNO)), 0.6F);
 		this.addLayer(new HoveringInfernoShieldLayer(this));
 	}
 

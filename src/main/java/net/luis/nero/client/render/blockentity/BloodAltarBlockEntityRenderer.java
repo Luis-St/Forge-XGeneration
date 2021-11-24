@@ -16,13 +16,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 
-public class BloodAltarTileEntityRenderer implements BlockEntityRenderer<BloodAltarBlockEntity> {
+public class BloodAltarBlockEntityRenderer implements BlockEntityRenderer<BloodAltarBlockEntity> {
 	
 	public static final Material TEXTURE_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(Nero.MOD_ID, "entity/blood"));
 	private final BloodAltarModel altarModel;
 	
-	public BloodAltarTileEntityRenderer(Context context) {
-		this.altarModel = new BloodAltarModel(Nero.getInstance().getModModelSet().bakeLayer(ModModelLayers.BLOOD));
+	public BloodAltarBlockEntityRenderer(Context context) {
+		this.altarModel = new BloodAltarModel(context.bakeLayer(ModModelLayers.BLOOD));
 	}
 	
 	@Override

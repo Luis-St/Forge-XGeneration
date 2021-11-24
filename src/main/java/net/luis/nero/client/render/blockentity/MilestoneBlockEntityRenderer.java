@@ -1,6 +1,6 @@
 package net.luis.nero.client.render.blockentity;
 
-public class MilestoneTileEntityRenderer /*extends TileEntityRenderer<MilestoneTileEntity>*/ {
+public class MilestoneBlockEntityRenderer {
 /*	
 	public static final RenderMaterial TEXTURE_LOCATION = new RenderMaterial(PlayerContainer.BLOCK_ATLAS, new ResourceLocation(Nero.MOD_ID, "entity/mile"));
 	protected final MilestoneModel milestone = new MilestoneModel();

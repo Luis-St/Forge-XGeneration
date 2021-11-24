@@ -3,7 +3,6 @@ package net.luis.nero;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.luis.nero.client.model.ModEntityModelSet;
 import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.block.item.ModBlockItems;
 import net.luis.nero.init.block.util.ModBlockEntityTypes;
@@ -38,8 +37,6 @@ public class Nero {
 	
 	private static Nero nero;
 	
-	protected final ModEntityModelSet modModelSet;
-	
 	public Nero() {
 		nero = this;
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -70,16 +67,10 @@ public class Nero {
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
 		ModWorldTypes.WORLD_TYPES.register(eventBus);
-		
-		this.modModelSet = new ModEntityModelSet();
 	}
 	
 	public static Nero getInstance() {
 		return nero;
-	}
-	
-	public ModEntityModelSet getModModelSet() {
-		return this.modModelSet;
 	}
 	
 }
