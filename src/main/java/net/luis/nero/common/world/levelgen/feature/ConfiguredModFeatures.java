@@ -5,8 +5,6 @@ import com.google.common.collect.Lists;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.util.annotation.NotTested;
-import net.luis.nero.common.world.levelgen.feature.decorator.config.DepthAverageDecoratorConfiguration;
-import net.luis.nero.init.world.levelgen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.levelgen.feature.ModFeatures;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -56,13 +54,11 @@ public class ConfiguredModFeatures {
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_COAL_ORE = register("overworld_coal_ore",
 			ModFeatures.ORE.get().configured(new OreConfiguration(STONE, BlockStates.COAL_ORE, 17))
 			.range(triangle(0, 128, 0))
-			.decorated(ModFeatureDecorators.DEPTH_AVERAGE.get().configured(new DepthAverageDecoratorConfiguration(0, 128)))
 			.squared().count(20));
 	
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_COPPER_ORE = register("overworld_copper_ore",
 			ModFeatures.ORE.get().configured(new OreConfiguration(STONE, BlockStates.COPPER_ORE, 10))
 			.range(triangle(0, 96, 0))
-			.decorated(ModFeatureDecorators.DEPTH_AVERAGE.get().configured(new DepthAverageDecoratorConfiguration(0, 96)))
 			.squared().count(20));
 	
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_COPPER_ORE_BLOBS = register("overworld_copper_ore_blobs",
@@ -72,7 +68,6 @@ public class ConfiguredModFeatures {
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_IRON_ORE = register("overworld_iron_ore",
 			ModFeatures.ORE.get().configured(new OreConfiguration(STONE, BlockStates.IRON_ORE, 9))
 			.range(triangle(0, 64, 0))
-			.decorated(ModFeatureDecorators.DEPTH_AVERAGE.get().configured(new DepthAverageDecoratorConfiguration(0, 64)))
 			.squared().count(20));
 	
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_IRON_ORE_BLOBS = register("overworld_iron_ore_blobs",
@@ -82,7 +77,6 @@ public class ConfiguredModFeatures {
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_GOLD_ORE = register("overworld_gold_ore",
 			ModFeatures.ORE.get().configured(new OreConfiguration(STONE, BlockStates.GOLD_ORE, 7))
 			.range(triangle(0, 48, 0))
-			.decorated(ModFeatureDecorators.DEPTH_AVERAGE.get().configured(new DepthAverageDecoratorConfiguration(0, 48)))
 			.squared().count(4));
 	
 	@NotTested public static final ConfiguredFeature<?, ?> OVERWORLD_EMERALD_ORE = register("overworld_emerald_ore",
