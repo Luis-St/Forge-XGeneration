@@ -1,4 +1,4 @@
-package net.luis.nero.event;
+package net.luis.nero.event.registery;
 
 import net.luis.nero.Nero;
 import net.luis.nero.common.command.NoiseCommand;

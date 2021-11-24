@@ -1,4 +1,4 @@
-package net.luis.nero.event.overlay;
+package net.luis.nero.event.client;
 
 import net.luis.nero.Nero;
 import net.minecraftforge.api.distmarker.Dist;

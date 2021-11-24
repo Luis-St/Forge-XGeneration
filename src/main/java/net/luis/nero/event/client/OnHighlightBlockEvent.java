@@ -1,4 +1,4 @@
-package net.luis.nero.event;
+package net.luis.nero.event.client;
 
 import net.luis.nero.Nero;
 import net.luis.nero.init.block.ModBlocks;
