@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum RiverBiomeType implements IBiomeType {
 	
 	RIVER(0.5F, BiomeSettings.getRiverSpawns(false), BiomeSettings.getRiverFeatures(false)),

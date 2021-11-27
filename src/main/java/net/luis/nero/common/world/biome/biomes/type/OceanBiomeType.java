@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum OceanBiomeType implements IBiomeType {
 	
 	WARM_OCEAN(0.95F, BiomeNoise.of(268, 1.1), BiomeSettings.getWarmOceanSpawns(false), BiomeSettings.getWarmOceanFeatures(false)),

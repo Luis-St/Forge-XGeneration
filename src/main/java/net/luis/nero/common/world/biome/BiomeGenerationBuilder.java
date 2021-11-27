@@ -3,6 +3,8 @@ package net.luis.nero.common.world.biome;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
@@ -35,21 +37,21 @@ public class BiomeGenerationBuilder extends BiomeGenerationSettings.Builder {
 	
 	@Override
 	public BiomeGenerationBuilder addFeature(int decoration, Supplier<ConfiguredFeature<?, ?>> configuredFeature) {
-//		this.addFeatureStepsUpTo(decoration);
-//		this.features.get(decoration).add(configuredFeature);
+		this.addFeatureStepsUpTo(decoration);
+		this.features.get(decoration).add(configuredFeature);
 		return this;
 	}
 	
 	public BiomeGenerationBuilder removeFeature(int decoration, ConfiguredFeature<?, ?> configuredFeature) {
-//		this.features.get(decoration).removeIf(feature -> feature.get() == configuredFeature);
+		this.features.get(decoration).removeIf(feature -> feature.get() == configuredFeature);
 		return this;
 	}
 	
 	@Override
 	public <C extends CarverConfiguration> BiomeGenerationBuilder addCarver(GenerationStep.Carving carving, ConfiguredWorldCarver<C> configuredWorldCarver) {
-//		this.carvers.computeIfAbsent(carving, (c) -> {
-//			return Lists.newArrayList();
-//		}).add(() -> configuredWorldCarver);
+		this.carvers.computeIfAbsent(carving, (c) -> {
+			return Lists.newArrayList();
+		}).add(() -> configuredWorldCarver);
 		return this;
 	}
 	
@@ -60,7 +62,7 @@ public class BiomeGenerationBuilder extends BiomeGenerationSettings.Builder {
 
 	@Override
 	public BiomeGenerationBuilder addStructureStart(ConfiguredStructureFeature<?, ?> configuredStructureFeature) {
-//		this.structureStarts.add(() -> configuredStructureFeature);
+		this.structureStarts.add(() -> configuredStructureFeature);
 		return this;
 	}
 	

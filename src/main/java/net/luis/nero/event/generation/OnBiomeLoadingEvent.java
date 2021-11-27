@@ -24,9 +24,10 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@SuppressWarnings("removal")
 @EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnBiomeLoadingEvent {
-	
+
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 		ResourceLocation biomeLocation = event.getName();

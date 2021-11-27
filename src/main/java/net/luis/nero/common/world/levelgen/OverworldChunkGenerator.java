@@ -40,6 +40,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 @NotTested
+@SuppressWarnings("removal")
 public class OverworldChunkGenerator extends NoiseBasedChunkGenerator {
 	
 	public static final Codec<OverworldChunkGenerator> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)

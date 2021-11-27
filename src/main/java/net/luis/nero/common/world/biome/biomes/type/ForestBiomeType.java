@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum ForestBiomeType implements IBiomeType {
 	
 	SNOWY_TAIGA(-0.5F, BiomeNoise.of(318, 1.2), BiomeSettings.getTaigaSpawns(true), BiomeSettings.getTaigaFeatures(false, false, false), false, false),

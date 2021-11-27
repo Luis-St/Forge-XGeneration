@@ -11,6 +11,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeSpecialEffects.GrassColorModifier;
 
+@Deprecated(forRemoval = true)
 public abstract class OverworldBiome extends ModBiome {
 	
 	protected final float temperature;

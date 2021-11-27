@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum SavannaBiomeType implements IBiomeType {
 	
 	SAVANNA(1.2F, BiomeNoise.of(312, 1.05), BiomeSettings.getSavannaSpawns(false), BiomeSettings.getSavannaFeatures(false, false), false, false),

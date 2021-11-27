@@ -1,4 +1,4 @@
-package net.luis.nero.common.world.biome.biomes.vanilla.overworld;
+package net.luis.nero.common.world.biome.biomes;
 
 import net.luis.nero.common.enums.BiomeEffects;
 import net.luis.nero.common.world.biome.BiomeGenerationBuilder;
@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@SuppressWarnings("removal")
 public class TempBiome extends ModBiome {
 	
 	public TempBiome(BiomeEffects biomeEffects) {

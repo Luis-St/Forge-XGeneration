@@ -8,6 +8,7 @@ import net.luis.nero.common.world.levelgen.surfacebuilder.ConfiguredModSurfaceBu
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public class OceanBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;

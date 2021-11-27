@@ -8,6 +8,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum DesertBiomeType implements IBiomeType {
 	
 	DESERT(BiomeNoise.of(312, 1.05), BiomeSettings.getDesertFeatures(false, false), false),

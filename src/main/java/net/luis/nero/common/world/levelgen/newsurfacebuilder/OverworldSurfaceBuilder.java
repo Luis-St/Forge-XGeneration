@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuild
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
+@SuppressWarnings("removal")
 public abstract class OverworldSurfaceBuilder extends SurfaceBuilder<OverworldSurfaceBuilderConfiguration> {
 	
 	protected static final BlockState SAND = Blocks.SAND.defaultBlockState();

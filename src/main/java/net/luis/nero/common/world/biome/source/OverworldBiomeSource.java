@@ -54,6 +54,7 @@ public class OverworldBiomeSource extends BiomeSource {
 	}
 	
 	@Override
+	@SuppressWarnings("removal")
 	public Biome getNoiseBiome(int x, int y, int z) {
 		return this.registry.get(ModBiomes.BADLANDS.location());
 	}

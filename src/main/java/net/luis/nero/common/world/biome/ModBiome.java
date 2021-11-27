@@ -8,6 +8,7 @@ import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.BiomeSpecialEffects.GrassColorModifier;
 
+@Deprecated(forRemoval = true)
 public abstract class ModBiome implements IBiome {
 	
 	protected final BiomeEffects biomeEffects;

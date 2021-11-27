@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum BeachBiomeType implements IBiomeType {
 	
 	BEACH(0.8F, BiomeNoise.of(302, 1.025), BiomeSettings.getBeachSpawns(true), BiomeSettings.getBeachFeatures(false), false),

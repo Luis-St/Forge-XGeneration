@@ -5,6 +5,7 @@ import net.luis.nero.common.world.biome.IBiomeType;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public class RiverBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;

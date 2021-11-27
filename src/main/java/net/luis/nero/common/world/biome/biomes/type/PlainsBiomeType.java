@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum PlainsBiomeType implements IBiomeType {
 	
 	PLAINS(0.8F, BiomeNoise.of(312, 1.05), BiomeSettings.getPlainsSpawns(false), BiomeSettings.getPlainsFeatures(false), false, false),

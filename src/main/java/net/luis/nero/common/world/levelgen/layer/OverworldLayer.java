@@ -19,6 +19,7 @@ import net.minecraft.world.level.newbiome.layer.ZoomLayer;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
+@SuppressWarnings("removal")
 public class OverworldLayer {
 	
 	public static final int CLIMATE_ICY = ModBiomes.CLIMATE_ICY.id();

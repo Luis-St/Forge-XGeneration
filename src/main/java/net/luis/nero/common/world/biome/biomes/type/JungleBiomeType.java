@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum JungleBiomeType implements IBiomeType {
 	
 	JUNGLE(BiomeNoise.of(310, 1.2), BiomeSettings.getJungleSpawns(false, false), BiomeSettings.getJungleFeatures(false, false, false), false),

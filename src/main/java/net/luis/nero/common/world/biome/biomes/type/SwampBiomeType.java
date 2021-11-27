@@ -8,6 +8,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum SwampBiomeType implements IBiomeType {
 	
 	SWAMP(BiomeNoise.of(292, 1.1), BiomeSettings.getSwampFeatures(false), false),

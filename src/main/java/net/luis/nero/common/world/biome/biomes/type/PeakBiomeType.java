@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum PeakBiomeType implements IBiomeType {
 	
 	MEADOW(0.0F, BiomeNoise.of(396, 1.25), BiomeSettings.getMeadowSpawns(), BiomeSettings.getMeadowFeatures(), false),

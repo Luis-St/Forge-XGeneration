@@ -17,6 +17,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
+@Deprecated(forRemoval = true)
 public interface IBiome {
 	
 	public static Supplier<Biome> createBiome(IBiome biome) {

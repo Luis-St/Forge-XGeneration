@@ -9,6 +9,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum OldGrowthBiomeType implements IBiomeType {
 	
 	OLD_GROWTH_PINE_TAIGA(0.3F, BiomeNoise.of(318, 1.2), BiomeSettings.getOldGrowthTaigaSpawns(false), BiomeSettings.getOldGrowthTaigaFeatures(false), false),

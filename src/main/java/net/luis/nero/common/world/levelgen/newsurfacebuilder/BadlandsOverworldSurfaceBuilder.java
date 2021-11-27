@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 @NotTested
+@SuppressWarnings("removal")
 public class BadlandsOverworldSurfaceBuilder extends OverworldSurfaceBuilder {
 	
 	protected static final BlockState BROWN_TERRACOTTA = Blocks.BROWN_TERRACOTTA.defaultBlockState();

@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
+@Deprecated(forRemoval = true)
 public class PeakBiome extends OverworldBiome {
 	
 	protected final IBiomeType biomeType;

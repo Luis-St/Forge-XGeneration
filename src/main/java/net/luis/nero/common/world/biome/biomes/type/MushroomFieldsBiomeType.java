@@ -8,6 +8,7 @@ import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
+@Deprecated(forRemoval = true)
 public enum MushroomFieldsBiomeType implements IBiomeType {
 	
 	MUSHROOM_FIELDS(BiomeNoise.of(318, 1.3), BiomeSettings.getMushroomFieldsSpawns(false), false),
