@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.block.LevelEvent;
 
 public class FireballRingAttackGoal extends Goal {
 
@@ -80,7 +80,7 @@ public class FireballRingAttackGoal extends Goal {
 					}
 					if (this.attackStep > 1) {
 						if (!this.hoveringInferno.isSilent()) {
-							this.hoveringInferno.level.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.hoveringInferno.blockPosition(), 0);
+							this.hoveringInferno.level.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, this.hoveringInferno.blockPosition(), 0);
 						}
 						distanceX = target.getX() - this.hoveringInferno.getX();
 						distanceY = target.getY(0.5D) - this.hoveringInferno.getY(0.5D);
