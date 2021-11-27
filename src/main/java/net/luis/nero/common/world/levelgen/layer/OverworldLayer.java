@@ -7,7 +7,6 @@ import net.luis.nero.common.world.levelgen.layer.climate.rainfall.RainfallLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.FixTemperatureLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.HotIceLayer;
 import net.luis.nero.common.world.levelgen.layer.climate.temperature.TemperatureLayer;
-import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.newbiome.area.Area;
@@ -19,20 +18,19 @@ import net.minecraft.world.level.newbiome.layer.ZoomLayer;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
-@SuppressWarnings("removal")
 public class OverworldLayer {
 	
-	public static final int CLIMATE_ICY = ModBiomes.CLIMATE_ICY.id();
-	public static final int CLIMATE_COLD = ModBiomes.CLIMATE_COLD.id();
-	public static final int CLIMATE_MEDIUM = ModBiomes.CLIMATE_MEDIUM.id();
-	public static final int CLIMATE_WARM = ModBiomes.CLIMATE_WARM.id();
-	public static final int CLIMATE_HOT = ModBiomes.CLIMATE_HOT.id();
+	public static final int CLIMATE_ICY = 1000;
+	public static final int CLIMATE_COLD = 1001;
+	public static final int CLIMATE_MEDIUM = 1002;
+	public static final int CLIMATE_WARM = 1003;
+	public static final int CLIMATE_HOT = 1004;
 	
-	public static final int CLIMATE_DRIZZLE = ModBiomes.CLIMATE_DRIZZLE.id();
-	public static final int CLIMATE_LIGHT = ModBiomes.CLIMATE_LIGHT.id();
-	public static final int CLIMATE_MODERATE = ModBiomes.CLIMATE_MODERATE.id();
-	public static final int CLIMATE_STRONG = ModBiomes.CLIMATE_STRONG.id();
-	public static final int CLIMATE_MONSOON = ModBiomes.CLIMATE_MONSOON.id();
+	public static final int CLIMATE_DRIZZLE = 1005;
+	public static final int CLIMATE_LIGHT = 1006;
+	public static final int CLIMATE_MODERATE = 1007;
+	public static final int CLIMATE_STRONG = 1008;
+	public static final int CLIMATE_MONSOON = 1009;
 	
 	public static int getBiomeId(ResourceLocation location) {
 		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(location);

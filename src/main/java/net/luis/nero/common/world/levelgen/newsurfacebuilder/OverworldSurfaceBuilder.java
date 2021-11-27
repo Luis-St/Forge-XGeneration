@@ -2,11 +2,8 @@ package net.luis.nero.common.world.levelgen.newsurfacebuilder;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
 
-import net.luis.nero.common.world.biome.IBiome;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +13,6 @@ import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuild
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
-@SuppressWarnings("removal")
 public abstract class OverworldSurfaceBuilder extends SurfaceBuilder<OverworldSurfaceBuilderConfiguration> {
 	
 	protected static final BlockState SAND = Blocks.SAND.defaultBlockState();
@@ -42,7 +38,7 @@ public abstract class OverworldSurfaceBuilder extends SurfaceBuilder<OverworldSu
 		throw new UnsupportedOperationException("Fail to build Surface, report this bug to the Mod author!");
 	}
 	
-	public abstract void apply(Random rng, ChunkAccess chunkAccess, @Nullable IBiome biome, int x, int z, double noise, int minSurface, int maxSurface, int seaLevel, long seed);
+	public abstract void apply(Random rng, ChunkAccess chunkAccess, int x, int z, double noise, int minSurface, int maxSurface, int seaLevel, long seed);
 	
 	@Override
 	public void initNoise(long seed) {

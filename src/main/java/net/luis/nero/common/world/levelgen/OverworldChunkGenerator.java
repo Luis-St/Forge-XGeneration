@@ -1,17 +1,12 @@
 package net.luis.nero.common.world.levelgen;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.util.annotation.NotTested;
-import net.luis.nero.common.world.biome.IBiome;
-import net.luis.nero.common.world.biome.biomes.vanilla.overworld.OverworldBiome;
-import net.luis.nero.common.world.biome.noise.IBiomeNoise;
 import net.luis.nero.common.world.biome.source.OverworldBiomeSource;
 import net.luis.nero.common.world.levelgen.newsurfacebuilder.OverworldSurfaceBuilder;
 import net.minecraft.core.BlockPos;
@@ -40,12 +35,10 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 @NotTested
-@SuppressWarnings("removal")
 public class OverworldChunkGenerator extends NoiseBasedChunkGenerator {
 	
 	public static final Codec<OverworldChunkGenerator> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
 			.xmap(OverworldChunkGenerator::new, OverworldChunkGenerator::getRegistry).codec();
-	public static final List<OverworldBiome> SEA_SMOOTH_BIOMES = Lists.newArrayList();
 	
 	protected final PerlinSimplexNoise worldNoise;
 	
@@ -97,7 +90,7 @@ public class OverworldChunkGenerator extends NoiseBasedChunkGenerator {
 					overworldSurfaceBuilder.initNoise(worldRegion.getSeed());
 					int maxSurface = this.getWorldNoise(worldX, worldZ);
 					int minSurface = maxSurface - 50;
-					overworldSurfaceBuilder.apply(worldRandom, chunkAccess, IBiome.byVanilla(biome), worldX, worldZ, noise, Math.max(0, minSurface), maxSurface, this.getSeaLevel(), worldRegion.getSeed());
+					overworldSurfaceBuilder.apply(worldRandom, chunkAccess, /*IBiome.byVanilla(biome),*/ worldX, worldZ, noise, Math.max(0, minSurface), maxSurface, this.getSeaLevel(), worldRegion.getSeed());
 				}
 			}
 		}
@@ -149,16 +142,16 @@ public class OverworldChunkGenerator extends NoiseBasedChunkGenerator {
 	}
 	
 	protected int getWorldNoise(int worldX, int worldZ) {
-		double noise = this.worldNoise.getSurfaceNoiseValue(worldX * 0.0425, worldZ * 0.0425, 0.0, 0.0);
-		IBiome biome = IBiome.byVanilla(this.biomeSource.getNoiseBiome(worldX, this.getSeaLevel(), worldZ));
-		if (biome instanceof OverworldBiome overworldBiome) {
-			IBiomeNoise biomeNoise = overworldBiome.getBiomeNoise();
-			int worldNoise = (int) (noise * biomeNoise.getNoiseScale() + biomeNoise.getBaseNoise());
-			if (SEA_SMOOTH_BIOMES.contains(biome) && this.getSeaLevel() > worldNoise) {
-				worldNoise += this.getSmoothnessLevel(worldNoise);
-			}
-			return worldNoise;
-		}
+//		double noise = this.worldNoise.getSurfaceNoiseValue(worldX * 0.0425, worldZ * 0.0425, 0.0, 0.0);
+//		IBiome biome = IBiome.byVanilla(this.biomeSource.getNoiseBiome(worldX, this.getSeaLevel(), worldZ));
+//		if (biome instanceof OverworldBiome overworldBiome) {
+//			IBiomeNoise biomeNoise = overworldBiome.getBiomeNoise();
+//			int worldNoise = (int) (noise * biomeNoise.getNoiseScale() + biomeNoise.getBaseNoise());
+//			if (SEA_SMOOTH_BIOMES.contains(biome) && this.getSeaLevel() > worldNoise) {
+//				worldNoise += this.getSmoothnessLevel(worldNoise);
+//			}
+//			return worldNoise;
+//		}
 		return 0;
 	}
 	

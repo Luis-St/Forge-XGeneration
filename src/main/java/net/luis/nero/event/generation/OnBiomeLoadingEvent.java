@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.luis.nero.Nero;
-import net.luis.nero.common.world.biome.IBiome;
 import net.luis.nero.common.world.biome.feature.DefaultModBiomeFeatures;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
-import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Block;
@@ -24,19 +22,18 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@SuppressWarnings("removal")
 @EventBusSubscriber(modid = Nero.MOD_ID)
 public class OnBiomeLoadingEvent {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoadingAdd(BiomeLoadingEvent event) {
 		ResourceLocation biomeLocation = event.getName();
-		IBiome biome = ModBiomes.BIOME_IDS.get(biomeLocation);
+//		IBiome biome = ModBiomes.BIOME_IDS.get(biomeLocation);
 		BiomeCategory biomeCategory = event.getCategory();
 		BiomeGenerationSettingsBuilder generationBuilder = event.getGeneration();
-		if (biome != null) {
-			biome.getModFeatures().addAllFeatures(generationBuilder);
-		}
+//		if (biome != null) {
+//			biome.getModFeatures().addAllFeatures(generationBuilder);
+//		}
 		if (biomeCategory == BiomeCategory.THEEND) {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {

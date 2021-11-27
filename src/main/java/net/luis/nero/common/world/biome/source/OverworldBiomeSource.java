@@ -8,7 +8,6 @@ import com.mojang.serialization.Codec;
 
 import net.luis.nero.common.util.annotation.NotTested;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
-import net.luis.nero.init.world.biome.ModBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
 import net.minecraft.resources.ResourceKey;
@@ -54,9 +53,8 @@ public class OverworldBiomeSource extends BiomeSource {
 	}
 	
 	@Override
-	@SuppressWarnings("removal")
 	public Biome getNoiseBiome(int x, int y, int z) {
-		return this.registry.get(ModBiomes.BADLANDS.location());
+		return null;
 	}
 	
 }

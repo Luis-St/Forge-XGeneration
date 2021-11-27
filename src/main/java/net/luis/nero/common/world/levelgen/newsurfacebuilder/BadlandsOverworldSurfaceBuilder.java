@@ -3,12 +3,9 @@ package net.luis.nero.common.world.levelgen.newsurfacebuilder;
 import java.util.Arrays;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
 
 import net.luis.nero.common.util.annotation.NotTested;
-import net.luis.nero.common.world.biome.IBiome;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,7 +14,6 @@ import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 @NotTested
-@SuppressWarnings("removal")
 public class BadlandsOverworldSurfaceBuilder extends OverworldSurfaceBuilder {
 	
 	protected static final BlockState BROWN_TERRACOTTA = Blocks.BROWN_TERRACOTTA.defaultBlockState();
@@ -33,7 +29,7 @@ public class BadlandsOverworldSurfaceBuilder extends OverworldSurfaceBuilder {
 	
 	@SuppressWarnings("unused")
 	@Override
-	public void apply(Random rng, ChunkAccess chunkAccess, @Nullable IBiome biome, int x, int z, double noise, int minSurface, int maxSurface, int seaLevel, long seed) {
+	public void apply(Random rng, ChunkAccess chunkAccess, int x, int z, double noise, int minSurface, int maxSurface, int seaLevel, long seed) {
 		WorldgenRandom worldRng = new WorldgenRandom(seed);
 		int surfaceNoise = (int) Math.round((noise + 1) * 2);
 		for (int y = maxSurface; y >= minSurface; y--) {
