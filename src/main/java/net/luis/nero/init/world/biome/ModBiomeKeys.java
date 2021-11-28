@@ -14,19 +14,6 @@ public class ModBiomeKeys {
 	
 	public static final List<ResourceKey<Biome>> BIOMES = Lists.newArrayList();
 	
-	public static final ResourceKey<Biome> CLIMATE_ICY = register("climate_icy");
-	public static final ResourceKey<Biome> CLIMATE_COLD = register("climate_cold");
-	public static final ResourceKey<Biome> CLIMATE_MEDIUM = register("climate_medium");
-	public static final ResourceKey<Biome> CLIMATE_WARM = register("climate_warm");
-	public static final ResourceKey<Biome> CLIMATE_HOT = register("climate_hot");
-	
-	public static final ResourceKey<Biome> CLIMATE_DRIZZLE = register("climate_drizzle");
-	public static final ResourceKey<Biome> CLIMATE_LIGHT = register("climate_light");
-	public static final ResourceKey<Biome> CLIMATE_MODERATE = register("climate_moderate");
-	public static final ResourceKey<Biome> CLIMATE_STRONG = register("climate_strong");
-	public static final ResourceKey<Biome> CLIMATE_MONSOON = register("climate_monsoon");
-	
-	
 	public static final ResourceKey<Biome> BADLANDS = register("badlands");
 	public static final ResourceKey<Biome> WINDSWEPT_BADLANDS = register("windswept_badlands");
 	public static final ResourceKey<Biome> ERODED_BADLANDS = register("eroded_badlands");

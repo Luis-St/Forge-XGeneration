@@ -1,18 +1,8 @@
 package net.luis.nero.common.enums;
 
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+
 public enum BiomeEffects {
-	
-	CLIMATE_ICY(4159204, 329011, 12638463, 9983, 9983),
-	CLIMATE_COLD(4159204, 329011, 12638463, 65535, 65535),
-	CLIMATE_MEDIUM(4159204, 329011, 12638463, 5046016, 5046016),
-	CLIMATE_WARM(4159204, 329011, 12638463, 16738816, 16738816),
-	CLIMATE_HOT(4159204, 329011, 12638463, 16711680, 16711680),
-	
-	CLIMATE_DRIZZLE(4159204, 329011, 12638463, 9551193, 48895),
-	CLIMATE_LIGHT(4159204, 329011, 12638463, 9551193, 38655),
-	CLIMATE_MODERATE(4159204, 329011, 12638463, 9551193, 25855),
-	CLIMATE_STRONG(4159204, 329011, 12638463, 9551193, 11796700),
-	CLIMATE_MONSOON(4159204, 329011, 12638463, 9551193, 16747520),
 	
 	OVERWORLD(4159204, 329011, 12638463, 9551193, 7842607),
 	NETHER(4159204, 329011, 3344392, 12564309, 11445290),
@@ -69,13 +59,19 @@ public enum BiomeEffects {
 	private final int fogColor;
 	private final int grassColor;
 	private final int foliageColor;
+	private final BiomeSpecialEffects.GrassColorModifier grassColorModifier;
 	
 	private BiomeEffects(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor) {
+		this(waterColor, waterFogColor, fogColor, grassColor, foliageColor, BiomeSpecialEffects.GrassColorModifier.NONE);
+	}
+	
+	private BiomeEffects(int waterColor, int waterFogColor, int fogColor, int grassColor, int foliageColor, BiomeSpecialEffects.GrassColorModifier grassColorModifier) {
 		this.waterColor = waterColor;
 		this.waterFogColor = waterFogColor;
 		this.fogColor = fogColor;
 		this.grassColor = grassColor;
 		this.foliageColor = foliageColor;
+		this.grassColorModifier = grassColorModifier;
 	}
 	
 	public int getWaterColor() {
@@ -96,6 +92,15 @@ public enum BiomeEffects {
 	
 	public int getFoliageColor() {
 		return this.foliageColor;
+	}
+	
+	public BiomeSpecialEffects.GrassColorModifier getGrassColorModifier() {
+		return this.grassColorModifier;
+	}
+	
+	public BiomeSpecialEffects toBiomeSpecialEffects() {
+		return new BiomeSpecialEffects.Builder().waterColor(this.waterColor).waterFogColor(this.waterFogColor).fogColor(this.fogColor)
+				.foliageColorOverride(this.foliageColor).grassColorOverride(this.grassColor).grassColorModifier(this.grassColorModifier).build();
 	}
 	
 }
