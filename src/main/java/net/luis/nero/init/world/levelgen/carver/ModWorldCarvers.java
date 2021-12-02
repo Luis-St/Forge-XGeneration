@@ -6,7 +6,7 @@ import net.luis.nero.common.world.levelgen.carver.ModCaveWorldCarver;
 import net.luis.nero.common.world.levelgen.carver.config.ModCanyonCarverConfiguration;
 import net.luis.nero.common.world.levelgen.carver.config.ModCaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

@@ -1,7 +1,5 @@
 package net.luis.nero.common.block;
 
-import java.util.Optional;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -42,12 +40,9 @@ public class DriftSandBlock extends SandBlock {
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
 		if (context instanceof EntityCollisionContext) {
-			EntityCollisionContext entityContext = (EntityCollisionContext) context;
-			Optional<Entity> optionalEntity = entityContext.getEntity();
-			if (optionalEntity.isPresent()) {
-				if (optionalEntity.get() instanceof FallingBlockEntity) {
-					return Shapes.block();
-				}
+			Entity entity = ((EntityCollisionContext) context).getEntity();
+			if (entity instanceof FallingBlockEntity) {
+				return Shapes.block();
 			}
 		}
 		return Shapes.empty();

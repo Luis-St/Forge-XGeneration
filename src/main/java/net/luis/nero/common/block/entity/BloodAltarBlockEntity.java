@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+// TODO: fix
 public class BloodAltarBlockEntity extends BlockEntity implements IAnimatedBlockEntity, IEnergyBlockEntity<BloodAltarBlockEntity> {
 	
 	protected int blood = 0;
@@ -111,12 +112,13 @@ public class BloodAltarBlockEntity extends BlockEntity implements IAnimatedBlock
 		}
 	}
 	
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.saveData());
-	}
+//	@Override
+//	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+//		return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.saveData());
+//	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
 		if (this.getLevel() != null) {
 			if (this.getLevel().isAreaLoaded(this.getBlockPos(), 1)) {

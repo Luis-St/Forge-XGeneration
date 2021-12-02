@@ -90,7 +90,6 @@ public class OnBiomeLoadingEvent {
 		for (GenerationStep.Carving carving : GenerationStep.Carving.values()) {
 			generationBuilder.getCarvers(carving).removeIf(t -> true);
 		}
-		generationBuilder.getStructures().removeIf(t -> true);
 	}
 
 }

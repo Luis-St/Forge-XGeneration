@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 	
-loaderVersion="[37,)" #mandatory 
+loaderVersion="[38,)" #mandatory 
 
 license="All rights reserved"
 
@@ -19,11 +19,8 @@ credits="Thanks for downloading my Mod" #optional
 authors="Luis" #optional
 
 description='''
-Nero adds a lot of cool new Features, 
- - One of the most interesting ones is the custom Dimension called Deepslate
- - Another feature is the Blood Magic System which is remake from 1.8
-
-One last thing which is very important, have a lot of fun when playing
+Nero adds a lot of cool new Features!
+Have a lot of fun when playing
 Nero Development Team
 '''
 	
@@ -33,7 +30,7 @@ Nero Development Team
     
     mandatory=true #mandatory
     
-    versionRange="[37,)" #mandatory
+    versionRange="[38,)" #mandatory
     
     ordering="NONE"
     
@@ -45,7 +42,7 @@ Nero Development Team
     
     mandatory=true
 
-    versionRange="[1.17.1,1.18)"
+    versionRange="[1.18,1.19)"
     
     ordering="NONE"
     

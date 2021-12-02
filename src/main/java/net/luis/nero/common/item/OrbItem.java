@@ -17,6 +17,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+// TODO: test
 public class OrbItem extends Item {
 	
 	private final IOrbType orbType;
@@ -30,22 +31,39 @@ public class OrbItem extends Item {
 		return this.orbType;
 	}
 	
+//	@Override
+//	public double getDurabilityForDisplay(ItemStack stack) {
+//		double blood = CapabilityUtil.getBloodOrbCapability(stack).getBlood();
+//		double bloodCapability = this.orbType.getBloodCapacity();
+//		return 1 - (blood / bloodCapability);
+//	}
+//	
+//	@Override
+//	public boolean showDurabilityBar(ItemStack stack) {
+//		boolean isOrbItem = stack.getItem() instanceof OrbItem;
+//		boolean isNotEmpty = CapabilityUtil.getBloodOrbCapability(stack).hasBlood();
+//		return isOrbItem && isNotEmpty;
+//	}
+//	
+//	@Override
+//	public int getRGBDurabilityForDisplay(ItemStack stack) {
+//		return 11796480;
+//	}
+	
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
+	public int getBarWidth(ItemStack stack) {
 		double blood = CapabilityUtil.getBloodOrbCapability(stack).getBlood();
 		double bloodCapability = this.orbType.getBloodCapacity();
-		return 1 - (blood / bloodCapability);
+		return (int) (1 - (blood / bloodCapability));
 	}
 	
 	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		boolean isOrbItem = stack.getItem() instanceof OrbItem;
-		boolean isNotEmpty = CapabilityUtil.getBloodOrbCapability(stack).hasBlood();
-		return isOrbItem && isNotEmpty;
+	public boolean isBarVisible(ItemStack stack) {
+		return stack.getItem() instanceof OrbItem && CapabilityUtil.getBloodOrbCapability(stack).hasBlood();
 	}
 	
 	@Override
-	public int getRGBDurabilityForDisplay(ItemStack stack) {
+	public int getBarColor(ItemStack stack) {
 		return 11796480;
 	}
 	

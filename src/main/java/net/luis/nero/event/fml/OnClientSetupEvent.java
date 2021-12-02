@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ForgeWorldTypeScreens;
+import net.minecraftforge.client.ForgeWorldPresetScreens;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -39,7 +39,7 @@ public class OnClientSetupEvent {
 	}
 	
 	protected static void registerWorldTypes(FMLClientSetupEvent event) {
-		ForgeWorldTypeScreens.registerFactory(ModWorldTypes.NERO_OVWERWORLD.get(), (worldScreen, worldGenSettings) -> new Screen(ModWorldTypes.NERO_OVWERWORLD.get().getDisplayName()) {
+		ForgeWorldPresetScreens.registerPresetEditor(ModWorldTypes.NERO_OVWERWORLD.get(), (worldScreen, worldGenSettings) -> new Screen(ModWorldTypes.NERO_OVWERWORLD.get().getDisplayName()) {
 			@Override
 			protected void init() {
 				super.init();

@@ -16,7 +16,7 @@ public class OnFogDensityEvent {
 	@SubscribeEvent
 	public static void fogDensity(EntityViewRenderEvent.FogDensity event) {
 		Minecraft minecraft = Minecraft.getInstance();
-		Camera camera = event.getInfo();
+		Camera camera = event.getCamera();
 		if (camera.getBlockAtCamera().getBlock() == ModBlocks.DRIFT_SAND.get()) {
 			event.setCanceled(true);
 			if (minecraft.player.isSpectator()) {

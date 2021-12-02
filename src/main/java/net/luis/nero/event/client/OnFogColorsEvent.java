@@ -14,7 +14,7 @@ public class OnFogColorsEvent {
 
 	@SubscribeEvent
 	public static void fogColors(EntityViewRenderEvent.FogColors event) {
-		Camera camera = event.getInfo();
+		Camera camera = event.getCamera();
 		if (camera.getBlockAtCamera().getBlock() == ModBlocks.DRIFT_SAND.get()) {
 			event.setRed(0.87843F);
 			event.setGreen(0.74117F);

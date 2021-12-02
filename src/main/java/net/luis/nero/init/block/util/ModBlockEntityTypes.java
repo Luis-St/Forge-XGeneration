@@ -5,7 +5,7 @@ import net.luis.nero.common.block.entity.BloodAltarBlockEntity;
 import net.luis.nero.common.block.entity.BridgeBlockEntity;
 import net.luis.nero.init.block.ModBlocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

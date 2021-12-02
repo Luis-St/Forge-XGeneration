@@ -18,15 +18,14 @@ import net.luis.nero.init.villager.ModVillagerProfessions;
 import net.luis.nero.init.world.ModWorldTypes;
 import net.luis.nero.init.world.biome.ModBiomes;
 import net.luis.nero.init.world.levelgen.carver.ModWorldCarvers;
-import net.luis.nero.init.world.levelgen.decorator.ModFeatureDecorators;
 import net.luis.nero.init.world.levelgen.feature.ModFeatures;
 import net.luis.nero.init.world.levelgen.feature.structure.ModStructures;
-import net.luis.nero.init.world.levelgen.surfacebuilder.ModSurfaceBuilders;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
+//TODO: fix
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
@@ -60,9 +59,9 @@ public class Nero {
 		ModEffects.MOB_EFFECTS.register(eventBus);
 		ModPotions.POTIONS.register(eventBus);
 		
-		ModFeatureDecorators.DECORATORS.register(eventBus);
+//		ModFeatureDecorators.DECORATORS.register(eventBus);
 		ModFeatures.FEATURES.register(eventBus);
-		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
+//		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
 		ModWorldCarvers.WORLD_CARVERS.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);

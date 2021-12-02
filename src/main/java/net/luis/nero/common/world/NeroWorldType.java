@@ -1,17 +1,20 @@
 package net.luis.nero.common.world;
 
-import net.luis.nero.common.world.levelgen.OverworldChunkGenerator;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.biome.Biome;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
-import net.minecraftforge.common.world.ForgeWorldType.IChunkGeneratorFactory;
+import net.minecraftforge.common.world.ForgeWorldPreset.IChunkGeneratorFactory;
 
+// TODO: fix
 public class NeroWorldType implements IChunkGeneratorFactory {
 	
+//	@Override
+//	public ChunkGenerator createChunkGenerator(Registry<Biome> biomeRegistry, Registry<NoiseGeneratorSettings> dimensionSettingsRegistry, long seed, String generatorSettings) {
+//		return new OverworldChunkGenerator(biomeRegistry);
+//	}
+
 	@Override
-	public ChunkGenerator createChunkGenerator(Registry<Biome> biomeRegistry, Registry<NoiseGeneratorSettings> dimensionSettingsRegistry, long seed, String generatorSettings) {
-		return new OverworldChunkGenerator(biomeRegistry);
+	public ChunkGenerator createChunkGenerator(RegistryAccess dynamicRegistries, long seed, String generatorSettings) {
+		return null;
 	}
 	
 }

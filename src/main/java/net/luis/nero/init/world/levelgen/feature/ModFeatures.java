@@ -4,7 +4,7 @@ import net.luis.nero.Nero;
 import net.luis.nero.common.world.levelgen.feature.ModDungeonsFeature;
 import net.luis.nero.common.world.levelgen.feature.ModOreFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

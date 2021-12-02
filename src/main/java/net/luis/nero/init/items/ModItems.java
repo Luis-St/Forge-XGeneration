@@ -23,7 +23,7 @@ import net.luis.nero.init.util.ModItemGroups;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.FireChargeItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

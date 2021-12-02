@@ -5,9 +5,9 @@ import net.luis.nero.init.block.ModBlocks;
 import net.luis.nero.init.util.ModItemGroups;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockItems {
 	
