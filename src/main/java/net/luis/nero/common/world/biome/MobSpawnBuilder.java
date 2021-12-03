@@ -3,7 +3,6 @@ package net.luis.nero.common.world.biome;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import net.luis.nero.Nero;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -41,24 +40,6 @@ public class MobSpawnBuilder extends MobSpawnSettings.Builder {
 	@Override
 	public MobSpawnBuilder creatureGenerationProbability(float creatureGenerationProbability) {
 		this.creatureGenerationProbability = creatureGenerationProbability;
-		return this;
-	}
-	
-	public MobSpawnBuilder enablePlayerSpawn() {
-		this.playerCanSpawn = true;
-		return this;
-	}
-
-	public MobSpawnBuilder disablePlayerSpawn() {
-		this.playerCanSpawn = false;
-		return this;
-	}
-
-	@Override
-	@Deprecated
-	public MobSpawnBuilder setPlayerCanSpawn() {
-		Nero.LOGGER.warn("A deprecated marked method was executed: {}", "MobSpawnBuilder#setPlayerCanSpawn");
-		this.playerCanSpawn = true;
 		return this;
 	}
 	

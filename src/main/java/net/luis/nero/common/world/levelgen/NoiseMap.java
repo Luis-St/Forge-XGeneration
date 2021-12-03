@@ -1,10 +1,8 @@
 package net.luis.nero.common.world.levelgen;
 
-import net.luis.nero.common.util.annotation.NotTested;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
-@NotTested
 public class NoiseMap {
 	
 	protected final PerlinSimplexNoise worldNoise;

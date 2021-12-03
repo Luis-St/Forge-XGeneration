@@ -25,11 +25,11 @@ public class ModCanyonCarverConfiguration extends ModCarverConfiguration {
 	public final ModCanyonCarverConfiguration.ModCanyonShapeConfiguration shape;
 	
 	protected ModCanyonCarverConfiguration(ModCarverConfiguration config, FloatProvider verticalRotation, ModCanyonCarverConfiguration.ModCanyonShapeConfiguration shape) {
-		this(config.probability, config.y, config.yScale, config.fluidLevel, config.fluid, config.aquifersEnabled, config.range, verticalRotation, shape);
+		this(config.probability, config.y, config.yScale, config.fluidLevel, config.fluid, config.range, verticalRotation, shape);
 	}
 	
-	public ModCanyonCarverConfiguration(float probability, HeightProvider y, FloatProvider yScale, VerticalAnchor fluidLevel, FluidState fluid, boolean aquifersEnabled, int range, FloatProvider verticalRotation, ModCanyonCarverConfiguration.ModCanyonShapeConfiguration shape) {
-		super(probability, y, yScale, fluidLevel, fluid, aquifersEnabled, range);
+	public ModCanyonCarverConfiguration(float probability, HeightProvider y, FloatProvider yScale, VerticalAnchor fluidLevel, FluidState fluid, int range, FloatProvider verticalRotation, ModCanyonCarverConfiguration.ModCanyonShapeConfiguration shape) {
+		super(probability, y, yScale, fluidLevel, fluid, range);
 		this.verticalRotation = verticalRotation;
 		this.shape = shape;
 	}

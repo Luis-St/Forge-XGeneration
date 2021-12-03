@@ -88,8 +88,6 @@ public class ModBiome implements Creator<Supplier<Biome>> {
 		biomeBuilder.temperatureAdjustment(this.getTemperatureModifier());
 		biomeBuilder.downfall(this.getDownfall());
 		biomeBuilder.biomeCategory(Biome.BiomeCategory.NONE);
-		biomeBuilder.scale(0.0F);
-		biomeBuilder.depth(0.0F);
 		biomeBuilder.specialEffects(this.getBiomeEffects().toBiomeSpecialEffects());
 		biomeBuilder.generationSettings(this.getGenerationSettings());
 		biomeBuilder.mobSpawnSettings(this.getSpawnSettings());

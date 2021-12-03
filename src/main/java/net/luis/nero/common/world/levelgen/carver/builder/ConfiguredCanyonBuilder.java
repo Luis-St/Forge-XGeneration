@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
+// TODO: fix
 public class ConfiguredCanyonBuilder<C extends ModCanyonCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
 	
 	protected final WorldCarver<C> carver;
@@ -24,7 +25,6 @@ public class ConfiguredCanyonBuilder<C extends ModCanyonCarverConfiguration> imp
 	protected FloatProvider yScale;
 	protected VerticalAnchor fluidLevel;
 	protected FluidState fluid;
-	protected boolean aquifersEnabled;
 	protected int range;
 	protected FloatProvider verticalRotation;
 	protected ModCanyonShapeConfiguration shape;
@@ -82,16 +82,6 @@ public class ConfiguredCanyonBuilder<C extends ModCanyonCarverConfiguration> imp
 		return this;
 	}
 	
-	public ConfiguredCanyonBuilder<C> enableAquifers() {
-		this.aquifersEnabled = true;
-		return this;
-	}
-	
-	public ConfiguredCanyonBuilder<C> disableAquifers() {
-		this.aquifersEnabled = false;
-		return this;
-	}
-	
 	public ConfiguredCanyonBuilder<C> range(int range) {
 		this.range = range;
 		return this;
@@ -115,7 +105,7 @@ public class ConfiguredCanyonBuilder<C extends ModCanyonCarverConfiguration> imp
 	@Override
 	@SuppressWarnings("unchecked")
 	public ConfiguredWorldCarver<C> build() {
-		return this.carver.configured((C) new ModCanyonCarverConfiguration(this.probability, this.y, this.yScale, this.fluidLevel, this.fluid, this.aquifersEnabled, this.range, this.verticalRotation, this.shape));
+		return this.carver.configured((C) new ModCanyonCarverConfiguration(this.probability, this.y, this.yScale, this.fluidLevel, this.fluid, this.range, this.verticalRotation, this.shape));
 	}
 	
 	public static class ShapeBuilder {

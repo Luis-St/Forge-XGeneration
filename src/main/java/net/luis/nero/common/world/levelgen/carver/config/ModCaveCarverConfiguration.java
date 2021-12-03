@@ -37,11 +37,11 @@ public class ModCaveCarverConfiguration extends ModCarverConfiguration {
 	public final FloatProvider floorLevel;
 	
 	protected ModCaveCarverConfiguration(ModCarverConfiguration config, FloatProvider yRoomScale, FloatProvider yTunnelScale, int bound, FloatProvider horizontalMultiplier, FloatProvider verticalMultiplier, FloatProvider floorLevel) {
-		this(config.probability, config.y, yRoomScale, yTunnelScale, config.fluidLevel, config.fluid, config.aquifersEnabled, config.range, bound, horizontalMultiplier, verticalMultiplier, floorLevel);
+		this(config.probability, config.y, yRoomScale, yTunnelScale, config.fluidLevel, config.fluid, config.range, bound, horizontalMultiplier, verticalMultiplier, floorLevel);
 	}
 	
-	public ModCaveCarverConfiguration(float probability, HeightProvider y, FloatProvider yRoomScale, FloatProvider yTunnelScale, VerticalAnchor fluidLevel, FluidState fluid, boolean aquifersEnabled, int range, int bound, FloatProvider horizontalMultiplier, FloatProvider verticalMultiplier, FloatProvider floorLevel) {
-		super(probability, y, ConstantFloat.ZERO, fluidLevel, fluid, aquifersEnabled, range);
+	public ModCaveCarverConfiguration(float probability, HeightProvider y, FloatProvider yRoomScale, FloatProvider yTunnelScale, VerticalAnchor fluidLevel, FluidState fluid, int range, int bound, FloatProvider horizontalMultiplier, FloatProvider verticalMultiplier, FloatProvider floorLevel) {
+		super(probability, y, ConstantFloat.ZERO, fluidLevel, fluid,  range);
 		this.yRoomScale = yRoomScale;
 		this.yTunnelScale = yTunnelScale;
 		this.bound = bound;

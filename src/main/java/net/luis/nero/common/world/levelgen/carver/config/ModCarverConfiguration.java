@@ -24,8 +24,6 @@ public class ModCarverConfiguration extends CarverConfiguration {
 			return carverConfig.fluidLevel;
 		}), FluidState.CODEC.fieldOf("fluid").forGetter((carverConfig) -> {
 			return carverConfig.fluid;
-		}), Codec.BOOL.fieldOf("aquifers_enabled").forGetter((carverConfig) -> {
-			return carverConfig.aquifersEnabled;
 		}), Codec.INT.fieldOf("range").forGetter((carverConfig) -> {
 			return carverConfig.range;
 		})).apply(instance, ModCarverConfiguration::new);
@@ -35,8 +33,8 @@ public class ModCarverConfiguration extends CarverConfiguration {
 	public final VerticalAnchor fluidLevel;
 	public final int range;
 	
-	public ModCarverConfiguration(float probability, HeightProvider y, FloatProvider yScale, VerticalAnchor fluidLevel, FluidState fluid, boolean aquifersEnabled, int range) {
-		super(probability, y, yScale, VerticalAnchor.absolute(0), aquifersEnabled, CarverDebugSettings.DEFAULT);
+	public ModCarverConfiguration(float probability, HeightProvider y, FloatProvider yScale, VerticalAnchor fluidLevel, FluidState fluid, int range) {
+		super(probability, y, yScale, VerticalAnchor.absolute(0), CarverDebugSettings.DEFAULT);
 		this.fluidLevel = fluidLevel;
 		this.fluid = fluid;
 		this.range = range;

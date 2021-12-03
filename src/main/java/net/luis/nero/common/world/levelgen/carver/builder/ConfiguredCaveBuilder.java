@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
+// TODO: fix
 public class ConfiguredCaveBuilder<C extends ModCaveCarverConfiguration> implements Builder<ConfiguredWorldCarver<C>> {
 	
 	protected final WorldCarver<C> carver;
@@ -23,7 +24,6 @@ public class ConfiguredCaveBuilder<C extends ModCaveCarverConfiguration> impleme
 	protected FloatProvider yTunnelScale;
 	protected VerticalAnchor fluidLevel;
 	protected FluidState fluid;
-	protected boolean aquifersEnabled;
 	protected int range;
 	protected int bound;
 	protected FloatProvider horizontalMultiplier;
@@ -93,16 +93,6 @@ public class ConfiguredCaveBuilder<C extends ModCaveCarverConfiguration> impleme
 		return this;
 	}
 	
-	public ConfiguredCaveBuilder<C> enableAquifers() {
-		this.aquifersEnabled = true;
-		return this;
-	}
-	
-	public ConfiguredCaveBuilder<C> disableAquifers() {
-		this.aquifersEnabled = false;
-		return this;
-	}
-	
 	public ConfiguredCaveBuilder<C> range(int range) {
 		this.range = range;
 		return this;
@@ -141,8 +131,8 @@ public class ConfiguredCaveBuilder<C extends ModCaveCarverConfiguration> impleme
 	@Override
 	@SuppressWarnings("unchecked")
 	public ConfiguredWorldCarver<C> build() {
-		return this.carver.configured((C) new ModCaveCarverConfiguration(this.probability, this.y, this.yRoomScale, this.yTunnelScale, this.fluidLevel, this.fluid, this.aquifersEnabled, this.range, this.bound, 
-				this.horizontalMultiplier, this.verticalMultiplier, this.floorLevel));
+		return this.carver.configured((C) new ModCaveCarverConfiguration(this.probability, this.y, this.yRoomScale, this.yTunnelScale, this.fluidLevel, this.fluid, this.range, this.bound, this.horizontalMultiplier, 
+				this.verticalMultiplier, this.floorLevel));
 	}
 	
 }

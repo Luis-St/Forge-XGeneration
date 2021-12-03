@@ -1,6 +1,5 @@
 package net.luis.nero.common.world.levelgen.carver;
 
-import java.util.BitSet;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -11,11 +10,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.CarvingMask;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Aquifer;
 import net.minecraft.world.level.levelgen.carver.CarvingContext;
-import net.minecraft.world.level.levelgen.carver.WorldCarver;
 
+// TODO: fix
 public class ModCanyonWorldCarver extends ModWorldCarver<ModCanyonCarverConfiguration> {
 
 	public ModCanyonWorldCarver(Codec<ModCanyonCarverConfiguration> codec) {
@@ -28,55 +28,62 @@ public class ModCanyonWorldCarver extends ModWorldCarver<ModCanyonCarverConfigur
 	}
 
 	@Override
-	public boolean carve(CarvingContext context, ModCanyonCarverConfiguration config, ChunkAccess chunkAccess, Function<BlockPos, Biome> toBiome, Random rng, Aquifer aquifer, ChunkPos chunkPos, BitSet bitSet) {
-		int range = (config.range * 2 - 1) * 16;
-		double posX = chunkPos.getBlockX(rng.nextInt(16));
-		double posY = config.y.sample(rng, context);
-		double posZ = chunkPos.getBlockZ(rng.nextInt(16));
-		float motionHorizontal = rng.nextFloat() * ((float) Math.PI * 2F);
-		float verticalRotation = config.verticalRotation.sample(rng);
-		double yScale = config.yScale.sample(rng);
-		float thickness = config.shape.thickness.sample(rng);
-		int length = (int) (range * config.shape.distanceFactor.sample(rng));
-		this.doCarve(context, config, chunkAccess, toBiome, rng.nextLong(), aquifer, posX, posY, posZ, thickness, motionHorizontal, verticalRotation, 0, length, yScale, bitSet);
-		return true;
+	public boolean carve(CarvingContext p_190766_, ModCanyonCarverConfiguration p_190767_, ChunkAccess p_190768_,
+			Function<BlockPos, Biome> p_190769_, Random p_190770_, Aquifer p_190771_, ChunkPos p_190772_,
+			CarvingMask p_190773_) {
+		return false;
 	}
+	
+//	@Override
+//	public boolean carve(CarvingContext context, ModCanyonCarverConfiguration config, ChunkAccess chunkAccess, Function<BlockPos, Biome> toBiome, Random rng, Aquifer aquifer, ChunkPos chunkPos, BitSet bitSet) {
+//		int range = (config.range * 2 - 1) * 16;
+//		double posX = chunkPos.getBlockX(rng.nextInt(16));
+//		double posY = config.y.sample(rng, context);
+//		double posZ = chunkPos.getBlockZ(rng.nextInt(16));
+//		float motionHorizontal = rng.nextFloat() * ((float) Math.PI * 2F);
+//		float verticalRotation = config.verticalRotation.sample(rng);
+//		double yScale = config.yScale.sample(rng);
+//		float thickness = config.shape.thickness.sample(rng);
+//		int length = (int) (range * config.shape.distanceFactor.sample(rng));
+//		this.doCarve(context, config, chunkAccess, toBiome, rng.nextLong(), aquifer, posX, posY, posZ, thickness, motionHorizontal, verticalRotation, 0, length, yScale, bitSet);
+//		return true;
+//	}
 
-	protected void doCarve(CarvingContext context, ModCanyonCarverConfiguration config, ChunkAccess chunkAccess, Function<BlockPos, Biome> toBiome, long seed, Aquifer aquifer, double posX, double posY, double posZ, float thickness, 
-			float motionHorizontal, float verticalRotation, int startGen, int length, double yScale, BitSet bitSet) {
-		Random rng = new Random(seed);
-		float[] widthFactors = this.initWidthFactors(context, config, rng);
-		float f = 0.0F;
-		float g = 0.0F;
-		for (int i = startGen; i < length; ++i) {
-			double width = 1.5D + (Mth.sin((float) i * (float) Math.PI / (float) length) * thickness);
-			double height = width * yScale;
-			width *= config.shape.horizontalFactor.sample(rng);
-			height = this.updateVerticalRadius(config, rng, height, (float) length, (float) i);
-			float h = Mth.cos(verticalRotation);
-			float j = Mth.sin(verticalRotation);
-			posX += Mth.cos(motionHorizontal) * h;
-			posY += j;
-			posZ += Mth.sin(motionHorizontal) * h;
-			verticalRotation *= 0.7F;
-			verticalRotation += g * 0.05F;
-			motionHorizontal += f * 0.05F;
-			g *= 0.8F;
-			f *= 0.5F;
-			g += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 2.0F;
-			f += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 4.0F;
-			if (rng.nextInt(4) != 0) {
-				if (!canReach(chunkAccess.getPos(), posX, posZ, i, length, thickness)) {
-					return;
-				}
-				WorldCarver.CarveSkipChecker skipChecker = (carvingContext, xOffset, yOffset, zOffset, y) -> {
-					return this.shouldSkip(carvingContext, widthFactors, xOffset, yOffset, zOffset, y);
-				};
-				this.carveEllipsoid(context, config, chunkAccess, toBiome, seed, aquifer, posX, posY, posZ, width, height, bitSet, skipChecker);
-			}
-		}
-
-	}
+//	protected void doCarve(CarvingContext context, ModCanyonCarverConfiguration config, ChunkAccess chunkAccess, Function<BlockPos, Biome> toBiome, long seed, Aquifer aquifer, double posX, double posY, double posZ, float thickness, 
+//			float motionHorizontal, float verticalRotation, int startGen, int length, double yScale, BitSet bitSet) {
+//		Random rng = new Random(seed);
+//		float[] widthFactors = this.initWidthFactors(context, config, rng);
+//		float f = 0.0F;
+//		float g = 0.0F;
+//		for (int i = startGen; i < length; ++i) {
+//			double width = 1.5D + (Mth.sin((float) i * (float) Math.PI / (float) length) * thickness);
+//			double height = width * yScale;
+//			width *= config.shape.horizontalFactor.sample(rng);
+//			height = this.updateVerticalRadius(config, rng, height, (float) length, (float) i);
+//			float h = Mth.cos(verticalRotation);
+//			float j = Mth.sin(verticalRotation);
+//			posX += Mth.cos(motionHorizontal) * h;
+//			posY += j;
+//			posZ += Mth.sin(motionHorizontal) * h;
+//			verticalRotation *= 0.7F;
+//			verticalRotation += g * 0.05F;
+//			motionHorizontal += f * 0.05F;
+//			g *= 0.8F;
+//			f *= 0.5F;
+//			g += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 2.0F;
+//			f += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 4.0F;
+//			if (rng.nextInt(4) != 0) {
+//				if (!canReach(chunkAccess.getPos(), posX, posZ, i, length, thickness)) {
+//					return;
+//				}
+//				WorldCarver.CarveSkipChecker skipChecker = (carvingContext, xOffset, yOffset, zOffset, y) -> {
+//					return this.shouldSkip(carvingContext, widthFactors, xOffset, yOffset, zOffset, y);
+//				};
+//				this.carveEllipsoid(context, config, chunkAccess, toBiome, seed, aquifer, posX, posY, posZ, width, height, bitSet, skipChecker);
+//			}
+//		}
+//
+//	}
 
 	protected float[] initWidthFactors(CarvingContext context, ModCanyonCarverConfiguration config, Random rng) {
 		float[] widthFactors = new float[context.getGenDepth()];

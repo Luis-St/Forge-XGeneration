@@ -6,16 +6,15 @@ import java.util.stream.Collectors;
 
 import com.mojang.serialization.Codec;
 
-import net.luis.nero.common.util.annotation.NotTested;
 import net.luis.nero.init.world.biome.ModBiomeKeys;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.newbiome.layer.Layer;
+import net.minecraft.world.level.biome.Climate.Sampler;
 
-@NotTested
+// TODO: fix
 public class OverworldBiomeSource extends BiomeSource {
 
 	public static final Codec<OverworldBiomeSource> CODEC = RegistryLookupCodec.create(Registry.BIOME_REGISTRY)
@@ -23,8 +22,6 @@ public class OverworldBiomeSource extends BiomeSource {
 	
 	protected final Registry<Biome> registry;
 	protected final long seed;
-	protected final Layer surfaceLayer;
-	protected final Layer undergroundLayer;
 	
 	public OverworldBiomeSource(Registry<Biome> registry) {
 		this(registry, new Random().nextLong());
@@ -34,8 +31,6 @@ public class OverworldBiomeSource extends BiomeSource {
 		super(ModBiomeKeys.BIOMES.stream().map(ResourceKey::location).map(registry::getOptional).filter(Optional::isPresent).map(optional -> optional.get()).collect(Collectors.toList()));
 		this.registry = registry;
 		this.seed = seed;
-		this.surfaceLayer = null;
-		this.undergroundLayer = null;
 	}
 	
 	public Registry<Biome> getRegistry() {
@@ -51,9 +46,9 @@ public class OverworldBiomeSource extends BiomeSource {
 	public BiomeSource withSeed(long seed) {
 		return new OverworldBiomeSource(this.registry, seed);
 	}
-	
+
 	@Override
-	public Biome getNoiseBiome(int x, int y, int z) {
+	public Biome getNoiseBiome(int p_186735_, int p_186736_, int p_186737_, Sampler p_186738_) {
 		return null;
 	}
 	
