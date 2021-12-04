@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nero:block/drift_sand"
+      "model": "nero_generation:block/drift_sand"
     }
   }
 }

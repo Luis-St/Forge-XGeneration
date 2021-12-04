@@ -8,14 +8,10 @@ import com.google.common.collect.Lists;
 import net.luis.nero.Nero;
 import net.luis.nero.common.world.biome.source.OverworldBiomeSource;
 import net.luis.nero.common.world.levelgen.OverworldChunkGenerator;
-import net.luis.nero.init.entity.ModEntityTypes;
 import net.luis.nero.network.NetworkHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
@@ -31,7 +27,6 @@ public class OnCommonSetupEvent {
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		registerNetwork(event);
 		registerBiome(event);
-		registerEntitySpawnPlacements(event);
 		registerStructure(event);
 		registerUtil(event);
 	}
@@ -42,11 +37,6 @@ public class OnCommonSetupEvent {
 	
 	protected static void registerBiome(FMLCommonSetupEvent event) {
 		
-	}
-	
-	protected static void registerEntitySpawnPlacements(FMLCommonSetupEvent event) {
-		SpawnPlacements.register(ModEntityTypes.SOUL_BLAZE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,  Monster::checkAnyLightMonsterSpawnRules);
-		SpawnPlacements.register(ModEntityTypes.HOVERING_INFERNO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,  Monster::checkAnyLightMonsterSpawnRules);
 	}
 	
 	protected static void registerStructure(FMLCommonSetupEvent event) {

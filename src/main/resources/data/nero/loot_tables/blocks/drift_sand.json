@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nero:drift_sand"
+          "name": "nero_generation:drift_sand"
         }
       ],
       "conditions": [

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nero:deepslate_wall"
+          "name": "nero_generation:deepslate_wall"
         }
       ],
       "conditions": [

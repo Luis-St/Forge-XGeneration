@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "nero:block/scorched_sand"
+    "all": "nero_generation:block/scorched_sand"
   }
 }

@@ -1,4 +1,4 @@
-package net.luis.nero.common.capability;
+package net.luis.nero.common.util;
 
 import net.minecraft.nbt.CompoundTag;
 

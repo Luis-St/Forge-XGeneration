@@ -6,11 +6,11 @@ license="All rights reserved"
 
 [[mods]] #mandatory
 	
-modId="nero" #mandatory
+modId="nero_generation" #mandatory
 
 version="${file.jarVersion}" #mandatory
 
-displayName="Nero" #mandatory
+displayName="Nero Generation" #mandatory
 
 logoFile="" #optional
 
@@ -19,12 +19,12 @@ credits="Thanks for downloading my Mod" #optional
 authors="Luis" #optional
 
 description='''
-Nero adds a lot of cool new Features!
+Nero adds a lot of cool new World Features!
 Have a lot of fun when playing
 Nero Development Team
 '''
 	
-[[dependencies.nero]] #optional
+[[dependencies.nero_generation]] #optional
 	
     modId="forge" #mandatory
     
@@ -36,7 +36,7 @@ Nero Development Team
     
     side="BOTH"
     
-[[dependencies.nero]]
+[[dependencies.nero_generation]]
 		
     modId="minecraft"
     

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nero:deepslate_stairs"
+          "name": "nero_generation:deepslate_stairs"
         }
       ],
       "conditions": [

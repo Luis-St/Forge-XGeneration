@@ -38,7 +38,7 @@ public class OnBiomeLoadingEvent {
 			
 		} else if (biomeCategory == BiomeCategory.NETHER) {
 			
-		} else if (!biomeLocation.getNamespace().equals("nero")) {
+		} else if (!biomeLocation.getNamespace().equals("nero_generation")) {
 			DefaultModBiomeFeatures.addOreOverwrites(generationBuilder);
 		}
 	}

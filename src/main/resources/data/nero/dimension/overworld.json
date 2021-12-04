@@ -1,6 +1,6 @@
 {
-  "type": "nero:overworld",
+  "type": "nero_generation:overworld",
   "generator": {
-    "type": "nero:overworld_chunk_generator"
+    "type": "nero_generation:overworld_chunk_generator"
   }
 }

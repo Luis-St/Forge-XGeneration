@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "minecraft:deepslate"
   },
-  "result": "nero:deepslate_stairs",
+  "result": "nero_generation:deepslate_stairs",
   "count": 1
 }

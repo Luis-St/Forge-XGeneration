@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class OnWorldTickEvent {
 
 	@SubscribeEvent
-	public static void worldLoad(TickEvent.WorldTickEvent event) {
+	public static void worldTick(TickEvent.WorldTickEvent event) {
 		
 	}
 

@@ -18,11 +18,8 @@ public class OnHighlightBlockEvent {
 	@SuppressWarnings("resource")
 	public static void highlightBlock(DrawSelectionEvent.HighlightBlock event) {
 		LocalPlayer localPlayer = Minecraft.getInstance().player;
-		BlockPos targetPos = event.getTarget().getBlockPos();
 		BlockPos headPos = localPlayer.eyeBlockPosition();
-		if (Minecraft.getInstance().level.getBlockState(targetPos).getBlock() == ModBlocks.BRIDGE_BLOCK.get()) {
-			event.setCanceled(true);
-		} else if (Minecraft.getInstance().level.getBlockState(headPos).getBlock() == ModBlocks.DRIFT_SAND.get()) {
+		if (Minecraft.getInstance().level.getBlockState(headPos).getBlock() == ModBlocks.DRIFT_SAND.get()) {
 			event.setCanceled(true);
 		} else if (Minecraft.getInstance().level.getBlockState(headPos).getBlock() == Blocks.POWDER_SNOW) {
 			event.setCanceled(true);

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nero:block/scorched_sand"
+      "model": "nero_generation:block/scorched_sand"
     }
   }
 }

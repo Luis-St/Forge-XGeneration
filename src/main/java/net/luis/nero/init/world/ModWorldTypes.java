@@ -12,6 +12,6 @@ public class ModWorldTypes {
 	public static final DeferredRegister<ForgeWorldPreset> WORLD_TYPES = DeferredRegister.create(ForgeRegistries.WORLD_TYPES, Nero.MOD_ID);
 	
 	
-	public static final RegistryObject<ForgeWorldPreset> NERO_OVWERWORLD = WORLD_TYPES.register("nero_overworld", () -> new ForgeWorldPreset(new NeroWorldType()));
+	public static final RegistryObject<ForgeWorldPreset> NERO_OVWERWORLD = WORLD_TYPES.register("nero_generation_overworld", () -> new ForgeWorldPreset(new NeroWorldType()));
 	
 }

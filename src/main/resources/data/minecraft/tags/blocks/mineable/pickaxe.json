@@ -1,11 +1,8 @@
 {
   "replace": false,
   "values": [
-    "nero:fluid_pipe",
-    "nero:milestone",
-    "nero:deepslate_wall",
-    "nero:deepslate_stairs",    
-    "nero:deepslate_slab",    
-    "nero:blood_altar"  
+    "nero_generation:deepslate_wall",
+    "nero_generation:deepslate_stairs",    
+    "nero_generation:deepslate_slab"
   ]
 }
