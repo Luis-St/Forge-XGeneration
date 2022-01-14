@@ -27,6 +27,9 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 @Mod(Nero.MOD_ID)
 public class Nero {
 	
+	// add https://www.curseforge.com/minecraft/mc-mods/recipebuilder/files
+	// via https://www.cursemaven.com/
+	
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "nero_generation";
 	public static final String MINECRAFT_ID = "minecraft";
