@@ -7,13 +7,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetworkHandler {
 	
-	private static final String version = "1";
+	private static final String VERSION = "1";
 	@SuppressWarnings("unused")
 	private static int id = 0;
 	public static SimpleChannel simpleChannel;
 
 	public static void init() {
-		NetworkRegistry.newSimpleChannel(new ResourceLocation(Nero.MOD_ID, "simple_chnanel"), () -> version, version::equals, version::equals);
+		NetworkRegistry.newSimpleChannel(new ResourceLocation(Nero.MOD_ID, "simple_chnanel"), () -> VERSION, VERSION::equals, VERSION::equals);
 	}
 
 }
